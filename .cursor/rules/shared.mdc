@@ -3,9 +3,9 @@ description:
 globs: 
 alwaysApply: true
 ---
-# AI Rules for {app-name}
+# AI Rules for ZwierzakBezAlergii
 
-{project-description}
+A central database of dry foods available in Poland, with the option of filtering by composition and allergens, as well as a compendium of knowledge about dog nutrition and allergies.
 
 ## Tech Stack
 

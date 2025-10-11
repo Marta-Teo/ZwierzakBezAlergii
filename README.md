@@ -1,94 +1,93 @@
-# 10x Astro Starter
+# ZwierzakBezAlergii
 
-A modern, opinionated starter template for building fast, accessible, and AI-friendly web applications.
+## Table of Contents
+1. [Description](#description)
+2. [Tech Stack](#tech-stack)
+3. [Getting Started](#getting-started)
+4. [Available Scripts](#available-scripts)
+5. [Project Scope](#project-scope)
+6. [Project Status](#project-status)
+7. [License](#license)
+
+## Description
+ZwierzakBezAlergii (MVP) is a central database of dry dog foods available in Poland, allowing users to filter products by composition and allergens, and providing a compendium of knowledge about dog nutrition and allergies.
 
 ## Tech Stack
-
-- [Astro](https://astro.build/) v5.5.5 - Modern web framework for building fast, content-focused websites
-- [React](https://react.dev/) v19.0.0 - UI library for building interactive components
-- [TypeScript](https://www.typescriptlang.org/) v5 - Type-safe JavaScript
-- [Tailwind CSS](https://tailwindcss.com/) v4.0.17 - Utility-first CSS framework
-
-## Prerequisites
-
-- Node.js v22.14.0 (as specified in `.nvmrc`)
-- npm (comes with Node.js)
+- **Frontend**: Astro 5, React 19, TypeScript 5, Tailwind CSS 4, Shadcn/ui
+- **Backend**: Supabase (PostgreSQL, Authentication, SDK)
+- **AI Integration**: Openrouter.ai
+- **CI/CD**: GitHub Actions
+- **Hosting**: DigitalOcean (Docker)
 
 ## Getting Started
+### Prerequisites
+- Node.js v22.14.0 (as specified in `.nvmrc`)
+- npm (bundled with Node.js)
+- Supabase account and project
+- Environment variables (create a `.env` file in project root):
+  - `SUPABASE_URL=<your-supabase-url>`
+  - `SUPABASE_ANON_KEY=<your-supabase-anon-key>`
 
-1. Clone the repository:
-
+### Local Setup
 ```bash
-git clone https://github.com/przeprogramowani/10x-astro-starter.git
-cd 10x-astro-starter
-```
+# Clone the repository
+git clone https://github.com/Marta-Teo/ZwierzakBezAlergii.git
+cd ZwierzakBezAlergii
 
-2. Install dependencies:
+# Switch to the correct Node.js version
+nvm use
 
-```bash
+# Install dependencies
 npm install
-```
 
-3. Run the development server:
+# Create .env file in root with your Supabase credentials
+# SUPABASE_URL=<your-supabase-url>
+# SUPABASE_ANON_KEY=<your-supabase-anon-key>
 
-```bash
+# Start development server
 npm run dev
 ```
 
-4. Build for production:
-
-```bash
-npm run build
-```
-
 ## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint issues
-
-## Project Structure
-
-```md
-.
-├── src/
-│   ├── layouts/    # Astro layouts
-│   ├── pages/      # Astro pages
-│   │   └── api/    # API endpoints
-│   ├── components/ # UI components (Astro & React)
-│   └── assets/     # Static assets
-├── public/         # Public assets
+```bash
+npm run dev       # Start Astro development server
+npm run build     # Build the application for production
+npm run preview   # Preview the production build locally
+npm run astro     # Run Astro CLI commands
+npm run lint      # Run ESLint to lint code
+npm run lint:fix  # Run ESLint and automatically fix issues
+npm run format    # Format code with Prettier
 ```
 
-## AI Development Support
+## Project Scope
+### In-Scope (MVP)
+- User registration & login (email/password) via Supabase Auth
+- Role-based access control:
+  - **user**: browse and filter products
+  - **admin**: manage foods and articles
+- Browse and filter dry dog foods by:
+  - Brand
+  - Kibble size
+  - Dog age group (junior, adult, senior)
+  - Ingredients and allergens
+- Educational articles section on dog nutrition and allergies
+- Filtering logic to exclude products containing selected allergens
+- Unit and integration tests (including `filter_foods_by_allergens`)
+- CI/CD pipeline using GitHub Actions
+- Automated Supabase database backups
 
-This project is configured with AI development tools to enhance the development experience, providing guidelines for:
+### Out-of-Scope
+- Third-party store integrations or web scraping
+- AI chatbots or recommendation engines
+- Newsletters or email marketing
+- User comments or ratings functionality
+- Analytics dashboards or reports
 
-- Project structure
-- Coding practices
-- Frontend development
-- Styling with Tailwind
-- Accessibility best practices
-- Astro and React guidelines
+## Project Status
+This project is currently in active development as an MVP.
 
-### Cursor IDE
-
-The project includes AI rules in `.cursor/rules/` directory that help Cursor IDE understand the project structure and provide better code suggestions.
-
-### GitHub Copilot
-
-AI instructions for GitHub Copilot are available in `.github/copilot-instructions.md`
-
-### Windsurf
-
-The `.windsurfrules` file contains AI configuration for Windsurf.
-
-## Contributing
-
-Please follow the AI guidelines and coding practices defined in the AI configuration files when contributing to this project.
+<!-- Add real CI badge URL once workflow is configured -->
+![CI](https://img.shields.io/github/actions/workflow/status/<GitHubUsername>/ZwierzakBezAlergii/ci.yml?branch=master)
 
 ## License
-
-MIT
+This project is currently unlicensed. Please add a `LICENSE` file to specify the license of your choice.
