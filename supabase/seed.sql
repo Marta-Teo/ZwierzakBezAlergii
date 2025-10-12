@@ -381,3 +381,4 @@ BEGIN
   RAISE NOTICE '  Articles: %', articles_count;
 END $$;
 
+
