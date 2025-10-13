@@ -1,8 +1,58 @@
 ---
 import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
+import BrandsExample from "../components/BrandsExample";
+
+// 🔥 TAK UŻYWASZ SUPABASE w plikach .astro!
+// Klient Supabase jest dostępny przez Astro.locals dzięki middleware
+const { supabase } = Astro.locals;
+
+// Przykład: Pobieranie wszystkich marek psiej karmy z bazy
+const { data: brands, error } = await supabase
+  .from('brands')
+  .select('*')
+  .order('name');
+
+// Obsługa błędów
+if (error) {
+  console.error('Błąd podczas pobierania marek:', error);
+}
 ---
 
 <Layout>
   <Welcome />
+  
+  <div class="max-w-4xl mx-auto p-6 mt-8">
+    <h2 class="text-3xl font-bold mb-6">Przykład użycia Supabase 🎉</h2>
+    
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h3 class="text-xl font-semibold mb-4">Marki psiej karmy z bazy danych:</h3>
+      
+      {error ? (
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+          <p><strong>Błąd:</strong> {error.message}</p>
+        </div>
+      ) : brands && brands.length > 0 ? (
+        <ul class="space-y-2">
+          {brands.map((brand) => (
+            <li class="p-3 bg-gray-50 rounded border border-gray-200 hover:bg-gray-100 transition">
+              <span class="font-medium">{brand.name}</span>
+              <span class="text-sm text-gray-500 ml-2">(ID: {brand.id})</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-gray-600 italic">Brak marek w bazie danych. Dodaj jakieś dane!</p>
+      )}
+      
+      <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500">
+        <p class="text-sm text-gray-700">
+          💡 <strong>Wskazówka:</strong> Ten kod pobiera dane z tabeli 'brands' 
+          używając klienta Supabase dostępnego w <code class="bg-gray-200 px-1 rounded">Astro.locals</code>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <BrandsExample client:load />
 </Layout>
