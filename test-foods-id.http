@@ -1,0 +1,72 @@
+### Test GET/PUT/DELETE /api/foods/:id endpoints
+
+### 1. GET /api/foods/1 - Pobierz szczegóły karmy (ze składnikami i alergenami)
+GET http://localhost:3000/api/foods/1
+
+### 2. GET /api/foods/999 - Nieistniejące ID (404)
+GET http://localhost:3000/api/foods/999
+
+### 3. GET /api/foods/abc - Nieprawidłowe ID (400)
+GET http://localhost:3000/api/foods/abc
+
+### 4. PUT /api/foods/1 - Aktualizacja tylko nazwy
+PUT http://localhost:3000/api/foods/1
+Content-Type: application/json
+
+{
+  "name": "Brit Care Adult Jagnięcina z Ryżem - ZAKTUALIZOWANA"
+}
+
+### 5. PUT /api/foods/1 - Częściowa aktualizacja (brand_id + size_type_id)
+PUT http://localhost:3000/api/foods/1
+Content-Type: application/json
+
+{
+  "brand_id": 2,
+  "size_type_id": 1
+}
+
+### 6. PUT /api/foods/1 - Aktualizacja ingredients_raw
+PUT http://localhost:3000/api/foods/1
+Content-Type: application/json
+
+{
+  "ingredients_raw": "jagnięcina, ryż, olej z łososia, jabłka suszone"
+}
+
+### 7. PUT /api/foods/999 - Aktualizacja nieistniejącej karmy (404)
+PUT http://localhost:3000/api/foods/999
+Content-Type: application/json
+
+{
+  "name": "Test"
+}
+
+### 8. PUT /api/foods/1 - Błąd walidacji (za długa nazwa)
+PUT http://localhost:3000/api/foods/1
+Content-Type: application/json
+
+{
+  "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+}
+
+### 9. PUT /api/foods/1 - Błąd walidacji (nieprawidłowy brand_id)
+PUT http://localhost:3000/api/foods/1
+Content-Type: application/json
+
+{
+  "brand_id": -1
+}
+
+### 10. DELETE /api/foods/11 - Usuń karmę (204 No Content)
+DELETE http://localhost:3000/api/foods/11
+
+### 11. DELETE /api/foods/11 - Spróbuj usunąć ponownie (404)
+DELETE http://localhost:3000/api/foods/11
+
+### 12. DELETE /api/foods/abc - Nieprawidłowe ID (400)
+DELETE http://localhost:3000/api/foods/abc
+
+### 13. GET /api/foods - Sprawdź ile karm zostało
+GET http://localhost:3000/api/foods
+

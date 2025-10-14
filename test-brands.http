@@ -1,0 +1,63 @@
+### Test CRUD /api/brands endpoints
+
+### 1. GET /api/brands - Lista wszystkich marek
+GET http://localhost:3000/api/brands
+
+### 2. POST /api/brands - Tworzenie nowej marki
+POST http://localhost:3000/api/brands
+Content-Type: application/json
+
+{
+  "name": "Purina Pro Plan"
+}
+
+### 3. POST /api/brands - Kolejna marka
+POST http://localhost:3000/api/brands
+Content-Type: application/json
+
+{
+  "name": "Hill's Science Plan"
+}
+
+### 4. PUT /api/brands/:id - Aktualizacja marki (zmień ID na właściwe)
+PUT http://localhost:3000/api/brands/7
+Content-Type: application/json
+
+{
+  "name": "Hill's Science Plan Premium"
+}
+
+### 5. POST /api/brands - Błąd walidacji (pusta nazwa)
+POST http://localhost:3000/api/brands
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### 6. POST /api/brands - Błąd walidacji (za długa nazwa)
+POST http://localhost:3000/api/brands
+Content-Type: application/json
+
+{
+  "name": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+}
+
+### 7. PUT /api/brands/999 - Aktualizacja nieistniejącej marki (404)
+PUT http://localhost:3000/api/brands/999
+Content-Type: application/json
+
+{
+  "name": "Test"
+}
+
+### 8. DELETE /api/brands/1 - Próba usunięcia marki z karmami (409 Conflict)
+DELETE http://localhost:3000/api/brands/1
+
+### 9. DELETE /api/brands/:id - Usunięcie marki bez karm (204)
+# UWAGA: Zmień ID na markę, która nie ma przypisanych karm
+DELETE http://localhost:3000/api/brands/9
+
+### 10. GET /api/brands - Sprawdź listę po zmianach
+GET http://localhost:3000/api/brands
+

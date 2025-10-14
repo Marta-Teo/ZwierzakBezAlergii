@@ -1,0 +1,29 @@
+### Test read-only endpoints (zasoby statyczne)
+
+### 1. GET /api/brands - Lista marek karm
+GET http://localhost:3000/api/brands
+
+### 2. GET /api/size_types - Lista rozmiarów granulatu
+GET http://localhost:3000/api/size_types
+
+### 3. GET /api/age_categories - Lista kategorii wieku psa
+GET http://localhost:3000/api/age_categories
+
+### 4. GET /api/ingredients - Lista składników (pierwsze 10)
+GET http://localhost:3000/api/ingredients?limit=10
+
+### 5. GET /api/ingredients - Paginacja (offset 10, limit 10)
+GET http://localhost:3000/api/ingredients?offset=10&limit=10
+
+### 6. GET /api/ingredients - Wyszukiwanie "kurczak"
+GET http://localhost:3000/api/ingredients?search=kurczak
+
+### 7. GET /api/ingredients - Wyszukiwanie "łosoś"
+GET http://localhost:3000/api/ingredients?search=łosoś
+
+### 8. GET /api/allergens - Lista alergenów z hierarchią
+GET http://localhost:3000/api/allergens
+
+### 9. GET /api/ingredients - Wszystkie składniki (domyślny limit 100)
+GET http://localhost:3000/api/ingredients
+

@@ -1,0 +1,50 @@
+### Test GET /api/foods endpoints
+
+### 1. Pobierz wszystkie karmy (domyślna paginacja)
+GET http://localhost:3000/api/foods
+
+### 2. Filtrowanie po brandId (Brit Care = 1)
+GET http://localhost:3000/api/foods?brandId=1
+
+### 3. Wyszukiwanie pełnotekstowe - "jagnięcina"
+GET http://localhost:3000/api/foods?search=jagni
+
+### 4. Wykluczanie pojedynczego alergenu - kurczak
+GET http://localhost:3000/api/foods?excludeAllergens=kurczak
+
+### 5. Wykluczanie hierarchiczne - drób (wykluczy kurczak, indyk, kaczka, gęś, przepiórka)
+GET http://localhost:3000/api/foods?excludeAllergens=drób
+
+### 6. Wykluczanie wielu alergenów - drób + ryby
+GET http://localhost:3000/api/foods?excludeAllergens=drób,ryby
+
+### 7. Paginacja - pierwsze 3 wyniki
+GET http://localhost:3000/api/foods?limit=3&offset=0
+
+### 8. Paginacja - następne 3 wyniki
+GET http://localhost:3000/api/foods?limit=3&offset=3
+
+### 9. Sortowanie alfabetyczne rosnąco
+GET http://localhost:3000/api/foods?orderBy=name&orderDirection=asc
+
+### 10. Sortowanie po dacie utworzenia malejąco (najnowsze)
+GET http://localhost:3000/api/foods?orderBy=created_at&orderDirection=desc
+
+### 11. Kombinacja filtrów - Brit Care bez kurczaka
+GET http://localhost:3000/api/foods?brandId=1&excludeAllergens=kurczak
+
+### 12. Kombinacja filtrów - wyszukiwanie + wykluczenie alergenu
+GET http://localhost:3000/api/foods?search=jagni&excludeAllergens=drób
+
+### 13. Pełna kombinacja - wyszukiwanie, filtr, paginacja, sortowanie
+GET http://localhost:3000/api/foods?search=jagni&excludeAllergens=kurczak&limit=5&orderBy=name&orderDirection=asc
+
+### 14. Test błędnej walidacji - nieprawidłowy orderBy
+GET http://localhost:3000/api/foods?orderBy=invalid_field
+
+### 15. Test błędnej walidacji - ujemny offset
+GET http://localhost:3000/api/foods?offset=-1
+
+### 16. Test błędnej walidacji - limit większy niż 100
+GET http://localhost:3000/api/foods?limit=999
+

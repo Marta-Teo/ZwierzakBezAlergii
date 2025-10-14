@@ -1,9 +1,8 @@
 import type { APIRoute } from 'astro';
+import { CreateBrandSchema } from '../../lib/schemas/brandSchema';
 
-// 🔥 TAK UŻYWASZ SUPABASE w API routes!
-// Endpoint zwraca listę wszystkich marek w formacie JSON
-
-export const prerender = false; // Wyłącz pre-rendering dla API route
+// Endpoint do zarządzania markami karm
+export const prerender = false;
 
 export const GET: APIRoute = async ({ locals }) => {
   try {
@@ -49,6 +48,113 @@ export const GET: APIRoute = async ({ locals }) => {
     );
   } catch (err) {
     console.error('[API /brands] Nieoczekiwany błąd:', JSON.stringify(err, null, 2));
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: 'Wystąpił nieoczekiwany błąd serwera',
+      }),
+      {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
+};
+
+/**
+ * POST /api/brands
+ * 
+ * Tworzy nową markę karmy
+ * 
+ * @returns 201 - Marka utworzona
+ * @returns 400 - Błąd walidacji
+ * @returns 500 - Błąd serwera
+ */
+export const POST: APIRoute = async ({ locals, request }) => {
+  try {
+    // KROK 1: Parsowanie body
+    let body: unknown;
+    try {
+      body = await request.json();
+    } catch (parseError) {
+      console.error('[API POST /brands] Błąd parsowania JSON:', parseError);
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: 'Nieprawidłowy format JSON',
+        }),
+        {
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    }
+
+    // KROK 2: Walidacja przez Zod
+    const validationResult = CreateBrandSchema.safeParse(body);
+
+    if (!validationResult.success) {
+      console.error('[API POST /brands] Błąd walidacji:', JSON.stringify(validationResult.error.format(), null, 2));
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: 'Błąd walidacji danych',
+          details: validationResult.error.errors,
+        }),
+        {
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    }
+
+    // KROK 3: Wstawienie do bazy
+    const { data: newBrand, error } = await locals.supabase
+      .from('brands')
+      .insert({
+        name: validationResult.data.name,
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('[API POST /brands] Błąd Supabase:', JSON.stringify(error, null, 2));
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: 'Nie udało się utworzyć marki',
+          details: error.message,
+        }),
+        {
+          status: 500,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    }
+
+    // KROK 4: Sukces
+    return new Response(
+      JSON.stringify({
+        success: true,
+        data: newBrand,
+      }),
+      {
+        status: 201,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  } catch (err) {
+    console.error('[API POST /brands] Nieoczekiwany błąd:', JSON.stringify(err, null, 2));
     return new Response(
       JSON.stringify({
         success: false,

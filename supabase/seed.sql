@@ -2,6 +2,13 @@
 -- This file contains test data for local development
 
 -- ============================================================================
+-- 0. USERS (Użytkownicy testowi)
+-- ============================================================================
+-- UWAGA: Użytkownicy są zarządzani przez Supabase Auth (auth.users)
+-- Tabela public.users zawiera tylko rozszerzone dane profilu
+-- Do czasu wdrożenia auth używamy NULL dla created_by/updated_by
+
+-- ============================================================================
 -- 1. BRANDS (Marki karm)
 -- ============================================================================
 
@@ -37,116 +44,487 @@ INSERT INTO public.age_categories (name) VALUES
 -- ============================================================================
 
 INSERT INTO public.ingredients (name) VALUES
-  -- Białka zwierzęce
+  -- BIAŁKA DROBIOWE (świeże i przetworzone)
   ('kurczak'),
-  ('wołowina'),
-  ('jagnięcina'),
+  ('mięso z kurczaka'),
+  ('świeży kurczak'),
+  ('suszone mięso z kurczaka'),
+  ('mączka z kurczaka'),
+  ('hydrolizowane białko drobiowe'),
   ('indyk'),
+  ('mięso z indyka'),
+  ('mączka z indyka'),
   ('kaczka'),
-  ('łosoś'),
-  ('ryba'),
+  ('mięso z kaczki'),
+  ('gęś'),
+  ('przepiórka'),
+  
+  -- BIAŁKA MIĘSNE (świeże i przetworzone)
+  ('wołowina'),
+  ('świeża wołowina'),
+  ('suszone mięso wołowe'),
+  ('mączka wołowa'),
+  ('jagnięcina'),
+  ('świeża jagnięcina'),
+  ('mączka z jagnięciny'),
+  ('baranina'),
   ('wieprzowina'),
-  ('królik'),
+  ('dzik'),
   ('dziczyzna'),
-  -- Węglowodany i warzywa
-  ('ryż'),
-  ('ziemniak'),
-  ('batat'),
-  ('owies'),
+  ('sarna'),
+  ('jeleń'),
+  ('renifer'),
+  ('kangur'),
+  ('królik'),
+  ('koń'),
+  
+  -- BIAŁKA RYBNE (świeże i przetworzone)
+  ('łosoś'),
+  ('świeży łosoś'),
+  ('mączka z łososia'),
+  ('pstrąg'),
+  ('śledź'),
+  ('sardynka'),
+  ('dorsz'),
+  ('halibut'),
+  ('tuńczyk'),
+  ('makrela'),
+  ('biała ryba'),
+  ('mączka rybna'),
+  ('hydrolizowane białko rybne'),
+  
+  -- JAJA I NABIAŁ
+  ('jaja'),
+  ('całe jaja'),
+  ('jajka w proszku'),
+  ('mleko'),
+  ('ser'),
+  ('twaróg'),
+  ('jogurt'),
+  ('serwatka'),
+  
+  -- ZBOŻA
   ('pszenica'),
+  ('mąka pszenna'),
+  ('gluten pszenny'),
   ('kukurydza'),
+  ('mąka kukurydziana'),
+  ('gluten kukurydziany'),
+  ('jęczmień'),
+  ('owies'),
+  ('ryż'),
+  ('ryż brązowy'),
+  ('ryż biały'),
+  ('sorgo'),
+  ('proso'),
+  ('żyto'),
+  
+  -- PSEUDOZBOŻA I BEZGLUTENOWE WĘGLOWODANY
+  ('amarantus'),
+  ('komosa ryżowa (quinoa)'),
+  ('gryka'),
+  ('tapioka'),
+  ('maniok'),
+  
+  -- ROŚLINY STRĄCZKOWE
   ('groszek'),
+  ('groch'),
+  ('białko grochu'),
   ('soczewica'),
   ('ciecierzyca'),
-  -- Dodatki
-  ('jajka'),
+  ('fasola'),
+  ('bób'),
+  ('łubin'),
+  
+  -- WARZYWA KORZENIOWE
+  ('ziemniak'),
+  ('batat'),
+  ('marchew'),
+  ('burak'),
+  ('pasternak'),
+  ('topinambur'),
+  ('seler'),
+  
+  -- WARZYWA ZIELONE I INNE
+  ('brokuł'),
+  ('szpinak'),
+  ('jarmuż'),
+  ('kapusta'),
+  ('kalafior'),
+  ('pomidor'),
+  ('dynia'),
+  ('kabaczek'),
+  ('ogórek'),
+  ('papryka'),
+  ('buraki liściowe'),
+  
+  -- OWOCE
+  ('jabłko'),
+  ('gruszka'),
+  ('borówki'),
+  ('żurawina'),
+  ('maliny'),
+  ('truskawki'),
+  ('czarne jagody'),
+  ('banany'),
+  ('aronia'),
+  ('czarna porzeczka'),
+  ('róża (owoce)'),
+  
+  -- TŁUSZCZE I OLEJE
+  ('tłuszcz drobiowy'),
+  ('tłuszcz z kurczaka'),
+  ('olej z kurczaka'),
+  ('tłuszcz wołowy'),
   ('olej z ryb'),
-  ('tłuszcz z kurczaka');
+  ('olej z łososia'),
+  ('olej lniany'),
+  ('olej słonecznikowy'),
+  ('olej kokosowy'),
+  ('olej z wiesiołka'),
+  ('olej z czarnuszki'),
+  
+  -- ZIOŁA I ROŚLINY LECZNICZE
+  ('lucerna'),
+  ('pokrzywa'),
+  ('rumianek'),
+  ('mniszek lekarski'),
+  ('mięta'),
+  ('rozmaryn'),
+  ('tymianek'),
+  ('bazylia'),
+  ('pietruszka'),
+  ('oregano'),
+  ('kurkuma'),
+  ('imbir'),
+  ('czosnek'),
+  
+  -- SUPLEMENTY I DODATKI FUNKCJONALNE
+  ('drożdże piwne'),
+  ('pulpa buraczana'),
+  ('pulpa z buraków cukrowych'),
+  ('FOS (fruktooligosacharydy)'),
+  ('MOS (mannanoligosacharydy)'),
+  ('inulina'),
+  ('beta-glukany'),
+  ('chondroityna'),
+  ('glukozamina'),
+  ('ekstrakt z mięczaka'),
+  ('muszle małży'),
+  ('algi morskie'),
+  ('spirulina'),
+  ('chlorella'),
+  ('mączka z chrząstki'),
+  ('kolagen'),
+  ('L-karnityna'),
+  ('tauryna'),
+  ('glutation'),
+  
+  -- INNE SKŁADNIKI
+  ('sól'),
+  ('chlorek sodu'),
+  ('chlorek potasu'),
+  ('węglan wapnia'),
+  ('fosforan dwuwapniowy'),
+  ('drożdże suszone'),
+  ('zioła mieszane'),
+  ('nasiona lnu'),
+  ('nasiona chia'),
+  ('nasiona dyni'),
+  ('owies zwyczajny'),
+  ('żelatyna');
 
 -- ============================================================================
 -- 5. ALLERGENS (Alergeny z hierarchią)
 -- ============================================================================
 
--- Główne kategorie alergenów
+-- Główne kategorie alergenów (z ręcznymi ID dla łatwiejszego referencowania)
 INSERT INTO public.allergens (id, name, parent_id) VALUES
   (1, 'mięso', NULL),
   (2, 'drób', NULL),
   (3, 'ryby', NULL),
   (4, 'zboża', NULL),
-  (5, 'nabiał', NULL);
+  (5, 'nabiał', NULL),
+  (6, 'strączkowe', NULL),
+  (7, 'jaja', NULL),
+  (8, 'inne białka', NULL);
 
 -- Resetuj sekwencję po ręcznych insertach z ID
 SELECT setval('public.allergens_id_seq', (SELECT MAX(id) FROM public.allergens));
 
--- Podkategorie alergenów (z parent_id)
+-- Podkategorie alergenów - DRÓB (parent_id = 2)
 INSERT INTO public.allergens (name, parent_id) VALUES
-  -- Drób
   ('kurczak', 2),
   ('indyk', 2),
   ('kaczka', 2),
-  -- Mięso
+  ('gęś', 2),
+  ('przepiórka', 2);
+
+-- Podkategorie alergenów - MIĘSO (parent_id = 1)
+INSERT INTO public.allergens (name, parent_id) VALUES
   ('wołowina', 1),
   ('jagnięcina', 1),
+  ('baranina', 1),
   ('wieprzowina', 1),
-  ('królik', 1),
+  ('dzik', 1),
   ('dziczyzna', 1),
-  -- Ryby
+  ('sarna', 1),
+  ('jeleń', 1),
+  ('renifer', 1),
+  ('kangur', 1),
+  ('królik', 1),
+  ('koń', 1);
+
+-- Podkategorie alergenów - RYBY (parent_id = 3)
+INSERT INTO public.allergens (name, parent_id) VALUES
   ('łosoś', 3),
-  ('biała ryba', 3),
-  -- Zboża
+  ('pstrąg', 3),
+  ('śledź', 3),
+  ('sardynka', 3),
+  ('dorsz', 3),
+  ('halibut', 3),
+  ('tuńczyk', 3),
+  ('makrela', 3),
+  ('biała ryba', 3);
+
+-- Podkategorie alergenów - ZBOŻA (parent_id = 4)
+INSERT INTO public.allergens (name, parent_id) VALUES
   ('pszenica', 4),
   ('kukurydza', 4),
+  ('jęczmień', 4),
   ('owies', 4),
-  -- Inne
-  ('jajka', NULL),
-  ('soja', NULL);
+  ('ryż', 4),
+  ('sorgo', 4),
+  ('proso', 4),
+  ('żyto', 4);
+
+-- Podkategorie alergenów - NABIAŁ (parent_id = 5)
+INSERT INTO public.allergens (name, parent_id) VALUES
+  ('mleko', 5),
+  ('ser', 5),
+  ('twaróg', 5),
+  ('jogurt', 5),
+  ('serwatka', 5);
+
+-- Podkategorie alergenów - STRĄCZKOWE (parent_id = 6)
+INSERT INTO public.allergens (name, parent_id) VALUES
+  ('groszek', 6),
+  ('groch', 6),
+  ('soczewica', 6),
+  ('ciecierzyca', 6),
+  ('fasola', 6),
+  ('bób', 6),
+  ('łupin', 6),
+  ('soja', 6);
+
+-- Pojedyncze alergeny (bez parent - najwyższy poziom)
+INSERT INTO public.allergens (name, parent_id) VALUES
+  ('gluten', NULL),
+  ('czosnek', NULL);
 
 -- ============================================================================
 -- 6. INGREDIENT_ALLERGENS (Powiązania składnik ↔ alergen)
 -- ============================================================================
+-- Każdy składnik mapowany jest do konkretnego alergenu + kategorii nadrzędnej
+-- Format: (ingredient_id, allergen_id)
 
-INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
-  -- Kurczak
-  (1, (SELECT id FROM public.allergens WHERE name = 'kurczak' AND parent_id IS NOT NULL)),
-  (1, 2), -- drób (kategoria nadrzędna)
-  -- Wołowina
-  (2, (SELECT id FROM public.allergens WHERE name = 'wołowina')),
-  (2, 1), -- mięso (kategoria nadrzędna)
-  -- Jagnięcina
-  (3, (SELECT id FROM public.allergens WHERE name = 'jagnięcina')),
-  (3, 1), -- mięso
+-- Pomocnicza funkcja do mapowania - pobiera ID składnika i alergenu po nazwie
+DO $$
+DECLARE
+  ingredient_rec RECORD;
+  allergen_rec RECORD;
+BEGIN
+  -- BIAŁKA DROBIOWE → drób + konkretny podtyp
+  FOR ingredient_rec IN 
+    SELECT id, name FROM public.ingredients 
+    WHERE name IN ('kurczak', 'mięso z kurczaka', 'świeży kurczak', 'suszone mięso z kurczaka', 'mączka z kurczaka')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
+      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'kurczak' AND parent_id = 2)),
+      (ingredient_rec.id, 2); -- drób (kategoria)
+  END LOOP;
+
+  -- Hydrolizowane białko drobiowe → TYLKO drób (nie wiemy konkretny ptak)
+  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+    SELECT id, 2 FROM public.ingredients WHERE name = 'hydrolizowane białko drobiowe';
+
+  -- Tłuszcz drobiowy → drób + kurczak (najczęściej z kurczaka)
+  FOR ingredient_rec IN 
+    SELECT id FROM public.ingredients WHERE name IN ('tłuszcz drobiowy', 'tłuszcz z kurczaka', 'olej z kurczaka')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
+      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'kurczak' AND parent_id = 2)),
+      (ingredient_rec.id, 2);
+  END LOOP;
+
   -- Indyk
-  (4, (SELECT id FROM public.allergens WHERE name = 'indyk')),
-  (4, 2), -- drób
+  FOR ingredient_rec IN 
+    SELECT id FROM public.ingredients WHERE name IN ('indyk', 'mięso z indyka', 'mączka z indyka')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
+      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'indyk' AND parent_id = 2)),
+      (ingredient_rec.id, 2);
+  END LOOP;
+
   -- Kaczka
-  (5, (SELECT id FROM public.allergens WHERE name = 'kaczka')),
-  (5, 2), -- drób
+  FOR ingredient_rec IN 
+    SELECT id FROM public.ingredients WHERE name IN ('kaczka', 'mięso z kaczki')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
+      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'kaczka' AND parent_id = 2)),
+      (ingredient_rec.id, 2);
+  END LOOP;
+
+  -- Gęś, Przepiórka
+  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+    SELECT i.id, a.id FROM public.ingredients i
+    CROSS JOIN public.allergens a
+    WHERE i.name = 'gęś' AND a.name = 'gęś' AND a.parent_id = 2;
+  
+  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+    SELECT id, 2 FROM public.ingredients WHERE name = 'gęś';
+
+  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+    SELECT i.id, a.id FROM public.ingredients i
+    CROSS JOIN public.allergens a
+    WHERE i.name = 'przepiórka' AND a.name = 'przepiórka' AND a.parent_id = 2;
+  
+  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+    SELECT id, 2 FROM public.ingredients WHERE name = 'przepiórka';
+
+  -- BIAŁKA MIĘSNE → mięso + konkretny podtyp
+  -- Wołowina
+  FOR ingredient_rec IN 
+    SELECT id FROM public.ingredients WHERE name IN ('wołowina', 'świeża wołowina', 'suszone mięso wołowe', 'mączka wołowa', 'tłuszcz wołowy')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
+      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'wołowina' AND parent_id = 1)),
+      (ingredient_rec.id, 1);
+  END LOOP;
+
+  -- Jagnięcina
+  FOR ingredient_rec IN 
+    SELECT id FROM public.ingredients WHERE name IN ('jagnięcina', 'świeża jagnięcina', 'mączka z jagnięciny')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
+      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'jagnięcina' AND parent_id = 1)),
+      (ingredient_rec.id, 1);
+  END LOOP;
+
+  -- Pozostałe mięsa (baranina, wieprzowina, dzik, itd.)
+  FOR allergen_rec IN 
+    SELECT name FROM public.allergens WHERE parent_id = 1 AND name NOT IN ('wołowina', 'jagnięcina')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+      SELECT i.id, a.id FROM public.ingredients i
+      CROSS JOIN public.allergens a
+      WHERE i.name = allergen_rec.name AND a.name = allergen_rec.name AND a.parent_id = 1;
+    
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+      SELECT id, 1 FROM public.ingredients WHERE name = allergen_rec.name;
+  END LOOP;
+
+  -- BIAŁKA RYBNE → ryby + konkretny podtyp
   -- Łosoś
-  (6, (SELECT id FROM public.allergens WHERE name = 'łosoś')),
-  (6, 3), -- ryby (kategoria)
-  -- Ryba ogólnie
-  (7, (SELECT id FROM public.allergens WHERE name = 'biała ryba')),
-  (7, 3), -- ryby
-  -- Wieprzowina
-  (8, (SELECT id FROM public.allergens WHERE name = 'wieprzowina')),
-  (8, 1), -- mięso
-  -- Królik
-  (9, (SELECT id FROM public.allergens WHERE name = 'królik')),
-  (9, 1), -- mięso
-  -- Dziczyzna
-  (10, (SELECT id FROM public.allergens WHERE name = 'dziczyzna')),
-  (10, 1), -- mięso
-  -- Pszenica
-  (15, (SELECT id FROM public.allergens WHERE name = 'pszenica')),
-  (15, 4), -- zboża
+  FOR ingredient_rec IN 
+    SELECT id FROM public.ingredients WHERE name IN ('łosoś', 'świeży łosoś', 'mączka z łososia', 'olej z łososia', 'olej z ryb')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
+      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'łosoś' AND parent_id = 3)),
+      (ingredient_rec.id, 3);
+  END LOOP;
+
+  -- Hydrolizowane białko rybne → TYLKO ryby (nie wiemy konkretna ryba)
+  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+    SELECT id, 3 FROM public.ingredients WHERE name IN ('hydrolizowane białko rybne', 'mączka rybna');
+
+  -- Pozostałe ryby
+  FOR allergen_rec IN 
+    SELECT name FROM public.allergens WHERE parent_id = 3 AND name != 'łosoś'
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+      SELECT i.id, a.id FROM public.ingredients i
+      CROSS JOIN public.allergens a
+      WHERE i.name = allergen_rec.name AND a.name = allergen_rec.name AND a.parent_id = 3;
+    
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+      SELECT id, 3 FROM public.ingredients WHERE name = allergen_rec.name;
+  END LOOP;
+
+  -- JAJA → jaja (kategoria główna)
+  FOR ingredient_rec IN 
+    SELECT id FROM public.ingredients WHERE name IN ('jaja', 'całe jaja', 'jajka w proszku')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
+      (ingredient_rec.id, 7);
+  END LOOP;
+
+  -- NABIAŁ → nabiał + podtypy
+  FOR allergen_rec IN 
+    SELECT id, name FROM public.allergens WHERE parent_id = 5
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+      SELECT i.id, allergen_rec.id FROM public.ingredients i
+      WHERE i.name = allergen_rec.name;
+    
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+      SELECT id, 5 FROM public.ingredients WHERE name = allergen_rec.name;
+  END LOOP;
+
+  -- ZBOŻA → zboża + konkretne zboże
+  -- Pszenica + gluten
+  FOR ingredient_rec IN 
+    SELECT id FROM public.ingredients WHERE name IN ('pszenica', 'mąka pszenna', 'gluten pszenny')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
+      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'pszenica' AND parent_id = 4)),
+      (ingredient_rec.id, 4), -- zboża
+      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'gluten' AND parent_id IS NULL)); -- gluten
+  END LOOP;
+
   -- Kukurydza
-  (16, (SELECT id FROM public.allergens WHERE name = 'kukurydza')),
-  (16, 4), -- zboża
-  -- Owies
-  (14, (SELECT id FROM public.allergens WHERE name = 'owies')),
-  (14, 4), -- zboża
-  -- Jajka
-  (20, (SELECT id FROM public.allergens WHERE name = 'jajka'));
+  FOR ingredient_rec IN 
+    SELECT id FROM public.ingredients WHERE name IN ('kukurydza', 'mąka kukurydziana', 'gluten kukurydziany')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
+      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'kukurydza' AND parent_id = 4)),
+      (ingredient_rec.id, 4);
+  END LOOP;
+
+  -- Pozostałe zboża (jęczmień, owies, ryż, itd.)
+  FOR allergen_rec IN 
+    SELECT name FROM public.allergens WHERE parent_id = 4 AND name NOT IN ('pszenica', 'kukurydza')
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+      SELECT i.id, a.id FROM public.ingredients i
+      CROSS JOIN public.allergens a
+      WHERE i.name LIKE '%' || allergen_rec.name || '%' AND a.name = allergen_rec.name AND a.parent_id = 4;
+    
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+      SELECT id, 4 FROM public.ingredients WHERE name LIKE '%' || allergen_rec.name || '%';
+  END LOOP;
+
+  -- ROŚLINY STRĄCZKOWE → strączkowe + konkretny podtyp
+  FOR allergen_rec IN 
+    SELECT name FROM public.allergens WHERE parent_id = 6
+  LOOP
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+      SELECT i.id, a.id FROM public.ingredients i
+      CROSS JOIN public.allergens a
+      WHERE (i.name = allergen_rec.name OR i.name LIKE '%' || allergen_rec.name || '%') 
+        AND a.name = allergen_rec.name AND a.parent_id = 6;
+    
+    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+      SELECT id, 6 FROM public.ingredients 
+      WHERE name = allergen_rec.name OR name LIKE '%' || allergen_rec.name || '%';
+  END LOOP;
+
+  -- CZOSNEK → czosnek (pojedynczy alergen)
+  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
+    SELECT id, (SELECT id FROM public.allergens WHERE name = 'czosnek')
+    FROM public.ingredients WHERE name = 'czosnek';
+
+END $$;
 
 -- ============================================================================
 -- 7. FOODS (Przykładowe karmy)
@@ -234,94 +612,193 @@ INSERT INTO public.foods (name, brand_id, size_type_id, age_category_id, ingredi
 -- ============================================================================
 -- 8. FOOD_INGREDIENTS (Powiązania karma ↔ składniki)
 -- ============================================================================
+-- WAŻNE: Używamy SELECT zamiast hardcoded ID, aby zapewnić poprawne mapowania
 
 -- Brit Care Adult Jagnięcina z Ryżem
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (1, 3), -- jagnięcina
-  (1, 11), -- ryż
-  (1, 22), -- tłuszcz z kurczaka
-  (1, 6); -- łosoś (w postaci oleju)
+-- ingredients_raw: 'jagnięcina, ryż, tłuszcz z kurczaka, suszone jabłka, olej z łososia'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Brit Care Adult Jagnięcina z Ryżem';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jagnięcina')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ryż')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'tłuszcz z kurczaka')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jabłko')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z łososia'));
+END $$;
 
 -- Brit Care Bezzbożowa Łosoś z Ziemniakiem
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (2, 6), -- łosoś
-  (2, 12), -- ziemniak
-  (2, 17), -- groszek
-  (2, 21); -- olej z ryb
+-- ingredients_raw: 'łosoś, ziemniak, groszek, olej z ryb, batat'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Brit Care Bezzbożowa Łosoś z Ziemniakiem';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'łosoś')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ziemniak')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'batat'));
+END $$;
 
 -- Brit Care Puppy Kurczak z Ryżem
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (3, 1), -- kurczak
-  (3, 11), -- ryż
-  (3, 22), -- tłuszcz z kurczaka
-  (3, 21); -- olej z ryb
+-- ingredients_raw: 'kurczak, ryż, tłuszcz z kurczaka, olej z ryb'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Brit Care Puppy Kurczak z Ryżem';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'kurczak')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ryż')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'tłuszcz z kurczaka')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb'));
+END $$;
 
 -- Carnilove Kaczka z Bażantem
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (4, 5), -- kaczka
-  (4, 4), -- indyk
-  (4, 17), -- groszek
-  (4, 18), -- soczewica
-  (4, 21); -- olej z ryb
+-- ingredients_raw: 'kaczka, indyk, groszek, soczewica, olej z ryb'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Carnilove Kaczka z Bażantem';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'kaczka')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'indyk')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'soczewica')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb'));
+END $$;
 
 -- Carnilove Jagnięcina z Dzikiem
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (5, 3), -- jagnięcina
-  (5, 8), -- wieprzowina
-  (5, 13), -- batat
-  (5, 17), -- groszek
-  (5, 19); -- ciecierzyca
+-- ingredients_raw: 'jagnięcina, wieprzowina, batat, groszek, ciecierzyca'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Carnilove Jagnięcina z Dzikiem';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jagnięcina')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'wieprzowina')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'batat')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ciecierzyca'));
+END $$;
 
 -- Acana Heritage Kaczka Wolny Wybieg
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (6, 5), -- kaczka
-  (6, 20), -- jajka
-  (6, 7), -- ryba
-  (6, 14), -- owies
-  (6, 17); -- groszek
+-- ingredients_raw: 'kaczka, jajka, ryba, owies, groszek'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Acana Heritage Kaczka Wolny Wybieg';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'kaczka')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jaja')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'biała ryba')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'owies')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek'));
+END $$;
 
 -- Acana Singles Jagnięcina z Jabłkiem
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (7, 3), -- jagnięcina
-  (7, 14), -- owies
-  (7, 18), -- soczewica
-  (7, 21); -- olej z ryb
+-- ingredients_raw: 'jagnięcina, owies, soczewica, olej z ryb'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Acana Singles Jagnięcina z Jabłkiem';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jagnięcina')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'owies')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'soczewica')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb'));
+END $$;
 
 -- Royal Canin Hypoallergenic
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (8, 11), -- ryż
-  (8, 7), -- ryba
-  (8, 21), -- olej z ryb
-  (8, 12); -- ziemniak
+-- ingredients_raw: 'ryż, ryba, olej z ryb, ziemniak'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Royal Canin Hypoallergenic';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ryż')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'biała ryba')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ziemniak'));
+END $$;
 
 -- Taste of the Wild High Prairie
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (9, 2), -- wołowina
-  (9, 3), -- jagnięcina
-  (9, 13), -- batat
-  (9, 17), -- groszek
-  (9, 21); -- olej z ryb
+-- ingredients_raw: 'wołowina, jagnięcina, batat, groszek, olej z ryb'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Taste of the Wild High Prairie';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'wołowina')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jagnięcina')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'batat')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb'));
+END $$;
 
 -- Taste of the Wild Pacific Stream
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (10, 6), -- łosoś
-  (10, 7), -- ryba
-  (10, 13), -- batat
-  (10, 17); -- groszek
+-- ingredients_raw: 'łosoś, ryba, batat, groszek'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Taste of the Wild Pacific Stream';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'łosoś')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'biała ryba')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'batat')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek'));
+END $$;
 
 -- Josera SensiPlus
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (11, 5), -- kaczka
-  (11, 11), -- ryż
-  (11, 12), -- ziemniak
-  (11, 21); -- olej z ryb
+-- ingredients_raw: 'kaczka, ryż, ziemniak, olej z ryb'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Josera SensiPlus';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'kaczka')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ryż')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ziemniak')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb'));
+END $$;
 
 -- Josera Optiness
-INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-  (12, 3), -- jagnięcina
-  (12, 11), -- ryż
-  (12, 16), -- kukurydza
-  (12, 22); -- tłuszcz z kurczaka
+-- ingredients_raw: 'jagnięcina, ryż, kukurydza, tłuszcz z kurczaka'
+DO $$
+DECLARE
+  food_id_var INT;
+BEGIN
+  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Josera Optiness';
+  
+  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jagnięcina')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ryż')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'kukurydza')),
+    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'tłuszcz drobiowy'));
+END $$;
 
 -- ============================================================================
 -- 9. ARTICLES (Przykładowe artykuły edukacyjne)

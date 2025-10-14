@@ -59,6 +59,35 @@ npm run lint:fix  # Run ESLint and automatically fix issues
 npm run format    # Format code with Prettier
 ```
 
+## API Endpoints
+
+### Foods (Karmy) - CRUD
+- `GET /api/foods` - Lista karm z filtrowaniem, wyszukiwaniem i paginacją
+- `POST /api/foods` - Tworzenie nowej karmy
+- `GET /api/foods/:id` - Szczegóły karmy ze składnikami i alergenami
+- `PUT /api/foods/:id` - Aktualizacja karmy
+- `DELETE /api/foods/:id` - Usunięcie karmy
+
+### Brands (Marki) - CRUD
+- `GET /api/brands` - Lista marek karm
+- `POST /api/brands` - Tworzenie nowej marki
+- `PUT /api/brands/:id` - Aktualizacja marki
+- `DELETE /api/brands/:id` - Usunięcie marki (tylko jeśli nie ma karm)
+
+### Static Resources (Read-only)
+- `GET /api/size_types` - Lista rozmiarów granulatu
+- `GET /api/age_categories` - Lista kategorii wieku psa
+- `GET /api/ingredients` - Lista składników (z wyszukiwaniem i paginacją)
+- `GET /api/allergens` - Lista alergenów (struktura hierarchiczna)
+
+### Testing
+Pliki `.http` do testowania API:
+- `test-brands.http` - Testy dla CRUD /api/brands
+- `test-get-foods.http` - Testy dla GET /api/foods
+- `test-post-foods.http` - Testy dla POST /api/foods
+- `test-foods-id.http` - Testy dla GET/PUT/DELETE /api/foods/:id
+- `test-readonly-endpoints.http` - Testy dla zasobów read-only
+
 ## Project Scope
 ### In-Scope (MVP)
 - User registration & login (email/password) via Supabase Auth

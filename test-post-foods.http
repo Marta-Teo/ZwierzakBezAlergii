@@ -1,0 +1,41 @@
+### Test POST /api/foods
+# Tworzy nową karmę w bazie danych
+# Endpoint: http://localhost:3000/api/foods
+
+POST http://localhost:3000/api/foods
+Content-Type: application/json
+
+{
+  "name": "Test Karma",
+  "brand_id": 1,
+  "size_type_id": 2,
+  "age_category_id": 3,
+  "ingredients_raw": "kurczak, ryż, marchew"
+}
+
+### Test POST /api/foods - błąd walidacji (brak name)
+POST http://localhost:3000/api/foods
+Content-Type: application/json
+
+{
+  "brand_id": 1
+}
+
+### Test POST /api/foods - błąd walidacji (brand_id jako string)
+POST http://localhost:3000/api/foods
+Content-Type: application/json
+
+{
+  "name": "Test Karma 2",
+  "brand_id": "invalid"
+}
+
+### Test POST /api/foods - minimalne dane (tylko wymagane pola)
+POST http://localhost:3000/api/foods
+Content-Type: application/json
+
+{
+  "name": "Minimalna Karma",
+  "brand_id": 2
+}
+
