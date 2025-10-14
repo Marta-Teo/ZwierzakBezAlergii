@@ -41,8 +41,8 @@ nvm use
 npm install
 
 # Create .env file in root with your Supabase credentials
-SUPABASE_URL=https://bplavubvgcxdocbgrhky.supabase.co
-SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJwbGF2dWJ2Z2N4ZG9jYmdyaGt5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxOTg2MzksImV4cCI6MjA3NTc3NDYzOX0.ynpNbXrCmEeI5M0eUYkKIeBLzNe4FFog4ntuBehM-x4
+SUPABASE_URL=
+SUPABASE_KEY=
 
 # Start development server
 npm run dev
