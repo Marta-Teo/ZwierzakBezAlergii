@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Button } from './ui/button';
+import { useState } from "react";
+import { Button } from "./ui/button";
 
 // 🔥 TAK UŻYWASZ API ENDPOINT z komponentu React!
 
@@ -28,17 +28,17 @@ export default function BrandsExample() {
 
     try {
       // Wywołanie API endpoint
-      const response = await fetch('/api/brands');
+      const response = await fetch("/api/brands");
       const result: ApiResponse = await response.json();
 
       if (result.success && result.data) {
         setBrands(result.data);
       } else {
-        setError(result.error || 'Wystąpił nieznany błąd');
+        setError(result.error || "Wystąpił nieznany błąd");
       }
     } catch (err) {
-      setError('Nie udało się połączyć z API');
-      console.error('Błąd fetch:', err);
+      setError("Nie udało się połączyć z API");
+      console.error("Błąd fetch:", err);
     } finally {
       setLoading(false);
     }
@@ -47,17 +47,11 @@ export default function BrandsExample() {
   return (
     <div className="max-w-4xl mx-auto p-6 mt-8">
       <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg shadow-lg p-6">
-        <h3 className="text-2xl font-bold mb-4 text-purple-900">
-          Przykład użycia API Endpoint (React)
-        </h3>
+        <h3 className="text-2xl font-bold mb-4 text-purple-900">Przykład użycia API Endpoint (React)</h3>
 
         <div className="mb-6">
-          <Button
-            onClick={fetchBrands}
-            disabled={loading}
-            className="bg-purple-600 hover:bg-purple-700"
-          >
-            {loading ? 'Ładowanie...' : '🔄 Pobierz marki z API'}
+          <Button onClick={fetchBrands} disabled={loading} className="bg-purple-600 hover:bg-purple-700">
+            {loading ? "Ładowanie..." : "🔄 Pobierz marki z API"}
           </Button>
         </div>
 
@@ -82,9 +76,7 @@ export default function BrandsExample() {
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-semibold text-purple-900">{brand.name}</span>
-                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                      ID: {brand.id}
-                    </span>
+                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">ID: {brand.id}</span>
                   </div>
                 </li>
               ))}
@@ -97,7 +89,9 @@ export default function BrandsExample() {
             💡 <strong>Jak to działa:</strong>
           </p>
           <ul className="text-sm text-purple-800 mt-2 space-y-1 list-disc list-inside">
-            <li>Komponent wywołuje <code className="bg-purple-200 px-1 rounded">/api/brands</code></li>
+            <li>
+              Komponent wywołuje <code className="bg-purple-200 px-1 rounded">/api/brands</code>
+            </li>
             <li>Endpoint używa Supabase do pobrania danych</li>
             <li>Dane są zwracane jako JSON i wyświetlane w komponencie</li>
           </ul>
@@ -106,4 +100,3 @@ export default function BrandsExample() {
     </div>
   );
 }
-

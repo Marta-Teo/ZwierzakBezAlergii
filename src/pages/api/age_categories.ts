@@ -1,11 +1,11 @@
-import type { APIRoute } from 'astro';
+import type { APIRoute } from "astro";
 
 /**
  * GET /api/age_categories
- * 
+ *
  * Pobiera listę kategorii wieku psa (szczeniak, junior, dorosły, senior)
  * Zasób read-only - dostępny dla wszystkich użytkowników
- * 
+ *
  * @returns 200 - Lista kategorii wieku
  * @returns 500 - Błąd serwera
  */
@@ -13,13 +13,10 @@ export const prerender = false;
 
 export const GET: APIRoute = async ({ locals }) => {
   try {
-    const { data: ageCategories, error } = await locals.supabase
-      .from('age_categories')
-      .select('*')
-      .order('name');
+    const { data: ageCategories, error } = await locals.supabase.from("age_categories").select("*").order("name");
 
     if (error) {
-      console.error('[API /age_categories] Błąd Supabase:', JSON.stringify(error, null, 2));
+      console.error("[API /age_categories] Błąd Supabase:", JSON.stringify(error, null, 2));
       return new Response(
         JSON.stringify({
           success: false,
@@ -28,7 +25,7 @@ export const GET: APIRoute = async ({ locals }) => {
         {
           status: 500,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -43,24 +40,23 @@ export const GET: APIRoute = async ({ locals }) => {
       {
         status: 200,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
   } catch (err) {
-    console.error('[API /age_categories] Nieoczekiwany błąd:', JSON.stringify(err, null, 2));
+    console.error("[API /age_categories] Nieoczekiwany błąd:", JSON.stringify(err, null, 2));
     return new Response(
       JSON.stringify({
         success: false,
-        error: 'Wystąpił nieoczekiwany błąd serwera',
+        error: "Wystąpił nieoczekiwany błąd serwera",
       }),
       {
         status: 500,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
   }
 };
-

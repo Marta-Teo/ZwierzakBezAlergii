@@ -1,5 +1,5 @@
-import type { APIRoute } from 'astro';
-import { CreateBrandSchema } from '../../lib/schemas/brandSchema';
+import type { APIRoute } from "astro";
+import { CreateBrandSchema } from "../../lib/schemas/brandSchema";
 
 // Endpoint do zarządzania markami karm
 export const prerender = false;
@@ -10,14 +10,11 @@ export const GET: APIRoute = async ({ locals }) => {
     const { supabase } = locals;
 
     // Pobierz wszystkie marki z bazy danych
-    const { data: brands, error } = await supabase
-      .from('brands')
-      .select('*')
-      .order('name');
+    const { data: brands, error } = await supabase.from("brands").select("*").order("name");
 
     // Obsługa błędów z bazy danych
     if (error) {
-      console.error('[API /brands] Błąd Supabase:', JSON.stringify(error, null, 2));
+      console.error("[API /brands] Błąd Supabase:", JSON.stringify(error, null, 2));
       return new Response(
         JSON.stringify({
           success: false,
@@ -26,7 +23,7 @@ export const GET: APIRoute = async ({ locals }) => {
         {
           status: 500,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -42,21 +39,21 @@ export const GET: APIRoute = async ({ locals }) => {
       {
         status: 200,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
   } catch (err) {
-    console.error('[API /brands] Nieoczekiwany błąd:', JSON.stringify(err, null, 2));
+    console.error("[API /brands] Nieoczekiwany błąd:", JSON.stringify(err, null, 2));
     return new Response(
       JSON.stringify({
         success: false,
-        error: 'Wystąpił nieoczekiwany błąd serwera',
+        error: "Wystąpił nieoczekiwany błąd serwera",
       }),
       {
         status: 500,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -65,9 +62,9 @@ export const GET: APIRoute = async ({ locals }) => {
 
 /**
  * POST /api/brands
- * 
+ *
  * Tworzy nową markę karmy
- * 
+ *
  * @returns 201 - Marka utworzona
  * @returns 400 - Błąd walidacji
  * @returns 500 - Błąd serwera
@@ -79,16 +76,16 @@ export const POST: APIRoute = async ({ locals, request }) => {
     try {
       body = await request.json();
     } catch (parseError) {
-      console.error('[API POST /brands] Błąd parsowania JSON:', parseError);
+      console.error("[API POST /brands] Błąd parsowania JSON:", parseError);
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Nieprawidłowy format JSON',
+          error: "Nieprawidłowy format JSON",
         }),
         {
           status: 400,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -98,17 +95,17 @@ export const POST: APIRoute = async ({ locals, request }) => {
     const validationResult = CreateBrandSchema.safeParse(body);
 
     if (!validationResult.success) {
-      console.error('[API POST /brands] Błąd walidacji:', JSON.stringify(validationResult.error.format(), null, 2));
+      console.error("[API POST /brands] Błąd walidacji:", JSON.stringify(validationResult.error.format(), null, 2));
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Błąd walidacji danych',
+          error: "Błąd walidacji danych",
           details: validationResult.error.errors,
         }),
         {
           status: 400,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -116,7 +113,7 @@ export const POST: APIRoute = async ({ locals, request }) => {
 
     // KROK 3: Wstawienie do bazy
     const { data: newBrand, error } = await locals.supabase
-      .from('brands')
+      .from("brands")
       .insert({
         name: validationResult.data.name,
       })
@@ -124,17 +121,17 @@ export const POST: APIRoute = async ({ locals, request }) => {
       .single();
 
     if (error) {
-      console.error('[API POST /brands] Błąd Supabase:', JSON.stringify(error, null, 2));
+      console.error("[API POST /brands] Błąd Supabase:", JSON.stringify(error, null, 2));
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Nie udało się utworzyć marki',
+          error: "Nie udało się utworzyć marki",
           details: error.message,
         }),
         {
           status: 500,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -149,24 +146,23 @@ export const POST: APIRoute = async ({ locals, request }) => {
       {
         status: 201,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
   } catch (err) {
-    console.error('[API POST /brands] Nieoczekiwany błąd:', JSON.stringify(err, null, 2));
+    console.error("[API POST /brands] Nieoczekiwany błąd:", JSON.stringify(err, null, 2));
     return new Response(
       JSON.stringify({
         success: false,
-        error: 'Wystąpił nieoczekiwany błąd serwera',
+        error: "Wystąpił nieoczekiwany błąd serwera",
       }),
       {
         status: 500,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
   }
 };
-

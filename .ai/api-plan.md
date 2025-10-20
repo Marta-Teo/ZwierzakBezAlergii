@@ -51,11 +51,36 @@
   ```
 
 #### GET /api/foods/:id
-- Pobiera szczegóły karmy (w tym pivoty: składniki i alergeny).
+- Pobiera szczegóły karmy wraz z pełnymi relacjami (marka, kategorie) i pivotami (składniki, alergeny).
+- Wykorzystywany głównie przez modal szczegółów karmy w UI.
+- Parametry URL: `id` (number) - ID karmy
 - Response 200:
   ```json
-  { "id":1, "name":"X", "ingredients":[…], "allergens":[…] }
+  {
+    "success": true,
+    "data": {
+      "id": 1,
+      "name": "Brit Care Lamb & Rice",
+      "brand_id": 1,
+      "size_type_id": 2,
+      "age_category_id": 3,
+      "ingredients_raw": "lamb, rice, corn",
+      "image_url": "https://...",
+      "brand": { "id": 1, "name": "Brit Care" },
+      "sizeType": { "id": 2, "name": "Średni" },
+      "ageCategory": { "id": 3, "name": "Adult" },
+      "ingredients": [
+        { "id": 5, "name": "Jagnięcina" },
+        { "id": 12, "name": "Ryż" }
+      ],
+      "allergens": [
+        { "id": 1, "name": "Mięso", "parent_id": null },
+        { "id": 3, "name": "Jagnięcina", "parent_id": 1 }
+      ]
+    }
+  }
   ```
+- Response 404: `{ "success": false, "error": "Karma nie istnieje" }`
 
 #### POST /api/foods
 - Tworzy karmę (admin only).

@@ -1,21 +1,21 @@
-import type { SupabaseClient } from '../../db/supabase.client';
-import type { CreateFoodCommand, FoodDTO, UpdateFoodCommand } from '../../types';
-import type { FoodFilters } from '../schemas/foodQuerySchema';
+import type { SupabaseClient } from "../../db/supabase.client";
+import type { CreateFoodCommand, FoodDTO, FoodDetailDTO, UpdateFoodCommand } from "../../types";
+import type { FoodFilters } from "../schemas/foodQuerySchema";
 
 /**
  * Serwis do zarządzania karmami w bazie danych
- * 
+ *
  * Zawiera logikę biznesową związaną z operacjami CRUD na tabeli foods.
  * Wszystkie metody wymagają klienta Supabase przekazanego jako parametr.
  */
 
 /**
  * Tworzy nową karmę w bazie danych
- * 
+ *
  * @param supabase - Klient Supabase z kontekstu żądania (locals.supabase)
  * @param command - Dane nowej karmy do utworzenia (już zwalidowane przez Zod)
  * @returns Obiekt z danymi utworzonej karmy lub błędem
- * 
+ *
  * @example
  * ```ts
  * const result = await foodService.create(locals.supabase, {
@@ -25,7 +25,7 @@ import type { FoodFilters } from '../schemas/foodQuerySchema';
  *   age_category_id: 2,
  *   ingredients_raw: 'chicken, rice, corn'
  * });
- * 
+ *
  * if (result.error) {
  *   console.error('Błąd:', result.error);
  * } else {
@@ -41,11 +41,7 @@ export async function create(
     // Wykonujemy INSERT do tabeli foods
     // .select() zwraca utworzony rekord
     // .single() zapewnia, że zwracamy pojedynczy obiekt zamiast tablicy
-    const { data, error } = await supabase
-      .from('foods')
-      .insert([command])
-      .select()
-      .single();
+    const { data, error } = await supabase.from("foods").insert([command]).select().single();
 
     // Jeśli wystąpił błąd Supabase (np. naruszenie foreign key, duplikat itp.)
     if (error) {
@@ -62,33 +58,30 @@ export async function create(
 
 /**
  * Funkcja pomocnicza: Rekurencyjnie pobiera ID alergenu i wszystkich jego dzieci
- * 
+ *
  * @param supabase - Klient Supabase
  * @param allergenNames - Lista nazw alergenów do wykluczenia
  * @returns Lista ID alergenów (główne + wszystkie dzieci w hierarchii)
- * 
+ *
  * @example
  * ```ts
  * const ids = await getAllergenIdsWithChildren(supabase, ['drób']);
  * // Zwraca: [2, 9, 10, 11, 12, 13] (drób + kurczak, indyk, kaczka, gęś, przepiórka)
  * ```
  */
-async function getAllergenIdsWithChildren(
-  supabase: SupabaseClient,
-  allergenNames: string[]
-): Promise<number[]> {
+async function getAllergenIdsWithChildren(supabase: SupabaseClient, allergenNames: string[]): Promise<number[]> {
   if (!allergenNames || allergenNames.length === 0) {
     return [];
   }
 
   // Krok 1: Znajdź ID głównych alergenów po nazwie
   const { data: mainAllergens, error: mainError } = await supabase
-    .from('allergens')
-    .select('id')
-    .in('name', allergenNames);
+    .from("allergens")
+    .select("id")
+    .in("name", allergenNames);
 
   if (mainError || !mainAllergens) {
-    console.error('[foodService] Błąd pobierania głównych alergenów:', mainError);
+    console.error("[foodService] Błąd pobierania głównych alergenów:", mainError);
     return [];
   }
 
@@ -101,12 +94,12 @@ async function getAllergenIdsWithChildren(
   // Krok 2: Rekurencyjnie znajdź wszystkie dzieci
   // (alergeny które mają parent_id w mainIds)
   const { data: children, error: childrenError } = await supabase
-    .from('allergens')
-    .select('id')
-    .in('parent_id', mainIds);
+    .from("allergens")
+    .select("id")
+    .in("parent_id", mainIds);
 
   if (childrenError) {
-    console.error('[foodService] Błąd pobierania dzieci alergenów:', childrenError);
+    console.error("[foodService] Błąd pobierania dzieci alergenów:", childrenError);
     // Zwracamy przynajmniej główne ID
     return mainIds;
   }
@@ -119,11 +112,11 @@ async function getAllergenIdsWithChildren(
 
 /**
  * Pobiera listę karm z bazy danych z filtrowaniem, wyszukiwaniem i paginacją
- * 
+ *
  * @param supabase - Klient Supabase z kontekstu żądania
  * @param filters - Filtry, paginacja i sortowanie
  * @returns Obiekt z listą karm, licznikiem i błędem
- * 
+ *
  * @example
  * ```ts
  * const result = await foodService.list(locals.supabase, {
@@ -142,21 +135,21 @@ export async function list(
 ): Promise<{ data: FoodDTO[] | null; count: number; error: any }> {
   try {
     // Budujemy zapytanie bazowe
-    let query = supabase.from('foods').select('*', { count: 'exact' });
+    let query = supabase.from("foods").select("*", { count: "exact" });
 
     // Filtrowanie po brand_id
     if (filters.brandId) {
-      query = query.eq('brand_id', filters.brandId);
+      query = query.eq("brand_id", filters.brandId);
     }
 
     // Filtrowanie po size_type_id
     if (filters.sizeTypeId) {
-      query = query.eq('size_type_id', filters.sizeTypeId);
+      query = query.eq("size_type_id", filters.sizeTypeId);
     }
 
     // Filtrowanie po age_category_id
     if (filters.ageCategoryId) {
-      query = query.eq('age_category_id', filters.ageCategoryId);
+      query = query.eq("age_category_id", filters.ageCategoryId);
     }
 
     // Wyszukiwanie pełnotekstowe (w nazwie lub składnikach)
@@ -172,36 +165,36 @@ export async function list(
       if (allergenIds.length > 0) {
         // Krok 2: Znajdź wszystkie składniki zawierające te alergeny
         const { data: ingredientsWithAllergens, error: ingredientsError } = await supabase
-          .from('ingredient_allergens')
-          .select('ingredient_id')
-          .in('allergen_id', allergenIds);
+          .from("ingredient_allergens")
+          .select("ingredient_id")
+          .in("allergen_id", allergenIds);
 
         if (ingredientsError) {
-          console.error('[foodService] Błąd pobierania składników z alergenami:', ingredientsError);
+          console.error("[foodService] Błąd pobierania składników z alergenami:", ingredientsError);
         } else if (ingredientsWithAllergens && ingredientsWithAllergens.length > 0) {
           const ingredientIdsToExclude = ingredientsWithAllergens.map((i) => i.ingredient_id);
 
           // Krok 3: Wykluczamy karmy które mają te składniki w food_ingredients
           // Używamy NOT EXISTS do wykluczenia karm zawierających którykolwiek z wykluczonych składników
           const { data: foodsWithExcludedIngredients, error: foodIngredientsError } = await supabase
-            .from('food_ingredients')
-            .select('food_id')
-            .in('ingredient_id', ingredientIdsToExclude);
+            .from("food_ingredients")
+            .select("food_id")
+            .in("ingredient_id", ingredientIdsToExclude);
 
           if (foodIngredientsError) {
-            console.error('[foodService] Błąd pobierania food_ingredients:', foodIngredientsError);
+            console.error("[foodService] Błąd pobierania food_ingredients:", foodIngredientsError);
           } else if (foodsWithExcludedIngredients && foodsWithExcludedIngredients.length > 0) {
             const foodIdsToExclude = foodsWithExcludedIngredients.map((f) => f.food_id);
 
             // Wykluczamy te karmy z wyników
-            query = query.not('id', 'in', `(${foodIdsToExclude.join(',')})`);
+            query = query.not("id", "in", `(${foodIdsToExclude.join(",")})`);
           }
         }
       }
     }
 
     // Sortowanie
-    const ascending = filters.orderDirection === 'asc';
+    const ascending = filters.orderDirection === "asc";
     query = query.order(filters.orderBy, { ascending });
 
     // Paginacja
@@ -222,16 +215,17 @@ export async function list(
 }
 
 /**
- * Pobiera szczegóły pojedynczej karmy wraz ze składnikami i alergenami
- * 
+ * Pobiera szczegóły pojedynczej karmy wraz ze składnikami, alergenami i relacjami
+ *
  * @param supabase - Klient Supabase z kontekstu żądania
  * @param id - ID karmy do pobrania
- * @returns Obiekt z karmą lub null jeśli nie znaleziono
- * 
+ * @returns Obiekt z pełnymi danymi karmy (FoodDetailDTO) lub null jeśli nie znaleziono
+ *
  * @example
  * ```ts
  * const result = await foodService.getById(locals.supabase, 1);
  * if (result.data) {
+ *   console.log(result.data.brand); // { id, name }
  *   console.log(result.data.ingredients); // lista składników
  *   console.log(result.data.allergens); // lista alergenów
  * }
@@ -240,54 +234,67 @@ export async function list(
 export async function getById(
   supabase: SupabaseClient,
   id: number
-): Promise<{ data: any | null; error: any }> {
+): Promise<{ data: FoodDetailDTO | null; error: any }> {
   try {
     // Krok 1: Pobierz podstawowe dane karmy
-    const { data: food, error: foodError } = await supabase
-      .from('foods')
-      .select('*')
-      .eq('id', id)
-      .single();
+    const { data: food, error: foodError } = await supabase.from("foods").select("*").eq("id", id).single();
 
     if (foodError || !food) {
       return { data: null, error: foodError };
     }
 
-    // Krok 2: Pobierz składniki poprzez pivot food_ingredients
+    // Krok 2: Pobierz relacje (brand, sizeType, ageCategory) równolegle
+    const [brandResult, sizeTypeResult, ageCategoryResult] = await Promise.all([
+      food.brand_id
+        ? supabase.from("brands").select("id, name").eq("id", food.brand_id).single()
+        : Promise.resolve({ data: null, error: null }),
+      food.size_type_id
+        ? supabase.from("size_types").select("id, name").eq("id", food.size_type_id).single()
+        : Promise.resolve({ data: null, error: null }),
+      food.age_category_id
+        ? supabase.from("age_categories").select("id, name").eq("id", food.age_category_id).single()
+        : Promise.resolve({ data: null, error: null }),
+    ]);
+
+    // Krok 3: Pobierz składniki poprzez pivot food_ingredients
     const { data: foodIngredients, error: ingredientsError } = await supabase
-      .from('food_ingredients')
-      .select(`
+      .from("food_ingredients")
+      .select(
+        `
         ingredient_id,
         ingredients:ingredient_id (
           id,
           name
         )
-      `)
-      .eq('food_id', id);
+      `
+      )
+      .eq("food_id", id);
 
     if (ingredientsError) {
-      console.error('[foodService] Błąd pobierania składników:', ingredientsError);
+      console.error("[foodService] Błąd pobierania składników:", ingredientsError);
     }
 
-    // Krok 3: Pobierz alergeny dla każdego składnika
+    // Krok 4: Pobierz alergeny dla każdego składnika
     const ingredientIds = foodIngredients?.map((fi: any) => fi.ingredient_id) || [];
     let allergens: any[] = [];
 
     if (ingredientIds.length > 0) {
       const { data: ingredientAllergens, error: allergensError } = await supabase
-        .from('ingredient_allergens')
-        .select(`
+        .from("ingredient_allergens")
+        .select(
+          `
           allergen_id,
           allergens:allergen_id (
             id,
             name,
             parent_id
           )
-        `)
-        .in('ingredient_id', ingredientIds);
+        `
+        )
+        .in("ingredient_id", ingredientIds);
 
       if (allergensError) {
-        console.error('[foodService] Błąd pobierania alergenów:', allergensError);
+        console.error("[foodService] Błąd pobierania alergenów:", allergensError);
       } else {
         // Deduplikacja alergenów (ten sam alergen może występować w wielu składnikach)
         const uniqueAllergens = new Map();
@@ -300,28 +307,31 @@ export async function getById(
       }
     }
 
-    // Krok 4: Budujemy rozszerzoną odpowiedź
-    const enrichedFood = {
+    // Krok 5: Budujemy pełną odpowiedź FoodDetailDTO
+    const enrichedFood: FoodDetailDTO = {
       ...food,
+      brand: brandResult.data || null,
+      sizeType: sizeTypeResult.data || null,
+      ageCategory: ageCategoryResult.data || null,
       ingredients: foodIngredients?.map((fi: any) => fi.ingredients).filter(Boolean) || [],
       allergens,
     };
 
     return { data: enrichedFood, error: null };
   } catch (err) {
-    console.error('[foodService] Nieoczekiwany błąd w getById:', err);
+    console.error("[foodService] Nieoczekiwany błąd w getById:", err);
     return { data: null, error: err };
   }
 }
 
 /**
  * Aktualizuje istniejącą karmę w bazie danych
- * 
+ *
  * @param supabase - Klient Supabase z kontekstu żądania
  * @param id - ID karmy do aktualizacji
  * @param data - Dane do aktualizacji (wszystkie pola opcjonalne)
  * @returns Obiekt z zaktualizowaną karmą lub błędem
- * 
+ *
  * @example
  * ```ts
  * const result = await foodService.update(locals.supabase, 1, {
@@ -340,7 +350,7 @@ export async function update(
     if (Object.keys(data).length === 0) {
       return {
         data: null,
-        error: { message: 'Brak danych do aktualizacji' },
+        error: { message: "Brak danych do aktualizacji" },
       };
     }
 
@@ -351,33 +361,28 @@ export async function update(
     };
 
     // Wykonaj aktualizację
-    const { data: updatedFood, error } = await supabase
-      .from('foods')
-      .update(updateData)
-      .eq('id', id)
-      .select()
-      .single();
+    const { data: updatedFood, error } = await supabase.from("foods").update(updateData).eq("id", id).select().single();
 
     if (error) {
-      console.error('[foodService] Błąd Supabase podczas aktualizacji:', error);
+      console.error("[foodService] Błąd Supabase podczas aktualizacji:", error);
       return { data: null, error };
     }
 
     return { data: updatedFood, error: null };
   } catch (err) {
     // Obsługa nieoczekiwanych błędów (np. problemy sieciowe)
-    console.error('[foodService] Nieoczekiwany błąd w update:', err);
+    console.error("[foodService] Nieoczekiwany błąd w update:", err);
     return { data: null, error: err };
   }
 }
 
 /**
  * Usuwa karmę z bazy danych
- * 
+ *
  * @param supabase - Klient Supabase z kontekstu żądania
  * @param id - ID karmy do usunięcia
  * @returns Obiekt z informacją o sukcesie lub błędzie
- * 
+ *
  * @example
  * ```ts
  * const result = await foodService.remove(locals.supabase, 1);
@@ -386,22 +391,19 @@ export async function update(
  * }
  * ```
  */
-export async function remove(
-  supabase: SupabaseClient,
-  id: number
-): Promise<{ error: any }> {
+export async function remove(supabase: SupabaseClient, id: number): Promise<{ error: any }> {
   try {
-    const { error } = await supabase.from('foods').delete().eq('id', id);
+    const { error } = await supabase.from("foods").delete().eq("id", id);
 
     if (error) {
-      console.error('[foodService] Błąd Supabase podczas usuwania:', error);
+      console.error("[foodService] Błąd Supabase podczas usuwania:", error);
       return { error };
     }
 
     return { error: null };
   } catch (err) {
     // Obsługa nieoczekiwanych błędów
-    console.error('[foodService] Nieoczekiwany błąd w remove:', err);
+    console.error("[foodService] Nieoczekiwany błąd w remove:", err);
     return { error: err };
   }
 }
@@ -417,4 +419,3 @@ export const foodService = {
   update,
   remove,
 };
-

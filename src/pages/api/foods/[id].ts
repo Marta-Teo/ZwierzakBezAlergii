@@ -1,7 +1,7 @@
-import type { APIRoute } from 'astro';
-import { foodService } from '../../../lib/services/foodService';
-import { UpdateFoodSchema } from '../../../lib/schemas/foodSchema';
-import type { UpdateFoodCommand } from '../../../types';
+import type { APIRoute } from "astro";
+import { foodService } from "../../../lib/services/foodService";
+import { UpdateFoodSchema } from "../../../lib/schemas/foodSchema";
+import type { UpdateFoodCommand } from "../../../types";
 
 // Wyłączenie pre-renderingu dla tego endpointu API
 // Endpoint musi działać dynamicznie (server-side)
@@ -9,9 +9,9 @@ export const prerender = false;
 
 /**
  * GET /api/foods/:id
- * 
+ *
  * Pobiera szczegóły pojedynczej karmy wraz z listą składników i alergenów.
- * 
+ *
  * @param id - ID karmy (z URL)
  * @returns 200 - Szczegóły karmy
  * @returns 404 - Karma nie znaleziona
@@ -21,18 +21,18 @@ export const prerender = false;
 export const GET: APIRoute = async ({ locals, params }) => {
   try {
     // KROK 1: Walidacja parametru ID
-    const id = parseInt(params.id || '', 10);
+    const id = parseInt(params.id || "", 10);
 
     if (isNaN(id) || id <= 0) {
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Nieprawidłowe ID karmy',
+          error: "Nieprawidłowe ID karmy",
         }),
         {
           status: 400,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -48,12 +48,12 @@ export const GET: APIRoute = async ({ locals, params }) => {
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Karma nie została znaleziona',
+          error: "Karma nie została znaleziona",
         }),
         {
           status: 404,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -61,18 +61,18 @@ export const GET: APIRoute = async ({ locals, params }) => {
 
     // KROK 4: Obsługa błędów z bazy danych
     if (error) {
-      console.error('[API GET /foods/:id] Błąd Supabase:', JSON.stringify(error, null, 2));
+      console.error("[API GET /foods/:id] Błąd Supabase:", JSON.stringify(error, null, 2));
 
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Nie udało się pobrać szczegółów karmy',
-          details: error?.message || 'Nieznany błąd bazy danych',
+          error: "Nie udało się pobrać szczegółów karmy",
+          details: error?.message || "Nieznany błąd bazy danych",
         }),
         {
           status: 500,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -87,23 +87,23 @@ export const GET: APIRoute = async ({ locals, params }) => {
       {
         status: 200,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
   } catch (err) {
     // Obsługa nieoczekiwanych błędów
-    console.error('[API GET /foods/:id] Nieoczekiwany błąd:', JSON.stringify(err, null, 2));
+    console.error("[API GET /foods/:id] Nieoczekiwany błąd:", JSON.stringify(err, null, 2));
 
     return new Response(
       JSON.stringify({
         success: false,
-        error: 'Wystąpił nieoczekiwany błąd serwera',
+        error: "Wystąpił nieoczekiwany błąd serwera",
       }),
       {
         status: 500,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -112,9 +112,9 @@ export const GET: APIRoute = async ({ locals, params }) => {
 
 /**
  * PUT /api/foods/:id
- * 
+ *
  * Aktualizuje istniejącą karmę (wszystkie pola opcjonalne - częściowa aktualizacja).
- * 
+ *
  * @param id - ID karmy (z URL)
  * @param body - Dane do aktualizacji
  * @returns 200 - Karma zaktualizowana
@@ -125,18 +125,18 @@ export const GET: APIRoute = async ({ locals, params }) => {
 export const PUT: APIRoute = async ({ locals, params, request }) => {
   try {
     // KROK 1: Walidacja parametru ID
-    const id = parseInt(params.id || '', 10);
+    const id = parseInt(params.id || "", 10);
 
     if (isNaN(id) || id <= 0) {
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Nieprawidłowe ID karmy',
+          error: "Nieprawidłowe ID karmy",
         }),
         {
           status: 400,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -147,17 +147,17 @@ export const PUT: APIRoute = async ({ locals, params, request }) => {
     try {
       body = await request.json();
     } catch (parseError) {
-      console.error('[API PUT /foods/:id] Błąd parsowania JSON:', parseError);
+      console.error("[API PUT /foods/:id] Błąd parsowania JSON:", parseError);
 
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Nieprawidłowy format JSON',
+          error: "Nieprawidłowy format JSON",
         }),
         {
           status: 400,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -168,18 +168,18 @@ export const PUT: APIRoute = async ({ locals, params, request }) => {
 
     if (!validationResult.success) {
       const errors = validationResult.error.format();
-      console.error('[API PUT /foods/:id] Błąd walidacji:', JSON.stringify(errors, null, 2));
+      console.error("[API PUT /foods/:id] Błąd walidacji:", JSON.stringify(errors, null, 2));
 
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Błąd walidacji danych',
+          error: "Błąd walidacji danych",
           details: validationResult.error.errors,
         }),
         {
           status: 400,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -190,47 +190,47 @@ export const PUT: APIRoute = async ({ locals, params, request }) => {
       ...(validationResult.data.name !== undefined && { name: validationResult.data.name }),
       ...(validationResult.data.brand_id !== undefined && { brand_id: validationResult.data.brand_id }),
       ...(validationResult.data.size_type_id !== undefined && { size_type_id: validationResult.data.size_type_id }),
-      ...(validationResult.data.age_category_id !== undefined && { age_category_id: validationResult.data.age_category_id }),
-      ...(validationResult.data.ingredients_raw !== undefined && { ingredients_raw: validationResult.data.ingredients_raw }),
+      ...(validationResult.data.age_category_id !== undefined && {
+        age_category_id: validationResult.data.age_category_id,
+      }),
+      ...(validationResult.data.ingredients_raw !== undefined && {
+        ingredients_raw: validationResult.data.ingredients_raw,
+      }),
     };
 
     // KROK 4: Wywołanie serwisu do aktualizacji
-    const { data: updatedFood, error } = await foodService.update(
-      locals.supabase,
-      id,
-      updateData
-    );
+    const { data: updatedFood, error } = await foodService.update(locals.supabase, id, updateData);
 
     // KROK 5: Obsługa błędów
     if (error) {
       // Sprawdź czy to błąd "nie znaleziono"
-      if (error.code === 'PGRST116' || !updatedFood) {
+      if (error.code === "PGRST116" || !updatedFood) {
         return new Response(
           JSON.stringify({
             success: false,
-            error: 'Karma nie została znaleziona',
+            error: "Karma nie została znaleziona",
           }),
           {
             status: 404,
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
           }
         );
       }
 
-      console.error('[API PUT /foods/:id] Błąd Supabase:', JSON.stringify(error, null, 2));
+      console.error("[API PUT /foods/:id] Błąd Supabase:", JSON.stringify(error, null, 2));
 
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Nie udało się zaktualizować karmy',
-          details: error?.message || 'Nieznany błąd bazy danych',
+          error: "Nie udało się zaktualizować karmy",
+          details: error?.message || "Nieznany błąd bazy danych",
         }),
         {
           status: 500,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -245,22 +245,22 @@ export const PUT: APIRoute = async ({ locals, params, request }) => {
       {
         status: 200,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
   } catch (err) {
-    console.error('[API PUT /foods/:id] Nieoczekiwany błąd:', JSON.stringify(err, null, 2));
+    console.error("[API PUT /foods/:id] Nieoczekiwany błąd:", JSON.stringify(err, null, 2));
 
     return new Response(
       JSON.stringify({
         success: false,
-        error: 'Wystąpił nieoczekiwany błąd serwera',
+        error: "Wystąpił nieoczekiwany błąd serwera",
       }),
       {
         status: 500,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -269,9 +269,9 @@ export const PUT: APIRoute = async ({ locals, params, request }) => {
 
 /**
  * DELETE /api/foods/:id
- * 
+ *
  * Usuwa karmę z bazy danych.
- * 
+ *
  * @param id - ID karmy (z URL)
  * @returns 204 - Karma usunięta (brak treści)
  * @returns 400 - Nieprawidłowe ID
@@ -281,18 +281,18 @@ export const PUT: APIRoute = async ({ locals, params, request }) => {
 export const DELETE: APIRoute = async ({ locals, params }) => {
   try {
     // KROK 1: Walidacja parametru ID
-    const id = parseInt(params.id || '', 10);
+    const id = parseInt(params.id || "", 10);
 
     if (isNaN(id) || id <= 0) {
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Nieprawidłowe ID karmy',
+          error: "Nieprawidłowe ID karmy",
         }),
         {
           status: 400,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -305,12 +305,12 @@ export const DELETE: APIRoute = async ({ locals, params }) => {
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Karma nie została znaleziona',
+          error: "Karma nie została znaleziona",
         }),
         {
           status: 404,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -320,18 +320,18 @@ export const DELETE: APIRoute = async ({ locals, params }) => {
     const { error } = await foodService.remove(locals.supabase, id);
 
     if (error) {
-      console.error('[API DELETE /foods/:id] Błąd Supabase:', JSON.stringify(error, null, 2));
+      console.error("[API DELETE /foods/:id] Błąd Supabase:", JSON.stringify(error, null, 2));
 
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Nie udało się usunąć karmy',
-          details: error?.message || 'Nieznany błąd bazy danych',
+          error: "Nie udało się usunąć karmy",
+          details: error?.message || "Nieznany błąd bazy danych",
         }),
         {
           status: 500,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -342,20 +342,19 @@ export const DELETE: APIRoute = async ({ locals, params }) => {
       status: 204,
     });
   } catch (err) {
-    console.error('[API DELETE /foods/:id] Nieoczekiwany błąd:', JSON.stringify(err, null, 2));
+    console.error("[API DELETE /foods/:id] Nieoczekiwany błąd:", JSON.stringify(err, null, 2));
 
     return new Response(
       JSON.stringify({
         success: false,
-        error: 'Wystąpił nieoczekiwany błąd serwera',
+        error: "Wystąpił nieoczekiwany błąd serwera",
       }),
       {
         status: 500,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
   }
 };
-
