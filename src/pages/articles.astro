@@ -1,65 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Button } from "../components/ui/button";
+import { ArticlesPage } from "../components/ArticlesPage";
 ---
 
-<Layout title="Artykuły - Wkrótce | ZwierzakBezAlergii">
-  <main class="min-h-screen flex items-center justify-center bg-background px-4">
-    <div class="container max-w-2xl text-center">
-      {/* Ikona "W budowie" */}
-      <div class="mb-8 flex justify-center">
-        <svg
-          class="h-24 w-24 text-primary"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-          />
-        </svg>
-      </div>
-
-      {/* Nagłówek */}
-      <h1 class="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-        Wkrótce!
-      </h1>
-
-      {/* Opis */}
-      <p class="text-lg sm:text-xl text-muted-foreground mb-8 max-w-lg mx-auto">
-        Sekcja z artykułami edukacyjnymi o żywieniu i alergiach psów jest obecnie w budowie. 
-        Wróć wkrótce, aby znaleźć wartościowe porady i informacje.
-      </p>
-
-      {/* Przycisk powrotu */}
-      <a 
-        href="/"
-        class="inline-block transition-transform hover:-translate-y-1 active:translate-y-0"
-        aria-label="Wróć do strony głównej"
-      >
-        <Button 
-          variant="default" 
-          size="lg"
-          className="px-8"
-        >
-          ← Powrót do strony głównej
-        </Button>
-      </a>
-
-      {/* Link do karm */}
-      <div class="mt-6">
-        <a 
-          href="/foods"
-          class="text-primary hover:underline text-sm"
-        >
-          Lub przeglądaj karmy dla psów
-        </a>
-      </div>
-    </div>
-  </main>
+<Layout 
+  title="Artykuły o alergiach pokarmowych | ZwierzakBezAlergii"
+  description="Dowiedz się więcej o alergiach pokarmowych u psów. Praktyczne porady, wiedza merytoryczna i najnowsze informacje od ekspertów."
+>
+  <ArticlesPage client:load />
 </Layout>
 

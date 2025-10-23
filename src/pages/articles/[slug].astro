@@ -1,0 +1,327 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Button } from "../../components/ui/button";
+import { marked } from "marked";
+import { format } from "date-fns";
+import { pl } from "date-fns/locale";
+
+// Pobierz slug z parametrów URL
+const { slug } = Astro.params;
+
+// Pobierz artykuł z API
+const apiUrl = new URL(`/api/articles/${slug}`, Astro.url);
+const response = await fetch(apiUrl);
+
+// Obsługa błędów
+if (!response.ok) {
+  return Astro.redirect("/articles");
+}
+
+const json = await response.json();
+
+// Jeśli nie znaleziono artykułu - redirect do listy
+if (!json.success || !json.data) {
+  return Astro.redirect("/articles");
+}
+
+const article = json.data;
+
+// Renderuj Markdown do HTML
+const contentHtml = marked(article.content || "");
+
+// Formatuj datę publikacji
+const formattedDate = format(new Date(article.created_at), "dd MMMM yyyy", { locale: pl });
+---
+
+<Layout 
+  title={`${article.title} | ZwierzakBezAlergii`}
+  description={article.excerpt || article.title}
+>
+  <main class="min-h-screen bg-background py-8">
+    <article class="container mx-auto max-w-4xl px-4">
+      {/* Breadcrumbs / Nawigacja */}
+      <nav class="mb-8" aria-label="Nawigacja breadcrumb">
+        <ol class="flex items-center gap-2 text-sm text-muted-foreground">
+          <li>
+            <a href="/" class="hover:text-foreground transition-colors">
+              Strona główna
+            </a>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li>
+            <a href="/articles" class="hover:text-foreground transition-colors">
+              Artykuły
+            </a>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li class="text-foreground" aria-current="page">
+            {article.title}
+          </li>
+        </ol>
+      </nav>
+
+      {/* Przycisk powrotu */}
+      <div class="mb-8">
+        <a href="/articles">
+          <Button variant="outline" className="gap-2">
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Powrót do listy artykułów
+          </Button>
+        </a>
+      </div>
+
+      {/* Nagłówek artykułu */}
+      <header class="mb-8 border-b border-border pb-8">
+        <h1 class="text-4xl font-bold text-foreground mb-4 leading-tight">
+          {article.title}
+        </h1>
+
+        {/* Metadane */}
+        <div class="flex items-center gap-4 text-sm text-muted-foreground">
+          {/* Data publikacji */}
+          <time datetime={article.created_at} class="flex items-center gap-1">
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            {formattedDate}
+          </time>
+
+          {/* Separator */}
+          {article.authorName && <span aria-hidden="true">•</span>}
+
+          {/* Autor (jeśli jest) */}
+          {article.authorName && (
+            <span class="flex items-center gap-1">
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+              {article.authorName}
+            </span>
+          )}
+        </div>
+
+        {/* Excerpt (jeśli jest) */}
+        {article.excerpt && (
+          <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
+            {article.excerpt}
+          </p>
+        )}
+      </header>
+
+      {/* Treść artykułu (Markdown wyrenderowany do HTML) */}
+      <div 
+        class="prose prose-slate dark:prose-invert max-w-none
+               prose-headings:text-foreground
+               prose-p:text-foreground
+               prose-a:text-primary hover:prose-a:text-primary/80
+               prose-strong:text-foreground
+               prose-code:text-foreground
+               prose-pre:bg-muted
+               prose-blockquote:text-muted-foreground
+               prose-blockquote:border-primary
+               prose-th:text-foreground
+               prose-td:text-foreground
+               prose-li:text-foreground"
+        set:html={contentHtml}
+      />
+
+      {/* Footer artykułu - CTA */}
+      <footer class="mt-12 border-t border-border pt-8">
+        <div class="bg-muted rounded-lg p-6 text-center">
+          <h2 class="text-xl font-semibold text-foreground mb-2">
+            Szukasz karmy dla psa z alergiami?
+          </h2>
+          <p class="text-muted-foreground mb-4">
+            Przeglądaj naszą bazę karm i filtruj po alergenach
+          </p>
+          <a href="/foods">
+            <Button variant="default" size="lg">
+              Przeglądaj karmy
+            </Button>
+          </a>
+        </div>
+
+        {/* Powrót do listy artykułów */}
+        <div class="mt-6 text-center">
+          <a 
+            href="/articles" 
+            class="text-primary hover:text-primary/80 transition-colors text-sm"
+          >
+            ← Zobacz więcej artykułów o alergiach
+          </a>
+        </div>
+      </footer>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  /* Dodatkowe style dla treści Markdown */
+  .prose {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  /* Responsive typography */
+  @media (min-width: 640px) {
+    .prose {
+      font-size: 1.125rem;
+    }
+  }
+
+  /* Spacing między elementami */
+  .prose > * + * {
+    margin-top: 1rem;
+  }
+
+  .prose h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .prose h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .prose h4 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .prose ul,
+  .prose ol {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose li + li {
+    margin-top: 0.5rem;
+  }
+
+  .prose ul {
+    list-style-type: disc;
+  }
+
+  .prose ol {
+    list-style-type: decimal;
+  }
+
+  .prose blockquote {
+    border-left-width: 4px;
+    padding-left: 1rem;
+    font-style: italic;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose code {
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  .prose pre {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose pre code {
+    background: transparent;
+    padding: 0;
+  }
+
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose th,
+  .prose td {
+    padding: 0.5rem 1rem;
+  }
+
+  .prose th {
+    font-weight: 600;
+  }
+
+  .prose img {
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Dodatkowe kolory dla dark mode - będą dziedziczone z prose-* klas */
+  .prose code {
+    background-color: hsl(var(--muted));
+  }
+
+  .prose th,
+  .prose td {
+    border: 1px solid hsl(var(--border));
+  }
+
+  .prose th {
+    background-color: hsl(var(--muted));
+  }
+
+  .prose blockquote {
+    border-left-color: hsl(var(--primary));
+  }
+
+  .prose hr {
+    border-color: hsl(var(--border));
+  }
+</style>
+

@@ -530,84 +530,96 @@ END $$;
 -- 7. FOODS (Przykładowe karmy)
 -- ============================================================================
 
-INSERT INTO public.foods (name, brand_id, size_type_id, age_category_id, ingredients_raw) VALUES
+INSERT INTO public.foods (name, brand_id, size_type_id, age_category_id, ingredients_raw, image_url) VALUES
   -- Brit Care
   ('Brit Care Adult Jagnięcina z Ryżem', 
    (SELECT id FROM public.brands WHERE name = 'Brit Care'),
    (SELECT id FROM public.size_types WHERE name = 'średni'),
    (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'jagnięcina, ryż, tłuszcz z kurczaka, suszone jabłka, olej z łososia'),
+   'jagnięcina, ryż, tłuszcz z kurczaka, suszone jabłka, olej z łososia',
+   '/images/foods/brit-care-jagniecina-medium-adult.jpg'),
   
   ('Brit Care Bezzbożowa Łosoś z Ziemniakiem', 
    (SELECT id FROM public.brands WHERE name = 'Brit Care'),
    (SELECT id FROM public.size_types WHERE name = 'mały'),
    (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'łosoś, ziemniak, groszek, olej z ryb, batat'),
+   'łosoś, ziemniak, groszek, olej z ryb, batat',
+   '/images/foods/brit-care-salmon-adult-small.jpg'),
   
   ('Brit Care Puppy Kurczak z Ryżem', 
    (SELECT id FROM public.brands WHERE name = 'Brit Care'),
    (SELECT id FROM public.size_types WHERE name = 'mały'),
    (SELECT id FROM public.age_categories WHERE name = 'szczeniak'),
-   'kurczak, ryż, tłuszcz z kurczaka, olej z ryb'),
+   'kurczak, ryż, tłuszcz z kurczaka, olej z ryb',
+   NULL),
   
   -- Carnilove
   ('Carnilove Kaczka z Bażantem', 
    (SELECT id FROM public.brands WHERE name = 'Carnilove'),
    (SELECT id FROM public.size_types WHERE name = 'średni'),
    (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'kaczka, indyk, groszek, soczewica, olej z ryb'),
+   'kaczka, indyk, groszek, soczewica, olej z ryb',
+   NULL),
   
   ('Carnilove Jagnięcina z Dzikiem', 
    (SELECT id FROM public.brands WHERE name = 'Carnilove'),
    (SELECT id FROM public.size_types WHERE name = 'duży'),
    (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'jagnięcina, wieprzowina, batat, groszek, ciecierzyca'),
+   'jagnięcina, wieprzowina, batat, groszek, ciecierzyca',
+   NULL),
   
   -- Acana
   ('Acana Heritage Kaczka Wolny Wybieg', 
    (SELECT id FROM public.brands WHERE name = 'Acana'),
    (SELECT id FROM public.size_types WHERE name = 'średni'),
    (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'kaczka, jajka, ryba, owies, groszek'),
+   'kaczka, jajka, ryba, owies, groszek',
+   NULL),
   
   ('Acana Singles Jagnięcina z Jabłkiem', 
    (SELECT id FROM public.brands WHERE name = 'Acana'),
    (SELECT id FROM public.size_types WHERE name = 'średni'),
    (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'jagnięcina, owies, soczewica, olej z ryb'),
+   'jagnięcina, owies, soczewica, olej z ryb',
+   '/images/foods/Acana-singles-lamb.jpg'),
   
   -- Royal Canin
   ('Royal Canin Hypoallergenic', 
    (SELECT id FROM public.brands WHERE name = 'Royal Canin'),
    (SELECT id FROM public.size_types WHERE name = 'mały'),
    (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'ryż, ryba, olej z ryb, ziemniak'),
+   'ryż, ryba, olej z ryb, ziemniak',
+   NULL),
   
   -- Taste of the Wild
   ('Taste of the Wild High Prairie', 
    (SELECT id FROM public.brands WHERE name = 'Taste of the Wild'),
    (SELECT id FROM public.size_types WHERE name = 'średni'),
    (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'wołowina, jagnięcina, batat, groszek, olej z ryb'),
+   'wołowina, jagnięcina, batat, groszek, olej z ryb',
+   '/images/foods/taste-of-the-wild-high-prairie.jpg'),
   
   ('Taste of the Wild Pacific Stream', 
    (SELECT id FROM public.brands WHERE name = 'Taste of the Wild'),
    (SELECT id FROM public.size_types WHERE name = 'średni'),
    (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'łosoś, ryba, batat, groszek'),
+   'łosoś, ryba, batat, groszek',
+   '/images/foods/taste-of-the-wild-pacific-stream.jpg'),
   
   -- Josera
   ('Josera SensiPlus', 
    (SELECT id FROM public.brands WHERE name = 'Josera'),
    (SELECT id FROM public.size_types WHERE name = 'średni'),
    (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'kaczka, ryż, ziemniak, olej z ryb'),
+   'kaczka, ryż, ziemniak, olej z ryb',
+   '/images/foods/josera-sensiplus-adult.jpg'),
   
   ('Josera Optiness', 
    (SELECT id FROM public.brands WHERE name = 'Josera'),
    (SELECT id FROM public.size_types WHERE name = 'duży'),
    (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'jagnięcina, ryż, kukurydza, tłuszcz z kurczaka');
+   'jagnięcina, ryż, kukurydza, tłuszcz z kurczaka',
+   '/images/foods/josera-optiness-adult.jpg');
 
 -- ============================================================================
 -- 8. FOOD_INGREDIENTS (Powiązania karma ↔ składniki)
@@ -804,26 +816,36 @@ END $$;
 -- 9. ARTICLES (Przykładowe artykuły edukacyjne)
 -- ============================================================================
 
-INSERT INTO public.articles (title, slug, content) VALUES
+INSERT INTO public.articles (title, slug, excerpt, content, published) VALUES
   ('Jak rozpoznać alergię pokarmową u psa?',
    'jak-rozpoznac-alergie-pokarmowa-u-psa',
-   'Alergie pokarmowe u psów są coraz częstszym problemem. Objawy mogą obejmować swędzenie skóry, problemy żołądkowo-jelitowe, czy chroniczne infekcje uszu. W tym artykule omawiamy najczęstsze symptomy i metody diagnozowania alergii pokarmowych u czworonogów.'),
+   'Alergie pokarmowe to częsty problem. Poznaj objawy takie jak swędzenie skóry, problemy żołądkowo-jelitowe i chroniczne infekcje uszu.',
+   'Alergie pokarmowe u psów są coraz częstszym problemem. Objawy mogą obejmować swędzenie skóry, problemy żołądkowo-jelitowe, czy chroniczne infekcje uszu. W tym artykule omawiamy najczęstsze symptomy i metody diagnozowania alergii pokarmowych u czworonogów.',
+   true),
   
   ('Najczęstsze alergeny w karmach dla psów',
    'najczestsze-alergeny-w-karmach-dla-psow',
-   'Kurczak, wołowina, pszenica i kukurydza to jedne z najczęstszych alergenów występujących w karmach dla psów. Dowiedz się, które składniki najczęściej wywołują reakcje alergiczne i jak je unikać przy wyborze karmy.'),
+   'Kurczak, wołowina, pszenica i kukurydza to najczęstsze alergeny. Dowiedz się, których składników unikać przy wyborze karmy.',
+   'Kurczak, wołowina, pszenica i kukurydza to jedne z najczęstszych alergenów występujących w karmach dla psów. Dowiedz się, które składniki najczęściej wywołują reakcje alergiczne i jak je unikać przy wyborze karmy.',
+   true),
   
   ('Dieta eliminacyjna - jak ją przeprowadzić?',
    'dieta-eliminacyjna-jak-ja-przeprowadzic',
-   'Dieta eliminacyjna to skuteczna metoda diagnozowania alergii pokarmowych. Polega na karmieniu psa karmą z jednym źródłem białka przez 8-12 tygodni. W artykule przedstawiamy krok po kroku, jak bezpiecznie przeprowadzić dietę eliminacyjną.'),
+   'Skuteczna metoda diagnozowania alergii. Polega na karmieniu psa karmą z jednym źródłem białka przez 8-12 tygodni.',
+   'Dieta eliminacyjna to skuteczna metoda diagnozowania alergii pokarmowych. Polega na karmieniu psa karmą z jednym źródłem białka przez 8-12 tygodni. W artykule przedstawiamy krok po kroku, jak bezpiecznie przeprowadzić dietę eliminacyjną.',
+   true),
   
   ('Karmy hipoalergiczne - co warto wiedzieć?',
    'karmy-hipoalergiczne-co-warto-wiedziec',
-   'Karmy hipoalergiczne zawierają hydrolizowane białka lub rzadkie źródła protein, które minimalizują ryzyko reakcji alergicznych. Dowiedz się, czym różnią się od zwykłych karm i dla których psów są odpowiednie.'),
+   'Karmy z hydrolizowanym białkiem lub rzadkimi źródłami protein minimalizują ryzyko alergii. Zobacz, czym różnią się od zwykłych karm.',
+   'Karmy hipoalergiczne zawierają hydrolizowane białka lub rzadkie źródła protein, które minimalizują ryzyko reakcji alergicznych. Dowiedz się, czym różnią się od zwykłych karm i dla których psów są odpowiednie.',
+   true),
   
   ('Rola kwasów omega-3 w diecie alergika',
    'rola-kwasow-omega-3-w-diecie-alergika',
-   'Kwasy omega-3 z oleju rybiego mają właściwości przeciwzapalne i mogą pomóc złagodzić objawy alergii skórnych u psów. Poznaj korzyści płynące z suplementacji omega-3 i naturalne źródła tych cennych kwasów.');
+   'Kwasy omega-3 mają właściwości przeciwzapalne i pomagają złagodzić objawy alergii skórnych. Poznaj korzyści suplementacji.',
+   'Kwasy omega-3 z oleju rybiego mają właściwości przeciwzapalne i mogą pomóc złagodzić objawy alergii skórnych u psów. Poznaj korzyści płynące z suplementacji omega-3 i naturalne źródła tych cennych kwasów.',
+   true);
 
 -- ============================================================================
 -- Podsumowanie

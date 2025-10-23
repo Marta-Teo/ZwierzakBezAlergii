@@ -6,9 +6,9 @@
  */
 
 export const HERO_CONTENT = {
-  title: "Znajdź idealną karmę dla Twojego pupila",
+  title: "Zapewne jesteś tu, by znaleźć idealną karmę dla Twojego pupila?",
   description:
-    "Centralna baza karm suchych dostępnych w Polsce z możliwością filtrowania po składnikach i alergenach. Zaopiekuj się swoim psem z alergiami pokarmowymi.",
+    "Strona ta została stworzona z miłości do psów i z doświadczenia związanego z posiadaniem psów z alergami. Być może Twój pies boryka się z różnymi przypadłościami, których nie umiesz zdiagnozować bądź alergia już jest znana i chcesz się dowiedzieć jaki wybór karm masz. Posiadamy tu bazę karm suchych dostępnych w Polsce z możliwością filtrowania po składnikach i alergenach oraz artykuły, które odpowiedzą na nurtujące Cię pytania.",
   buttons: {
     primary: {
       label: "Przeglądaj karmy",
@@ -39,7 +39,7 @@ export const HERO_CONTENT = {
      * 
      * INSTRUKCJE: Zobacz plik public/images/hero/README.md
      */
-    image: "/images/hero/pieski1.jpg" ,// ← Zmień tutaj aby włączyć tło
+    image: "/images/hero/pieski3.jpg" ,// ← Zmień tutaj aby włączyć tło
     
     /**
      * Gradient overlay dla lepszej czytelności tekstu
