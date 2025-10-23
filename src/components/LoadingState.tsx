@@ -20,14 +20,14 @@ export function LoadingState() {
       {skeletonCards.map((index) => (
         <div
           key={index}
-          className="animate-pulse overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm"
+          className="animate-pulse overflow-hidden rounded-lg border border-border bg-card shadow-sm"
           aria-hidden="true"
         >
           {/* Skeleton dla obrazu (4:3 aspect ratio) */}
           <div className="relative w-full" style={{ paddingBottom: "75%" }}>
-            <div className="absolute inset-0 bg-gray-200">
+            <div className="absolute inset-0 bg-muted">
               {/* Shimmer effect */}
-              <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+              <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-background/40 to-transparent" />
             </div>
           </div>
 
@@ -35,17 +35,17 @@ export function LoadingState() {
           <div className="p-4">
             {/* Nazwa karmy (2 linie) */}
             <div className="mb-2 space-y-2">
-              <div className="h-4 rounded bg-gray-200">
-                <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+              <div className="h-4 rounded bg-muted">
+                <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-background/40 to-transparent" />
               </div>
-              <div className="h-4 w-3/4 rounded bg-gray-200">
-                <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+              <div className="h-4 w-3/4 rounded bg-muted">
+                <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-background/40 to-transparent" />
               </div>
             </div>
 
             {/* Nazwa marki (1 linia) */}
-            <div className="h-3 w-1/2 rounded bg-gray-200">
-              <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+            <div className="h-3 w-1/2 rounded bg-muted">
+              <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-background/40 to-transparent" />
             </div>
           </div>
         </div>

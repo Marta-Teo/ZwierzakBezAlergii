@@ -1,5 +1,68 @@
 # 🎯 Szybki start: Edycja danych w Supabase
 
+## 🚦 JAK URUCHOMIĆ SUPABASE (KROK PO KROKU)
+
+**Ważne!** Musisz zrobić to KAŻDORAZOWO gdy chcesz pracować z projektem!
+
+### Krok 1: Uruchom Docker Desktop
+1. Wciśnij **Windows + S** (wyszukiwarka Windows)
+2. Wpisz: `Docker Desktop`
+3. Kliknij i poczekaj aż Docker się uruchomi (ikona wieloryba w trayu przy zegarze)
+4. **Poczekaj ~30 sekund** aż Docker w pełni wystartuje
+
+### Krok 2: Otwórz Terminal
+1. Otwórz **Cursor**
+2. Wciśnij **Ctrl + `** (klawisz z grawisem, nad Tabem) - otworzy się terminal
+3. Upewnij się że jesteś w folderze projektu:
+   ```powershell
+   cd D:\github\ZwierzakBezAlergii
+   ```
+
+### Krok 3: Uruchom Supabase
+W terminalu wpisz:
+```powershell
+supabase start
+```
+
+⏱️ **Poczekaj ~1-2 minuty** - Supabase startuje kontenery Docker
+
+### Krok 4: Sprawdź czy działa
+Po wystartowaniu zobaczysz tabelkę z URL-ami. Otwórz w przeglądarce:
+- **Supabase Studio**: http://127.0.0.1:54323
+
+Jeśli strona się otworzy - **GOTOWE!** ✅
+
+---
+
+## 🛑 JAK ZATRZYMAĆ SUPABASE
+
+Gdy kończysz pracę (lub chcesz zrestartować):
+
+```powershell
+supabase stop
+```
+
+**Restart** (gdy coś nie działa):
+```powershell
+supabase stop
+supabase start
+```
+
+---
+
+## ⚠️ Najczęstsze problemy
+
+### Problem: "Docker Desktop is a prerequisite"
+**Rozwiązanie:** Docker Desktop nie jest uruchomiony! Wróć do Kroku 1.
+
+### Problem: "error during connect"
+**Rozwiązanie:** Docker jeszcze nie wystartował w pełni. Poczekaj 30 sekund i spróbuj ponownie.
+
+### Problem: "port already in use"
+**Rozwiązanie:** Supabase już działa! Albo zatrzymaj go (`supabase stop`) i wystartuj ponownie.
+
+---
+
 ## ✅ Supabase jest uruchomiony!
 
 ### 📍 Dostęp do narzędzi:

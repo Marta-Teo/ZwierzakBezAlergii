@@ -75,6 +75,14 @@ export type UpdateFoodCommand = TablesUpdate<"foods">;
 export type ArticleDTO = Tables<"articles">;
 export type ArticleDetailDTO = ArticleDTO; // Na razie taki sam jak ArticleDTO
 
+/**
+ * Artykuł na liście z nazwą autora
+ * Używany w widoku listy artykułów (/articles)
+ */
+export interface ArticleListItem extends ArticleDTO {
+  authorName: string | null;
+}
+
 export type CreateArticleCommand = TablesInsert<"articles">;
 export type UpdateArticleCommand = TablesUpdate<"articles">;
 

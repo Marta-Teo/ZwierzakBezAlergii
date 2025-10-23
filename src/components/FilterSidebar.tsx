@@ -80,17 +80,17 @@ export function FilterSidebar({ filters, onChange, onReset, options }: FilterSid
 
   return (
     <aside
-      className="w-64 flex-shrink-0 rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
+      className="w-64 flex-shrink-0 rounded-lg border border-border bg-card p-6 shadow-sm"
       aria-label="Filtry karm"
     >
       <div className="space-y-6">
         {/* Nagłówek */}
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">Filtry</h2>
+          <h2 className="text-lg font-semibold text-foreground">Filtry</h2>
           <button
             type="button"
             onClick={onReset}
-            className="text-sm text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="text-sm text-primary hover:text-primary/80 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             aria-label="Resetuj wszystkie filtry"
           >
             Resetuj
@@ -99,9 +99,9 @@ export function FilterSidebar({ filters, onChange, onReset, options }: FilterSid
 
         {/* Section: Alergeny (najważniejsza) */}
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-gray-900">
+          <h3 className="text-sm font-medium text-foreground">
             Alergeny
-            <span className="ml-1 text-xs text-gray-500">(odznacz aby wykluczyć)</span>
+            <span className="ml-1 text-xs text-muted-foreground">(odznacz aby wykluczyć)</span>
           </h3>
 
           <div className="max-h-64 space-y-2 overflow-y-auto pr-2">
@@ -119,7 +119,7 @@ export function FilterSidebar({ filters, onChange, onReset, options }: FilterSid
                   <label
                     htmlFor={`allergen-${allergen.id}`}
                     className={`text-sm ${
-                      isChecked ? "text-gray-900" : "text-gray-500 line-through"
+                      isChecked ? "text-foreground" : "text-muted-foreground line-through"
                     } cursor-pointer select-none`}
                   >
                     {allergen.name}
@@ -131,11 +131,11 @@ export function FilterSidebar({ filters, onChange, onReset, options }: FilterSid
         </div>
 
         {/* Separator */}
-        <div className="border-t border-gray-200" />
+        <div className="border-t border-border" />
 
         {/* Section: Marka */}
         <div className="space-y-2">
-          <label htmlFor="brand-select" className="text-sm font-medium text-gray-900">
+          <label htmlFor="brand-select" className="text-sm font-medium text-foreground">
             Marka
           </label>
           <Select
@@ -163,7 +163,7 @@ export function FilterSidebar({ filters, onChange, onReset, options }: FilterSid
 
         {/* Section: Rozmiar granulatu */}
         <div className="space-y-2">
-          <label htmlFor="size-select" className="text-sm font-medium text-gray-900">
+          <label htmlFor="size-select" className="text-sm font-medium text-foreground">
             Rozmiar granulatu
           </label>
           <Select
@@ -191,7 +191,7 @@ export function FilterSidebar({ filters, onChange, onReset, options }: FilterSid
 
         {/* Section: Wiek psa */}
         <div className="space-y-2">
-          <label htmlFor="age-select" className="text-sm font-medium text-gray-900">
+          <label htmlFor="age-select" className="text-sm font-medium text-foreground">
             Wiek psa
           </label>
           <Select

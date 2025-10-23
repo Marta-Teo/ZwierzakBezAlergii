@@ -1,60 +1,161 @@
 ---
-import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
-import BrandsExample from "../components/BrandsExample";
+import { Button } from "../components/ui/button";
+import { HERO_CONTENT } from "../config/hero";
 
-// 🔥 TAK UŻYWASZ SUPABASE w plikach .astro!
-// Klient Supabase jest dostępny przez Astro.locals dzięki middleware
-const { supabase } = Astro.locals;
-
-// Przykład: Pobieranie wszystkich marek psiej karmy z bazy
-const { data: brands, error } = await supabase.from("brands").select("*").order("name");
-
-// Obsługa błędów
-if (error) {
-  console.error("Błąd podczas pobierania marek:", error);
-}
+// Konfiguracja tła
+const { background } = HERO_CONTENT;
+const hasBackground = background.image !== null;
 ---
 
-<Layout>
-  <Welcome />
+<Layout title="ZwierzakBezAlergii - Karmy dla psów z alergiami">
+  <main 
+    class="hero-section min-h-screen flex items-center justify-center px-4"
+    class:list={[!hasBackground && "bg-background"]}
+  >
+    {/* Warstwa tła - tylko gdy jest ustawiony obraz */}
+    {hasBackground && (
+      <>
+        {/* Obraz tła */}
+        <div 
+          class="hero-background"
+          style={`background-image: url('${background.image}');`}
+        />
+        
+        {/* Gradient overlay */}
+        {background.overlay !== "none" && (
+          <div 
+            class="hero-overlay"
+            data-overlay={background.overlay}
+            style={`opacity: ${background.overlayOpacity};`}
+          />
+        )}
+      </>
+    )}
 
-  <div class="max-w-4xl mx-auto p-6 mt-8">
-    <h2 class="text-3xl font-bold mb-6">Przykład użycia Supabase 🎉</h2>
+    {/* Treść hero (zawsze na wierzchu) */}
+    <section 
+      class="hero-content container max-w-2xl text-center relative z-10"
+      aria-labelledby="hero-heading"
+    >
+      {/* Nagłówek główny */}
+      <h1 
+        id="hero-heading"
+        class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+        class:list={[hasBackground ? "text-white drop-shadow-lg" : "text-foreground"]}
+      >
+        {HERO_CONTENT.title}
+      </h1>
 
-    <div class="bg-white rounded-lg shadow-md p-6">
-      <h3 class="text-xl font-semibold mb-4">Marki psiej karmy z bazy danych:</h3>
+      {/* Opis misji */}
+      <p 
+        class="text-lg sm:text-xl mb-10 max-w-xl mx-auto leading-relaxed"
+        class:list={[hasBackground ? "text-white/90 drop-shadow-md" : "text-muted-foreground"]}
+      >
+        {HERO_CONTENT.description}
+      </p>
 
-      {
-        error ? (
-          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-            <p>
-              <strong>Błąd:</strong> {error.message}
-            </p>
-          </div>
-        ) : brands && brands.length > 0 ? (
-          <ul class="space-y-2">
-            {brands.map((brand) => (
-              <li class="p-3 bg-gray-50 rounded border border-gray-200 hover:bg-gray-100 transition">
-                <span class="font-medium">{brand.name}</span>
-                <span class="text-sm text-gray-500 ml-2">(ID: {brand.id})</span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p class="text-gray-600 italic">Brak marek w bazie danych. Dodaj jakieś dane!</p>
-        )
-      }
-
-      <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500">
-        <p class="text-sm text-gray-700">
-          💡 <strong>Wskazówka:</strong> Ten kod pobiera dane z tabeli 'brands' używając klienta Supabase dostępnego w <code
-            class="bg-gray-200 px-1 rounded">Astro.locals</code
+      {/* Przyciski CTA */}
+      <div class="flex flex-col gap-4 items-center">
+        {/* Primary CTA - Karmy */}
+        <a 
+          href={HERO_CONTENT.buttons.primary.href}
+          class="w-full max-w-md transition-transform hover:-translate-y-1 active:translate-y-0"
+          aria-label={HERO_CONTENT.buttons.primary.ariaLabel}
+        >
+          <Button 
+            variant="default" 
+            size="lg"
+            className="w-full text-lg py-6 shadow-lg"
           >
-        </p>
-      </div>
-    </div>
-  </div>
+            {HERO_CONTENT.buttons.primary.label}
+          </Button>
+        </a>
 
-  <BrandsExample client:load />
+        {/* Secondary CTA - Artykuły */}
+        <a 
+          href={HERO_CONTENT.buttons.secondary.href}
+          class="w-full max-w-md transition-transform hover:-translate-y-1 active:translate-y-0"
+          aria-label={HERO_CONTENT.buttons.secondary.ariaLabel}
+        >
+          <Button 
+            variant="outline" 
+            size="lg"
+            className="w-full text-lg py-6 backdrop-blur-sm"
+            class:list={[hasBackground && "bg-white/10 hover:bg-white/20 border-white/30"]}
+          >
+            {HERO_CONTENT.buttons.secondary.label}
+          </Button>
+        </a>
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<style>
+  /* Kontener hero z pozycjonowaniem relative dla warstw */
+  .hero-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Warstwa tła - obraz */
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Warstwa overlay - gradient dla lepszej czytelności */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  /* Gradient ciemny (dla jasnych zdjęć) */
+  .hero-overlay[data-overlay="dark"] {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.6) 50%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+  }
+
+  /* Gradient jasny (dla ciemnych zdjęć) */
+  .hero-overlay[data-overlay="light"] {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.8) 100%
+    );
+  }
+
+  /* Animacja fade-in przy załadowaniu */
+  .hero-content {
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsywne dostosowanie tła */
+  @media (max-width: 640px) {
+    .hero-background {
+      background-position: center center;
+    }
+  }
+</style>

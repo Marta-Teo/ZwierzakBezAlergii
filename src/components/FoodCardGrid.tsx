@@ -35,10 +35,10 @@ export function FoodCardGrid({ items, onSelect, isLoading = false }: FoodCardGri
 
   if (items.length === 0) {
     return (
-      <div className="flex min-h-[400px] items-center justify-center rounded-lg border border-gray-200 bg-gray-50">
+      <div className="flex min-h-[400px] items-center justify-center rounded-lg border border-border bg-muted">
         <div className="text-center">
-          <p className="text-lg font-medium text-gray-900">Brak wyników</p>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="text-lg font-medium text-foreground">Brak wyników</p>
+          <p className="mt-1 text-sm text-muted-foreground">
             Spróbuj zmienić filtry lub wyszukiwanie
           </p>
         </div>
@@ -97,11 +97,11 @@ function FoodCard({ food, onSelect }: FoodCardProps) {
       tabIndex={0}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      className="group cursor-pointer overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:border-blue-400 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      className="group cursor-pointer overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-primary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
       aria-label={`Zobacz szczegóły karmy ${food.name}`}
     >
       {/* Miniaturka z AspectRatio 4:3 */}
-      <div className="relative w-full overflow-hidden bg-white" style={{ paddingBottom: '75%' }}>
+      <div className="relative w-full overflow-hidden bg-card" style={{ paddingBottom: '75%' }}>
         {food.image_url ? (
           <img
             src={food.image_url}
@@ -112,7 +112,7 @@ function FoodCard({ food, onSelect }: FoodCardProps) {
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
             <svg
-              className="h-16 w-16 text-gray-300"
+              className="h-16 w-16 text-muted"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -132,12 +132,12 @@ function FoodCard({ food, onSelect }: FoodCardProps) {
       {/* Content */}
       <div className="p-4">
         {/* Nazwa karmy (max 2 linie) */}
-        <h3 className="mb-1 line-clamp-2 text-sm font-semibold text-gray-900 group-hover:text-blue-600">
+        <h3 className="mb-1 line-clamp-2 text-sm font-semibold text-foreground group-hover:text-primary">
           {food.name}
         </h3>
 
         {/* Nazwa marki */}
-        <p className="text-xs text-gray-500">{food.brandName}</p>
+        <p className="text-xs text-muted-foreground">{food.brandName}</p>
       </div>
     </div>
   );

@@ -72,7 +72,7 @@ export function SearchBar({
     <div className="relative w-full max-w-2xl">
       {/* Ikona lupy po lewej */}
       <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-        <Search className="h-5 w-5 text-gray-400" aria-hidden="true" />
+        <Search className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
       </div>
 
       {/* Input wyszukiwania */}
@@ -82,7 +82,7 @@ export function SearchBar({
         onChange={handleChange}
         placeholder={placeholder}
         maxLength={100}
-        className="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-10 text-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="block w-full rounded-lg border border-input bg-card py-3 pl-10 pr-10 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring"
         aria-label="Wyszukaj karmę"
       />
 
@@ -91,7 +91,7 @@ export function SearchBar({
         <button
           type="button"
           onClick={handleClear}
-          className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
           aria-label="Wyczyść wyszukiwanie"
         >
           <X className="h-5 w-5" aria-hidden="true" />

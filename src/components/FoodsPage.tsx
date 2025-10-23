@@ -127,12 +127,12 @@ function FoodsPageContent() {
     isBrandsLoading || isSizeTypesLoading || isAgeCategoriesLoading || isAllergensLoading;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white shadow-sm">
+      <header className="bg-card shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">Karmy dla psów</h1>
-          <p className="mt-2 text-sm text-gray-600">
+          <h1 className="text-3xl font-bold text-foreground">Karmy dla psów</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
             Znajdź odpowiednią karmę dla Twojego pupila, wolną od wybranych alergenów
           </p>
         </div>
@@ -149,13 +149,13 @@ function FoodsPageContent() {
         <div className="flex gap-6">
           {/* Sidebar z filtrami */}
           {areOptionsLoading ? (
-            <div className="w-64 flex-shrink-0 rounded-lg border border-gray-200 bg-white p-6">
+            <div className="w-64 flex-shrink-0 rounded-lg border border-border bg-card p-6">
               <div className="animate-pulse space-y-4">
-                <div className="h-4 w-24 rounded bg-gray-200" />
+                <div className="h-4 w-24 rounded bg-muted" />
                 <div className="space-y-2">
-                  <div className="h-3 w-full rounded bg-gray-200" />
-                  <div className="h-3 w-full rounded bg-gray-200" />
-                  <div className="h-3 w-full rounded bg-gray-200" />
+                  <div className="h-3 w-full rounded bg-muted" />
+                  <div className="h-3 w-full rounded bg-muted" />
+                  <div className="h-3 w-full rounded bg-muted" />
                 </div>
               </div>
             </div>

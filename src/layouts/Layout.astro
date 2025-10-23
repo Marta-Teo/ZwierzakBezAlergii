@@ -3,30 +3,49 @@ import "../styles/global.css";
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title = "10x Astro Starter" } = Astro.props;
+const { 
+  title = "ZwierzakBezAlergii - Karmy dla psów z alergiami",
+  description = "Centralna baza karm suchych dostępnych w Polsce z możliwością filtrowania po składnikach i alergenach. Znajdź idealną karmę dla psa z alergiami pokarmowymi."
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="pl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
+    
+    {/* Primary Meta Tags */}
     <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="karma dla psa, alergie pokarmowe psa, karma hipoalergiczna, alergeny w karmie, składniki karmy dla psów, karmy suche dla psów" />
+    <meta name="author" content="ZwierzakBezAlergii" />
+    
+    {/* Open Graph / Facebook */}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="pl_PL" />
+    
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={Astro.url} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    
+    {/* Additional SEO */}
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={Astro.url} />
   </head>
   <body>
     <slot />
   </body>
 </html>
 
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>
