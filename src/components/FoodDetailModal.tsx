@@ -97,13 +97,13 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
             </DialogHeader>
 
             <div className="space-y-6">
-              {/* Duże zdjęcie 16:9 */}
-              <div className="relative w-full overflow-hidden rounded-lg bg-gray-100" style={{ paddingBottom: '56.25%' }}>
+              {/* Duże zdjęcie - dopasowane do proporcji obrazka */}
+              <div className="relative w-full overflow-hidden rounded-lg bg-white" style={{ paddingBottom: '75%' }}>
                 {food.image_url ? (
                   <img
                     src={food.image_url}
                     alt={`Opakowanie karmy ${food.name}`}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-contain"
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
