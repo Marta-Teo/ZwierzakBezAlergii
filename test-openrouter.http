@@ -1,0 +1,133 @@
+### Test 1: Podstawowe zapytanie do OpenRouter
+POST http://localhost:4321/api/chat
+Content-Type: application/json
+
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Jakie składniki karmy są najczęściej alergenami u psów?"
+    }
+  ],
+  "systemMessage": "Jesteś ekspertem od żywienia psów i alergii pokarmowych.",
+  "model": "openai/gpt-3.5-turbo",
+  "temperature": 0.7
+}
+
+###
+
+### Test 2: Zapytanie z historią konwersacji
+POST http://localhost:4321/api/chat
+Content-Type: application/json
+
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Wymień 3 najczęstsze alergeny u psów"
+    },
+    {
+      "role": "assistant",
+      "content": "Najczęstsze alergeny pokarmowe u psów to:\n1. Wołowina\n2. Kurczak\n3. Pszenica"
+    },
+    {
+      "role": "user",
+      "content": "Jakie alternatywy polecasz dla kurczaka?"
+    }
+  ],
+  "systemMessage": "Jesteś ekspertem od żywienia psów."
+}
+
+###
+
+### Test 3: Zapytanie z niższą temperaturą (bardziej deterministyczne)
+POST http://localhost:4321/api/chat
+Content-Type: application/json
+
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Czy ryż jest bezpieczny dla psów z alergią?"
+    }
+  ],
+  "systemMessage": "Jesteś weterynaryjnym dietetykiem specjalizującym się w alergii pokarmowej u psów.",
+  "temperature": 0.3,
+  "maxTokens": 500
+}
+
+###
+
+### Test 4: Błąd - brak messages (powinien zwrócić 400)
+POST http://localhost:4321/api/chat
+Content-Type: application/json
+
+{
+  "systemMessage": "Test"
+}
+
+###
+
+### Test 5: Błąd - puste messages (powinien zwrócić 400)
+POST http://localhost:4321/api/chat
+Content-Type: application/json
+
+{
+  "messages": []
+}
+
+###
+
+### Test 6: Zapytanie o konkretną karmę z maksymalną liczbą tokenów
+POST http://localhost:4321/api/chat
+Content-Type: application/json
+
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Przeanalizuj skład karmy: kurczak 30%, ryż 25%, kukurydza 20%, mączka mięsna 15%, tłuszcz drobiowy 8%, minerały 2%. Jakie potencjalne alergeny zawiera?"
+    }
+  ],
+  "systemMessage": "Jesteś ekspertem od analizy składu karm dla psów. Identyfikujesz potencjalne alergeny i oceniasz bezpieczeństwo karmy.",
+  "model": "openai/gpt-4",
+  "temperature": 0.5,
+  "maxTokens": 800
+}
+
+###
+
+### Test 7: Zapytanie z alternatywnym modelem (Claude)
+POST http://localhost:4321/api/chat
+Content-Type: application/json
+
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Wyjaśnij różnicę między nietolerancją pokarmową a prawdziwą alergią u psów."
+    }
+  ],
+  "systemMessage": "Jesteś weterynarzem specjalizującym się w immunologii i alergologii.",
+  "model": "anthropic/claude-3-sonnet",
+  "temperature": 0.7
+}
+
+###
+
+### Test 8: Krótkie zapytanie o listę
+POST http://localhost:4321/api/chat
+Content-Type: application/json
+
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Lista 5 hipoalergicznych białek dla psów"
+    }
+  ],
+  "maxTokens": 200
+}
+
+###
+
