@@ -50,14 +50,20 @@ npm run dev
 
 ## Available Scripts
 ```bash
-npm run dev       # Start Astro development server
-npm run build     # Build the application for production
-npm run preview   # Preview the production build locally
-npm run astro     # Run Astro CLI commands
-npm run lint      # Run ESLint to lint code
-npm run lint:fix  # Run ESLint and automatically fix issues
-npm run format    # Format code with Prettier
+npm run dev          # Start Astro development server
+npm run build        # Build the application for production
+npm run preview      # Preview the production build locally
+npm run astro        # Run Astro CLI commands
+npm run lint         # Run ESLint to lint code
+npm run lint:fix     # Run ESLint and automatically fix issues
+npm run format       # Format code with Prettier
+npm run db:export    # Export database to supabase/seed.sql (backup)
+npm run food:update  # Update food composition with detailed ingredients
 ```
+
+### Database Management
+- **Export database**: [docs/database-export.md](docs/database-export.md)
+- **Update food compositions**: [docs/aktualizacja-skladow-karm.md](docs/aktualizacja-skladow-karm.md)
 
 ## API Endpoints
 

@@ -9,7 +9,9 @@
     "astro": "astro",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "db:export": "tsx --env-file=.env scripts/export-to-seed.ts",
+    "food:update": "tsx --env-file=.env scripts/update-food-composition.ts"
   },
   "dependencies": {
     "@astrojs/node": "^9.4.3",
@@ -59,6 +61,7 @@
     "lint-staged": "15.5.0",
     "prettier-plugin-astro": "0.14.1",
     "supabase": "^2.48.3",
+    "tsx": "^4.20.6",
     "typescript-eslint": "8.28.0"
   },
   "lint-staged": {

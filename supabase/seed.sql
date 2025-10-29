@@ -1,244 +1,231 @@
--- Seed data for ZwierzakBezAlergii MVP
--- This file contains test data for local development
+-- Seed data for ZwierzakBezAlergii
+-- Auto-generated on 2025-10-29T21:29:02.908Z
+-- This file contains all data exported from Supabase database
 
 -- ============================================================================
--- 0. USERS (Użytkownicy testowi)
--- ============================================================================
--- UWAGA: Użytkownicy są zarządzani przez Supabase Auth (auth.users)
--- Tabela public.users zawiera tylko rozszerzone dane profilu
--- Do czasu wdrożenia auth używamy NULL dla created_by/updated_by
-
--- ============================================================================
--- 1. BRANDS (Marki karm)
+-- BRANDS
 -- ============================================================================
 
-INSERT INTO public.brands (name) VALUES
-  ('Brit Care'),
-  ('Royal Canin'),
-  ('Acana'),
-  ('Taste of the Wild'),
-  ('Carnilove'),
-  ('Josera');
+INSERT INTO public.brands (id, name) VALUES
+  (1, 'Brit Care'),
+  (2, 'Royal Canin'),
+  (3, 'Acana'),
+  (4, 'Taste of the Wild'),
+  (5, 'Carnilove'),
+  (6, 'Josera');
 
 -- ============================================================================
--- 2. SIZE TYPES (Rozmiary granulatu)
+-- SIZE_TYPES
 -- ============================================================================
 
-INSERT INTO public.size_types (name) VALUES
-  ('mały'),
-  ('średni'),
-  ('duży');
+INSERT INTO public.size_types (id, name) VALUES
+  (1, 'mały'),
+  (2, 'średni'),
+  (3, 'duży');
 
 -- ============================================================================
--- 3. AGE CATEGORIES (Kategorie wieku psa)
+-- AGE_CATEGORIES
 -- ============================================================================
 
-INSERT INTO public.age_categories (name) VALUES
-  ('szczeniak'),
-  ('junior'),
-  ('dorosły'),
-  ('senior');
+INSERT INTO public.age_categories (id, name) VALUES
+  (1, 'szczeniak'),
+  (2, 'junior'),
+  (3, 'dorosły'),
+  (4, 'senior');
 
 -- ============================================================================
--- 4. INGREDIENTS (Składniki)
+-- INGREDIENTS
 -- ============================================================================
 
-INSERT INTO public.ingredients (name) VALUES
-  -- BIAŁKA DROBIOWE (świeże i przetworzone)
-  ('kurczak'),
-  ('mięso z kurczaka'),
-  ('świeży kurczak'),
-  ('suszone mięso z kurczaka'),
-  ('mączka z kurczaka'),
-  ('hydrolizowane białko drobiowe'),
-  ('indyk'),
-  ('mięso z indyka'),
-  ('mączka z indyka'),
-  ('kaczka'),
-  ('mięso z kaczki'),
-  ('gęś'),
-  ('przepiórka'),
-  
-  -- BIAŁKA MIĘSNE (świeże i przetworzone)
-  ('wołowina'),
-  ('świeża wołowina'),
-  ('suszone mięso wołowe'),
-  ('mączka wołowa'),
-  ('jagnięcina'),
-  ('świeża jagnięcina'),
-  ('mączka z jagnięciny'),
-  ('baranina'),
-  ('wieprzowina'),
-  ('dzik'),
-  ('dziczyzna'),
-  ('sarna'),
-  ('jeleń'),
-  ('renifer'),
-  ('kangur'),
-  ('królik'),
-  ('koń'),
-  
-  -- BIAŁKA RYBNE (świeże i przetworzone)
-  ('łosoś'),
-  ('świeży łosoś'),
-  ('mączka z łososia'),
-  ('pstrąg'),
-  ('śledź'),
-  ('sardynka'),
-  ('dorsz'),
-  ('halibut'),
-  ('tuńczyk'),
-  ('makrela'),
-  ('biała ryba'),
-  ('mączka rybna'),
-  ('hydrolizowane białko rybne'),
-  
-  -- JAJA I NABIAŁ
-  ('jaja'),
-  ('całe jaja'),
-  ('jajka w proszku'),
-  ('mleko'),
-  ('ser'),
-  ('twaróg'),
-  ('jogurt'),
-  ('serwatka'),
-  
-  -- ZBOŻA
-  ('pszenica'),
-  ('mąka pszenna'),
-  ('gluten pszenny'),
-  ('kukurydza'),
-  ('mąka kukurydziana'),
-  ('gluten kukurydziany'),
-  ('jęczmień'),
-  ('owies'),
-  ('ryż'),
-  ('ryż brązowy'),
-  ('ryż biały'),
-  ('sorgo'),
-  ('proso'),
-  ('żyto'),
-  
-  -- PSEUDOZBOŻA I BEZGLUTENOWE WĘGLOWODANY
-  ('amarantus'),
-  ('komosa ryżowa (quinoa)'),
-  ('gryka'),
-  ('tapioka'),
-  ('maniok'),
-  
-  -- ROŚLINY STRĄCZKOWE
-  ('groszek'),
-  ('groch'),
-  ('białko grochu'),
-  ('soczewica'),
-  ('ciecierzyca'),
-  ('fasola'),
-  ('bób'),
-  ('łubin'),
-  
-  -- WARZYWA KORZENIOWE
-  ('ziemniak'),
-  ('batat'),
-  ('marchew'),
-  ('burak'),
-  ('pasternak'),
-  ('topinambur'),
-  ('seler'),
-  
-  -- WARZYWA ZIELONE I INNE
-  ('brokuł'),
-  ('szpinak'),
-  ('jarmuż'),
-  ('kapusta'),
-  ('kalafior'),
-  ('pomidor'),
-  ('dynia'),
-  ('kabaczek'),
-  ('ogórek'),
-  ('papryka'),
-  ('buraki liściowe'),
-  
-  -- OWOCE
-  ('jabłko'),
-  ('gruszka'),
-  ('borówki'),
-  ('żurawina'),
-  ('maliny'),
-  ('truskawki'),
-  ('czarne jagody'),
-  ('banany'),
-  ('aronia'),
-  ('czarna porzeczka'),
-  ('róża (owoce)'),
-  
-  -- TŁUSZCZE I OLEJE
-  ('tłuszcz drobiowy'),
-  ('tłuszcz z kurczaka'),
-  ('olej z kurczaka'),
-  ('tłuszcz wołowy'),
-  ('olej z ryb'),
-  ('olej z łososia'),
-  ('olej lniany'),
-  ('olej słonecznikowy'),
-  ('olej kokosowy'),
-  ('olej z wiesiołka'),
-  ('olej z czarnuszki'),
-  
-  -- ZIOŁA I ROŚLINY LECZNICZE
-  ('lucerna'),
-  ('pokrzywa'),
-  ('rumianek'),
-  ('mniszek lekarski'),
-  ('mięta'),
-  ('rozmaryn'),
-  ('tymianek'),
-  ('bazylia'),
-  ('pietruszka'),
-  ('oregano'),
-  ('kurkuma'),
-  ('imbir'),
-  ('czosnek'),
-  
-  -- SUPLEMENTY I DODATKI FUNKCJONALNE
-  ('drożdże piwne'),
-  ('pulpa buraczana'),
-  ('pulpa z buraków cukrowych'),
-  ('FOS (fruktooligosacharydy)'),
-  ('MOS (mannanoligosacharydy)'),
-  ('inulina'),
-  ('beta-glukany'),
-  ('chondroityna'),
-  ('glukozamina'),
-  ('ekstrakt z mięczaka'),
-  ('muszle małży'),
-  ('algi morskie'),
-  ('spirulina'),
-  ('chlorella'),
-  ('mączka z chrząstki'),
-  ('kolagen'),
-  ('L-karnityna'),
-  ('tauryna'),
-  ('glutation'),
-  
-  -- INNE SKŁADNIKI
-  ('sól'),
-  ('chlorek sodu'),
-  ('chlorek potasu'),
-  ('węglan wapnia'),
-  ('fosforan dwuwapniowy'),
-  ('drożdże suszone'),
-  ('zioła mieszane'),
-  ('nasiona lnu'),
-  ('nasiona chia'),
-  ('nasiona dyni'),
-  ('owies zwyczajny'),
-  ('żelatyna');
+INSERT INTO public.ingredients (id, name) VALUES
+  (1, 'kurczak'),
+  (2, 'mięso z kurczaka'),
+  (3, 'świeży kurczak'),
+  (4, 'suszone mięso z kurczaka'),
+  (5, 'mączka z kurczaka'),
+  (6, 'hydrolizowane białko drobiowe'),
+  (7, 'indyk'),
+  (8, 'mięso z indyka'),
+  (9, 'mączka z indyka'),
+  (10, 'kaczka'),
+  (11, 'mięso z kaczki'),
+  (12, 'gęś'),
+  (13, 'przepiórka'),
+  (14, 'wołowina'),
+  (15, 'świeża wołowina'),
+  (16, 'suszone mięso wołowe'),
+  (17, 'mączka wołowa'),
+  (18, 'jagnięcina'),
+  (19, 'świeża jagnięcina'),
+  (20, 'mączka z jagnięciny'),
+  (21, 'baranina'),
+  (22, 'wieprzowina'),
+  (23, 'dzik'),
+  (24, 'dziczyzna'),
+  (25, 'sarna'),
+  (26, 'jeleń'),
+  (27, 'renifer'),
+  (28, 'kangur'),
+  (29, 'królik'),
+  (30, 'koń'),
+  (31, 'łosoś'),
+  (32, 'świeży łosoś'),
+  (33, 'mączka z łososia'),
+  (34, 'pstrąg'),
+  (35, 'śledź'),
+  (36, 'sardynka'),
+  (37, 'dorsz'),
+  (38, 'halibut'),
+  (39, 'tuńczyk'),
+  (40, 'makrela'),
+  (41, 'biała ryba'),
+  (42, 'mączka rybna'),
+  (43, 'hydrolizowane białko rybne'),
+  (44, 'jaja'),
+  (45, 'całe jaja'),
+  (46, 'jajka w proszku'),
+  (47, 'mleko'),
+  (48, 'ser'),
+  (49, 'twaróg'),
+  (50, 'jogurt'),
+  (51, 'serwatka'),
+  (52, 'pszenica'),
+  (53, 'mąka pszenna'),
+  (54, 'gluten pszenny'),
+  (55, 'kukurydza'),
+  (56, 'mąka kukurydziana'),
+  (57, 'gluten kukurydziany'),
+  (58, 'jęczmień'),
+  (59, 'owies'),
+  (60, 'ryż'),
+  (61, 'ryż brązowy'),
+  (62, 'ryż biały'),
+  (63, 'sorgo'),
+  (64, 'proso'),
+  (65, 'żyto'),
+  (66, 'amarantus'),
+  (67, 'komosa ryżowa (quinoa)'),
+  (68, 'gryka'),
+  (69, 'tapioka'),
+  (70, 'maniok'),
+  (71, 'groszek'),
+  (72, 'groch'),
+  (73, 'białko grochu'),
+  (74, 'soczewica'),
+  (75, 'ciecierzyca'),
+  (76, 'fasola'),
+  (77, 'bób'),
+  (78, 'łubin'),
+  (79, 'ziemniak'),
+  (80, 'batat'),
+  (81, 'marchew'),
+  (82, 'burak'),
+  (83, 'pasternak'),
+  (84, 'topinambur'),
+  (85, 'seler'),
+  (86, 'brokuł'),
+  (87, 'szpinak'),
+  (88, 'jarmuż'),
+  (89, 'kapusta'),
+  (90, 'kalafior'),
+  (91, 'pomidor'),
+  (92, 'dynia'),
+  (93, 'kabaczek'),
+  (94, 'ogórek'),
+  (95, 'papryka'),
+  (96, 'buraki liściowe'),
+  (97, 'jabłko'),
+  (98, 'gruszka'),
+  (99, 'borówki'),
+  (100, 'żurawina'),
+  (101, 'maliny'),
+  (102, 'truskawki'),
+  (103, 'czarne jagody'),
+  (104, 'banany'),
+  (105, 'aronia'),
+  (106, 'czarna porzeczka'),
+  (107, 'róża (owoce)'),
+  (108, 'tłuszcz drobiowy'),
+  (109, 'tłuszcz z kurczaka'),
+  (110, 'olej z kurczaka'),
+  (111, 'tłuszcz wołowy'),
+  (112, 'olej z ryb'),
+  (113, 'olej z łososia'),
+  (114, 'olej lniany'),
+  (115, 'olej słonecznikowy'),
+  (116, 'olej kokosowy'),
+  (117, 'olej z wiesiołka'),
+  (118, 'olej z czarnuszki'),
+  (119, 'lucerna'),
+  (120, 'pokrzywa'),
+  (121, 'rumianek'),
+  (122, 'mniszek lekarski'),
+  (123, 'mięta'),
+  (124, 'rozmaryn'),
+  (125, 'tymianek'),
+  (126, 'bazylia'),
+  (127, 'pietruszka'),
+  (128, 'oregano'),
+  (129, 'kurkuma'),
+  (130, 'imbir'),
+  (131, 'czosnek'),
+  (132, 'drożdże piwne'),
+  (133, 'pulpa buraczana'),
+  (134, 'pulpa z buraków cukrowych'),
+  (135, 'FOS (fruktooligosacharydy)'),
+  (136, 'MOS (mannanoligosacharydy)'),
+  (137, 'inulina'),
+  (138, 'beta-glukany'),
+  (139, 'chondroityna'),
+  (140, 'glukozamina'),
+  (141, 'ekstrakt z mięczaka'),
+  (142, 'muszle małży'),
+  (143, 'algi morskie'),
+  (144, 'spirulina'),
+  (145, 'chlorella'),
+  (146, 'mączka z chrząstki'),
+  (147, 'kolagen'),
+  (148, 'L-karnityna'),
+  (149, 'tauryna'),
+  (150, 'glutation'),
+  (151, 'sól'),
+  (152, 'chlorek sodu'),
+  (153, 'chlorek potasu'),
+  (154, 'węglan wapnia'),
+  (155, 'fosforan dwuwapniowy'),
+  (156, 'drożdże suszone'),
+  (157, 'zioła mieszane'),
+  (158, 'nasiona lnu'),
+  (159, 'nasiona chia'),
+  (160, 'nasiona dyni'),
+  (161, 'owies zwyczajny'),
+  (162, 'żelatyna'),
+  (163, 'suszona jagnięcina'),
+  (164, 'wytłoki z jabłek'),
+  (165, 'naturalny aromat'),
+  (166, 'hydrolizowane drożdże'),
+  (167, 'mączka grochowa'),
+  (168, 'siarczan chondroityny'),
+  (169, 'jukka'),
+  (170, 'ostropest plamisty'),
+  (171, 'serdecznik'),
+  (172, 'rokitnik'),
+  (173, 'probiotyki'),
+  (174, 'bizon'),
+  (175, 'woĺ‚owina'),
+  (176, 'jagniä™cina suszona'),
+  (177, 'tłuszcz wołowy'),
+  (178, 'białko ziemniaczane'),
+  (179, 'bataty');
 
 -- ============================================================================
--- 5. ALLERGENS (Alergeny z hierarchią)
+-- ALLERGENS (Main categories)
 -- ============================================================================
 
--- Główne kategorie alergenów (z ręcznymi ID dla łatwiejszego referencowania)
+-- ============================================================================
+-- ALLERGENS
+-- ============================================================================
+
 INSERT INTO public.allergens (id, name, parent_id) VALUES
   (1, 'mięso', NULL),
   (2, 'drób', NULL),
@@ -247,637 +234,567 @@ INSERT INTO public.allergens (id, name, parent_id) VALUES
   (5, 'nabiał', NULL),
   (6, 'strączkowe', NULL),
   (7, 'jaja', NULL),
-  (8, 'inne białka', NULL);
+  (8, 'inne białka', NULL),
+  (56, 'gluten', NULL),
+  (57, 'czosnek', NULL);
 
--- Resetuj sekwencję po ręcznych insertach z ID
+-- Reset sequence for allergens
 SELECT setval('public.allergens_id_seq', (SELECT MAX(id) FROM public.allergens));
 
--- Podkategorie alergenów - DRÓB (parent_id = 2)
-INSERT INTO public.allergens (name, parent_id) VALUES
-  ('kurczak', 2),
-  ('indyk', 2),
-  ('kaczka', 2),
-  ('gęś', 2),
-  ('przepiórka', 2);
-
--- Podkategorie alergenów - MIĘSO (parent_id = 1)
-INSERT INTO public.allergens (name, parent_id) VALUES
-  ('wołowina', 1),
-  ('jagnięcina', 1),
-  ('baranina', 1),
-  ('wieprzowina', 1),
-  ('dzik', 1),
-  ('dziczyzna', 1),
-  ('sarna', 1),
-  ('jeleń', 1),
-  ('renifer', 1),
-  ('kangur', 1),
-  ('królik', 1),
-  ('koń', 1);
-
--- Podkategorie alergenów - RYBY (parent_id = 3)
-INSERT INTO public.allergens (name, parent_id) VALUES
-  ('łosoś', 3),
-  ('pstrąg', 3),
-  ('śledź', 3),
-  ('sardynka', 3),
-  ('dorsz', 3),
-  ('halibut', 3),
-  ('tuńczyk', 3),
-  ('makrela', 3),
-  ('biała ryba', 3);
-
--- Podkategorie alergenów - ZBOŻA (parent_id = 4)
-INSERT INTO public.allergens (name, parent_id) VALUES
-  ('pszenica', 4),
-  ('kukurydza', 4),
-  ('jęczmień', 4),
-  ('owies', 4),
-  ('ryż', 4),
-  ('sorgo', 4),
-  ('proso', 4),
-  ('żyto', 4);
-
--- Podkategorie alergenów - NABIAŁ (parent_id = 5)
-INSERT INTO public.allergens (name, parent_id) VALUES
-  ('mleko', 5),
-  ('ser', 5),
-  ('twaróg', 5),
-  ('jogurt', 5),
-  ('serwatka', 5);
-
--- Podkategorie alergenów - STRĄCZKOWE (parent_id = 6)
-INSERT INTO public.allergens (name, parent_id) VALUES
-  ('groszek', 6),
-  ('groch', 6),
-  ('soczewica', 6),
-  ('ciecierzyca', 6),
-  ('fasola', 6),
-  ('bób', 6),
-  ('łupin', 6),
-  ('soja', 6);
-
--- Pojedyncze alergeny (bez parent - najwyższy poziom)
-INSERT INTO public.allergens (name, parent_id) VALUES
-  ('gluten', NULL),
-  ('czosnek', NULL);
-
 -- ============================================================================
--- 6. INGREDIENT_ALLERGENS (Powiązania składnik ↔ alergen)
--- ============================================================================
--- Każdy składnik mapowany jest do konkretnego alergenu + kategorii nadrzędnej
--- Format: (ingredient_id, allergen_id)
-
--- Pomocnicza funkcja do mapowania - pobiera ID składnika i alergenu po nazwie
-DO $$
-DECLARE
-  ingredient_rec RECORD;
-  allergen_rec RECORD;
-BEGIN
-  -- BIAŁKA DROBIOWE → drób + konkretny podtyp
-  FOR ingredient_rec IN 
-    SELECT id, name FROM public.ingredients 
-    WHERE name IN ('kurczak', 'mięso z kurczaka', 'świeży kurczak', 'suszone mięso z kurczaka', 'mączka z kurczaka')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
-      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'kurczak' AND parent_id = 2)),
-      (ingredient_rec.id, 2); -- drób (kategoria)
-  END LOOP;
-
-  -- Hydrolizowane białko drobiowe → TYLKO drób (nie wiemy konkretny ptak)
-  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-    SELECT id, 2 FROM public.ingredients WHERE name = 'hydrolizowane białko drobiowe';
-
-  -- Tłuszcz drobiowy → drób + kurczak (najczęściej z kurczaka)
-  FOR ingredient_rec IN 
-    SELECT id FROM public.ingredients WHERE name IN ('tłuszcz drobiowy', 'tłuszcz z kurczaka', 'olej z kurczaka')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
-      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'kurczak' AND parent_id = 2)),
-      (ingredient_rec.id, 2);
-  END LOOP;
-
-  -- Indyk
-  FOR ingredient_rec IN 
-    SELECT id FROM public.ingredients WHERE name IN ('indyk', 'mięso z indyka', 'mączka z indyka')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
-      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'indyk' AND parent_id = 2)),
-      (ingredient_rec.id, 2);
-  END LOOP;
-
-  -- Kaczka
-  FOR ingredient_rec IN 
-    SELECT id FROM public.ingredients WHERE name IN ('kaczka', 'mięso z kaczki')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
-      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'kaczka' AND parent_id = 2)),
-      (ingredient_rec.id, 2);
-  END LOOP;
-
-  -- Gęś, Przepiórka
-  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-    SELECT i.id, a.id FROM public.ingredients i
-    CROSS JOIN public.allergens a
-    WHERE i.name = 'gęś' AND a.name = 'gęś' AND a.parent_id = 2;
-  
-  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-    SELECT id, 2 FROM public.ingredients WHERE name = 'gęś';
-
-  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-    SELECT i.id, a.id FROM public.ingredients i
-    CROSS JOIN public.allergens a
-    WHERE i.name = 'przepiórka' AND a.name = 'przepiórka' AND a.parent_id = 2;
-  
-  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-    SELECT id, 2 FROM public.ingredients WHERE name = 'przepiórka';
-
-  -- BIAŁKA MIĘSNE → mięso + konkretny podtyp
-  -- Wołowina
-  FOR ingredient_rec IN 
-    SELECT id FROM public.ingredients WHERE name IN ('wołowina', 'świeża wołowina', 'suszone mięso wołowe', 'mączka wołowa', 'tłuszcz wołowy')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
-      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'wołowina' AND parent_id = 1)),
-      (ingredient_rec.id, 1);
-  END LOOP;
-
-  -- Jagnięcina
-  FOR ingredient_rec IN 
-    SELECT id FROM public.ingredients WHERE name IN ('jagnięcina', 'świeża jagnięcina', 'mączka z jagnięciny')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
-      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'jagnięcina' AND parent_id = 1)),
-      (ingredient_rec.id, 1);
-  END LOOP;
-
-  -- Pozostałe mięsa (baranina, wieprzowina, dzik, itd.)
-  FOR allergen_rec IN 
-    SELECT name FROM public.allergens WHERE parent_id = 1 AND name NOT IN ('wołowina', 'jagnięcina')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-      SELECT i.id, a.id FROM public.ingredients i
-      CROSS JOIN public.allergens a
-      WHERE i.name = allergen_rec.name AND a.name = allergen_rec.name AND a.parent_id = 1;
-    
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-      SELECT id, 1 FROM public.ingredients WHERE name = allergen_rec.name;
-  END LOOP;
-
-  -- BIAŁKA RYBNE → ryby + konkretny podtyp
-  -- Łosoś
-  FOR ingredient_rec IN 
-    SELECT id FROM public.ingredients WHERE name IN ('łosoś', 'świeży łosoś', 'mączka z łososia', 'olej z łososia', 'olej z ryb')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
-      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'łosoś' AND parent_id = 3)),
-      (ingredient_rec.id, 3);
-  END LOOP;
-
-  -- Hydrolizowane białko rybne → TYLKO ryby (nie wiemy konkretna ryba)
-  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-    SELECT id, 3 FROM public.ingredients WHERE name IN ('hydrolizowane białko rybne', 'mączka rybna');
-
-  -- Pozostałe ryby
-  FOR allergen_rec IN 
-    SELECT name FROM public.allergens WHERE parent_id = 3 AND name != 'łosoś'
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-      SELECT i.id, a.id FROM public.ingredients i
-      CROSS JOIN public.allergens a
-      WHERE i.name = allergen_rec.name AND a.name = allergen_rec.name AND a.parent_id = 3;
-    
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-      SELECT id, 3 FROM public.ingredients WHERE name = allergen_rec.name;
-  END LOOP;
-
-  -- JAJA → jaja (kategoria główna)
-  FOR ingredient_rec IN 
-    SELECT id FROM public.ingredients WHERE name IN ('jaja', 'całe jaja', 'jajka w proszku')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
-      (ingredient_rec.id, 7);
-  END LOOP;
-
-  -- NABIAŁ → nabiał + podtypy
-  FOR allergen_rec IN 
-    SELECT id, name FROM public.allergens WHERE parent_id = 5
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-      SELECT i.id, allergen_rec.id FROM public.ingredients i
-      WHERE i.name = allergen_rec.name;
-    
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-      SELECT id, 5 FROM public.ingredients WHERE name = allergen_rec.name;
-  END LOOP;
-
-  -- ZBOŻA → zboża + konkretne zboże
-  -- Pszenica + gluten
-  FOR ingredient_rec IN 
-    SELECT id FROM public.ingredients WHERE name IN ('pszenica', 'mąka pszenna', 'gluten pszenny')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
-      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'pszenica' AND parent_id = 4)),
-      (ingredient_rec.id, 4), -- zboża
-      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'gluten' AND parent_id IS NULL)); -- gluten
-  END LOOP;
-
-  -- Kukurydza
-  FOR ingredient_rec IN 
-    SELECT id FROM public.ingredients WHERE name IN ('kukurydza', 'mąka kukurydziana', 'gluten kukurydziany')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
-      (ingredient_rec.id, (SELECT id FROM public.allergens WHERE name = 'kukurydza' AND parent_id = 4)),
-      (ingredient_rec.id, 4);
-  END LOOP;
-
-  -- Pozostałe zboża (jęczmień, owies, ryż, itd.)
-  FOR allergen_rec IN 
-    SELECT name FROM public.allergens WHERE parent_id = 4 AND name NOT IN ('pszenica', 'kukurydza')
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-      SELECT i.id, a.id FROM public.ingredients i
-      CROSS JOIN public.allergens a
-      WHERE i.name LIKE '%' || allergen_rec.name || '%' AND a.name = allergen_rec.name AND a.parent_id = 4;
-    
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-      SELECT id, 4 FROM public.ingredients WHERE name LIKE '%' || allergen_rec.name || '%';
-  END LOOP;
-
-  -- ROŚLINY STRĄCZKOWE → strączkowe + konkretny podtyp
-  FOR allergen_rec IN 
-    SELECT name FROM public.allergens WHERE parent_id = 6
-  LOOP
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-      SELECT i.id, a.id FROM public.ingredients i
-      CROSS JOIN public.allergens a
-      WHERE (i.name = allergen_rec.name OR i.name LIKE '%' || allergen_rec.name || '%') 
-        AND a.name = allergen_rec.name AND a.parent_id = 6;
-    
-    INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-      SELECT id, 6 FROM public.ingredients 
-      WHERE name = allergen_rec.name OR name LIKE '%' || allergen_rec.name || '%';
-  END LOOP;
-
-  -- CZOSNEK → czosnek (pojedynczy alergen)
-  INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id)
-    SELECT id, (SELECT id FROM public.allergens WHERE name = 'czosnek')
-    FROM public.ingredients WHERE name = 'czosnek';
-
-END $$;
-
--- ============================================================================
--- 7. FOODS (Przykładowe karmy)
+-- ALLERGENS (Sub-categories)
 -- ============================================================================
 
-INSERT INTO public.foods (name, brand_id, size_type_id, age_category_id, ingredients_raw, image_url) VALUES
-  -- Brit Care
-  ('Brit Care Adult Jagnięcina z Ryżem', 
-   (SELECT id FROM public.brands WHERE name = 'Brit Care'),
-   (SELECT id FROM public.size_types WHERE name = 'średni'),
-   (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'jagnięcina, ryż, tłuszcz z kurczaka, suszone jabłka, olej z łososia',
-   '/images/foods/brit-care-jagniecina-medium-adult.jpg'),
-  
-  ('Brit Care Bezzbożowa Łosoś z Ziemniakiem', 
-   (SELECT id FROM public.brands WHERE name = 'Brit Care'),
-   (SELECT id FROM public.size_types WHERE name = 'mały'),
-   (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'łosoś, ziemniak, groszek, olej z ryb, batat',
-   '/images/foods/brit-care-salmon-adult-small.jpg'),
-  
-  ('Brit Care Puppy Kurczak z Ryżem', 
-   (SELECT id FROM public.brands WHERE name = 'Brit Care'),
-   (SELECT id FROM public.size_types WHERE name = 'mały'),
-   (SELECT id FROM public.age_categories WHERE name = 'szczeniak'),
-   'kurczak, ryż, tłuszcz z kurczaka, olej z ryb',
-   NULL),
-  
-  -- Carnilove
-  ('Carnilove Kaczka z Bażantem', 
-   (SELECT id FROM public.brands WHERE name = 'Carnilove'),
-   (SELECT id FROM public.size_types WHERE name = 'średni'),
-   (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'kaczka, indyk, groszek, soczewica, olej z ryb',
-   NULL),
-  
-  ('Carnilove Jagnięcina z Dzikiem', 
-   (SELECT id FROM public.brands WHERE name = 'Carnilove'),
-   (SELECT id FROM public.size_types WHERE name = 'duży'),
-   (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'jagnięcina, wieprzowina, batat, groszek, ciecierzyca',
-   NULL),
-  
-  -- Acana
-  ('Acana Heritage Kaczka Wolny Wybieg', 
-   (SELECT id FROM public.brands WHERE name = 'Acana'),
-   (SELECT id FROM public.size_types WHERE name = 'średni'),
-   (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'kaczka, jajka, ryba, owies, groszek',
-   NULL),
-  
-  ('Acana Singles Jagnięcina z Jabłkiem', 
-   (SELECT id FROM public.brands WHERE name = 'Acana'),
-   (SELECT id FROM public.size_types WHERE name = 'średni'),
-   (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'jagnięcina, owies, soczewica, olej z ryb',
-   '/images/foods/Acana-singles-lamb.jpg'),
-  
-  -- Royal Canin
-  ('Royal Canin Hypoallergenic', 
-   (SELECT id FROM public.brands WHERE name = 'Royal Canin'),
-   (SELECT id FROM public.size_types WHERE name = 'mały'),
-   (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'ryż, ryba, olej z ryb, ziemniak',
-   NULL),
-  
-  -- Taste of the Wild
-  ('Taste of the Wild High Prairie', 
-   (SELECT id FROM public.brands WHERE name = 'Taste of the Wild'),
-   (SELECT id FROM public.size_types WHERE name = 'średni'),
-   (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'wołowina, jagnięcina, batat, groszek, olej z ryb',
-   '/images/foods/taste-of-the-wild-high-prairie.jpg'),
-  
-  ('Taste of the Wild Pacific Stream', 
-   (SELECT id FROM public.brands WHERE name = 'Taste of the Wild'),
-   (SELECT id FROM public.size_types WHERE name = 'średni'),
-   (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'łosoś, ryba, batat, groszek',
-   '/images/foods/taste-of-the-wild-pacific-stream.jpg'),
-  
-  -- Josera
-  ('Josera SensiPlus', 
-   (SELECT id FROM public.brands WHERE name = 'Josera'),
-   (SELECT id FROM public.size_types WHERE name = 'średni'),
-   (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'kaczka, ryż, ziemniak, olej z ryb',
-   '/images/foods/josera-sensiplus-adult.jpg'),
-  
-  ('Josera Optiness', 
-   (SELECT id FROM public.brands WHERE name = 'Josera'),
-   (SELECT id FROM public.size_types WHERE name = 'duży'),
-   (SELECT id FROM public.age_categories WHERE name = 'dorosły'),
-   'jagnięcina, ryż, kukurydza, tłuszcz z kurczaka',
-   '/images/foods/josera-optiness-adult.jpg');
-
 -- ============================================================================
--- 8. FOOD_INGREDIENTS (Powiązania karma ↔ składniki)
--- ============================================================================
--- WAŻNE: Używamy SELECT zamiast hardcoded ID, aby zapewnić poprawne mapowania
-
--- Brit Care Adult Jagnięcina z Ryżem
--- ingredients_raw: 'jagnięcina, ryż, tłuszcz z kurczaka, suszone jabłka, olej z łososia'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Brit Care Adult Jagnięcina z Ryżem';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jagnięcina')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ryż')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'tłuszcz z kurczaka')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jabłko')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z łososia'));
-END $$;
-
--- Brit Care Bezzbożowa Łosoś z Ziemniakiem
--- ingredients_raw: 'łosoś, ziemniak, groszek, olej z ryb, batat'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Brit Care Bezzbożowa Łosoś z Ziemniakiem';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'łosoś')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ziemniak')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'batat'));
-END $$;
-
--- Brit Care Puppy Kurczak z Ryżem
--- ingredients_raw: 'kurczak, ryż, tłuszcz z kurczaka, olej z ryb'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Brit Care Puppy Kurczak z Ryżem';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'kurczak')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ryż')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'tłuszcz z kurczaka')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb'));
-END $$;
-
--- Carnilove Kaczka z Bażantem
--- ingredients_raw: 'kaczka, indyk, groszek, soczewica, olej z ryb'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Carnilove Kaczka z Bażantem';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'kaczka')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'indyk')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'soczewica')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb'));
-END $$;
-
--- Carnilove Jagnięcina z Dzikiem
--- ingredients_raw: 'jagnięcina, wieprzowina, batat, groszek, ciecierzyca'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Carnilove Jagnięcina z Dzikiem';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jagnięcina')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'wieprzowina')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'batat')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ciecierzyca'));
-END $$;
-
--- Acana Heritage Kaczka Wolny Wybieg
--- ingredients_raw: 'kaczka, jajka, ryba, owies, groszek'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Acana Heritage Kaczka Wolny Wybieg';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'kaczka')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jaja')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'biała ryba')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'owies')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek'));
-END $$;
-
--- Acana Singles Jagnięcina z Jabłkiem
--- ingredients_raw: 'jagnięcina, owies, soczewica, olej z ryb'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Acana Singles Jagnięcina z Jabłkiem';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jagnięcina')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'owies')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'soczewica')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb'));
-END $$;
-
--- Royal Canin Hypoallergenic
--- ingredients_raw: 'ryż, ryba, olej z ryb, ziemniak'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Royal Canin Hypoallergenic';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ryż')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'biała ryba')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ziemniak'));
-END $$;
-
--- Taste of the Wild High Prairie
--- ingredients_raw: 'wołowina, jagnięcina, batat, groszek, olej z ryb'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Taste of the Wild High Prairie';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'wołowina')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jagnięcina')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'batat')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb'));
-END $$;
-
--- Taste of the Wild Pacific Stream
--- ingredients_raw: 'łosoś, ryba, batat, groszek'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Taste of the Wild Pacific Stream';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'łosoś')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'biała ryba')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'batat')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'groszek'));
-END $$;
-
--- Josera SensiPlus
--- ingredients_raw: 'kaczka, ryż, ziemniak, olej z ryb'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Josera SensiPlus';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'kaczka')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ryż')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ziemniak')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'olej z ryb'));
-END $$;
-
--- Josera Optiness
--- ingredients_raw: 'jagnięcina, ryż, kukurydza, tłuszcz z kurczaka'
-DO $$
-DECLARE
-  food_id_var INT;
-BEGIN
-  SELECT id INTO food_id_var FROM public.foods WHERE name = 'Josera Optiness';
-  
-  INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'jagnięcina')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'ryż')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'kukurydza')),
-    (food_id_var, (SELECT id FROM public.ingredients WHERE name = 'tłuszcz drobiowy'));
-END $$;
-
--- ============================================================================
--- 9. ARTICLES (Przykładowe artykuły edukacyjne)
+-- ALLERGENS
 -- ============================================================================
 
-INSERT INTO public.articles (title, slug, excerpt, content, published) VALUES
-  ('Jak rozpoznać alergię pokarmową u psa?',
-   'jak-rozpoznac-alergie-pokarmowa-u-psa',
-   'Alergie pokarmowe to częsty problem. Poznaj objawy takie jak swędzenie skóry, problemy żołądkowo-jelitowe i chroniczne infekcje uszu.',
-   'Alergie pokarmowe u psów są coraz częstszym problemem. Objawy mogą obejmować swędzenie skóry, problemy żołądkowo-jelitowe, czy chroniczne infekcje uszu. W tym artykule omawiamy najczęstsze symptomy i metody diagnozowania alergii pokarmowych u czworonogów.',
-   true),
-  
-  ('Najczęstsze alergeny w karmach dla psów',
-   'najczestsze-alergeny-w-karmach-dla-psow',
-   'Kurczak, wołowina, pszenica i kukurydza to najczęstsze alergeny. Dowiedz się, których składników unikać przy wyborze karmy.',
-   'Kurczak, wołowina, pszenica i kukurydza to jedne z najczęstszych alergenów występujących w karmach dla psów. Dowiedz się, które składniki najczęściej wywołują reakcje alergiczne i jak je unikać przy wyborze karmy.',
-   true),
-  
-  ('Dieta eliminacyjna - jak ją przeprowadzić?',
-   'dieta-eliminacyjna-jak-ja-przeprowadzic',
-   'Skuteczna metoda diagnozowania alergii. Polega na karmieniu psa karmą z jednym źródłem białka przez 8-12 tygodni.',
-   'Dieta eliminacyjna to skuteczna metoda diagnozowania alergii pokarmowych. Polega na karmieniu psa karmą z jednym źródłem białka przez 8-12 tygodni. W artykule przedstawiamy krok po kroku, jak bezpiecznie przeprowadzić dietę eliminacyjną.',
-   true),
-  
-  ('Karmy hipoalergiczne - co warto wiedzieć?',
-   'karmy-hipoalergiczne-co-warto-wiedziec',
-   'Karmy z hydrolizowanym białkiem lub rzadkimi źródłami protein minimalizują ryzyko alergii. Zobacz, czym różnią się od zwykłych karm.',
-   'Karmy hipoalergiczne zawierają hydrolizowane białka lub rzadkie źródła protein, które minimalizują ryzyko reakcji alergicznych. Dowiedz się, czym różnią się od zwykłych karm i dla których psów są odpowiednie.',
-   true),
-  
-  ('Rola kwasów omega-3 w diecie alergika',
-   'rola-kwasow-omega-3-w-diecie-alergika',
-   'Kwasy omega-3 mają właściwości przeciwzapalne i pomagają złagodzić objawy alergii skórnych. Poznaj korzyści suplementacji.',
-   'Kwasy omega-3 z oleju rybiego mają właściwości przeciwzapalne i mogą pomóc złagodzić objawy alergii skórnych u psów. Poznaj korzyści płynące z suplementacji omega-3 i naturalne źródła tych cennych kwasów.',
-   true);
+INSERT INTO public.allergens (id, name, parent_id) VALUES
+  (9, 'kurczak', 2),
+  (10, 'indyk', 2),
+  (11, 'kaczka', 2),
+  (12, 'gęś', 2),
+  (13, 'przepiórka', 2),
+  (14, 'wołowina', 1),
+  (15, 'jagnięcina', 1),
+  (16, 'baranina', 1),
+  (17, 'wieprzowina', 1),
+  (18, 'dzik', 1),
+  (19, 'dziczyzna', 1),
+  (20, 'sarna', 1),
+  (21, 'jeleń', 1),
+  (22, 'renifer', 1),
+  (23, 'kangur', 1),
+  (24, 'królik', 1),
+  (25, 'koń', 1),
+  (26, 'łosoś', 3),
+  (27, 'pstrąg', 3),
+  (28, 'śledź', 3),
+  (29, 'sardynka', 3),
+  (30, 'dorsz', 3),
+  (31, 'halibut', 3),
+  (32, 'tuńczyk', 3),
+  (33, 'makrela', 3),
+  (34, 'biała ryba', 3),
+  (35, 'pszenica', 4),
+  (36, 'kukurydza', 4),
+  (37, 'jęczmień', 4),
+  (38, 'owies', 4),
+  (39, 'ryż', 4),
+  (40, 'sorgo', 4),
+  (41, 'proso', 4),
+  (42, 'żyto', 4),
+  (43, 'mleko', 5),
+  (44, 'ser', 5),
+  (45, 'twaróg', 5),
+  (46, 'jogurt', 5),
+  (47, 'serwatka', 5),
+  (48, 'groszek', 6),
+  (49, 'groch', 6),
+  (50, 'soczewica', 6),
+  (51, 'ciecierzyca', 6),
+  (52, 'fasola', 6),
+  (53, 'bób', 6),
+  (54, 'łupin', 6),
+  (55, 'soja', 6);
 
 -- ============================================================================
--- Podsumowanie
+-- INGREDIENT_ALLERGENS
 -- ============================================================================
 
--- Sprawdzenie ile rekordów zostało dodanych
-DO $$
-DECLARE
-  brands_count INT;
-  size_types_count INT;
-  age_categories_count INT;
-  ingredients_count INT;
-  allergens_count INT;
-  foods_count INT;
-  articles_count INT;
-BEGIN
-  SELECT COUNT(*) INTO brands_count FROM public.brands;
-  SELECT COUNT(*) INTO size_types_count FROM public.size_types;
-  SELECT COUNT(*) INTO age_categories_count FROM public.age_categories;
-  SELECT COUNT(*) INTO ingredients_count FROM public.ingredients;
-  SELECT COUNT(*) INTO allergens_count FROM public.allergens;
-  SELECT COUNT(*) INTO foods_count FROM public.foods;
-  SELECT COUNT(*) INTO articles_count FROM public.articles;
-  
-  RAISE NOTICE 'Seed data loaded successfully!';
-  RAISE NOTICE '  Brands: %', brands_count;
-  RAISE NOTICE '  Size types: %', size_types_count;
-  RAISE NOTICE '  Age categories: %', age_categories_count;
-  RAISE NOTICE '  Ingredients: %', ingredients_count;
-  RAISE NOTICE '  Allergens: %', allergens_count;
-  RAISE NOTICE '  Foods: %', foods_count;
-  RAISE NOTICE '  Articles: %', articles_count;
-END $$;
+INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
+  (1, 2),
+  (1, 9),
+  (2, 2),
+  (2, 9),
+  (3, 2),
+  (3, 9),
+  (4, 2),
+  (4, 9),
+  (5, 2),
+  (5, 9),
+  (6, 2),
+  (7, 2),
+  (7, 10),
+  (8, 2),
+  (8, 10),
+  (9, 2),
+  (9, 10),
+  (10, 2),
+  (10, 11),
+  (11, 2),
+  (11, 11),
+  (12, 2),
+  (12, 12),
+  (13, 2),
+  (13, 13),
+  (14, 1),
+  (14, 14),
+  (15, 1),
+  (15, 14),
+  (16, 1),
+  (16, 14),
+  (17, 1),
+  (17, 14),
+  (18, 1),
+  (18, 15),
+  (19, 1),
+  (19, 15),
+  (20, 1),
+  (20, 15),
+  (21, 1),
+  (21, 16),
+  (22, 1),
+  (22, 17),
+  (23, 1),
+  (23, 18),
+  (24, 1),
+  (24, 19),
+  (25, 1),
+  (25, 20),
+  (26, 1),
+  (26, 21),
+  (27, 1),
+  (27, 22),
+  (28, 1),
+  (28, 23),
+  (29, 1),
+  (29, 24),
+  (30, 1),
+  (30, 25),
+  (31, 3),
+  (31, 26),
+  (32, 3),
+  (32, 26),
+  (33, 3),
+  (33, 26),
+  (34, 3),
+  (34, 27),
+  (35, 3),
+  (35, 28),
+  (36, 3),
+  (36, 29),
+  (37, 3),
+  (37, 30),
+  (38, 3),
+  (38, 31),
+  (39, 3),
+  (39, 32),
+  (40, 3),
+  (40, 33),
+  (41, 3),
+  (41, 34),
+  (42, 3),
+  (43, 3),
+  (44, 7),
+  (45, 7),
+  (46, 7),
+  (47, 5),
+  (47, 43),
+  (48, 5),
+  (48, 44),
+  (49, 5),
+  (49, 45),
+  (50, 5),
+  (50, 46),
+  (51, 5),
+  (51, 47),
+  (52, 4),
+  (52, 35),
+  (52, 56),
+  (53, 4),
+  (53, 35),
+  (53, 56),
+  (54, 4),
+  (54, 35),
+  (54, 56),
+  (55, 4),
+  (55, 36),
+  (56, 4),
+  (56, 36),
+  (57, 4),
+  (57, 36),
+  (58, 4),
+  (58, 37),
+  (59, 4),
+  (59, 38),
+  (60, 4),
+  (60, 39),
+  (61, 4),
+  (61, 39),
+  (62, 4),
+  (62, 39),
+  (63, 4),
+  (63, 40),
+  (64, 4),
+  (64, 41),
+  (65, 4),
+  (65, 42),
+  (67, 4),
+  (67, 39),
+  (71, 6),
+  (71, 48),
+  (72, 6),
+  (72, 49),
+  (73, 6),
+  (73, 49),
+  (74, 6),
+  (74, 50),
+  (75, 6),
+  (75, 51),
+  (76, 6),
+  (76, 52),
+  (77, 6),
+  (77, 53),
+  (108, 2),
+  (108, 9),
+  (109, 2),
+  (109, 9),
+  (110, 2),
+  (110, 9),
+  (111, 1),
+  (111, 14),
+  (112, 3),
+  (112, 26),
+  (113, 3),
+  (113, 26),
+  (131, 57),
+  (161, 4),
+  (161, 38),
+  (163, 1),
+  (163, 15),
+  (167, 6),
+  (167, 49);
+
+-- ============================================================================
+-- FOODS
+-- ============================================================================
+
+INSERT INTO public.foods (id, name, brand_id, size_type_id, age_category_id, ingredients_raw, image_url) VALUES
+  (1, 'Brit Care Adult Jagnięcina z Ryżem', 1, 2, 3, 'Suszona jagnięcina (42%), ryż (35%), tłuszcz z kurczaka, wytłoki z jabłek, olej z łososia (3%), drożdże piwowarskie, naturalny aromat, hydrolizowane drożdże (0,5%), mączka grochowa, glukozamina (300 mg/kg), fruktooligosacharydy (230 mg/kg), siarczan chondroityny (230 mg/kg), mannan-oligosacharydy (180 mg/kg), jukka (180 mg/kg), ostropest plamisty (110 mg/kg), beta-glukany (60 mg/kg), serdecznik (60 mg/kg), rokitnik (60 mg/kg), probiotyki Lactobacillus helveticus (15x109 komórek/kg)', '/images/foods/brit-care-jagniecina-medium-adult.jpg'),
+  (2, 'Brit Care Bezzbożowa Łosoś z Ziemniakiem', 1, 1, 3, 'Łosoś (50%, odwodniony, hydrolizowany), ziemniaki (26%), suszona pulpa jabłkowa, tłuszcz z kurczaka, olej z łososia (3%), naturalny aromat, mączka grochowa, glukozamina (260 mg/kg), fruktooligosacharydy (200 mg/kg), siarczan chondroityny (200 mg/kg), mannan-oligosacharydy (150 mg/kg), Mojave yucca (150 mg/kg), nasiona ostropestu plamistego (90 mg/kg), β-glukany (50 mg/kg), suszone ziele serdecznika (50 mg/kg), suszony rokitnik (50 mg/kg), probiotyk Lactobacillus helveticus HA - 122 inaktywowany (15x109 komórek/kg).', '/images/foods/brit-care-salmon-adult-small.jpg'),
+  (4, 'Carnilove Kaczka z Bażantem', 5, 2, 3, 'mączka z kaczki (30%), mączka z bażanta (22%), groch żółty (20%), tłuszcz kurczęcy (źródło tokoferoli, 8%), kaczka bez kości (5%), wątroba kurczęca (3%), jabłka (3%), skrobia z tapioki (3%), olej z łososia (2%), marchew (1%), siemię lniane (1%), ciecierzyca (1%), hydrolizowane skorupiaki (źródło glukozaminy, 0,026%), ekstrakt z chrząstki (źródło chondroityny, 0,016%), drożdże browarnicze (źródło mannanooligosacharydów, 0,015%), korzeń cykorii (źródło fruktooligosacharydów, 0,01%), juka (0,01 %), algi (0,01%), psylium (0,01%), tymianek (0,01%), rozmaryn (0,01%), oregano (0,01%), żurawina (0,0008%), borówki (0,0008%), maliny ( 0,0008%)', '/images/foods/Carnilove-kaczka-z-bazantem.jpg'),
+  (5, 'Carnilove Jagnięcina z Dzikiem', 5, 3, 3, 'mączka z dziczyzny (30%), mączka z jagnięciny z wolnego wybiegu (25%), groch żółty (20%), tłuszcz drobiowy (konserwowany tokoferolami) (10%), wątróbka z kurczaka (3%), jabłka (3%), skrobie z manioku (3%), olej z łososia (2%), marchew (1%), siemię lniane (1%), ciecierzyca (1%), hydrolizowane pancerze skorupiaków (źródło glukozaminy ) (0,026%), ekstrakt z chrząstki (źródło chondroityny) (0,016%), drożdże piwne (źródło mannanooligosacharydów) (0,015%), korzeń cykorii (źródło fruktooligosacharydów) (0,01%), juka schidigera (0,01%), algi (0,01%), łupiny psyllium (0,01%), tymianek (0,01%), rozmaryn (0,01%), oregano (0,01%), żurawina (0,0008%), jagody (0,0008%), maliny (0,0008%)', '/images/foods/Carnilove-jagniecina-i-dzik.jpg'),
+  (6, 'Acana Heritage Kaczka Wolny Wybieg', 3, 2, 3, 'Surowa kaczka (18%), dehydratyzowana kaczka (17%), cały groch zielony, cała czerwona soczewica, surowa wątroba kaczki (9%), tłuszcz kaczki (6%), świeże gruszki (4%), cała ciecierzyca, cała zielona soczewica, cały groch żółty, skrobia grochowa, włókno soczewicy, algi (źródło EPA i DHA) (1,2%), świeża cała dynia piżmowa, świeża cała dynia, suszony kelp, sól, suszony korzeń cykorii, całe borówki, całe jagody, kurkuma, ostropest plamisty, korzeń łopianu, lawenda, korzeń prawoślazu lekarskiego, owoce dzikiej róży.', 'images/foods/acana-heritage-kaczka.jpg'),
+  (7, 'Acana Singles Jagnięcina z Jabłkiem', 3, 2, 3, 'Surowa jagnięcina (21%), dehydratyzowana jagnięcina (19%), cały groch zielony, cała czerwona soczewica, surowa wątroba jagnięca (8%), olej rzepakowy, świeże jabłka (4%), cała ciecierzyca, cała zielona soczewica, cały groch żółty, włókno soczewicy, skrobia grochowa, olej słonecznikowy, algi (źródło EPA i DHA), surowe flaki jagnięce (1%), surowe nerki jagnięce (1%), świeża cała dynia piżmowa, świeża cała dynia, suszony kelp, sól, suszony korzeń cykorii, całe borówki, całe jagody, kurkuma, ostropest plamisty, korzeń łopianu, lawenda, korzeń prawoślazu lekarskiego, owoce dzikiej róży.', '/images/foods/Acana-singles-lamb.jpg'),
+  (8, 'Royal Canin Hypoallergenic', 2, 1, 3, 'Mąka ryżowa, hydrolizat białka sojowego, tłuszcz zwierzęcy, ryż, minerały, hydrolizat wątroby drobiowej, pulpa buraczana, olej sojowy, fruktooligosacharydy, olej rybny, olej z ogórecznika, mączka z nagietka.', '/images/foods/royal-canin-hypoallergenic.jpg'),
+  (9, 'Taste of the Wild High Prairie', 4, 2, 3, 'Bizon (12%), mączka z jagnięciny, mączka drobiowa, bataty, groszek, ziemniaki, tłuszcz drobiowy (z dodatkiem mieszaniny tokoferoli jako przeciwutleniaczy), produkty jajeczne, wołowina, pieczony jeleń (4%), pulpa pomidorowa, białko ziemniaczane, białko grochu, mączka z ryb morskich, składniki mineralne, suszony korzeń cykorii, pomidory, borówki, maliny, ekstrakt z jukki Schidigera.', '/images/foods/taste-of-the-wild-high-prairie.jpg'),
+  (10, 'Taste of the Wild Pacific Stream', 4, 2, 3, 'Łosoś (21%), mączka z ryb morskich, bataty, ziemniaki, groszek, olej rzepakowy, soczewica, mączka z łososia, wędzony łosoś (4%), włókno ziemniaczane, składniki mineralne, suszony korzeń cykorii, pomidory, borówki, maliny, ekstrakt z jukki Schidigera.', '/images/foods/taste-of-the-wild-pacific-stream.jpg'),
+  (11, 'Josera SensiPlus', 6, 2, 3, 'Suszone białko drobiowe (drób 24,0%, kaczka 4,0%), kukurydza pełnoziarnista, ryż, tłuszcz drobiowy, włókno buraczane, hydrolizowane białko drobiowe, minerały, mielony korzeń cykorii (naturalne źródło inuliny).', '/images/foods/josera-sensiplus-adult.jpg'),
+  (12, 'Josera Optiness', 6, 3, 3, 'Suszone białko drobiowe, ryż, jęczmień, suszony ziemniak, włókno buraczane, tłuszcz drobiowy, suszone białko jagnięce (4,5%), hydrolizowane białko drobiowe, minerały, mielony korzeń cykorii (naturalne źródło inuliny), suszone białko z nowozelandzkiej małży zielonowargowej (perna canaliculus).', '/images/foods/josera-optiness-adult.jpg'),
+  (13, 'Brit Veterinary Diet Hypoallergenic', 1, 2, 3, 'dehydratyzowany łosoś (30%), żółty groszek (25%), hydrolizowane białko łososia (18%), gryka, olej kokosowy, pulpa jabłkowa, olej z łososia (3%), hydrolizowany sos z łososia (2%), minerały, suszone algi (0,5%, Ascophyllum nodosum), suszone algi (0,4%, Schizochytrium limacinum), wyciąg z drożdży (źródło mannooligosacharydów, 0,02%), beta-glukany (0,02%), rokitnik zwyczajny (0,015%), fruktooligosacharydy (0,013%), jukka Mojave (0,013%).', '/images/foods/Brit-veterinary-hypoallergenic.jpg'),
+  (14, 'ACANA DOG Puppy Small Breed', 3, 1, 1, 'świeży kurczak (18%), dehydratyzowany kurczak (18%), cała czerwona soczewica, cały groch zielony, świeże organy kurczaka (wątroba, serce) (7%), tłuszcz z kurczaka (7%), dehydratyzowany indyk (4%), świeże jaja (4%), surowy morszczuk (4%), dehydratyzowany śledź (4%), olej rybny (3%), cała zielona soczewica, cała ciecierzyca, cały groch żółty, włókno z ciecierzycy, skrobia grochowa, surowa wątroba indyka (1%), sól, suszony kelp, świeża cała dynia, świeża cała dynia piżmowa, świeża cała marchew, świeże całe jabłka, świeże całe gruszki, świeża cała cukinia, suszony korzeń cykorii, świeży jarmuż, świeży szpinak, świeże liście rzepy, świeże liście buraków, cała żurawina, całe borówki, całe jagody saskatoon, kurkuma, ostropest plamisty, korzeń łopianu, lawenda, korzeń prawoślazu lekarskiego, owoce dzikiej róży.', '/images/foods/Acana-puppy-small-breed.jpg'),
+  (15, 'Brit Grain Free Veterinary Diets Dog Ultra-Hypoallergenic', 1, 2, 3, 'owady dehydratyzowane (30%), groch żółty, suszona pulpa jabłkowa, olej kokosowy, białko grochu, siemię lniane (4%), węglan wapnia, suszone algi (2,5%, Schizochytrium limacinum), mąka grochowa, hydrolizowane drożdże (0,5% – źródło inozytolu i aminokwasów), ekstrakt drożdżowy (źródło mannanooligosacharydów, 0,02%), β-glukany (0,02%), suszony rokitnik zwyczajny (0,015%), fruktooligosacharydy (0,013%), Jukka Mojave (0,013%), Lactobacillus helveticus HA – 122 inaktywowane (15x109 komórek/kg).', '/images/foods/brit-vet-ultrahypoallergenic.jpg');
+
+-- ============================================================================
+-- FOOD_INGREDIENTS
+-- ============================================================================
+
+INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
+  (1, 60),
+  (1, 109),
+  (1, 113),
+  (1, 132),
+  (1, 135),
+  (1, 136),
+  (1, 138),
+  (1, 140),
+  (1, 163),
+  (1, 164),
+  (1, 165),
+  (1, 166),
+  (1, 167),
+  (1, 168),
+  (1, 169),
+  (1, 170),
+  (1, 171),
+  (1, 172),
+  (1, 173),
+  (2, 31),
+  (2, 71),
+  (2, 79),
+  (2, 80),
+  (2, 112),
+  (4, 7),
+  (4, 10),
+  (4, 71),
+  (4, 74),
+  (4, 112),
+  (5, 18),
+  (5, 22),
+  (5, 71),
+  (5, 75),
+  (5, 80),
+  (6, 10),
+  (6, 41),
+  (6, 44),
+  (6, 59),
+  (6, 71),
+  (7, 18),
+  (7, 59),
+  (7, 74),
+  (7, 112),
+  (8, 41),
+  (8, 60),
+  (8, 79),
+  (8, 112),
+  (9, 71),
+  (9, 74),
+  (9, 112),
+  (9, 174),
+  (9, 175),
+  (9, 176),
+  (9, 177),
+  (9, 178),
+  (9, 179),
+  (10, 31),
+  (10, 41),
+  (10, 71),
+  (10, 80),
+  (11, 10),
+  (11, 60),
+  (11, 79),
+  (11, 112),
+  (12, 18),
+  (12, 55),
+  (12, 60),
+  (12, 108);
+
+-- ============================================================================
+-- ARTICLES
+-- ============================================================================
+
+INSERT INTO public.articles (id, title, slug, excerpt, content, published) VALUES
+  (1, 'Alergie pokarmowe u psów – jak je rozpoznać i co najczęściej je powoduje?', 'alergie-pokarmowe-u-psow-jak-je-rozpoznac-i-co-najczesciej-je-powoduje', 'Alergie pokarmowe to częsty problem. Poznaj objawy takie jak swędzenie skóry, problemy żołądkowo-jelitowe i chroniczne infekcje uszu.', '**Czym są alergie pokarmowe u psów?**
+```markdown
+
+```
 
 
+Coraz więcej właścicieli psów zauważa, że ich pupile nie zawsze dobrze reagują na wszystko, co znajdzie się w misce. Drapanie się, problemy z sierścią czy biegunki to często pierwsze sygnały, że coś jest nie tak. Jednym z powodów takich reakcji może być alergia pokarmowa – czyli nadwrażliwość organizmu psa na konkretny składnik w jedzeniu.
+```markdown
+
+```
+
+
+
+Alergia pokarmowa to reakcja układu odpornościowego psa na pewne białka obecne w pożywieniu. Organizm psa traktuje dane białko jak „intruza” i zaczyna z nim walczyć – podobnie jak w przypadku infekcji. W efekcie pojawiają się objawy skórne, trawienne lub obie grupy jednocześnie.
+```markdown
+
+```
+
+
+Warto pamiętać, że alergia to nie to samo co nietolerancja pokarmowa. Nietolerancja dotyczy problemów z trawieniem, a nie reakcji układu odpornościowego. Objawy bywają podobne, ale przyczyna jest inna.
+```markdown
+
+```
+
+
+**Najczęstsze alergeny u psów**
+```markdown
+
+```
+Wbrew pozorom, alergie u psów najczęściej wywołują składniki, które pojawiają się w karmach najczęściej. To właśnie częsty kontakt z danym białkiem może prowadzić do nadwrażliwości.
+```markdown
+
+```
+Do najczęstszych alergenów u psów należą:
+```markdown
+
+```
+
+🐔 **Kurczak**– najczęstszy winowajca alergii pokarmowych.
+
+🐄 **Wołowina**– wartościowe mięso, ale często uczulające.
+
+🧀 **Nabiał** – mleko i sery mogą powodować problemy skórne i żołądkowe.
+
+🥚 **Jajka** – szczególnie białko kurzego jajka.
+
+🌾 **Zboża**– pszenica, kukurydza czy soja.
+
+🐟 **Ryby** – rzadziej, ale również mogą uczulać.
+```markdown
+
+```
+
+**Objawy alergii pokarmowej u psów**
+```markdown
+
+```
+
+Objawy alergii pokarmowej potrafią być bardzo różne i czasem trudno je jednoznacznie powiązać z dietą. Najczęściej jednak dotyczą skóry i układu pokarmowego.
+
+
+►**Objawy skórne:**
+```markdown
+
+```
+▪ intensywne drapanie się i lizanie łap, brzucha lub pyska,
+
+▪ czerwone plamy, krostki lub łupież,
+
+▪ nadmierne wypadanie sierści,
+
+▪ częste potrząsanie głową lub drapanie uszu (może wskazywać na zapalenie ucha).
+```markdown
+
+```
+►**Objawy ze strony układu pokarmowego:**
+```markdown
+
+```
+▪ biegunki lub wymioty,
+
+▪ śluzy w kale, wzdęcia, gazy,
+
+▪ nieprzyjemny zapach z pyska,
+
+▪ utrata apetytu lub chęci do jedzenia.
+```markdown
+
+```
+
+Objawy alergii nie muszą pojawić się od razu – czasem reakcja występuje dopiero po dłuższym czasie spożywania uczulającego składnika.
+
+```markdown
+
+```
+**Co robić, gdy podejrzewasz alergię u psa?**
+```markdown
+
+```
+
+Jeśli Twój pies się drapie, ma problemy z trawieniem lub jego sierść wygląda gorzej niż zwykle – warto działać.
+```markdown
+
+```
+
+Pierwszym krokiem powinna być wizyta u weterynarza, który może zaproponować dietę eliminacyjną. Polega ona na stopniowym wykluczaniu potencjalnych alergenów i obserwowaniu reakcji organizmu psa.
+```markdown
+
+```
+
+Nie warto zmieniać karmy co kilka dni – wtedy trudno ustalić, co szkodzi. Proces diagnozy wymaga cierpliwości, ale efekty są tego warte.
+```markdown
+
+```
+
+**Czy alergię pokarmową da się wyleczyć?**
+```markdown
+
+```
+Alergii pokarmowych nie da się całkowicie wyleczyć, ale można skutecznie nad nimi zapanować. Najważniejsze to unikać alergenów i dobrać karmę lub dietę, która nie zawiera szkodliwych składników.
+```markdown
+
+```
+Dobrze dobrane jedzenie potrafi zdziałać cuda – pies staje się spokojniejszy, ma zdrowszą sierść, a jego skóra przestaje swędzieć.
+```markdown
+
+```
+**Podsumowanie**
+```markdown
+
+```
+Alergie pokarmowe u psów to coraz częstszy problem, ale też coraz łatwiejszy do opanowania. Obserwacja pupila, odpowiednia dieta i współpraca z weterynarzem to klucz do sukcesu.
+```markdown
+
+```
+Jeśli Twój pies drapie się, ma problemy z żołądkiem lub często potrząsa głową – być może to nie przypadek, tylko reakcja alergiczna. Gdy już uda się ustalić, co dokładnie szkodzi, życie psa (i Twoje) stanie się o wiele spokojniejsze.', true),
+  (2, 'Najczęstsze alergeny w karmach dla psów', 'najczestsze-alergeny-w-karmach-dla-psow', 'Kurczak, wołowina, pszenica i kukurydza to najczęstsze alergeny. Dowiedz się, których składników unikać przy wyborze karmy.', 'Kurczak, wołowina, pszenica i kukurydza to jedne z najczęstszych alergenów występujących w karmach dla psów. Dowiedz się, które składniki najczęściej wywołują reakcje alergiczne i jak je unikać przy wyborze karmy.', true),
+  (3, 'Dieta eliminacyjna - jak ją przeprowadzić?', 'dieta-eliminacyjna-jak-ja-przeprowadzic', 'Skuteczna metoda diagnozowania alergii. Polega na karmieniu psa karmą z jednym źródłem białka przez 8-12 tygodni.', 'Dieta eliminacyjna to skuteczna metoda diagnozowania alergii pokarmowych. Polega na karmieniu psa karmą z jednym źródłem białka przez 8-12 tygodni. W artykule przedstawiamy krok po kroku, jak bezpiecznie przeprowadzić dietę eliminacyjną.', true),
+  (4, 'Karmy hipoalergiczne - co warto wiedzieć?', 'karmy-hipoalergiczne-co-warto-wiedziec', 'Karmy z hydrolizowanym białkiem lub rzadkimi źródłami protein minimalizują ryzyko alergii. Zobacz, czym różnią się od zwykłych karm.', 'Karmy hipoalergiczne zawierają hydrolizowane białka lub rzadkie źródła protein, które minimalizują ryzyko reakcji alergicznych. Dowiedz się, czym różnią się od zwykłych karm i dla których psów są odpowiednie.', true),
+  (5, 'Rola kwasów omega-3 w diecie alergika', 'rola-kwasow-omega-3-w-diecie-alergika', 'Kwasy omega-3 mają właściwości przeciwzapalne i pomagają złagodzić objawy alergii skórnych. Poznaj korzyści suplementacji.', 'Kwasy Omega-3 a alergie pokarmowe u psów – dlaczego warto je suplementować?
+
+Coraz więcej psów zmaga się dziś z alergiami pokarmowymi. Swędzenie skóry, drapanie, lizanie łap, łupież, wypadanie sierści czy nawracające infekcje uszu – to tylko kilka z objawów, które mogą świadczyć o tym, że Twój pupil reaguje źle na któryś ze składników karmy. W walce z alergiami u psów bardzo pomocne okazują się kwasy tłuszczowe omega-3. Choć brzmią jak coś, co znajdziesz w sklepie dla kulturystów, to w rzeczywistości są jednym z najprostszych i najbardziej naturalnych sposobów na wsparcie skóry, sierści i układu odpornościowego psa.
+
+Dlaczego kwasy omega-3 są tak ważne?
+
+Kwasy omega-3 to zdrowe tłuszcze, które mają silne działanie przeciwzapalne. U psów z alergiami pokarmowymi w organizmie często dochodzi do stanu zapalnego – głównie skóry i jelit. Właśnie wtedy omega-3 potrafią zdziałać cuda.
+Działają one jak „strażacy” – gaszą zapalenie od środka, łagodząc świąd, zmniejszając zaczerwienienia i wspierając regenerację skóry.
+
+W naturze psy otrzymywały omega-3 z jedzenia – np. z tłustych ryb, takich jak łosoś czy sardynki. Niestety większość gotowych karm (nawet tych droższych) zawiera zbyt mało tych kwasów, bo są one bardzo delikatne i łatwo ulegają utlenieniu w procesie produkcji. Dlatego warto dostarczać je dodatkowo, w formie suplementu.
+
+Jak kwasy omega-3 pomagają przy alergiach pokarmowych?
+
+U psów z alergią pokarmową układ odpornościowy przesadnie reaguje na pewne białka lub składniki w jedzeniu. Prowadzi to do stanu zapalnego, który objawia się na skórze i w jelitach.
+Kwasy omega-3 (głównie EPA i DHA) pomagają w trzech głównych obszarach:
+
+Zmniejszają stan zapalny – ograniczają produkcję substancji odpowiedzialnych za świąd i podrażnienia skóry.
+
+Poprawiają wygląd sierści i skóry – regularne stosowanie omega-3 sprawia, że sierść staje się błyszcząca, a skóra mniej sucha.
+
+Wspierają jelita – a to bardzo ważne, bo większość odporności psa „mieszka” właśnie w układzie pokarmowym.
+
+Efekty suplementacji nie są natychmiastowe, ale zazwyczaj po 4–6 tygodniach można zauważyć wyraźną poprawę kondycji skóry i sierści, a także mniejsze nasilenie objawów alergii.
+
+W jakiej formie podawać omega-3 psu?
+
+Najczęściej spotykane formy suplementów z omega-3 dla psów to:
+
+Olej z łososia – najpopularniejszy i zwykle najlepiej tolerowany. Ma łagodny smak, który większości psów bardzo odpowiada.
+
+Olej z kryla – bogaty w przeciwutleniacze, trochę droższy, ale bardzo skuteczny.
+
+Olej z sardeli, makreli lub śledzia – alternatywa dla psów uczulonych na łososia.
+
+Kapsułki z omega-3 – dobre rozwiązanie, jeśli pies nie lubi smaku rybnych olejów, ale łatwiej podać je większym psom niż małym.
+
+Ważne, by wybierać produkty przeznaczone specjalnie dla zwierząt, z czystych źródeł i przebadane pod kątem zawartości metali ciężkich. Oleje przeznaczone dla ludzi często mają dodatki smakowe lub witaminy w dawkach, które nie są odpowiednie dla psa.
+
+Jak dawkować omega-3 u psów?
+
+Dawkowanie zależy od wagi, wieku i ogólnego stanu zdrowia psa, ale można kierować się ogólnymi zasadami:
+
+Małe psy (do 10 kg): ok. 250–500 mg EPA + DHA dziennie
+
+Średnie psy (10–25 kg): 500–1000 mg EPA + DHA dziennie
+
+Duże psy (25–40 kg): 1000–1500 mg EPA + DHA dziennie
+
+Bardzo duże psy (powyżej 40 kg): 1500–2000 mg EPA + DHA dziennie
+
+Jeśli Twój pies cierpi na silne alergie, weterynarz może zalecić wyższe dawki na początku, a potem przejście na dawkę podtrzymującą. Warto zacząć od mniejszej ilości i stopniowo ją zwiększać – by układ pokarmowy psa miał czas się przyzwyczaić.
+
+U szczeniąt i starszych psów omega-3 są również bardzo wskazane, ale dawkę warto omówić z weterynarzem – u młodych pomagają w rozwoju mózgu, a u seniorów wspierają stawy i serce.
+
+Jak podawać suplementy, żeby pies chętnie je zjadł?
+
+Większość psów uwielbia smak oleju z łososia, więc wystarczy kilka kropel na karmę. Olej najlepiej podawać raz dziennie z posiłkiem – tłuszcz w jedzeniu ułatwia jego wchłanianie.
+Uważaj tylko, żeby nie przechowywać oleju w cieple ani na słońcu. Omega-3 są bardzo wrażliwe i szybko się utleniają, więc najlepiej trzymać butelkę w lodówce i zużyć w ciągu kilku tygodni od otwarcia.
+
+Na co zwrócić uwagę przy wyborze suplementu?
+
+Kupując omega-3 dla psa, zwróć uwagę na:
+
+Zawartość EPA i DHA – to właśnie one mają największe znaczenie dla skóry i odporności.
+
+Źródło ryb – im czystsze wody, tym lepiej (np. Islandia, Norwegia).
+
+Forma podania – czy olej, kapsułki, czy smakowy spray – wybierz tę, którą pies najlepiej akceptuje.
+
+Certyfikaty jakości – np. IFOS, które potwierdzają czystość produktu.
+
+Podsumowanie
+
+Kwasy omega-3 to jeden z najprostszych, a zarazem najskuteczniejszych sposobów, by wspomóc psa z alergią pokarmową. Regularna suplementacja łagodzi stany zapalne, poprawia wygląd sierści, wzmacnia odporność i wspiera układ pokarmowy.
+Nie zastąpi oczywiście eliminacyjnej diety czy leczenia weterynaryjnego, ale może być ogromnym wsparciem w procesie powrotu do komfortowego życia bez ciągłego drapania i podrażnień.
+
+Warto pamiętać, że każdy pies jest inny – dlatego najlepiej skonsultować suplementację z weterynarzem, szczególnie jeśli pies przyjmuje leki lub ma inne schorzenia.
+
+Jeśli chcesz pomóc swojemu pupilowi czuć się lepiej, wprowadzenie kwasów omega-3 do jego codziennej diety to krok w dobrą stronę. Jego sierść, skóra – i samopoczucie – na pewno Ci za to podziękują.', true);
+
+-- ============================================================================
+-- SUMMARY
+-- ============================================================================
+
+-- Export completed on 29.10.2025, 22:29:03
+-- Brands: 6
+-- Size types: 3
+-- Age categories: 4
+-- Ingredients: 179
+-- Allergens: 57
+-- Ingredient-Allergen mappings: 162
+-- Foods: 14
+-- Food-Ingredient mappings: 68
+-- Articles: 5
