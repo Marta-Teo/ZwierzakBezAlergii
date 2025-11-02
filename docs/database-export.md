@@ -57,6 +57,8 @@ Skrypt eksportuje dane z następujących tabel (w odpowiedniej kolejności):
 7. **foods** - Karmy
 8. **food_ingredients** - Powiązania karma ↔ składnik
 9. **articles** - Artykuły edukacyjne
+10. **dog_profiles** - Profile psów użytkowników
+11. **dog_allergens** - Powiązania pies ↔ alergen
 
 ## 🔄 Przykładowy workflow
 
@@ -118,6 +120,8 @@ Nie! Skrypt **nie** eksportuje tabeli `users` ani danych z `auth.users`. To znac
 - Nie eksportujemy haseł ani tokenów
 - Dane autorstwa (created_by, updated_by, author_id) są pomijane
 
+⚠️ **Uwaga**: Tabela `dog_profiles` zawiera `user_id` (foreign key do `auth.users`). Jeśli resetujesz bazę i wgrywasz seed.sql, upewnij się, że odpowiednie konta użytkowników istnieją w `auth.users`, albo ręcznie zaktualizuj `user_id` w wyeksportowanych danych przed importem.
+
 ## 🐛 Rozwiązywanie problemów
 
 ### Błąd: "Brak wymaganych zmiennych środowiskowych"
@@ -155,6 +159,8 @@ To może oznaczać, że:
 📦 Eksportuję foods...
 📦 Eksportuję food_ingredients...
 📦 Eksportuję articles...
+📦 Eksportuję dog_profiles...
+📦 Eksportuję dog_allergens...
 
 ✅ Eksport zakończony pomyślnie!
 📄 Plik zapisany: D:\github\ZwierzakBezAlergii\supabase\seed.sql
@@ -167,6 +173,8 @@ To może oznaczać, że:
    - Allergens: 62
    - Foods: 12
    - Articles: 5
+   - Dog profiles: 3
+   - Dog allergens: 8
 ```
 
 ## 🔗 Zobacz też

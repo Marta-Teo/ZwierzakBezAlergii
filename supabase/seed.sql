@@ -1,5 +1,5 @@
 -- Seed data for ZwierzakBezAlergii
--- Auto-generated on 2025-10-29T21:29:02.908Z
+-- Auto-generated on 2025-11-02T19:07:41.627Z
 -- This file contains all data exported from Supabase database
 
 -- ============================================================================
@@ -785,10 +785,37 @@ Warto pamiętać, że każdy pies jest inny – dlatego najlepiej skonsultować 
 Jeśli chcesz pomóc swojemu pupilowi czuć się lepiej, wprowadzenie kwasów omega-3 do jego codziennej diety to krok w dobrą stronę. Jego sierść, skóra – i samopoczucie – na pewno Ci za to podziękują.', true);
 
 -- ============================================================================
+-- DOG_PROFILES
+-- ============================================================================
+
+INSERT INTO public.dog_profiles (id, user_id, name, size_type_id, age_category_id, notes) VALUES
+  (1, '830b2b41-c6a3-4119-8be5-2cb7aec4609a', 'Vi', NULL, 3, NULL),
+  (2, '830b2b41-c6a3-4119-8be5-2cb7aec4609a', 'Su', NULL, 3, NULL);
+
+-- Reset sequence for dog_profiles
+SELECT setval('public.dog_profiles_id_seq', (SELECT MAX(id) FROM public.dog_profiles));
+
+-- ============================================================================
+-- DOG_ALLERGENS
+-- ============================================================================
+
+INSERT INTO public.dog_allergens (dog_id, allergen_id) VALUES
+  (1, 2),
+  (1, 9),
+  (1, 12),
+  (1, 13),
+  (2, 2),
+  (2, 9),
+  (2, 11),
+  (2, 12),
+  (2, 13),
+  (2, 14);
+
+-- ============================================================================
 -- SUMMARY
 -- ============================================================================
 
--- Export completed on 29.10.2025, 22:29:03
+-- Export completed on 2.11.2025, 20:07:41
 -- Brands: 6
 -- Size types: 3
 -- Age categories: 4
@@ -798,3 +825,5 @@ Jeśli chcesz pomóc swojemu pupilowi czuć się lepiej, wprowadzenie kwasów om
 -- Foods: 14
 -- Food-Ingredient mappings: 68
 -- Articles: 5
+-- Dog profiles: 2
+-- Dog-Allergen mappings: 10

@@ -209,6 +209,26 @@ async function exportToSeed() {
     if (articlesError) throw articlesError;
     seedContent += generateInsertStatement('articles', articles || [], ['id', 'title', 'slug', 'excerpt', 'content', 'published']);
 
+    // 10. DOG PROFILES
+    console.log('📦 Eksportuję dog_profiles...');
+    const { data: dogProfiles, error: dogProfilesError } = await supabase
+      .from('dog_profiles')
+      .select('*')
+      .order('id');
+    
+    if (dogProfilesError) throw dogProfilesError;
+    seedContent += generateInsertStatement('dog_profiles', dogProfiles || [], ['id', 'user_id', 'name', 'size_type_id', 'age_category_id', 'notes'], { manualIds: true });
+
+    // 11. DOG ALLERGENS (pivot table)
+    console.log('📦 Eksportuję dog_allergens...');
+    const { data: dogAllergens, error: dogAllergensError } = await supabase
+      .from('dog_allergens')
+      .select('*')
+      .order('dog_id, allergen_id');
+    
+    if (dogAllergensError) throw dogAllergensError;
+    seedContent += generateInsertStatement('dog_allergens', dogAllergens || [], ['dog_id', 'allergen_id']);
+
     // Add summary
     seedContent += `-- ============================================================================\n`;
     seedContent += `-- SUMMARY\n`;
@@ -223,6 +243,8 @@ async function exportToSeed() {
     seedContent += `-- Foods: ${foods?.length || 0}\n`;
     seedContent += `-- Food-Ingredient mappings: ${foodIngredients?.length || 0}\n`;
     seedContent += `-- Articles: ${articles?.length || 0}\n`;
+    seedContent += `-- Dog profiles: ${dogProfiles?.length || 0}\n`;
+    seedContent += `-- Dog-Allergen mappings: ${dogAllergens?.length || 0}\n`;
 
     // Write to file with explicit UTF-8 encoding
     const outputPath = join(process.cwd(), 'supabase', 'seed.sql');
@@ -238,6 +260,8 @@ async function exportToSeed() {
     console.log(`   - Allergens: ${allergens?.length || 0}`);
     console.log(`   - Foods: ${foods?.length || 0}`);
     console.log(`   - Articles: ${articles?.length || 0}`);
+    console.log(`   - Dog profiles: ${dogProfiles?.length || 0}`);
+    console.log(`   - Dog allergens: ${dogAllergens?.length || 0}`);
 
   } catch (error) {
     console.error('\n❌ Błąd podczas eksportu:', error);
