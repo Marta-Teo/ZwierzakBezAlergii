@@ -100,3 +100,62 @@ export interface RemoveIngredientAllergenCommand {
   ingredient_id: number;
   allergen_id: number;
 }
+
+// ============================================================================
+// DOG PROFILES
+// ============================================================================
+
+/**
+ * Dog Profile Entity (from database)
+ */
+export type DogProfile = Tables<"dog_profiles">;
+
+/**
+ * Dog Profile with Relations (for display)
+ */
+export interface DogProfileWithRelations extends DogProfile {
+  size_type: SizeTypeDTO | null;
+  age_category: AgeCategoryDTO | null;
+  allergens: AllergenDTO[];
+}
+
+/**
+ * Dog Allergen Join Table
+ */
+export type DogAllergen = Tables<"dog_allergens">;
+
+/**
+ * DTO: Create Dog Profile
+ */
+export interface CreateDogProfileDTO {
+  name: string;
+  size_type_id?: number | null;
+  age_category_id?: number | null;
+  allergen_ids: number[]; // Array of allergen IDs
+  notes?: string | null;
+}
+
+/**
+ * DTO: Update Dog Profile
+ */
+export interface UpdateDogProfileDTO {
+  id: number;
+  name: string;
+  size_type_id?: number | null;
+  age_category_id?: number | null;
+  allergen_ids: number[]; // Array of allergen IDs
+  notes?: string | null;
+}
+
+/**
+ * DTO: Dog Profile Summary (for list view)
+ */
+export interface DogProfileSummaryDTO {
+  id: number;
+  name: string;
+  size_type_label: string | null;
+  age_category_label: string | null;
+  allergen_count: number;
+  allergen_names: string[]; // First 3 allergen names for preview
+  created_at: string;
+}

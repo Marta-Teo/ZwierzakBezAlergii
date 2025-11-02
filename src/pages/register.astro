@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { RegisterForm } from '../components/auth/RegisterForm';
+
+// Sprawdzenie sesji - jeśli zalogowany, redirect
+const { data: { session } } = await Astro.locals.supabase.auth.getSession();
+if (session) {
+  return Astro.redirect('/foods');
+}
+
+// Pobranie redirect URL z query params
+const redirectTo = Astro.url.searchParams.get('redirect') || '/foods';
+---
+
+<Layout title="Zarejestruj się - ZwierzakBezAlergii">
+  <div class="min-h-screen flex items-center justify-center bg-muted/30 px-4 py-8">
+    <RegisterForm client:load redirectTo={redirectTo} />
+  </div>
+</Layout>
+

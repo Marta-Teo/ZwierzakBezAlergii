@@ -85,3 +85,21 @@ W ramach MVP wyłączone są:
 4. Retencja użytkowników po 7 dniach (wartość bazowa do zdefiniowania).
 5. 100% przepuszczalność zestawów testów w CI.
 6. Regularne wykonywanie i weryfikacja backupu bazy według ustalonej polityki.
+
+---
+
+##6 Bezpieczny dostęp
+- Opis: Jako użytkownik chcę mieć możliwość rejestracji i logowania się do systemu w sposób zapewniający bezpieczeństwo moich danych.
+- Kryteria akceptacji:
+ - Logowanie i rejestracja odbywają się na dedykowanych stronach.
+  - Logowanie wymaga podania adresu email i hasła.
+  - Rejestracja wymaga podania adresu email, hasła i potwierdzenia hasła.
+  - Użytkownik MOŻE korzystać z głownych funkcjonalności naszej aplikacji bez logowania, ale spersonalizowane zapamietywanie preferencji użytkownika mozliwe jest tylko po zalogowaniu.
+  - Użytkownik może logować się do systemu poprzez przycisk w prawym górnym rogu.
+  - Użytkownik może się wylogować z systemu poprzez przycisk w prawym górnym rogu w głównym @Layout.astro.
+  - Nie korzystamy z zewnętrznych serwisów logowania (np. Google, GitHub).
+  - Odzyskiwanie hasła powinno być możliwe.
+
+  ##7 kolekcja reguł
+  jako użytkownik chcę móc zalogować się aby móc korzystać ze spersonalizownaych możliwości zapamiętywania ustawień osobistych, zapamiętywania preferencji psa, historii wyszukiwania i historii rozmowy z AI.
+  Cały, szczegółowy opis znajduje się w dokumencie @faza_pierwsza_autentykacja.md

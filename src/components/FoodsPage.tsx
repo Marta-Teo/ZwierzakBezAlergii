@@ -7,6 +7,8 @@ import { LoadingState } from './LoadingState';
 import { ErrorMessage } from './ErrorMessage';
 import { PaginationButton } from './PaginationButton';
 import { FoodDetailModal } from './FoodDetailModal';
+import { Alert, AlertDescription, AlertTitle } from './ui/alert';
+import { Button } from './ui/button';
 import { useFoods } from '../lib/hooks/useFoods';
 import { useBrands } from '../lib/hooks/useBrands';
 import { useSizeTypes } from '../lib/hooks/useSizeTypes';
@@ -23,6 +25,18 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+interface PreselectedFilters {
+  dogName: string;
+  sizeTypeId: number | null;
+  ageCategoryId: number | null;
+  excludeAllergens: string[]; // Nazwy alergenów (nie ID!)
+}
+
+interface FoodsPageContentProps {
+  isLoggedIn?: boolean;
+  preselectedFilters?: PreselectedFilters | null;
+}
 
 /**
  * Główny komponent widoku listy karm
@@ -45,16 +59,22 @@ const queryClient = new QueryClient({
  * <FoodsPage />
  * ```
  */
-function FoodsPageContent() {
+function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentProps) {
   // Stan lokalny
   const [searchTerm, setSearchTerm] = useState('');
   const [offset, setOffset] = useState(0);
   const [selectedFoodId, setSelectedFoodId] = useState<number | null>(null);
   
-  // Domyślne filtry (wszystkie alergeny ZAZNACZONE = excludeAllergens pusta tablica)
+  // Inicjalizacja filtrów z preselectedFilters jeśli dostępne
   const [filters, setFilters] = useState<FiltersModel>({
-    excludeAllergens: [],
+    excludeAllergens: preselectedFilters?.excludeAllergens || [],
+    brandId: undefined,
+    sizeTypeId: preselectedFilters?.sizeTypeId || undefined,
+    ageCategoryId: preselectedFilters?.ageCategoryId || undefined,
   });
+  
+  // Flaga czy filtry pochodzą z profilu psa
+  const [isDogProfile, setIsDogProfile] = useState(!!preselectedFilters);
 
   const limit = 20;
 
@@ -99,6 +119,18 @@ function FoodsPageContent() {
   const handleFiltersChange = (newFilters: FiltersModel) => {
     setFilters(newFilters);
     setOffset(0); // Reset paginacji przy nowych filtrach
+  };
+
+  // Funkcja do czyszczenia filtrów psa
+  const clearDogFilters = () => {
+    setFilters({
+      excludeAllergens: [],
+    });
+    setIsDogProfile(false);
+    // Remove dogId from URL
+    const url = new URL(window.location.href);
+    url.searchParams.delete('dogId');
+    window.history.replaceState({}, '', url);
   };
 
   // Obsługa resetowania filtrów
@@ -197,6 +229,30 @@ function FoodsPageContent() {
           </div>
         </div>
 
+        {/* Banner z informacją o profilu psa */}
+        {isDogProfile && preselectedFilters && (
+          <Alert className="mb-6">
+            <div className="flex items-start justify-between">
+              <div>
+                <AlertTitle className="flex items-center gap-2">
+                  <span>🐕</span>
+                  Wyniki dla: {preselectedFilters.dogName}
+                </AlertTitle>
+                <AlertDescription>
+                  Filtry automatycznie ustawione na podstawie profilu psa.
+                </AlertDescription>
+              </div>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={clearDogFilters}
+              >
+                Wyczyść filtry
+              </Button>
+            </div>
+          </Alert>
+        )}
+
         {/* Layout: Sidebar + Content */}
         <div className="flex gap-6">
           {/* Sidebar z filtrami */}
@@ -282,10 +338,10 @@ function FoodsPageContent() {
 /**
  * Komponent wrapper z QueryClientProvider
  */
-export function FoodsPage() {
+export function FoodsPage({ isLoggedIn, preselectedFilters }: FoodsPageContentProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <FoodsPageContent />
+      <FoodsPageContent isLoggedIn={isLoggedIn} preselectedFilters={preselectedFilters} />
     </QueryClientProvider>
   );
 }

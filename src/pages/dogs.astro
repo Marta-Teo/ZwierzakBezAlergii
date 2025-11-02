@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { DogsPage } from '../components/dogs/DogsPage';
+
+// Route protection - middleware już sprawdza sesję
+const user = Astro.locals.user;
+if (!user) {
+  return Astro.redirect('/login?redirect=/dogs');
+}
+
+// Pobranie profili psów użytkownika (SSR)
+const { data: dogProfiles, error } = await Astro.locals.supabase
+  .from('dog_profiles')
+  .select(`
+    *,
+    size_type:size_types(id, name),
+    age_category:age_categories(id, name),
+    dog_allergens(allergen:allergens(id, name))
+  `)
+  .eq('user_id', user.id)
+  .order('created_at', { ascending: false });
+
+if (error) {
+  console.error('Error fetching dog profiles:', error);
+}
+
+// Transform data do DTO
+const dogs = dogProfiles?.map(dog => ({
+  id: dog.id,
+  name: dog.name,
+  size_type_label: dog.size_type?.name || null,
+  age_category_label: dog.age_category?.name || null,
+  allergen_count: dog.dog_allergens?.length || 0,
+  allergen_names: dog.dog_allergens?.slice(0, 3).map((da: any) => da.allergen.name) || [],
+  created_at: dog.created_at,
+})) || [];
+---
+
+<Layout title="Moje psy - ZwierzakBezAlergii">
+  <DogsPage client:load dogs={dogs} />
+</Layout>
+

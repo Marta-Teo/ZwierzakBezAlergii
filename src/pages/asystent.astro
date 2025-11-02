@@ -1,6 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { PetFoodAssistant } from '@/components/PetFoodAssistant';
+
+// Sprawdzenie sesji użytkownika
+const isLoggedIn = !!Astro.locals.session;
 ---
 
 <Layout title="Asystent Żywieniowy - ZwierzakBezAlergii">
@@ -93,7 +96,7 @@ import { PetFoodAssistant } from '@/components/PetFoodAssistant';
       </div>
 
       <!-- Chat Component -->
-      <PetFoodAssistant client:load />
+      <PetFoodAssistant client:load isLoggedIn={isLoggedIn} />
 
       <!-- Info Section -->
       <div class="mt-12 grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">

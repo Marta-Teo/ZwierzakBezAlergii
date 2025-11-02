@@ -1,9 +1,40 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { FoodsPage } from '../components/FoodsPage';
+
+// Sprawdzenie sesji użytkownika
+const isLoggedIn = !!Astro.locals.session;
+
+// Automatyczne filtrowanie na podstawie profilu psa
+let preselectedFilters = null;
+const dogId = Astro.url.searchParams.get('dogId');
+
+if (dogId && isLoggedIn && Astro.locals.user) {
+  // Pobranie profilu psa wraz z nazwami alergenów
+  const { data: dogProfile } = await Astro.locals.supabase
+    .from('dog_profiles')
+    .select(`
+      name,
+      size_type_id,
+      age_category_id,
+      dog_allergens(allergen:allergens(name))
+    `)
+    .eq('id', dogId)
+    .eq('user_id', Astro.locals.user.id)
+    .single();
+
+  if (dogProfile) {
+    preselectedFilters = {
+      dogName: dogProfile.name,
+      sizeTypeId: dogProfile.size_type_id,
+      ageCategoryId: dogProfile.age_category_id,
+      excludeAllergens: dogProfile.dog_allergens?.map((da: any) => da.allergen.name) || [],
+    };
+  }
+}
 ---
 
 <Layout title="Karmy dla psów - ZwierzakBezAlergii">
-  <FoodsPage client:load />
+  <FoodsPage client:load isLoggedIn={isLoggedIn} preselectedFilters={preselectedFilters} />
 </Layout>
 
