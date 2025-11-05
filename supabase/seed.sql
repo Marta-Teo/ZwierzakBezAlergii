@@ -1,5 +1,5 @@
 -- Seed data for ZwierzakBezAlergii
--- Auto-generated on 2025-11-02T19:07:41.627Z
+-- Auto-generated on 2025-11-05T19:27:00.309Z
 -- This file contains all data exported from Supabase database
 
 -- ============================================================================
@@ -624,6 +624,9 @@ Do najczęstszych alergenów u psów należą:
 ```
 
 Objawy alergii pokarmowej potrafią być bardzo różne i czasem trudno je jednoznacznie powiązać z dietą. Najczęściej jednak dotyczą skóry i układu pokarmowego.
+```markdown
+
+```
 
 
 ►**Objawy skórne:**
@@ -701,88 +704,955 @@ Alergie pokarmowe u psów to coraz częstszy problem, ale też coraz łatwiejszy
 
 ```
 Jeśli Twój pies drapie się, ma problemy z żołądkiem lub często potrząsa głową – być może to nie przypadek, tylko reakcja alergiczna. Gdy już uda się ustalić, co dokładnie szkodzi, życie psa (i Twoje) stanie się o wiele spokojniejsze.', true),
-  (2, 'Najczęstsze alergeny w karmach dla psów', 'najczestsze-alergeny-w-karmach-dla-psow', 'Kurczak, wołowina, pszenica i kukurydza to najczęstsze alergeny. Dowiedz się, których składników unikać przy wyborze karmy.', 'Kurczak, wołowina, pszenica i kukurydza to jedne z najczęstszych alergenów występujących w karmach dla psów. Dowiedz się, które składniki najczęściej wywołują reakcje alergiczne i jak je unikać przy wyborze karmy.', true),
-  (3, 'Dieta eliminacyjna - jak ją przeprowadzić?', 'dieta-eliminacyjna-jak-ja-przeprowadzic', 'Skuteczna metoda diagnozowania alergii. Polega na karmieniu psa karmą z jednym źródłem białka przez 8-12 tygodni.', 'Dieta eliminacyjna to skuteczna metoda diagnozowania alergii pokarmowych. Polega na karmieniu psa karmą z jednym źródłem białka przez 8-12 tygodni. W artykule przedstawiamy krok po kroku, jak bezpiecznie przeprowadzić dietę eliminacyjną.', true),
-  (4, 'Karmy hipoalergiczne - co warto wiedzieć?', 'karmy-hipoalergiczne-co-warto-wiedziec', 'Karmy z hydrolizowanym białkiem lub rzadkimi źródłami protein minimalizują ryzyko alergii. Zobacz, czym różnią się od zwykłych karm.', 'Karmy hipoalergiczne zawierają hydrolizowane białka lub rzadkie źródła protein, które minimalizują ryzyko reakcji alergicznych. Dowiedz się, czym różnią się od zwykłych karm i dla których psów są odpowiednie.', true),
-  (5, 'Rola kwasów omega-3 w diecie alergika', 'rola-kwasow-omega-3-w-diecie-alergika', 'Kwasy omega-3 mają właściwości przeciwzapalne i pomagają złagodzić objawy alergii skórnych. Poznaj korzyści suplementacji.', 'Kwasy Omega-3 a alergie pokarmowe u psów – dlaczego warto je suplementować?
+  (2, 'Najczęstsze alergeny w karmach dla psów', 'najczestsze-alergeny-w-karmach-dla-psow', 'Kurczak, wołowina, pszenica i kukurydza to najczęstsze alergeny. Dowiedz się, których składników unikać przy wyborze karmy.', '**🐾 Najczęstsze alergeny w karmach dla psów – na co uważać?**
+```markdown
 
-Coraz więcej psów zmaga się dziś z alergiami pokarmowymi. Swędzenie skóry, drapanie, lizanie łap, łupież, wypadanie sierści czy nawracające infekcje uszu – to tylko kilka z objawów, które mogą świadczyć o tym, że Twój pupil reaguje źle na któryś ze składników karmy. W walce z alergiami u psów bardzo pomocne okazują się kwasy tłuszczowe omega-3. Choć brzmią jak coś, co znajdziesz w sklepie dla kulturystów, to w rzeczywistości są jednym z najprostszych i najbardziej naturalnych sposobów na wsparcie skóry, sierści i układu odpornościowego psa.
+```
+Coraz więcej psów zmaga się dziś z alergiami pokarmowymi. Drapanie się, lizanie łap, problemy z uszami, biegunki czy matowa sierść – to tylko część objawów, które mogą świadczyć o tym, że coś w misce Twojego pupila mu nie służy. Ale jak właściwie rozpoznać, co szkodzi psu? I czego unikać w składach karm?
+```markdown
 
-Dlaczego kwasy omega-3 są tak ważne?
+```
+Zacznijmy od początku – czyli od najczęstszych alergenów w psich karmach.
+```markdown
 
+```
+
+**🐔 1. Kurczak – król alergenów**
+```markdown
+
+```
+Kurczak to jedno z najczęściej używanych mięs w karmach. Nic dziwnego – jest tani, łatwo dostępny i lubiany przez psy. Ale... właśnie dlatego często staje się też przyczyną alergii.
+```markdown
+
+```
+Układ odpornościowy psa, narażony przez lata na to samo białko, zaczyna je „rozpoznawać” jako coś obcego i reaguje stanem zapalnym.
+```markdown
+
+```
+W składach karm kurczak może kryć się pod różnymi nazwami:
+```markdown
+
+```
+▪ **mączka drobiowa** – to suszone i zmielone resztki mięsa, kości i tłuszczu drobiowego (zazwyczaj z kurczaka lub indyka);
+```markdown
+
+```
+▪ **Mączka z kurczaka ** – to samo, ale bezpośrednio z kurczaka. 
+```markdown
+
+```
+▪ **białko drobiowe, hydrolizowane białko drobiowe, hydrolizat białka drobiowego** – białko rozbite na mniejsze cząsteczki, dzięki czemu ma być łatwiej przyswajalne, ale wciąż może uczulać;
+```markdown
+
+```
+▪ **mięso z kurczaka, tłuszcz drobiowy, podroby drobiowe.**
+```markdown
+
+```
+👉 Jeśli Twój pies ma alergię na kurczaka, **unikać należy wszystkich tych form,** nawet jeśli nazwa brzmi „niewinnie”.
+```markdown
+
+```
+
+**🐄 2. Wołowina – popularna, ale problematyczna**
+```markdown
+
+```
+Kolejnym często uczulającym mięsem jest **wołowina**. Choć wielu właścicieli uważa ją za „mocne, zdrowe” mięso, u psów z wrażliwym układem pokarmowym może powodować sporo kłopotów – od świądu po luźne stolce.
+```markdown
+
+```
+W składach karm znajdziesz ją jako:
+```markdown
+
+```
+▪ **mięso wołowe, mączka wołowa, białko wołowe,**
+```markdown
+
+```
+▪ **produkty pochodzenia zwierzęcego (wołowe)** – to ogólne określenie, za którym może kryć się różna jakość składników.
+```markdown
+
+```
+🐕‍🦺 Jeśli chcesz sprawdzić, czy to wołowina szkodzi Twojemu psu, wybierz karmę **monobiałkową** (czyli z jednym źródłem białka) – np. z jagnięciną albo rybą.
+```markdown
+
+```
+
+**🐟 3. Ryby i oleje rybne**
+```markdown
+
+```
+Zaskakująco, nawet **ryby** potrafią uczulać! Choć często poleca się je psom z alergiami (bo to źródło kwasów omega-3 i łatwo przyswajalnego białka), niektóre psy nie tolerują np. **łososia** czy **śledzia**.
+```markdown
+
+```
+Warto wiedzieć, że rybie składniki kryją się nie tylko pod nazwą „ryba”, ale też:
+```markdown
+
+```
+▪ **mączka rybna** – suszone i zmielone mięso ryb;
+```markdown
+
+```
+▪ **olej z łososia, olej rybny** – źródło tłuszczu, ale też potencjalny alergen;
+```markdown
+
+```
+▪ **hydrolizowane białko rybne** – rozbite białko z ryb.
+```markdown
+
+```
+🐠 Jeśli Twój pies reaguje źle na karmę z rybami, zwróć uwagę również na suplementy – wiele z nich zawiera olej rybny!
+
+```markdown
+
+```
+
+**🐑 4. Jagnięcina – rzadziej, ale jednak**
+```markdown
+
+```
+Przez wiele lat jagnięcina była „bezpiecznym” wyborem dla psów alergików. Niestety, im częściej zaczęła pojawiać się w karmach, tym częściej też uczula.
+```markdown
+
+```
+Warto pamiętać, że **reakcja alergiczna zależy nie tylko od rodzaju mięsa, ale i od jego przetworzenia** – w tanich karmach białko bywa gorszej jakości i bardziej alergizujące.
+```markdown
+
+```
+W składach karm jagnięcinę znajdziesz jako:
+```markdown
+
+```
+▪ **mączka jagnięca, białko jagnięce, mięso jagnięce.**
+```markdown
+
+```
+Jeśli Twój pies reaguje na kurczaka, a chcesz spróbować czegoś nowego – jagnięcina często jest pierwszym wyborem, ale obserwuj reakcję pupila.
+
+```markdown
+
+```
+
+**🥛 5. Nabiał i produkty mleczne**
+```markdown
+
+```
+Nie każdy pies toleruje laktozę. U niektórych wystarczy odrobina mleka, żeby pojawiły się gazy, biegunka czy drapanie się.
+```markdown
+```
+W karmach mleko lub jego pochodne występują pod nazwami:
+```markdown
+```
+▪ **białko mleka, serwatka, mleko w proszku, kazeina.**
+```markdown
+
+```
+🐶 Lepiej unikać karm z dodatkiem nabiału, jeśli pies ma wrażliwy żołądek lub już kiedyś miał problemy po zjedzeniu produktów mlecznych.
+```markdown
+
+```
+
+**🌾 6. Zboża i gluten**
+```markdown
+
+```
+To temat, który budzi emocje. Nie wszystkie psy źle reagują na zboża, ale niektóre rzeczywiście źle znoszą gluten (białko pszenicy).
+```markdown
+```
+Najczęściej uczulają:
+```markdown
+
+```
+▪ **pszenica, kukurydza, soja, jęczmień, żyto.**
+```markdown
+
+```
+Warto wiedzieć, że karmy bezzbożowe często używają innych źródeł węglowodanów, np. ziemniaków, batatów czy grochu. Ale i te składniki mogą czasem uczulać – dlatego **nie ma jednej karmy dobrej dla wszystkich psów.**
+```markdown
+
+```
+
+**🥩 7. Inne potencjalne alergeny**
+```markdown
+
+```
+Niektóre psy reagują też na mniej oczywiste składniki, np.:
+```markdown
+
+```
+▪ **jajka** (białko jaja kurzego),
+```markdown
+
+```
+▪ **wieprzowinę,**
+```markdown
+
+```
+▪ **kaczkę,**
+```markdown
+
+```
+▪ **konserwanty i barwniki** – np. sztuczne aromaty czy utwardzacze tłuszczu.
+```markdown
+
+```
+Właśnie dlatego warto wybierać karmy **z krótkim i prostym składem** – im mniej dodatków, tym mniejsze ryzyko uczulenia.
+```markdown
+
+```
+
+**📋 Jak czytać skład karmy?**
+```markdown
+
+```
+Oto kilka prostych zasad:
+```markdown
+
+```
+1.**Pierwsze trzy składniki** – to zwykle główne źródła białka i tłuszczu. Jeśli na początku jest „mączka drobiowa” – to znaczy, że karma zawiera kurczaka.
+```markdown
+
+```
+2.**„Produkty pochodzenia zwierzęcego”** – to bardzo ogólne określenie, które nie mówi nic o jakości ani rodzaju mięsa. Lepiej, gdy producent jasno podaje źródło białka.
+```markdown
+
+```
+3.**Hydrolizowane białko** – brzmi „naukowo”, ale to po prostu rozbite białko, które czasem uczula mniej, a czasem wcale.
+```markdown
+
+```
+4.**Unikaj sztucznych dodatków** – jeśli skład zawiera dużo trudnych do wymówienia nazw, to zwykle nie jest dobry znak.
+```markdown
+
+
+```
+**🧐 Na co uważać w składach karm?**
+```markdown
+
+```
+🔸 Im **bardziej ogólna** nazwa składnika, tym większe prawdopodobieństwo, że kryje się za nią drób.
+```markdown
+
+```
+🔸 Jeśli karma ma w nazwie „z jagnięciną”, „z rybą” czy „z dziczyzną”, to **nie znaczy**, że nie ma w niej kurczaka-  podany na etykiecie rodzaj mięsa jest tylko dodatkiem do pozostałych gatunków mięsa, często nawet nieokreślonych, jak „produkty pochodzenia zwierzęcego”.
+```markdown
+
+```
+
+
+
+**🐾 Podsumowanie**
+```markdown
+
+```
+Najczęstsze alergeny w psich karmach to:
+```markdown
+
+```
+🐔 kurczak
+```markdown
+
+```
+🐄 wołowina
+```markdown
+
+```
+🐟 ryby (łosoś, śledź)
+```markdown
+
+```
+🐑 jagnięcina
+```markdown
+
+```
+🥛 nabiał
+```markdown
+
+```
+🌾 zboża (pszenica, kukurydza, soja)
+```markdown
+
+```
+🥚 jajka
+```markdown
+
+```
+Jeśli Twój pies ma problemy skórne lub trawienne, warto spojrzeć na etykietę karmy z nowej perspektywy. Czasem wystarczy **zmiana jednego składnika**, by wrócił komfort i zdrowie Twojego pupila 🐶❤️
+', true),
+  (3, 'Dieta eliminacyjna - jak ją przeprowadzić?', 'dieta-eliminacyjna-jak-ja-przeprowadzic', 'Skuteczna metoda diagnozowania alergii. Polega na karmieniu psa karmą z jednym źródłem białka przez 8-10 tygodni.', '**Dieta eliminacyjna u psów – co to jest i kiedy warto ją wprowadzić?**
+```markdown
+
+```
+Zdarza się, że nasz pies zaczyna się drapać bez końca, ma problemy skórne, łzawiące oczy, a czasem nawet kłopoty z żołądkiem. Wtedy wielu właścicieli zastanawia się: „czy to może być alergia?”. Bardzo możliwe! 
+Jednym ze sposobów, by to sprawdzić i pomóc pupilowi, jest **dieta eliminacyjna**. Brzmi poważnie, ale spokojnie — to nic trudnego. Poniżej wyjaśnię, o co w niej chodzi i jak wprowadzić ją krok po kroku.
+```markdown
+
+```
+
+```markdown
+
+```
+**Co to jest dieta eliminacyjna?**
+```markdown
+
+```
+Dieta eliminacyjna to sposób żywienia psa, który ma pomóc ustalić, **na co dokładnie pies jest uczulony**. Mówiąc prosto — chodzi o to, żeby usunąć z diety wszystkie możliwe alergeny (czyli składniki, które mogą powodować reakcję alergiczną), a potem stopniowo sprawdzać, które z nich wywołują problemy.
+```markdown
+
+```
+Najczęściej alergię powoduje **białko pochodzenia zwierzęcego**, np. z kurczaka 🐔 , wołowiny 🐄 , ryby 🐟 czy jaj 🥚 .  Ale winowajcą mogą być też dodatki w karmie, konserwanty czy nawet niektóre zboża. Dieta eliminacyjna pozwala to wszystko uporządkować i dowiedzieć się, co naprawdę szkodzi naszemu psu.
+```markdown
+
+```
+
+**Kiedy warto zastosować dietę eliminacyjną?**
+```markdown
+
+```
+Jeśli Twój pies:
+```markdown
+
+```
+▪  często się drapie, ma łupież lub zaczerwienioną skórę,
+```markdown
+
+```
+▪ wylizuje łapy, uszy lub ogon,
+```markdown
+
+```
+▪ ma nawracające zapalenia uszu,
+```markdown
+
+```
+▪ wymiotuje, ma biegunki lub wzdęcia bez wyraźnej przyczyny,
+```markdown
+
+```
+▪ albo po prostu „coś mu nie służy”, mimo że weterynarz nie znajduje infekcji —
+```markdown
+
+```
+to znak, że **dieta eliminacyjna może być dobrym krokiem.**
+```markdown
+
+```
+Oczywiście zawsze warto wcześniej skonsultować się z weterynarzem. Czasem podobne objawy mogą mieć inne przyczyny, np. pasożyty, infekcje skórne czy problemy hormonalne. Ale jeśli badania nic nie pokazują – dieta eliminacyjna to kolejny logiczny krok.
+```markdown
+
+```
+
+**Jak przeprowadzić dietę eliminacyjną krok po kroku?**
+```markdown
+
+```
+Są dwa główne podejścia, w zależności od tego, jak silne są objawy u psa.
+```markdown
+
+```
+
+**1. Klasyczna dieta eliminacyjna – krok po kroku**
+```markdown
+
+```
+To najczęściej stosowana metoda.
+```markdown
+
+```
+Polega na tym, że przez **8–10 tygodni pies je tylko jeden rodzaj białka i jeden rodzaj węglowodanów,** których wcześniej **nie dostawał.**
+Na przykład:
+```markdown
+
+```
+▪ mięso z królika + bataty,
+```markdown
+
+```
+▪ kaczka + ryż,
+```markdown
+
+```
+▪ jagnięcina + ziemniaki.
+```markdown
+
+```
+Ważne, żeby nie podawać absolutnie nic innego – żadnych smaczków, resztek ze stołu, ani przekąsek, nawet jeśli „to tylko kawałeczek”. Każdy taki „kawałeczek” może zepsuć cały test.
+```markdown
+
+```
+Po tym okresie, jeśli objawy alergii ustąpią, można zacząć **stopniowo wprowadzać nowe źródła białka,** jedno po drugim.
+Przykład:
+```markdown
+
+```
+1.Przez 8 tygodni pies je królika + bataty.
+```markdown
+
+```
+2.Potem dodajesz np. trochę kurczaka – i obserwujesz psa przez 1–2 tygodnie.
+```markdown
+
+```
+3.Jeśli wszystko jest OK – kurczak zostaje. Jeśli objawy wracają – kurczak odpada.
+```markdown
+
+```
+Tak krok po kroku budujesz listę „dozwolonych” i „zakazanych” produktów dla swojego psa.
+```markdown
+
+```
+
+**2. Dieta oparta na karmie weterynaryjnej z białkiem hydrolizowanym lub roślinnym**
+```markdown
+
+```
+Czasem pies ma tak silne objawy (np. ciągłe drapanie, ranki, owrzodzenia, biegunki), że **nie da się od razu sprawdzać konkretnych białek.** Wtedy warto najpierw **uspokoić organizm.**
+W takiej sytuacji weterynarz może zalecić **specjalną karmę weterynaryjną,** która nie zawiera typowych białek zwierzęcych. 
+```markdown
+
+```
+Często są to karmy:
+```markdown
+
+```
+▪   z **hydrolizowanym białkiem** – czyli takim rozbitym na bardzo małe cząsteczki, których układ odpornościowy nie rozpoznaje jako „alergenów”,
+```markdown
+
+```
+▪   z **białkiem roślinnym**, np. z soi lub ziemniaka.
+```markdown
+
+```
+**Alternatywa: karma z białkiem z insektów**
+```markdown
+
+```
+Coraz większą popularność zdobywają karmy oparte na białku z owadów, np. z larw muchy Hermetia illucens. To tzw. „nowe białko”, którego większość psów wcześniej nie jadła, dzięki czemu świetnie sprawdza się w diecie eliminacyjnej. Białko z insektów jest pełnowartościowe, lekkostrawne i bardzo rzadko uczula. Warto rozważyć takie karmy jako alternatywę, szczególnie jeśli pies reaguje źle na większość tradycyjnych mięs. 
+```markdown
+
+```
+
+Celem takiej diety jest **wyciszenie reakcji alergicznej.**
+Zazwyczaj trwa to 6–8 tygodni.
+Dopiero po tym czasie, kiedy objawy znikną, można powoli przechodzić do klasycznej diety eliminacyjnej, czyli zaczynać testowanie nowych białek.
+```markdown
+
+```
+To podejście bywa skuteczniejsze w przypadkach mocnych alergii, bo daje psu czas na regenerację i odciążenie układu odpornościowego.
+```markdown
+
+```
+
+**Jakie korzyści daje dieta eliminacyjna?**
+```markdown
+
+```
+Dobrze przeprowadzona dieta eliminacyjna:
+```markdown
+
+```
+▪   pomaga ustalić dokładną przyczynę alergii,
+```markdown
+
+```
+▪   poprawia kondycję skóry i sierści,
+```markdown
+
+```
+▪   redukuje świąd i drapanie,
+```markdown
+
+```
+▪   uspokaja układ trawienny,
+```markdown
+
+```
+▪   poprawia ogólne samopoczucie psa.
+
+```markdown
+
+```
+Dodatkowo właściciel zyskuje **świadomość, co naprawdę służy jego psu,** a co lepiej omijać szerokim łukiem.
+```markdown
+
+```
+
+**Na co uważać podczas diety eliminacyjnej?**
+```markdown
+
+```
+▪   **Cierpliwość to podstawa.** Pierwsze efekty mogą być widoczne dopiero po kilku tygodniach.
+```markdown
+
+```
+▪   **Nie kombinuj zbyt wcześnie.** Jeśli pies dobrze reaguje na daną karmę – nie zmieniaj jej bez powodu.
+```markdown
+
+```
+▪   **Zawsze czytaj etykiety.** Wiele karm zawiera „niespodzianki” w postaci białek drobiowych czy rybnych, nawet jeśli w nazwie widnieje „z jagnięciną”.
+```markdown
+
+```
+▪   **Pamiętaj o suplementacji.** Przy dłuższej diecie domowej warto zadbać o witaminy i minerały – najlepiej po konsultacji z weterynarzem.
+```markdown
+
+```
+
+Poniżej przedstawiam kilka gotowych karm bez typowego mięsa, które właściciel może rozważyć w wariancie uspokojenia organizmu — pamiętaj jednak, by skonsultować wybór z weterynarzem.
+```markdown
+
+```
+▪  **Yarrah Organic Vegan Dog Food**– pełnoporcjowa karma wegańska, zawierająca białka roślinne (np. soja, białko z ryżu) i bez typowego mięsa.
+```markdown
+
+```
+▪  **GREEN PETFOOD VeggieDog Grainfree** – sucha karma wegańska, bez mięsa, alternatywa dla psów z alergiami na białka zwierzęce.
+```markdown
+
+```
+▪  **Brit Care Free Veterinary Diets Dog Ultra-Hypoallergic**– sucha karma z owadami jako główne i jedyne białko „zwierzęce”
+```markdown
+
+```
+▪  **WOW Dog Vegan**– karma wegańska dla dorosłych psów – kolejna wegańska propozycja, na rynku polskim, dla dorosłych psów.
+```markdown
+
+```
+▪  **Brit GF Veterinary Care Dog Veg Fibre** – karma weterynaryjna typu „vege”, zaprojektowana dla psów z wrażliwością pokarmową.
+```markdown
+
+```
+▪  **VEGDOG Simply Crunch** wegańska sucha karma – sucha karma wegańska, dobra opcja jako długotrwała dieta eliminacyjna bez białka zwierzęcego.
+```markdown
+
+```
+
+**Podsumowanie**
+```markdown
+
+```
+Dieta eliminacyjna to jedno z najlepszych narzędzi w walce z alergiami u psów. Nie wymaga skomplikowanej wiedzy ani kosztownych badań, ale za to wymaga **konsekwencji i cierpliwości.**
+```markdown
+
+```
+Jeśli Twój pies cierpi na alergię, spróbuj podejść do tematu spokojnie. Czasem wystarczy kilka tygodni, by jego skóra się uspokoiła, sierść nabrała blasku, a pies znów cieszył się życiem.
+```markdown
+
+```
+Dzięki diecie eliminacyjnej nie tylko poprawisz komfort życia swojego pupila, ale też poznasz go lepiej niż kiedykolwiek wcześniej.
+', true),
+  (4, 'Karmy hipoalergiczne - co warto wiedzieć?', 'karmy-hipoalergiczne-co-warto-wiedziec', 'Karmy z hydrolizowanym białkiem lub rzadkimi źródłami protein minimalizują ryzyko alergii. Zobacz, czym różnią się od zwykłych karm.', '**🐾 Karmy hipoalergiczne dla psów – kiedy warto po nie sięgnąć?🐾**
+```markdown
+
+```
+Coraz więcej psów zmaga się dziś z alergiami pokarmowymi. Jeśli Twój pupil często się drapie, ma problemy z sierścią, biegunką lub wymiotami, bardzo możliwe, że winny jest właśnie jego posiłek. W takiej sytuacji wielu właścicieli słyszy od weterynarza jedno hasło: **karma hipoalergiczna.**
+```markdown
+``` 
+Ale co to właściwie znaczy i czy naprawdę działa?
+```markdown
+
+```
+
+**Czym jest karma hipoalergiczna?**
+```markdown
+
+```
+Karma hipoalergiczna to specjalny rodzaj pożywienia opracowany z myślą o psach, które źle reagują na niektóre składniki pokarmowe. W odróżnieniu od zwykłej karmy, zawiera **ograniczoną liczbę składników** – tylko te, które rzadko uczulają i są łatwe do strawienia.
+```markdown
+
+```
+Najczęściej w takich karmach używa się **jednego rodzaju białka** (tzw. formuła monobiałkowa), np. z jagnięciny, łososia czy królika. Dzięki temu łatwiej zidentyfikować, który składnik powoduje reakcję alergiczną, a organizm psa może się „uspokoić”.
+```markdown
+
+```
+
+**Dlaczego psy mają alergie pokarmowe?**
+```markdown
+
+```
+Alergia pokarmowa to **nadmierna reakcja układu odpornościowego** na konkretny składnik w jedzeniu. Najczęściej uczulają białka zwierzęce – np. z kurczaka, wołowiny, jaj czy nabiału, ale też zboża jak pszenica czy kukurydza.
+```markdown
+
+```
+Objawy alergii mogą być różne: świąd skóry, drapanie się, łzawiące oczy, biegunki, wzdęcia czy problemy z uszami. Co ciekawe, alergia może się pojawić nawet po latach jedzenia tej samej karmy – organizm po prostu przestaje ją dobrze tolerować.
+```markdown
+
+```
+
+**Kiedy warto sięgnąć po karmę hipoalergiczną?**
+```markdown
+
+```
+Karmy hipoalergiczne poleca się psom, które:
+```markdown
+
+```
+▪  mają objawy alergii (świąd, wysypki, łupież, problemy trawienne),
+```markdown
+
+```
+▪  cierpią na nietolerancję pokarmową,
+```markdown
+
+```
+▪  mają przewlekłe zapalenie uszu lub skóry,
+```markdown
+
+```
+▪  wymagają tzw. diety eliminacyjnej (czyli testowania, co im szkodzi).
+```markdown
+
+```
+Ale po takie karmy sięga się też profilaktycznie – np. u psów o wrażliwym żołądku, po antybiotykach lub u szczeniąt, które dopiero uczą się trawić nowe pokarmy.
+```markdown
+
+```
+
+**Jakie są rodzaje karm hipoalergicznych?**
+```markdown
+
+```
+Karmy hipoalergiczne można podzielić według sposobu przygotowania i rodzaju użytego białka. To właśnie **białko** jest najczęściej powodem alergii, dlatego jego źródło ma ogromne znaczenie.
+```markdown
+
+```
+1.**Karmy monobiałkowe (jednobiałkowe)**
+```markdown
+
+```
+Zawierają tylko **jedno źródło białka zwierzęcego**, np. tylko z królika, jagnięciny, ryby lub kaczki.
+```markdown
+```
+Dzięki temu łatwo sprawdzić, czy pies dobrze toleruje dany rodzaj mięsa. Takie karmy są idealne do diety eliminacyjnej – jeśli pies po kilku tygodniach czuje się lepiej, wiadomo, że wcześniejsze białko mu nie służyło.
+```markdown
+
+```
+Najczęściej spotykane białka w karmach monobiałkowych:
+```markdown
+
+```
+▪  **Jagnięcina** – delikatna, lekkostrawna, bogata w żelazo i witaminy z grupy B.
+```markdown
+
+```
+▪  **Królik** – jedno z najbezpieczniejszych mięs dla alergików, niskotłuszczowe i dobrze przyswajalne.
+```markdown
+
+```
+▪  **Kaczka** – aromatyczna i smakowita, dobra alternatywa dla psów, które nie mogą jeść kurczaka.
+```markdown
+
+```
+▪  **Indyk**– lekkostrawny i łagodny dla żołądka.
+```markdown
+
+```
+▪  **Ryby (łosoś, pstrąg, tuńczyk)**– oprócz białka dostarczają też cennych kwasów omega-3, które wspierają skórę i sierść.
+```markdown
+
+```
+▪  **Dziczyzna, konina, koźlina** – rzadko uczulają, dlatego są częstym wyborem w karmach premium.
+```markdown
+
+```
+
+2.**Karmy z hydrolizowanym białkiem**
+```markdown
+
+```
+W tego typu karmach białko jest **rozbite na bardzo małe cząsteczki** (hydrolizowane), które układ odpornościowy psa „nie rozpoznaje” jako zagrożenie.
+```markdown
+```
+Dzięki temu nie wywołują one reakcji alergicznej, nawet u bardzo wrażliwych psów.
+```markdown
+```
+Tego rodzaju karmy są często stosowane w leczeniu alergii, zwłaszcza gdy trudno jest ustalić, na co dokładnie pies jest uczulony. Zazwyczaj są to produkty weterynaryjne, dostępne w gabinetach lub aptekach zoologicznych.
+```markdown
+
+```
+
+3.**Karmy z alternatywnymi źródłami białka (np. z insektów)**
+```markdown
+
+```
+To coraz popularniejsza nowość na rynku. **Karmy z owadów** są nie tylko hipoalergiczne, ale też ekologiczne i bardzo odżywcze.
+```markdown
+
+```
+Białko owadzie (najczęściej z larw muchy czarnego żołnierza – Black Soldier Fly – lub mącznika młynarka) jest **doskonale przyswajalne** i zawiera wszystkie niezbędne aminokwasy, tak jak mięso drobiowe czy rybie.
+```markdown
+```
+Dodatkowo nie powoduje typowych reakcji alergicznych, bo psy rzadko miały wcześniej kontakt z takim białkiem – ich układ odpornościowy go „nie zna”, więc nie reaguje agresywnie.
+```markdown
+```
+Zalety karm z insektów:
+```markdown
+
+```
+▪  bardzo wysoka strawność,
+```markdown
+
+```
+▪  bogactwo aminokwasów, witamin i minerałów,
+```markdown
+
+```
+▪  wspierają środowisko – produkcja białka z owadów wymaga mniej wody i ziemi niż hodowla zwierząt,
+```markdown
+
+```
+▪  praktycznie zerowe ryzyko alergii.
+```markdown
+
+```
+Dla wielu właścicieli może brzmieć to nietypowo, ale psy nie mają uprzedzeń – większość z nich zjada takie karmy z apetytem.
+
+```markdown
+
+```
+
+**Czym różni się karma hipoalergiczna od zwykłej?**
+```markdown
+
+```
+Zwykła karma dla psów często zawiera wiele różnych rodzajów mięsa, zbóż i dodatków smakowych. Dla psa z alergią to prawdziwe wyzwanie.
+```markdown
+```
+Karmy hipoalergiczne mają prosty, przejrzysty skład – bez zbędnych konserwantów, barwników czy wypełniaczy. Dzięki temu są:
+```markdown
+```
+▪  bezpieczniejsze dla układu pokarmowego,
+```markdown
+
+```
+▪  łatwiejsze do strawienia,
+```markdown
+
+```
+▪  mniej obciążające dla skóry i sierści.
+```markdown
+
+```
+Efekt? Mniej drapania, mniej problemów żołądkowych, a więcej energii i komfortu dla pupila.
+```markdown
+
+```
+
+
+
+**Dla jakich psów karma hipoalergiczna będzie odpowiednia?**
+```markdown
+
+```
+Nie tylko dla alergików!
+```markdown
+
+```
+Świetnie sprawdzi się także u psów:
+```markdown
+
+```
+▪  z wrażliwym układem pokarmowym,
+```markdown
+
+```
+▪  po chorobach i antybiotykoterapii,
+```markdown
+
+```
+▪  o delikatnej skórze i matowej sierści,
+```markdown
+
+```
+▪  z problemami trawiennymi (wzdęcia, biegunki).
+```markdown
+
+```
+Dzięki lekkostrawnym składnikom i braku alergenów, taka karma pomaga wrócić do równowagi i poprawia ogólne samopoczucie zwierzaka.
+```markdown
+
+```
+
+**Podsumowanie**
+```markdown
+
+```
+Karma hipoalergiczna to nie chwilowa moda, ale realna pomoc dla psów z alergiami i wrażliwym żołądkiem.
+```markdown
+
+```
+Wybierając odpowiednią – czy to z jagnięciny, królika, ryby, czy nawet z insektów – możesz znacząco poprawić komfort życia swojego pupila.
+```markdown
+
+```
+Zdrowe jedzenie to zdrowy pies – a zdrowy pies to szczęśliwy opiekun. 🐾
+', true),
+  (5, 'Rola kwasów omega-3 w diecie alergika', 'rola-kwasow-omega-3-w-diecie-alergika', 'Kwasy omega-3 mają właściwości przeciwzapalne i pomagają złagodzić objawy alergii skórnych. Poznaj korzyści suplementacji.', '**Kwasy Omega-3 a alergie pokarmowe u psów – dlaczego warto je suplementować?**
+```markdown
+
+```
+Coraz więcej psów zmaga się dziś z alergiami pokarmowymi. Swędzenie skóry, drapanie, lizanie łap, łupież, wypadanie sierści czy nawracające infekcje uszu – to tylko kilka z objawów, które mogą świadczyć o tym, że Twój pupil reaguje źle na któryś ze składników karmy. 
+```markdown
+
+```
+W walce z alergiami u psów bardzo pomocne okazują się **kwasy tłuszczowe omega-3**. Choć brzmią jak coś, co znajdziesz w sklepie dla kulturystów, to w rzeczywistości są jednym z najprostszych i najbardziej naturalnych sposobów na wsparcie skóry, sierści i układu odpornościowego psa.
+```markdown
+
+```
+**Dlaczego kwasy omega-3 są tak ważne?**
+```markdown
+
+```
 Kwasy omega-3 to zdrowe tłuszcze, które mają silne działanie przeciwzapalne. U psów z alergiami pokarmowymi w organizmie często dochodzi do stanu zapalnego – głównie skóry i jelit. Właśnie wtedy omega-3 potrafią zdziałać cuda.
+```markdown
+
+```
 Działają one jak „strażacy” – gaszą zapalenie od środka, łagodząc świąd, zmniejszając zaczerwienienia i wspierając regenerację skóry.
+```markdown
 
+```
 W naturze psy otrzymywały omega-3 z jedzenia – np. z tłustych ryb, takich jak łosoś czy sardynki. Niestety większość gotowych karm (nawet tych droższych) zawiera zbyt mało tych kwasów, bo są one bardzo delikatne i łatwo ulegają utlenieniu w procesie produkcji. Dlatego warto dostarczać je dodatkowo, w formie suplementu.
+```markdown
 
-Jak kwasy omega-3 pomagają przy alergiach pokarmowych?
+```
+**Jak kwasy omega-3 pomagają przy alergiach pokarmowych?**
+```markdown
 
+```
 U psów z alergią pokarmową układ odpornościowy przesadnie reaguje na pewne białka lub składniki w jedzeniu. Prowadzi to do stanu zapalnego, który objawia się na skórze i w jelitach.
 Kwasy omega-3 (głównie EPA i DHA) pomagają w trzech głównych obszarach:
+```markdown
 
-Zmniejszają stan zapalny – ograniczają produkcję substancji odpowiedzialnych za świąd i podrażnienia skóry.
+```
+**▪ Zmniejszają stan zapalny** – ograniczają produkcję substancji odpowiedzialnych za świąd i podrażnienia skóry.
+```markdown
 
-Poprawiają wygląd sierści i skóry – regularne stosowanie omega-3 sprawia, że sierść staje się błyszcząca, a skóra mniej sucha.
+```
+**▪ Poprawiają wygląd sierści i skóry** – regularne stosowanie omega-3 sprawia, że sierść staje się błyszcząca, a skóra mniej sucha.
+```markdown
 
-Wspierają jelita – a to bardzo ważne, bo większość odporności psa „mieszka” właśnie w układzie pokarmowym.
+```
+**▪ Wspierają jelita** – a to bardzo ważne, bo większość odporności psa „mieszka” właśnie w układzie pokarmowym.
+```markdown
 
+```
 Efekty suplementacji nie są natychmiastowe, ale zazwyczaj po 4–6 tygodniach można zauważyć wyraźną poprawę kondycji skóry i sierści, a także mniejsze nasilenie objawów alergii.
+```markdown
 
-W jakiej formie podawać omega-3 psu?
+```
+**W jakiej formie podawać omega-3 psu?**
+```markdown
 
+```
 Najczęściej spotykane formy suplementów z omega-3 dla psów to:
+```markdown
 
-Olej z łososia – najpopularniejszy i zwykle najlepiej tolerowany. Ma łagodny smak, który większości psów bardzo odpowiada.
+```
+**▪  Olej z łososia** – najpopularniejszy i zwykle najlepiej tolerowany. Ma łagodny smak, który większości psów bardzo odpowiada.
+```markdown
 
-Olej z kryla – bogaty w przeciwutleniacze, trochę droższy, ale bardzo skuteczny.
+```
+**▪  Olej z kryla**– bogaty w przeciwutleniacze, trochę droższy, ale bardzo skuteczny.
+```markdown
 
-Olej z sardeli, makreli lub śledzia – alternatywa dla psów uczulonych na łososia.
+```
+**▪  Olej z sardeli, makreli lub śledzia** – alternatywa dla psów uczulonych na łososia.
+```markdown
 
-Kapsułki z omega-3 – dobre rozwiązanie, jeśli pies nie lubi smaku rybnych olejów, ale łatwiej podać je większym psom niż małym.
+```
+**▪  Kapsułki z omega-3** – dobre rozwiązanie, jeśli pies nie lubi smaku rybnych olejów, ale łatwiej podać je większym psom niż małym.
+```markdown
 
+```
 Ważne, by wybierać produkty przeznaczone specjalnie dla zwierząt, z czystych źródeł i przebadane pod kątem zawartości metali ciężkich. Oleje przeznaczone dla ludzi często mają dodatki smakowe lub witaminy w dawkach, które nie są odpowiednie dla psa.
+```markdown
 
-Jak dawkować omega-3 u psów?
+```
+**Jak dawkować omega-3 u psów?**
+```markdown
 
-Dawkowanie zależy od wagi, wieku i ogólnego stanu zdrowia psa, ale można kierować się ogólnymi zasadami:
+```
+Dawkowanie zależy od **wagi, wieku i ogólnego stanu zdrowia** psa, ale można kierować się ogólnymi zasadami:
+```markdown
 
-Małe psy (do 10 kg): ok. 250–500 mg EPA + DHA dziennie
+```
+▪ Małe psy (do 10 kg): ok. 250–500 mg EPA + DHA dziennie
+```markdown
 
-Średnie psy (10–25 kg): 500–1000 mg EPA + DHA dziennie
+```
+▪ Średnie psy (10–25 kg): 500–1000 mg EPA + DHA dziennie
+```markdown
 
-Duże psy (25–40 kg): 1000–1500 mg EPA + DHA dziennie
+```
+▪ Duże psy (25–40 kg): 1000–1500 mg EPA + DHA dziennie
+```markdown
 
-Bardzo duże psy (powyżej 40 kg): 1500–2000 mg EPA + DHA dziennie
+```
+▪ Bardzo duże psy (powyżej 40 kg): 1500–2000 mg EPA + DHA dziennie
+```markdown
 
+```
 Jeśli Twój pies cierpi na silne alergie, weterynarz może zalecić wyższe dawki na początku, a potem przejście na dawkę podtrzymującą. Warto zacząć od mniejszej ilości i stopniowo ją zwiększać – by układ pokarmowy psa miał czas się przyzwyczaić.
+```markdown
 
+```
 U szczeniąt i starszych psów omega-3 są również bardzo wskazane, ale dawkę warto omówić z weterynarzem – u młodych pomagają w rozwoju mózgu, a u seniorów wspierają stawy i serce.
+```markdown
 
-Jak podawać suplementy, żeby pies chętnie je zjadł?
+```
+**Jak podawać suplementy, żeby pies chętnie je zjadł?**
+```markdown
 
-Większość psów uwielbia smak oleju z łososia, więc wystarczy kilka kropel na karmę. Olej najlepiej podawać raz dziennie z posiłkiem – tłuszcz w jedzeniu ułatwia jego wchłanianie.
+```
+Większość psów uwielbia smak oleju z łososia, więc wystarczy kilka kropel na karmę. Olej najlepiej podawać **raz dziennie z posiłkiem** – tłuszcz w jedzeniu ułatwia jego wchłanianie.
 Uważaj tylko, żeby nie przechowywać oleju w cieple ani na słońcu. Omega-3 są bardzo wrażliwe i szybko się utleniają, więc najlepiej trzymać butelkę w lodówce i zużyć w ciągu kilku tygodni od otwarcia.
+```markdown
 
-Na co zwrócić uwagę przy wyborze suplementu?
+```
+**Na co zwrócić uwagę przy wyborze suplementu?**
+```markdown
 
+```
 Kupując omega-3 dla psa, zwróć uwagę na:
+```markdown
 
-Zawartość EPA i DHA – to właśnie one mają największe znaczenie dla skóry i odporności.
+```
+▪ **Zawartość EPA i DHA** – to właśnie one mają największe znaczenie dla skóry i odporności.
+```markdown
 
-Źródło ryb – im czystsze wody, tym lepiej (np. Islandia, Norwegia).
+```
+▪ **Źródło ryb** – im czystsze wody, tym lepiej (np. Islandia, Norwegia).
+```markdown
 
-Forma podania – czy olej, kapsułki, czy smakowy spray – wybierz tę, którą pies najlepiej akceptuje.
+```
+▪ **Forma podania**– czy olej, kapsułki, czy smakowy spray – wybierz tę, którą pies najlepiej akceptuje.
+```markdown
 
-Certyfikaty jakości – np. IFOS, które potwierdzają czystość produktu.
+```
+▪ **Certyfikaty jakości** – np. IFOS, które potwierdzają czystość produktu.
+```markdown
 
-Podsumowanie
+```
+**Podsumowanie**
+```markdown
 
+```
 Kwasy omega-3 to jeden z najprostszych, a zarazem najskuteczniejszych sposobów, by wspomóc psa z alergią pokarmową. Regularna suplementacja łagodzi stany zapalne, poprawia wygląd sierści, wzmacnia odporność i wspiera układ pokarmowy.
+```markdown
+
+```
 Nie zastąpi oczywiście eliminacyjnej diety czy leczenia weterynaryjnego, ale może być ogromnym wsparciem w procesie powrotu do komfortowego życia bez ciągłego drapania i podrażnień.
+```markdown
 
+```
 Warto pamiętać, że każdy pies jest inny – dlatego najlepiej skonsultować suplementację z weterynarzem, szczególnie jeśli pies przyjmuje leki lub ma inne schorzenia.
+```markdown
 
-Jeśli chcesz pomóc swojemu pupilowi czuć się lepiej, wprowadzenie kwasów omega-3 do jego codziennej diety to krok w dobrą stronę. Jego sierść, skóra – i samopoczucie – na pewno Ci za to podziękują.', true);
+```
+Jeśli chcesz pomóc swojemu pupilowi czuć się lepiej, wprowadzenie kwasów omega-3 do jego codziennej diety to krok w dobrą stronę. Jego sierść, skóra – i samopoczucie – na pewno Ci za to podziękują.
+', true);
 
 -- ============================================================================
 -- DOG_PROFILES
@@ -815,7 +1685,7 @@ INSERT INTO public.dog_allergens (dog_id, allergen_id) VALUES
 -- SUMMARY
 -- ============================================================================
 
--- Export completed on 2.11.2025, 20:07:41
+-- Export completed on 5.11.2025, 20:27:00
 -- Brands: 6
 -- Size types: 3
 -- Age categories: 4
