@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import { SearchBar } from './SearchBar';
 import { FilterSidebar } from './FilterSidebar';
 import { FoodCardGrid } from './FoodCardGrid';
@@ -14,6 +15,8 @@ import { useBrands } from '../lib/hooks/useBrands';
 import { useSizeTypes } from '../lib/hooks/useSizeTypes';
 import { useAgeCategories } from '../lib/hooks/useAgeCategories';
 import { useAllergens } from '../lib/hooks/useAllergens';
+import { useFavoriteIds } from '../lib/hooks/useFavoriteIds';
+import { useFavoriteToggle } from '../lib/hooks/useFavoriteToggle';
 import type { FiltersModel, FoodListItem } from '../types';
 
 // Tworzenie QueryClient dla React Query
@@ -93,6 +96,13 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
     refetch: refetchFoods,
   } = useFoods(filters, searchTerm, limit, offset);
 
+  // Pobierz ID ulubionych karm (tylko dla zalogowanych)
+  const { data: favoriteIds } = useFavoriteIds(!!isLoggedIn);
+  const favoriteSet = new Set(favoriteIds || []);
+
+  // Hook do obsługi toggle favorites
+  const toggleFavorite = useFavoriteToggle();
+
   // Ekstrakcja danych z responses
   const brands = brandsResponse?.data || [];
   const sizeTypes = sizeTypesResponse?.data || [];
@@ -152,6 +162,21 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
   // Obsługa zamknięcia modalu
   const handleModalClose = () => {
     setSelectedFoodId(null);
+  };
+
+  // Obsługa dodawania/usuwania z ulubionych
+  const handleFavoriteToggle = (foodId: number, isFavorite: boolean) => {
+    if (!isLoggedIn) {
+      toast.info('Zaloguj się, aby dodać karmy do ulubionych', {
+        action: {
+          label: 'Zaloguj się',
+          onClick: () => (window.location.href = '/login?redirect=/foods'),
+        },
+      });
+      return;
+    }
+
+    toggleFavorite.mutate({ foodId, isFavorite });
   };
 
   // Loading state dla opcji filtrów
@@ -309,6 +334,9 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
                   items={foodsWithBrands}
                   onSelect={handleCardSelect}
                   isLoading={isFoodsLoading}
+                  favorites={favoriteSet}
+                  onFavoriteToggle={handleFavoriteToggle}
+                  isAuthenticated={!!isLoggedIn}
                 />
 
                 {/* Pagination */}

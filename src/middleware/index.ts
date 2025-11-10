@@ -14,7 +14,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   context.locals.user = session?.user ?? null;
 
   // 3. Ochrona chronionych stron
-  const protectedRoutes = ["/dogs", "/favorites", "/history"];
+  const protectedRoutes = ["/dogs", "/favorites"];
   const isProtectedRoute = protectedRoutes.some((route) =>
     context.url.pathname.startsWith(route)
   );

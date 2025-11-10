@@ -1,4 +1,6 @@
 import React from 'react';
+import { Heart } from 'lucide-react';
+import { cn } from '../lib/utils';
 import type { FoodListItem } from '../types';
 
 /**
@@ -11,6 +13,12 @@ interface FoodCardGridProps {
   onSelect: (food: FoodListItem) => void;
   /** Czy dane są w trakcie ładowania */
   isLoading?: boolean;
+  /** Set z ID ulubionych karm */
+  favorites?: Set<number>;
+  /** Callback do dodawania/usuwania z ulubionych */
+  onFavoriteToggle?: (foodId: number, isFavorite: boolean) => void;
+  /** Czy użytkownik jest zalogowany */
+  isAuthenticated?: boolean;
 }
 
 /**
@@ -28,7 +36,14 @@ interface FoodCardGridProps {
  * />
  * ```
  */
-export function FoodCardGrid({ items, onSelect, isLoading = false }: FoodCardGridProps) {
+export function FoodCardGrid({
+  items,
+  onSelect,
+  isLoading = false,
+  favorites = new Set(),
+  onFavoriteToggle,
+  isAuthenticated = false,
+}: FoodCardGridProps) {
   if (isLoading) {
     return null; // LoadingState renderowany jest w parent komponencie
   }
@@ -49,7 +64,14 @@ export function FoodCardGrid({ items, onSelect, isLoading = false }: FoodCardGri
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4 xl:grid-cols-5">
       {items.map((food) => (
-        <FoodCard key={food.id} food={food} onSelect={onSelect} />
+        <FoodCard
+          key={food.id}
+          food={food}
+          onSelect={onSelect}
+          isFavorite={favorites.has(food.id)}
+          onFavoriteToggle={onFavoriteToggle}
+          isAuthenticated={isAuthenticated}
+        />
       ))}
     </div>
   );
@@ -63,6 +85,12 @@ interface FoodCardProps {
   food: FoodListItem;
   /** Callback wywoływany po kliknięciu */
   onSelect: (food: FoodListItem) => void;
+  /** Czy karma jest w ulubionych */
+  isFavorite?: boolean;
+  /** Callback do dodawania/usuwania z ulubionych */
+  onFavoriteToggle?: (foodId: number, isFavorite: boolean) => void;
+  /** Czy użytkownik jest zalogowany */
+  isAuthenticated?: boolean;
 }
 
 /**
@@ -79,7 +107,13 @@ interface FoodCardProps {
  * />
  * ```
  */
-function FoodCard({ food, onSelect }: FoodCardProps) {
+function FoodCard({
+  food,
+  onSelect,
+  isFavorite = false,
+  onFavoriteToggle,
+  isAuthenticated = false,
+}: FoodCardProps) {
   const handleClick = () => {
     onSelect(food);
   };
@@ -91,15 +125,53 @@ function FoodCard({ food, onSelect }: FoodCardProps) {
     }
   };
 
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Zapobiega otwieraniu modalu
+    if (onFavoriteToggle) {
+      onFavoriteToggle(food.id, isFavorite);
+    }
+  };
+
+  const handleFavoriteKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      e.stopPropagation();
+      if (onFavoriteToggle) {
+        onFavoriteToggle(food.id, isFavorite);
+      }
+    }
+  };
+
   return (
     <div
       role="button"
       tabIndex={0}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      className="group cursor-pointer overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-primary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+      className="group relative cursor-pointer overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:border-primary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
       aria-label={`Zobacz szczegóły karmy ${food.name}`}
+      data-testid="food-card"
     >
+      {/* Favorite Heart Button - tylko dla zalogowanych */}
+      {isAuthenticated && onFavoriteToggle && (
+        <button
+          onClick={handleFavoriteClick}
+          onKeyDown={handleFavoriteKeyDown}
+          className="absolute right-2 top-2 z-10 rounded-full bg-background/80 p-2 backdrop-blur-sm transition-colors hover:bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          aria-label={isFavorite ? 'Usuń z ulubionych' : 'Dodaj do ulubionych'}
+          tabIndex={0}
+        >
+          <Heart
+            className={cn(
+              'h-5 w-5 transition-all',
+              isFavorite
+                ? 'fill-destructive text-destructive' // Czerwone wypełnione
+                : 'text-muted-foreground hover:text-destructive' // Szare puste
+            )}
+          />
+        </button>
+      )}
+
       {/* Miniaturka z AspectRatio 4:3 */}
       <div className="relative w-full overflow-hidden bg-card" style={{ paddingBottom: '75%' }}>
         {food.image_url ? (

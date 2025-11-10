@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dog, Star, History, LogOut, Loader2 } from "lucide-react";
+import { Dog, Heart, LogOut, Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import {
@@ -71,15 +71,8 @@ export function UserMenu({ user, userRole = "user" }: UserMenuProps) {
 
         <DropdownMenuItem asChild>
           <a href="/favorites" className="cursor-pointer">
-            <Star className="mr-2 h-4 w-4" />
+            <Heart className="mr-2 h-4 w-4" />
             Ulubione karmy
-          </a>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem asChild>
-          <a href="/history" className="cursor-pointer">
-            <History className="mr-2 h-4 w-4" />
-            Historia
           </a>
         </DropdownMenuItem>
 

@@ -32,35 +32,49 @@ Zobacz [docs/database-export.md](../docs/database-export.md) dla szczegółowej 
 
 **Uniwersalny skrypt do aktualizacji składów karm**
 
-### Użycie:
+### Użycie (zalecane - z plikiem konfiguracyjnym):
+
+```bash
+# 1. Edytuj plik scripts/food-update-config.json
+# 2. Uruchom:
+npm run food:update
+```
+
+**Plik `food-update-config.json`:**
+```json
+{
+  "foodName": "Brit Care Bezzbożowa Łosoś z Ziemniakiem",
+  "ingredients": "Łosoś, ziemniaki, suszona pulpa jabłkowa, tłuszcz z kurczaka"
+}
+```
+
+### Użycie (alternatywne - argumenty w linii poleceń):
+
+⚠️ **Uwaga:** Może mieć problemy z polskimi znakami w PowerShell
 
 ```bash
 npm run food:update "Nazwa karmy" "Pełny skład"
 ```
 
-### Przykład:
-
-```bash
-npm run food:update "Brit Care Adult Jagnięcina z Ryżem" "Suszona jagnięcina (42%), ryż (35%), tłuszcz z kurczaka, wytłoki z jabłek, olej z łososia (3%)"
-```
-
 ### Co robi?
 
 - ✅ Parsuje składniki z tekstu (usuwa procenty, jednostki)
-- ✅ Dodaje nowe składniki do bazy
+- ✅ **Bezpiecznie dodaje nowe składniki** (używa `upsert` - nie duplikuje)
 - ✅ Automatycznie mapuje składniki na alergeny
 - ✅ Aktualizuje skład karmy (ingredients_raw)
 - ✅ Aktualizuje powiązania karma-składnik
+- ✅ **Zachowuje polskie znaki** (ą, ć, ę, ł, ń, ó, ś, ź, ż)
 
 ### Wymagania:
 
 - Plik `.env` (tak jak export-to-seed.ts)
-- Dokładna nazwa karmy (jak w bazie)
+- Nazwa karmy (obsługuje częściowe dopasowanie)
 - Pełny skład karmy (z producentów/opakowań)
 
 ### Więcej informacji:
 
-Zobacz [docs/aktualizacja-skladow-karm.md](../docs/aktualizacja-skladow-karm.md) dla szczegółowego przewodnika.
+- [README-food-update.md](./README-food-update.md) - szczegółowa instrukcja
+- [docs/aktualizacja-skladow-karm.md](../docs/aktualizacja-skladow-karm.md) - przewodnik
 
 ## 🔧 Dodawanie nowych skryptów
 

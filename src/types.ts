@@ -56,6 +56,7 @@ export interface FoodDetailDTO extends FoodDTO {
 // Karma na liście z nazwą marki (używane w widoku listy karm)
 export interface FoodListItem extends FoodDTO {
   brandName: string;
+  isFavorite?: boolean; // Czy karma jest ulubiona (opcjonalne)
 }
 
 // Model filtrów dla widoku listy karm
@@ -158,4 +159,30 @@ export interface DogProfileSummaryDTO {
   allergen_count: number;
   allergen_names: string[]; // First 3 allergen names for preview
   created_at: string;
+}
+
+// ============================================================================
+// FAVORITE FOODS
+// ============================================================================
+
+/**
+ * Favorite Food Entity (from database)
+ */
+export type FavoriteFoodDTO = Tables<"favorite_foods">;
+
+/**
+ * Response z API /api/favorites
+ */
+export interface FavoritesResponse {
+  success: boolean;
+  data: FoodListItem[];
+  count: number;
+}
+
+/**
+ * Response z API /api/favorites?idsOnly=true
+ */
+export interface FavoriteIdsResponse {
+  success: boolean;
+  data: number[];
 }

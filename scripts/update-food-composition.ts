@@ -182,13 +182,33 @@ async function updateFoodComposition(foodName: string, ingredientsRaw: string) {
   try {
     // 1. Znajdź karmę w bazie
     console.log('🔍 Szukam karmy w bazie...');
-    const { data: food, error: foodError } = await supabase
+    
+    // Najpierw próbuj dokładnego dopasowania
+    let { data: food, error: foodError } = await supabase
       .from('foods')
       .select('id, name')
       .eq('name', foodName)
       .single();
     
+    // Jeśli nie znaleziono, spróbuj częściowego dopasowania (case insensitive)
     if (foodError || !food) {
+      const { data: allFoods } = await supabase
+        .from('foods')
+        .select('id, name')
+        .ilike('name', `%${foodName}%`);
+      
+      if (allFoods && allFoods.length === 1) {
+        food = allFoods[0];
+        console.log(`  ℹ️  Użyto częściowego dopasowania nazwy`);
+      } else if (allFoods && allFoods.length > 1) {
+        console.error(`❌ Znaleziono wiele karm pasujących do: "${foodName}"`);
+        console.log('\n💡 Doprecyzuj nazwę. Znalezione karmy:');
+        allFoods.forEach(f => console.log(`   - ${f.name}`));
+        process.exit(1);
+      }
+    }
+    
+    if (!food) {
       console.error(`❌ Nie znaleziono karmy o nazwie: "${foodName}"`);
       console.log('\n💡 Dostępne karmy w bazie:');
       const { data: allFoods } = await supabase.from('foods').select('name').order('name');
@@ -220,7 +240,10 @@ async function updateFoodComposition(foodName: string, ingredientsRaw: string) {
       console.log(`  📦 Dodaję ${newIngredients.length} nowych składników...`);
       const { data: inserted, error: insertError } = await supabase
         .from('ingredients')
-        .insert(newIngredients.map(name => ({ name })))
+        .upsert(
+          newIngredients.map(name => ({ name })),
+          { onConflict: 'name', ignoreDuplicates: true }
+        )
         .select();
       
       if (insertError) throw insertError;
@@ -327,18 +350,52 @@ async function updateFoodComposition(foodName: string, ingredientsRaw: string) {
   }
 }
 
-// Obsługa argumentów z linii komend
+// Obsługa argumentów z linii komend lub z pliku konfiguracyjnego
 const args = process.argv.slice(2);
 
-if (args.length < 2) {
+let foodName: string;
+let ingredientsRaw: string;
+
+// Sprawdź czy użyto flagi --config
+if (args[0] === '--config' || args.length === 0) {
+  console.log('📖 Czytam dane z pliku konfiguracyjnego...\n');
+  try {
+    const fs = await import('fs/promises');
+    const path = await import('path');
+    const configPath = path.join(process.cwd(), 'scripts', 'food-update-config.json');
+    const configContent = await fs.readFile(configPath, 'utf-8');
+    const config = JSON.parse(configContent);
+    
+    if (!config.foodName || !config.ingredients) {
+      console.error('❌ Błąd: Plik konfiguracyjny musi zawierać pola "foodName" i "ingredients"');
+      process.exit(1);
+    }
+    
+    foodName = config.foodName;
+    ingredientsRaw = config.ingredients;
+  } catch (error) {
+    console.error('❌ Błąd podczas czytania pliku konfiguracyjnego:', error);
+    console.log('\n💡 Utwórz plik scripts/food-update-config.json z zawartością:');
+    console.log('{');
+    console.log('  "foodName": "Nazwa karmy",');
+    console.log('  "ingredients": "składnik1, składnik2, składnik3"');
+    console.log('}');
+    process.exit(1);
+  }
+} else if (args.length >= 2) {
+  // Tradycyjny sposób z argumentami linii poleceń
+  [foodName, ingredientsRaw] = args;
+} else {
   console.log('❌ Błąd: Nieprawidłowa liczba argumentów\n');
-  console.log('Użycie:');
+  console.log('Użycie (sposób 1 - zalecany dla polskich znaków):');
+  console.log('  1. Edytuj plik scripts/food-update-config.json');
+  console.log('  2. Uruchom: npm run food:update --config\n');
+  console.log('Użycie (sposób 2 - argumenty):');
   console.log('  npm run food:update "Nazwa karmy" "Składniki"\n');
   console.log('Przykład:');
   console.log('  npm run food:update "Brit Care Adult Jagnięcina z Ryżem" "suszona jagnięcina (42%), ryż (35%), tłuszcz z kurczaka"');
   process.exit(1);
 }
 
-const [foodName, ingredientsRaw] = args;
 updateFoodComposition(foodName, ingredientsRaw);
 

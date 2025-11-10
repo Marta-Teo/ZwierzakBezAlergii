@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FavoritesPage } from '../components/favorites/FavoritesPage';
+
+// Middleware już sprawdził sesję (protectedRoute)
+// Jeśli użytkownik tutaj dotarł, jest zalogowany
+const user = Astro.locals.user;
+
+// Dodatkowe sprawdzenie (fail-safe)
+if (!user) {
+  return Astro.redirect('/login?redirect=/favorites');
+}
+---
+
+<Layout 
+  title="Ulubione karmy - ZwierzakBezAlergii" 
+  description="Twoja lista ulubionych karm dla psa. Szybki dostęp do sprawdzonych produktów bezpiecznych dla Twojego pupila."
+>
+  <FavoritesPage client:load />
+</Layout>
+
