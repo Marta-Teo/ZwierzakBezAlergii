@@ -1,6 +1,6 @@
 /**
  * 📘 PRZYKŁADY KONFIGURACJI TŁA DLA HERO SECTION
- * 
+ *
  * Ten plik zawiera przykłady różnych konfiguracji tła.
  * Skopiuj wybraną konfigurację do hero.ts
  */
@@ -74,4 +74,3 @@ export const CONFIG_STRONG_OVERLAY = {
 //   // ... reszta konfiguracji
 //   background: CONFIG_LIGHT_PHOTO,
 // };
-

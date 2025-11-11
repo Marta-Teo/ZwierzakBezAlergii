@@ -30,13 +30,13 @@ interface ArticlesResponse {
 
 /**
  * Custom hook do pobierania listy artykułów
- * 
+ *
  * Wykorzystuje React Query do zarządzania stanem, cache i refetch.
  * Automatycznie reaguje na zmiany searchTerm, page i limit.
- * 
+ *
  * @param params - Parametry wyszukiwania i paginacji
  * @returns Query result z danymi, loading state i error handling
- * 
+ *
  * @example
  * ```tsx
  * const { data, isLoading, error } = useArticles({
@@ -44,10 +44,10 @@ interface ArticlesResponse {
  *   page: 1,
  *   limit: 9
  * });
- * 
+ *
  * if (isLoading) return <LoadingState />;
  * if (error) return <ErrorMessage />;
- * 
+ *
  * return <ArticlesGrid articles={data?.data || []} />;
  * ```
  */
@@ -58,7 +58,7 @@ export function useArticles({ searchTerm, page, limit }: UseArticlesParams) {
   return useQuery<ArticlesResponse>({
     // Query key - cache invalidation przy zmianie parametrów
     queryKey: ["articles", searchTerm, page, limit],
-    
+
     // Query function - fetch danych z API
     queryFn: async () => {
       // Budowanie URL z query params
@@ -82,7 +82,7 @@ export function useArticles({ searchTerm, page, limit }: UseArticlesParams) {
       }
 
       const json: ArticlesResponse = await response.json();
-      
+
       // Sprawdzenie czy API zwróciło sukces
       if (!json.success) {
         throw new Error(json.error || "Błąd pobierania artykułów");
@@ -94,11 +94,10 @@ export function useArticles({ searchTerm, page, limit }: UseArticlesParams) {
     // Cache configuration
     staleTime: 5 * 60 * 1000, // 5 minut - dane uznawane za świeże
     gcTime: 10 * 60 * 1000, // 10 minut - czas w cache (dawniej cacheTime)
-    
+
     // UX improvements
     placeholderData: (previousData) => previousData, // Smooth transitions (dawniej keepPreviousData)
     refetchOnWindowFocus: false, // Nie refetch przy powrocie do okna
     retry: 1, // Jedna próba retry w przypadku błędu
   });
 }
-

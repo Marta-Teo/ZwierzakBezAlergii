@@ -31,12 +31,10 @@ export function LoginForm({ redirectTo = "/foods" }: LoginFormProps) {
       }
 
       // Supabase Auth login
-      const { error: authError } = await supabase.auth.signInWithPassword(
-        {
-          email,
-          password,
-        }
-      );
+      const { error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
       if (authError) throw authError;
 
@@ -54,9 +52,7 @@ export function LoginForm({ redirectTo = "/foods" }: LoginFormProps) {
       {/* Logo/Heading */}
       <div className="text-center mb-6">
         <h1 className="text-3xl font-bold mb-2">Zaloguj się</h1>
-        <p className="text-muted-foreground">
-          Wprowadź swoje dane aby kontynuować
-        </p>
+        <p className="text-muted-foreground">Wprowadź swoje dane aby kontynuować</p>
       </div>
 
       {/* Error Alert */}
@@ -101,10 +97,7 @@ export function LoginForm({ redirectTo = "/foods" }: LoginFormProps) {
 
         {/* Forgot Password Link */}
         <div className="text-right">
-          <a
-            href="/reset-password"
-            className="text-sm text-primary hover:underline"
-          >
+          <a href="/reset-password" className="text-sm text-primary hover:underline">
             Zapomniałeś hasła?
           </a>
         </div>
@@ -132,4 +125,3 @@ export function LoginForm({ redirectTo = "/foods" }: LoginFormProps) {
     </div>
   );
 }
-

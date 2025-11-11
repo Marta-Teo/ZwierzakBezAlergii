@@ -11,10 +11,10 @@ interface ArticleCardProps {
 
 /**
  * Komponent karty artykułu na liście
- * 
+ *
  * Wyświetla kartę z tytułem, fragmentem treści, metadanymi (autor, data)
  * i linkiem "Czytaj więcej". Cała karta jest klikalna i prowadzi do szczegółów.
- * 
+ *
  * @example
  * ```tsx
  * <ArticleCard article={article} />
@@ -47,13 +47,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
             {/* Autor */}
             {article.authorName && (
               <span className="flex items-center gap-1">
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -70,13 +64,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 
             {/* Data publikacji */}
             <time dateTime={article.created_at} className="flex items-center gap-1">
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -91,28 +79,15 @@ export function ArticleCard({ article }: ArticleCardProps) {
 
         {/* Fragment treści (excerpt) */}
         {article.excerpt && (
-          <p className="text-muted-foreground leading-relaxed line-clamp-3 mb-4 flex-grow">
-            {article.excerpt}
-          </p>
+          <p className="text-muted-foreground leading-relaxed line-clamp-3 mb-4 flex-grow">{article.excerpt}</p>
         )}
 
         {/* Link "Czytaj więcej" */}
         <div className="mt-auto pt-4 border-t border-border">
           <span className="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
             Czytaj więcej
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </span>
         </div>
@@ -120,4 +95,3 @@ export function ArticleCard({ article }: ArticleCardProps) {
     </article>
   );
 }
-

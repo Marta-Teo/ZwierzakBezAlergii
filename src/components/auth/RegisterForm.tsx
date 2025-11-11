@@ -6,11 +6,7 @@ import { Label } from "../ui/label";
 import { Alert, AlertDescription } from "../ui/alert";
 import { supabase } from "@/lib/supabase/client";
 import { getAuthErrorMessage } from "@/lib/auth/errorMessages";
-import {
-  validateRegisterForm,
-  getPasswordStrength,
-  type PasswordStrength,
-} from "@/lib/auth/validation";
+import { validateRegisterForm, getPasswordStrength, type PasswordStrength } from "@/lib/auth/validation";
 
 interface RegisterFormProps {
   redirectTo?: string;
@@ -25,9 +21,7 @@ function RequirementItem({ met, text }: { met: boolean; text: string }) {
       ) : (
         <X className="w-3 h-3 text-red-500 flex-shrink-0" />
       )}
-      <span className={met ? "text-green-600" : "text-muted-foreground"}>
-        {text}
-      </span>
+      <span className={met ? "text-green-600" : "text-muted-foreground"}>{text}</span>
     </div>
   );
 }
@@ -49,11 +43,7 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
 
     try {
       // Client-side validation
-      const validationError = validateRegisterForm(
-        email,
-        password,
-        confirmPassword
-      );
+      const validationError = validateRegisterForm(email, password, confirmPassword);
       if (validationError) {
         throw new Error(validationError);
       }
@@ -75,7 +65,7 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
         }, 2000);
       }
     } catch (err: any) {
-      console.error('Registration error:', err);
+      console.error("Registration error:", err);
       setError(getAuthErrorMessage(err));
     } finally {
       setIsLoading(false);
@@ -101,15 +91,9 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
         <CheckCircle className="mx-auto h-12 w-12 text-green-500 mb-4" />
         <h2 className="text-2xl font-bold mb-2">Rejestracja udana!</h2>
         <p className="text-muted-foreground mb-4">
-          {!error
-            ? "Za chwilę zostaniesz przekierowany..."
-            : "Możesz teraz zalogować się do swojego konta."}
+          {!error ? "Za chwilę zostaniesz przekierowany..." : "Możesz teraz zalogować się do swojego konta."}
         </p>
-        {!error && (
-          <p className="text-sm text-muted-foreground">
-            Przekierowanie nastąpi za chwilę...
-          </p>
-        )}
+        {!error && <p className="text-sm text-muted-foreground">Przekierowanie nastąpi za chwilę...</p>}
       </div>
     );
   }
@@ -119,9 +103,7 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
       {/* Logo/Heading */}
       <div className="text-center mb-6">
         <h1 className="text-3xl font-bold mb-2">Zarejestruj się</h1>
-        <p className="text-muted-foreground">
-          Stwórz konto aby korzystać z pełni możliwości
-        </p>
+        <p className="text-muted-foreground">Stwórz konto aby korzystać z pełni możliwości</p>
       </div>
 
       {/* Error Alert */}
@@ -168,31 +150,25 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
             <div className="mt-2 space-y-1">
               <div className="flex gap-1">
                 <div
-                  className={`h-1 flex-1 rounded ${
-                    passwordStrength === "weak" ? strengthColors.weak : "bg-gray-200"
-                  }`}
+                  className={`h-1 flex-1 rounded ${passwordStrength === "weak" ? strengthColors.weak : "bg-gray-200"}`}
                 />
                 <div
                   className={`h-1 flex-1 rounded ${
                     passwordStrength === "medium"
                       ? strengthColors.medium
                       : passwordStrength === "strong"
-                      ? strengthColors.strong
-                      : "bg-gray-200"
+                        ? strengthColors.strong
+                        : "bg-gray-200"
                   }`}
                 />
                 <div
                   className={`h-1 flex-1 rounded ${
-                    passwordStrength === "strong"
-                      ? strengthColors.strong
-                      : "bg-gray-200"
+                    passwordStrength === "strong" ? strengthColors.strong : "bg-gray-200"
                   }`}
                 />
               </div>
-              <p className="text-xs text-muted-foreground">
-                Siła hasła: {strengthLabels[passwordStrength]}
-              </p>
-              
+              <p className="text-xs text-muted-foreground">Siła hasła: {strengthLabels[passwordStrength]}</p>
+
               {/* Password Requirements */}
               <div className="mt-2 space-y-1 text-xs">
                 <p className="font-medium text-muted-foreground mb-1">Wymagania:</p>
@@ -247,4 +223,3 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
     </div>
   );
 }
-

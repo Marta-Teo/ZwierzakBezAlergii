@@ -48,4 +48,3 @@ export function validateDogForm(data: DogFormData): string | null {
 export function sanitizeDogName(name: string): string {
   return name.trim().replace(/\s+/g, " ");
 }
-

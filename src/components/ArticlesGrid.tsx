@@ -14,10 +14,10 @@ interface ArticlesGridProps {
 
 /**
  * Komponent gridu z kartami artykułów
- * 
+ *
  * Wyświetla responsive grid (1 kolumna mobile → 2 tablet → 3 desktop)
  * z kartami artykułów. Obsługuje empty state gdy brak wyników.
- * 
+ *
  * @example
  * ```tsx
  * <ArticlesGrid
@@ -56,9 +56,7 @@ export function ArticlesGrid({ articles, isLoading = false }: ArticlesGridProps)
           </div>
 
           {/* Komunikat */}
-          <p className="text-lg font-medium text-foreground mb-2">
-            Nie znaleziono artykułów
-          </p>
+          <p className="text-lg font-medium text-foreground mb-2">Nie znaleziono artykułów</p>
           <p className="text-sm text-muted-foreground">
             Spróbuj zmienić frazę wyszukiwania lub poczekaj na nowe publikacje.
           </p>
@@ -69,15 +67,10 @@ export function ArticlesGrid({ articles, isLoading = false }: ArticlesGridProps)
 
   // Grid z artykułami
   return (
-    <div 
-      className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-      role="list"
-      aria-label="Lista artykułów"
-    >
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" role="list" aria-label="Lista artykułów">
       {articles.map((article) => (
         <ArticleCard key={article.id} article={article} />
       ))}
     </div>
   );
 }
-

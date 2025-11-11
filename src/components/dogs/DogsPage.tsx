@@ -39,4 +39,3 @@ export function DogsPage({ dogs }: DogsPageProps) {
     </main>
   );
 }
-

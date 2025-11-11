@@ -80,4 +80,3 @@ export const DELETE: APIRoute = async ({ locals, params }) => {
     );
   }
 };
-

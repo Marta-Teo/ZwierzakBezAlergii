@@ -50,15 +50,46 @@ npm run dev
 
 ## Available Scripts
 ```bash
+# Development
 npm run dev          # Start Astro development server
 npm run build        # Build the application for production
 npm run preview      # Preview the production build locally
 npm run astro        # Run Astro CLI commands
+
+# Code Quality
 npm run lint         # Run ESLint to lint code
 npm run lint:fix     # Run ESLint and automatically fix issues
 npm run format       # Format code with Prettier
+
+# Testing
+npm run test         # Run unit tests (Vitest)
+npm run test:watch   # Run unit tests in watch mode
+npm run test:ui      # Open Vitest UI
+npm run test:coverage # Generate code coverage report
+npm run test:e2e     # Run E2E tests (Playwright)
+npm run test:e2e:ui  # Open Playwright UI (interactive mode)
+npm run test:e2e:debug # Debug E2E tests step-by-step
+
+# Database
 npm run db:export    # Export database to supabase/seed.sql (backup)
 npm run food:update  # Update food composition with detailed ingredients
+```
+
+### Testing
+See **[TESTING.md](TESTING.md)** for complete testing guide including:
+- ⭐ **User Journey tests** - testy z perspektywy użytkownika
+- Unit tests with Vitest
+- E2E tests with Playwright
+- Example tests and best practices
+- CI/CD integration
+
+**Wymaganie spełnione:** ✅ [WYMAGANIE-SPELNIONE.md](WYMAGANIE-SPELNIONE.md)
+
+Quick start:
+```bash
+npm run test:watch              # Unit tests in watch mode
+npm run test:e2e:ui             # E2E tests with interactive UI
+npx playwright test user-journey.e2e.ts  # User journey tests
 ```
 
 ### Database Management
@@ -86,8 +117,8 @@ npm run food:update  # Update food composition with detailed ingredients
 - `GET /api/ingredients` - Lista składników (z wyszukiwaniem i paginacją)
 - `GET /api/allergens` - Lista alergenów (struktura hierarchiczna)
 
-### Testing
-Pliki `.http` do testowania API:
+### Manual API Testing
+Pliki `.http` do ręcznego testowania API:
 - `test-brands.http` - Testy dla CRUD /api/brands
 - `test-get-foods.http` - Testy dla GET /api/foods
 - `test-post-foods.http` - Testy dla POST /api/foods
@@ -107,7 +138,10 @@ Pliki `.http` do testowania API:
   - Ingredients and allergens
 - Educational articles section on dog nutrition and allergies
 - Filtering logic to exclude products containing selected allergens
-- Unit and integration tests (including `filter_foods_by_allergens`)
+- Comprehensive testing environment:
+  - Unit tests with Vitest
+  - E2E tests with Playwright
+  - Test coverage reporting
 - CI/CD pipeline using GitHub Actions
 - Automated Supabase database backups
 

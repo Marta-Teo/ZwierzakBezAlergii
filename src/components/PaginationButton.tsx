@@ -1,5 +1,5 @@
-import React from 'react';
-import { Loader2 } from 'lucide-react';
+import React from "react";
+import { Loader2 } from "lucide-react";
 
 /**
  * Props dla komponentu PaginationButton
@@ -15,10 +15,10 @@ interface PaginationButtonProps {
 
 /**
  * Komponent przycisku "Załaduj więcej"
- * 
+ *
  * Wyświetla przycisk do ładowania kolejnej strony wyników.
  * Disabled gdy nie ma więcej wyników lub trwa ładowanie.
- * 
+ *
  * @example
  * ```tsx
  * <PaginationButton
@@ -28,11 +28,7 @@ interface PaginationButtonProps {
  * />
  * ```
  */
-export function PaginationButton({
-  hasMore,
-  isLoading = false,
-  onLoadMore,
-}: PaginationButtonProps) {
+export function PaginationButton({ hasMore, isLoading = false, onLoadMore }: PaginationButtonProps) {
   if (!hasMore && !isLoading) {
     return null; // Nie pokazuj przycisku gdy nie ma więcej wyników
   }
@@ -44,7 +40,7 @@ export function PaginationButton({
         onClick={onLoadMore}
         disabled={!hasMore || isLoading}
         className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground"
-        aria-label={isLoading ? 'Ładowanie...' : 'Załaduj więcej karm'}
+        aria-label={isLoading ? "Ładowanie..." : "Załaduj więcej karm"}
       >
         {isLoading ? (
           <>
@@ -58,4 +54,3 @@ export function PaginationButton({
     </div>
   );
 }
-

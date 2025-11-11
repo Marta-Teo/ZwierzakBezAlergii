@@ -1,22 +1,18 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { DogForm } from '../../components/dogs/DogForm';
+import Layout from "../../layouts/Layout.astro";
+import { DogForm } from "../../components/dogs/DogForm";
 
 // Route protection
 const user = Astro.locals.user;
 if (!user) {
-  return Astro.redirect('/login?redirect=/dogs/new');
+  return Astro.redirect("/login?redirect=/dogs/new");
 }
 
 // Pobranie opcji do selectów (SSR)
-const [
-  { data: sizeTypes },
-  { data: ageCategories },
-  { data: allergens }
-] = await Promise.all([
-  Astro.locals.supabase.from('size_types').select('*').order('id'),
-  Astro.locals.supabase.from('age_categories').select('*').order('id'),
-  Astro.locals.supabase.from('allergens').select('*').order('name')
+const [{ data: sizeTypes }, { data: ageCategories }, { data: allergens }] = await Promise.all([
+  Astro.locals.supabase.from("size_types").select("*").order("id"),
+  Astro.locals.supabase.from("age_categories").select("*").order("id"),
+  Astro.locals.supabase.from("allergens").select("*").order("name"),
 ]);
 ---
 
@@ -24,8 +20,8 @@ const [
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-2xl mx-auto">
       <h1 class="text-3xl font-bold mb-6">Dodaj profil psa</h1>
-      <DogForm 
-        client:load 
+      <DogForm
+        client:load
         mode="create"
         sizeTypes={sizeTypes || []}
         ageCategories={ageCategories || []}
@@ -34,4 +30,3 @@ const [
     </div>
   </main>
 </Layout>
-

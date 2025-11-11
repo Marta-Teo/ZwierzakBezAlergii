@@ -1,15 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { LoginForm } from '../components/auth/LoginForm';
+import Layout from "../layouts/Layout.astro";
+import { LoginForm } from "../components/auth/LoginForm";
 
 // Sprawdzenie sesji - jeśli zalogowany, redirect
-const { data: { session } } = await Astro.locals.supabase.auth.getSession();
+const {
+  data: { session },
+} = await Astro.locals.supabase.auth.getSession();
 if (session) {
-  return Astro.redirect('/foods');
+  return Astro.redirect("/foods");
 }
 
 // Pobranie redirect URL z query params
-const redirectTo = Astro.url.searchParams.get('redirect') || '/foods';
+const redirectTo = Astro.url.searchParams.get("redirect") || "/foods";
 ---
 
 <Layout title="Zaloguj się - ZwierzakBezAlergii">
@@ -17,4 +19,3 @@ const redirectTo = Astro.url.searchParams.get('redirect') || '/foods';
     <LoginForm client:load redirectTo={redirectTo} />
   </div>
 </Layout>
-

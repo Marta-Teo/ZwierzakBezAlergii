@@ -5,21 +5,10 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Checkbox } from "../ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Alert, AlertDescription } from "../ui/alert";
 import { supabase } from "@/lib/supabase/client";
-import type {
-  SizeTypeDTO,
-  AgeCategoryDTO,
-  AllergenDTO,
-  UpdateDogProfileDTO,
-} from "@/types";
+import type { SizeTypeDTO, AgeCategoryDTO, AllergenDTO, UpdateDogProfileDTO } from "@/types";
 import { validateDogForm, sanitizeDogName } from "@/lib/dogs/validation";
 
 interface DogFormProps {
@@ -34,23 +23,11 @@ interface DogFormProps {
  * DogForm Component
  * Form for creating and editing dog profiles
  */
-export function DogForm({
-  mode,
-  initialData,
-  sizeTypes,
-  ageCategories,
-  allergens,
-}: DogFormProps) {
+export function DogForm({ mode, initialData, sizeTypes, ageCategories, allergens }: DogFormProps) {
   const [name, setName] = useState(initialData?.name || "");
-  const [sizeTypeId, setSizeTypeId] = useState<number | null>(
-    initialData?.size_type_id || null
-  );
-  const [ageCategoryId, setAgeCategoryId] = useState<number | null>(
-    initialData?.age_category_id || null
-  );
-  const [allergenIds, setAllergenIds] = useState<number[]>(
-    initialData?.allergen_ids || []
-  );
+  const [sizeTypeId, setSizeTypeId] = useState<number | null>(initialData?.size_type_id || null);
+  const [ageCategoryId, setAgeCategoryId] = useState<number | null>(initialData?.age_category_id || null);
+  const [allergenIds, setAllergenIds] = useState<number[]>(initialData?.allergen_ids || []);
   const [notes, setNotes] = useState(initialData?.notes || "");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -58,9 +35,7 @@ export function DogForm({
 
   const handleAllergenToggle = (allergenId: number) => {
     setAllergenIds((prev) =>
-      prev.includes(allergenId)
-        ? prev.filter((id) => id !== allergenId)
-        : [...prev, allergenId]
+      prev.includes(allergenId) ? prev.filter((id) => id !== allergenId) : [...prev, allergenId]
     );
   };
 
@@ -71,7 +46,10 @@ export function DogForm({
 
     try {
       // Get current user
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
       if (userError || !user) {
         throw new Error("Musisz być zalogowany aby wykonać tę akcję");
       }
@@ -113,9 +91,7 @@ export function DogForm({
             allergen_id: allergenId,
           }));
 
-          const { error: allergensError } = await supabase
-            .from("dog_allergens")
-            .insert(allergenInserts);
+          const { error: allergensError } = await supabase.from("dog_allergens").insert(allergenInserts);
 
           if (allergensError) throw allergensError;
         }
@@ -134,10 +110,7 @@ export function DogForm({
         if (updateError) throw updateError;
 
         // Update allergens (delete all, then re-insert)
-        await supabase
-          .from("dog_allergens")
-          .delete()
-          .eq("dog_id", initialData!.id);
+        await supabase.from("dog_allergens").delete().eq("dog_id", initialData!.id);
 
         if (allergenIds.length > 0) {
           const allergenInserts = allergenIds.map((allergenId) => ({
@@ -145,9 +118,7 @@ export function DogForm({
             allergen_id: allergenId,
           }));
 
-          const { error: allergensError } = await supabase
-            .from("dog_allergens")
-            .insert(allergenInserts);
+          const { error: allergensError } = await supabase.from("dog_allergens").insert(allergenInserts);
 
           if (allergensError) throw allergensError;
         }
@@ -188,9 +159,7 @@ export function DogForm({
           disabled={isLoading}
           autoComplete="off"
         />
-        <p className="text-xs text-muted-foreground">
-          Tylko litery, spacje i myślniki (maksymalnie 50 znaków)
-        </p>
+        <p className="text-xs text-muted-foreground">Tylko litery, spacje i myślniki (maksymalnie 50 znaków)</p>
       </div>
 
       {/* Size Select */}
@@ -220,9 +189,7 @@ export function DogForm({
         <Label htmlFor="age_category">Wiek psa</Label>
         <Select
           value={ageCategoryId?.toString() || ""}
-          onValueChange={(value) =>
-            setAgeCategoryId(value ? parseInt(value) : null)
-          }
+          onValueChange={(value) => setAgeCategoryId(value ? parseInt(value) : null)}
           disabled={isLoading}
         >
           <SelectTrigger id="age_category">
@@ -260,9 +227,7 @@ export function DogForm({
             </div>
           ))}
         </div>
-        <p className="text-xs text-muted-foreground">
-          Wybrane: {allergenIds.length}
-        </p>
+        <p className="text-xs text-muted-foreground">Wybrane: {allergenIds.length}</p>
       </div>
 
       {/* Notes Textarea */}
@@ -277,9 +242,7 @@ export function DogForm({
           disabled={isLoading}
           rows={4}
         />
-        <p className="text-xs text-muted-foreground">
-          {notes.length}/500 znaków
-        </p>
+        <p className="text-xs text-muted-foreground">{notes.length}/500 znaków</p>
       </div>
 
       {/* Submit Buttons */}
@@ -288,16 +251,10 @@ export function DogForm({
           {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {mode === "create" ? "Dodaj psa" : "Zapisz zmiany"}
         </Button>
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => (window.location.href = "/dogs")}
-          disabled={isLoading}
-        >
+        <Button type="button" variant="outline" onClick={() => (window.location.href = "/dogs")} disabled={isLoading}>
           Anuluj
         </Button>
       </div>
     </form>
   );
 }
-

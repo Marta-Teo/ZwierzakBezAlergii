@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Heart, Search } from 'lucide-react';
-import { Button } from '../ui/button';
-import { FoodCardGrid } from '../FoodCardGrid';
-import { FoodDetailModal } from '../FoodDetailModal';
-import { LoadingState } from '../LoadingState';
-import { useFavorites } from '../../lib/hooks/useFavorites';
-import { useFavoriteToggle } from '../../lib/hooks/useFavoriteToggle';
+import React, { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Heart, Search } from "lucide-react";
+import { Button } from "../ui/button";
+import { FoodCardGrid } from "../FoodCardGrid";
+import { FoodDetailModal } from "../FoodDetailModal";
+import { LoadingState } from "../LoadingState";
+import { useFavorites } from "../../lib/hooks/useFavorites";
+import { useFavoriteToggle } from "../../lib/hooks/useFavoriteToggle";
 
 // Tworzenie QueryClient dla React Query
 const queryClient = new QueryClient({
@@ -20,10 +20,10 @@ const queryClient = new QueryClient({
 
 /**
  * Komponent widoku ulubionych karm
- * 
+ *
  * Wyświetla listę karm polubionych przez użytkownika.
  * Umożliwia usuwanie z ulubionych i przeglądanie szczegółów.
- * 
+ *
  * @example
  * ```tsx
  * <FavoritesPage />
@@ -51,17 +51,11 @@ function FavoritesPageContent() {
         <div className="container mx-auto px-4 py-8">
           <div className="flex min-h-[400px] items-center justify-center rounded-lg border border-destructive/50 bg-destructive/10">
             <div className="text-center">
-              <p className="text-lg font-medium text-destructive">
-                Nie udało się pobrać ulubionych karm
-              </p>
+              <p className="text-lg font-medium text-destructive">Nie udało się pobrać ulubionych karm</p>
               <p className="mt-2 text-sm text-muted-foreground">
                 Spróbuj odświeżyć stronę lub spróbuj ponownie później
               </p>
-              <Button
-                variant="outline"
-                className="mt-4"
-                onClick={() => window.location.reload()}
-              >
+              <Button variant="outline" className="mt-4" onClick={() => window.location.reload()}>
                 Odśwież stronę
               </Button>
             </div>
@@ -97,7 +91,7 @@ function FavoritesPageContent() {
               <h1 className="text-3xl font-bold text-foreground">Moje ulubione karmy</h1>
               {count > 0 && (
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {count} {count === 1 ? 'karma' : count < 5 ? 'karmy' : 'karm'} w ulubionych
+                  {count} {count === 1 ? "karma" : count < 5 ? "karmy" : "karm"} w ulubionych
                 </p>
               )}
             </div>
@@ -113,12 +107,10 @@ function FavoritesPageContent() {
             <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-muted">
               <Heart className="h-10 w-10 text-muted-foreground" />
             </div>
-            <h2 className="mb-2 text-2xl font-bold text-foreground">
-              Brak ulubionych karm
-            </h2>
+            <h2 className="mb-2 text-2xl font-bold text-foreground">Brak ulubionych karm</h2>
             <p className="mb-8 max-w-md text-muted-foreground">
-              Przeglądaj karmy i dodawaj je do ulubionych klikając ikonkę serduszka.
-              Wszystkie ulubione karmy znajdziesz tutaj!
+              Przeglądaj karmy i dodawaj je do ulubionych klikając ikonkę serduszka. Wszystkie ulubione karmy znajdziesz
+              tutaj!
             </p>
             <a href="/foods">
               <Button size="lg" className="gap-2">
@@ -143,11 +135,7 @@ function FavoritesPageContent() {
       </main>
 
       {/* Modal szczegółów karmy */}
-      <FoodDetailModal
-        isOpen={!!selectedFoodId}
-        foodId={selectedFoodId}
-        onClose={() => setSelectedFoodId(null)}
-      />
+      <FoodDetailModal isOpen={!!selectedFoodId} foodId={selectedFoodId} onClose={() => setSelectedFoodId(null)} />
     </div>
   );
 }
@@ -162,4 +150,3 @@ export function FavoritesPage() {
     </QueryClientProvider>
   );
 }
-

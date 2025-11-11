@@ -5,10 +5,10 @@ import type { ArticleFilters } from "../../lib/schemas/articleQuerySchema";
 
 /**
  * Endpoint: GET /api/articles
- * 
+ *
  * Pobiera listę opublikowanych artykułów edukacyjnych o alergiach pokarmowych u psów.
  * Obsługuje filtrowanie, wyszukiwanie, paginację i sortowanie.
- * 
+ *
  * Query params (wszystkie opcjonalne):
  * - authorId: number - filtrowanie po ID autora
  * - search: string - wyszukiwanie w tytule i treści (max 200 znaków)
@@ -16,7 +16,7 @@ import type { ArticleFilters } from "../../lib/schemas/articleQuerySchema";
  * - offset: number - przesunięcie (domyślnie 0)
  * - orderBy: 'created_at' | 'updated_at' | 'title' (domyślnie 'created_at')
  * - orderDirection: 'asc' | 'desc' (domyślnie 'desc')
- * 
+ *
  * Response 200:
  * {
  *   success: true,
@@ -24,7 +24,7 @@ import type { ArticleFilters } from "../../lib/schemas/articleQuerySchema";
  *   count: number,
  *   pagination: { limit, offset, total, hasMore }
  * }
- * 
+ *
  * Response 400: Błąd walidacji parametrów
  * Response 500: Błąd serwera
  */
@@ -40,10 +40,7 @@ export const GET: APIRoute = async ({ locals, request }) => {
     const validationResult = ArticleQuerySchema.safeParse(queryParams);
 
     if (!validationResult.success) {
-      console.error(
-        "[API GET /articles] Błąd walidacji:",
-        JSON.stringify(validationResult.error.errors)
-      );
+      console.error("[API GET /articles] Błąd walidacji:", JSON.stringify(validationResult.error.errors));
       return new Response(
         JSON.stringify({
           success: false,
@@ -65,10 +62,7 @@ export const GET: APIRoute = async ({ locals, request }) => {
     };
 
     // Wywołanie serwisu do pobrania artykułów
-    const { data: articles, count, error } = await articleService.list(
-      locals.supabase,
-      filters
-    );
+    const { data: articles, count, error } = await articleService.list(locals.supabase, filters);
 
     // Obsługa błędu z Supabase
     if (error || !articles) {
@@ -112,4 +106,3 @@ export const GET: APIRoute = async ({ locals, request }) => {
     );
   }
 };
-

@@ -27,12 +27,9 @@ export function ResetPasswordForm() {
       }
 
       // Supabase Auth password reset
-      const { error: resetError } = await supabase.auth.resetPasswordForEmail(
-        email,
-        {
-          redirectTo: `${window.location.origin}/update-password`,
-        }
-      );
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/update-password`,
+      });
 
       if (resetError) throw resetError;
 
@@ -50,8 +47,7 @@ export function ResetPasswordForm() {
         <Mail className="mx-auto h-12 w-12 text-primary mb-4" />
         <h2 className="text-2xl font-bold mb-2">Sprawdź swoją skrzynkę</h2>
         <p className="text-muted-foreground mb-4">
-          Wysłaliśmy link do resetowania hasła na adres{" "}
-          <strong>{email}</strong>.
+          Wysłaliśmy link do resetowania hasła na adres <strong>{email}</strong>.
         </p>
         <p className="text-sm text-muted-foreground">
           Nie otrzymałeś emaila? Sprawdź folder spam lub{" "}
@@ -74,9 +70,7 @@ export function ResetPasswordForm() {
       {/* Logo/Heading */}
       <div className="text-center mb-6">
         <h1 className="text-3xl font-bold mb-2">Resetuj hasło</h1>
-        <p className="text-muted-foreground">
-          Wprowadź swój email aby otrzymać link do resetowania hasła
-        </p>
+        <p className="text-muted-foreground">Wprowadź swój email aby otrzymać link do resetowania hasła</p>
       </div>
 
       {/* Error Alert */}
@@ -125,4 +119,3 @@ export function ResetPasswordForm() {
     </div>
   );
 }
-

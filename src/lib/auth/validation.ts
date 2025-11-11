@@ -55,10 +55,7 @@ export const validatePasswordStrict = (password: string): string | null => {
  * @param confirmPassword - Password confirmation
  * @returns Error message or null if valid
  */
-export const validatePasswordConfirmation = (
-  password: string,
-  confirmPassword: string
-): string | null => {
+export const validatePasswordConfirmation = (password: string, confirmPassword: string): string | null => {
   if (!confirmPassword) return "Potwierdzenie hasła jest wymagane";
   if (password !== confirmPassword) return "Hasła nie są identyczne";
   return null;
@@ -70,10 +67,7 @@ export const validatePasswordConfirmation = (
  * @param password - Password
  * @returns Error message or null if valid
  */
-export const validateLoginForm = (
-  email: string,
-  password: string
-): string | null => {
+export const validateLoginForm = (email: string, password: string): string | null => {
   const emailError = validateEmail(email);
   if (emailError) return emailError;
 
@@ -90,11 +84,7 @@ export const validateLoginForm = (
  * @param confirmPassword - Password confirmation
  * @returns Error message or null if valid
  */
-export const validateRegisterForm = (
-  email: string,
-  password: string,
-  confirmPassword: string
-): string | null => {
+export const validateRegisterForm = (email: string, password: string, confirmPassword: string): string | null => {
   const emailError = validateEmail(email);
   if (emailError) return emailError;
 
@@ -144,4 +134,3 @@ export const getInitials = (email: string): string => {
 
   return email.substring(0, 2).toUpperCase();
 };
-

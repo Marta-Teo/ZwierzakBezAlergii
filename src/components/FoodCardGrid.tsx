@@ -1,7 +1,7 @@
-import React from 'react';
-import { Heart } from 'lucide-react';
-import { cn } from '../lib/utils';
-import type { FoodListItem } from '../types';
+import React from "react";
+import { Heart } from "lucide-react";
+import { cn } from "../lib/utils";
+import type { FoodListItem } from "../types";
 
 /**
  * Props dla komponentu FoodCardGrid
@@ -23,10 +23,10 @@ interface FoodCardGridProps {
 
 /**
  * Komponent gridu z kartami karm
- * 
+ *
  * Wyświetla responsive grid (1-5 kolumn w zależności od breakpointa).
  * Przekazuje kliknięcie z karty do parent komponentu.
- * 
+ *
  * @example
  * ```tsx
  * <FoodCardGrid
@@ -53,9 +53,7 @@ export function FoodCardGrid({
       <div className="flex min-h-[400px] items-center justify-center rounded-lg border border-border bg-muted">
         <div className="text-center">
           <p className="text-lg font-medium text-foreground">Brak wyników</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Spróbuj zmienić filtry lub wyszukiwanie
-          </p>
+          <p className="mt-1 text-sm text-muted-foreground">Spróbuj zmienić filtry lub wyszukiwanie</p>
         </div>
       </div>
     );
@@ -95,10 +93,10 @@ interface FoodCardProps {
 
 /**
  * Komponent pojedynczej karty karmy
- * 
+ *
  * Wyświetla miniaturkę opakowania (4:3), nazwę karmy i markę.
  * Obsługuje kliknięcie myszką i klawisz Enter (keyboard navigation).
- * 
+ *
  * @example
  * ```tsx
  * <FoodCard
@@ -107,19 +105,13 @@ interface FoodCardProps {
  * />
  * ```
  */
-function FoodCard({
-  food,
-  onSelect,
-  isFavorite = false,
-  onFavoriteToggle,
-  isAuthenticated = false,
-}: FoodCardProps) {
+function FoodCard({ food, onSelect, isFavorite = false, onFavoriteToggle, isAuthenticated = false }: FoodCardProps) {
   const handleClick = () => {
     onSelect(food);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       onSelect(food);
     }
@@ -133,7 +125,7 @@ function FoodCard({
   };
 
   const handleFavoriteKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       e.stopPropagation();
       if (onFavoriteToggle) {
@@ -158,22 +150,22 @@ function FoodCard({
           onClick={handleFavoriteClick}
           onKeyDown={handleFavoriteKeyDown}
           className="absolute right-2 top-2 z-10 rounded-full bg-background/80 p-2 backdrop-blur-sm transition-colors hover:bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-          aria-label={isFavorite ? 'Usuń z ulubionych' : 'Dodaj do ulubionych'}
+          aria-label={isFavorite ? "Usuń z ulubionych" : "Dodaj do ulubionych"}
           tabIndex={0}
         >
           <Heart
             className={cn(
-              'h-5 w-5 transition-all',
+              "h-5 w-5 transition-all",
               isFavorite
-                ? 'fill-destructive text-destructive' // Czerwone wypełnione
-                : 'text-muted-foreground hover:text-destructive' // Szare puste
+                ? "fill-destructive text-destructive" // Czerwone wypełnione
+                : "text-muted-foreground hover:text-destructive" // Szare puste
             )}
           />
         </button>
       )}
 
       {/* Miniaturka z AspectRatio 4:3 */}
-      <div className="relative w-full overflow-hidden bg-card" style={{ paddingBottom: '75%' }}>
+      <div className="relative w-full overflow-hidden bg-card" style={{ paddingBottom: "75%" }}>
         {food.image_url ? (
           <img
             src={food.image_url}
@@ -214,4 +206,3 @@ function FoodCard({
     </div>
   );
 }
-

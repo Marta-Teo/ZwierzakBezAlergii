@@ -17,10 +17,10 @@ interface PaginationControlsProps {
 
 /**
  * Komponent kontrolek paginacji
- * 
+ *
  * Wyświetla przyciski Previous/Next oraz numery stron (max 5 widocznych).
  * Dla długich list używa ellipsis (...).
- * 
+ *
  * @example
  * ```tsx
  * <PaginationControls
@@ -31,12 +31,7 @@ interface PaginationControlsProps {
  * />
  * ```
  */
-export function PaginationControls({
-  currentPage,
-  totalPages,
-  onPageChange,
-  hasMore,
-}: PaginationControlsProps) {
+export function PaginationControls({ currentPage, totalPages, onPageChange, hasMore }: PaginationControlsProps) {
   // Nie wyświetlaj paginacji jeśli tylko 1 strona
   if (totalPages <= 1) {
     return null;
@@ -89,10 +84,7 @@ export function PaginationControls({
   const pageNumbers = getPageNumbers();
 
   return (
-    <nav 
-      className="flex items-center justify-center gap-2 mt-8"
-      aria-label="Nawigacja stron"
-    >
+    <nav className="flex items-center justify-center gap-2 mt-8" aria-label="Nawigacja stron">
       {/* Przycisk Previous */}
       <Button
         variant="outline"
@@ -102,19 +94,8 @@ export function PaginationControls({
         aria-label="Poprzednia strona"
         className="gap-2"
       >
-        <svg
-          className="h-4 w-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
-          />
+        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
         <span className="hidden sm:inline">Poprzednia</span>
       </Button>
@@ -124,11 +105,7 @@ export function PaginationControls({
         {pageNumbers.map((page, index) => {
           if (page === "ellipsis") {
             return (
-              <span
-                key={`ellipsis-${index}`}
-                className="px-2 text-muted-foreground"
-                aria-hidden="true"
-              >
+              <span key={`ellipsis-${index}`} className="px-2 text-muted-foreground" aria-hidden="true">
                 ...
               </span>
             );
@@ -162,22 +139,10 @@ export function PaginationControls({
         className="gap-2"
       >
         <span className="hidden sm:inline">Następna</span>
-        <svg
-          className="h-4 w-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
+        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </Button>
     </nav>
   );
 }
-

@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { Calendar, Dog, Edit, Filter, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
 import type { DogProfileSummaryDTO } from "@/types";
 import { DeleteDogModal } from "./DeleteDogModal.tsx";
@@ -33,9 +27,7 @@ export function DogCard({ dog }: DogCardProps) {
       <Card className="hover:shadow-lg transition">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle className="text-xl flex items-center gap-2">
-              🐕 {dog.name}
-            </CardTitle>
+            <CardTitle className="text-xl flex items-center gap-2">🐕 {dog.name}</CardTitle>
             {/* Delete Button (top-right corner) */}
             <Button
               variant="ghost"
@@ -71,8 +63,7 @@ export function DogCard({ dog }: DogCardProps) {
           {dog.allergen_count > 0 && (
             <div>
               <Badge variant="secondary">
-                {dog.allergen_count}{" "}
-                {dog.allergen_count === 1 ? "alergen" : "alergeny"}
+                {dog.allergen_count} {dog.allergen_count === 1 ? "alergen" : "alergeny"}
               </Badge>
               <p className="text-xs text-muted-foreground mt-1">
                 {dog.allergen_names.join(", ")}
@@ -81,9 +72,7 @@ export function DogCard({ dog }: DogCardProps) {
             </div>
           )}
 
-          {dog.allergen_count === 0 && (
-            <p className="text-sm text-muted-foreground">Brak alergenów</p>
-          )}
+          {dog.allergen_count === 0 && <p className="text-sm text-muted-foreground">Brak alergenów</p>}
         </CardContent>
 
         <CardFooter className="flex gap-2">

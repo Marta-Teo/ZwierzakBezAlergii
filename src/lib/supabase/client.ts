@@ -6,12 +6,8 @@ import type { Database } from "@/db/database.types";
  * This client properly manages cookies for session persistence across SSR
  */
 export function createSupabaseBrowserClient() {
-  return createBrowserClient<Database>(
-    import.meta.env.PUBLIC_SUPABASE_URL,
-    import.meta.env.PUBLIC_SUPABASE_ANON_KEY
-  );
+  return createBrowserClient<Database>(import.meta.env.PUBLIC_SUPABASE_URL, import.meta.env.PUBLIC_SUPABASE_ANON_KEY);
 }
 
 // Export a singleton instance for convenience
 export const supabase = createSupabaseBrowserClient();
-

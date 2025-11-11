@@ -34,10 +34,7 @@ export function UpdatePasswordForm() {
         throw new Error(passwordError);
       }
 
-      const confirmError = validatePasswordConfirmation(
-        password,
-        confirmPassword
-      );
+      const confirmError = validatePasswordConfirmation(password, confirmPassword);
       if (confirmError) {
         throw new Error(confirmError);
       }
@@ -80,9 +77,7 @@ export function UpdatePasswordForm() {
       <div className="w-full max-w-md mx-auto bg-card rounded-lg shadow-lg p-8 text-center">
         <CheckCircle className="mx-auto h-12 w-12 text-green-500 mb-4" />
         <h2 className="text-2xl font-bold mb-2">Hasło zostało zmienione!</h2>
-        <p className="text-muted-foreground mb-4">
-          Za chwilę zostaniesz przekierowany do strony logowania.
-        </p>
+        <p className="text-muted-foreground mb-4">Za chwilę zostaniesz przekierowany do strony logowania.</p>
       </div>
     );
   }
@@ -92,9 +87,7 @@ export function UpdatePasswordForm() {
       {/* Logo/Heading */}
       <div className="text-center mb-6">
         <h1 className="text-3xl font-bold mb-2">Ustaw nowe hasło</h1>
-        <p className="text-muted-foreground">
-          Wprowadź nowe hasło do swojego konta
-        </p>
+        <p className="text-muted-foreground">Wprowadź nowe hasło do swojego konta</p>
       </div>
 
       {/* Error Alert */}
@@ -126,30 +119,24 @@ export function UpdatePasswordForm() {
             <div className="mt-2 space-y-1">
               <div className="flex gap-1">
                 <div
-                  className={`h-1 flex-1 rounded ${
-                    passwordStrength === "weak" ? strengthColors.weak : "bg-gray-200"
-                  }`}
+                  className={`h-1 flex-1 rounded ${passwordStrength === "weak" ? strengthColors.weak : "bg-gray-200"}`}
                 />
                 <div
                   className={`h-1 flex-1 rounded ${
                     passwordStrength === "medium"
                       ? strengthColors.medium
                       : passwordStrength === "strong"
-                      ? strengthColors.strong
-                      : "bg-gray-200"
+                        ? strengthColors.strong
+                        : "bg-gray-200"
                   }`}
                 />
                 <div
                   className={`h-1 flex-1 rounded ${
-                    passwordStrength === "strong"
-                      ? strengthColors.strong
-                      : "bg-gray-200"
+                    passwordStrength === "strong" ? strengthColors.strong : "bg-gray-200"
                   }`}
                 />
               </div>
-              <p className="text-xs text-muted-foreground">
-                Siła hasła: {strengthLabels[passwordStrength]}
-              </p>
+              <p className="text-xs text-muted-foreground">Siła hasła: {strengthLabels[passwordStrength]}</p>
             </div>
           )}
         </div>
@@ -185,4 +172,3 @@ export function UpdatePasswordForm() {
     </div>
   );
 }
-

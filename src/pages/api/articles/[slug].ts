@@ -24,10 +24,7 @@ export const GET: APIRoute = async ({ locals, params }) => {
     }
 
     // Pobierz artykuł z serwisu
-    const { data: article, error } = await articleService.getBySlug(
-      locals.supabase,
-      slug
-    );
+    const { data: article, error } = await articleService.getBySlug(locals.supabase, slug);
 
     // Obsługa błędów Supabase
     if (error) {
@@ -75,10 +72,9 @@ export const GET: APIRoute = async ({ locals, params }) => {
     );
   } catch (err) {
     console.error("[API GET /articles/:slug] Nieoczekiwany błąd:", err);
-    return new Response(
-      JSON.stringify({ success: false, error: "Wystąpił błąd serwera" }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    );
+    return new Response(JSON.stringify({ success: false, error: "Wystąpił błąd serwera" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 };
-

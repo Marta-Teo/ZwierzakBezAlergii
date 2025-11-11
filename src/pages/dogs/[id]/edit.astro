@@ -1,39 +1,37 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import { DogForm } from '../../../components/dogs/DogForm';
+import Layout from "../../../layouts/Layout.astro";
+import { DogForm } from "../../../components/dogs/DogForm";
 
 // Route protection
 const user = Astro.locals.user;
 if (!user) {
-  return Astro.redirect('/login?redirect=' + Astro.url.pathname);
+  return Astro.redirect("/login?redirect=" + Astro.url.pathname);
 }
 
 const { id } = Astro.params;
 
 // Pobranie profilu psa + opcje do selectów (SSR)
-const [
-  { data: dogProfile, error: dogError },
-  { data: sizeTypes },
-  { data: ageCategories },
-  { data: allergens }
-] = await Promise.all([
-  Astro.locals.supabase
-    .from('dog_profiles')
-    .select(`
+const [{ data: dogProfile, error: dogError }, { data: sizeTypes }, { data: ageCategories }, { data: allergens }] =
+  await Promise.all([
+    Astro.locals.supabase
+      .from("dog_profiles")
+      .select(
+        `
       *,
       dog_allergens(allergen_id)
-    `)
-    .eq('id', id)
-    .eq('user_id', user.id) // Security: tylko własne profile
-    .single(),
-  Astro.locals.supabase.from('size_types').select('*').order('id'),
-  Astro.locals.supabase.from('age_categories').select('*').order('id'),
-  Astro.locals.supabase.from('allergens').select('*').order('name')
-]);
+    `
+      )
+      .eq("id", id)
+      .eq("user_id", user.id) // Security: tylko własne profile
+      .single(),
+    Astro.locals.supabase.from("size_types").select("*").order("id"),
+    Astro.locals.supabase.from("age_categories").select("*").order("id"),
+    Astro.locals.supabase.from("allergens").select("*").order("name"),
+  ]);
 
 // 404 jeśli pies nie istnieje lub nie należy do użytkownika
 if (dogError || !dogProfile) {
-  return Astro.redirect('/dogs');
+  return Astro.redirect("/dogs");
 }
 
 // Transform allergens do array of IDs
@@ -53,8 +51,8 @@ const initialData = {
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-2xl mx-auto">
       <h1 class="text-3xl font-bold mb-6">Edytuj profil: {dogProfile.name}</h1>
-      <DogForm 
-        client:load 
+      <DogForm
+        client:load
         mode="edit"
         initialData={initialData}
         sizeTypes={sizeTypes || []}
@@ -64,4 +62,3 @@ const initialData = {
     </div>
   </main>
 </Layout>
-

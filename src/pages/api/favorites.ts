@@ -4,7 +4,7 @@ import type { FavoritesResponse, FavoriteIdsResponse } from "../../types";
 /**
  * GET /api/favorites
  * Pobiera listę ulubionych karm użytkownika
- * 
+ *
  * Query params:
  * - idsOnly (boolean) - jeśli true, zwraca tylko tablicę ID karm
  */
@@ -27,10 +27,7 @@ export const GET: APIRoute = async ({ locals, url }) => {
   try {
     if (idsOnly) {
       // Tylko ID karm (dla widoku /foods)
-      const { data, error } = await locals.supabase
-        .from("favorite_foods")
-        .select("food_id")
-        .eq("user_id", user.id);
+      const { data, error } = await locals.supabase.from("favorite_foods").select("food_id").eq("user_id", user.id);
 
       if (error) {
         console.error("Error fetching favorite IDs:", error);
@@ -38,7 +35,7 @@ export const GET: APIRoute = async ({ locals, url }) => {
       }
 
       const ids = data.map((f) => f.food_id);
-      
+
       const response: FavoriteIdsResponse = {
         success: true,
         data: ids,
@@ -81,10 +78,7 @@ export const GET: APIRoute = async ({ locals, url }) => {
 
       let brandsMap: Record<number, string> = {};
       if (brandIds.length > 0) {
-        const { data: brands } = await locals.supabase
-          .from("brands")
-          .select("id, name")
-          .in("id", brandIds);
+        const { data: brands } = await locals.supabase.from("brands").select("id, name").in("id", brandIds);
 
         if (brands) {
           brandsMap = brands.reduce(
@@ -130,7 +124,7 @@ export const GET: APIRoute = async ({ locals, url }) => {
 /**
  * POST /api/favorites
  * Dodaje karmę do ulubionych
- * 
+ *
  * Body:
  * {
  *   "foodId": number
@@ -166,11 +160,7 @@ export const POST: APIRoute = async ({ locals, request }) => {
     }
 
     // Sprawdź czy karma istnieje
-    const { data: food } = await locals.supabase
-      .from("foods")
-      .select("id")
-      .eq("id", foodId)
-      .single();
+    const { data: food } = await locals.supabase.from("foods").select("id").eq("id", foodId).single();
 
     if (!food) {
       return new Response(
@@ -183,9 +173,7 @@ export const POST: APIRoute = async ({ locals, request }) => {
     }
 
     // Dodaj do ulubionych (RLS policy + UNIQUE constraint sprawdzą duplikaty)
-    const { error } = await locals.supabase
-      .from("favorite_foods")
-      .insert({ user_id: user.id, food_id: foodId });
+    const { error } = await locals.supabase.from("favorite_foods").insert({ user_id: user.id, food_id: foodId });
 
     if (error) {
       // Duplicate key error (23505)
@@ -219,4 +207,3 @@ export const POST: APIRoute = async ({ locals, request }) => {
     );
   }
 };
-

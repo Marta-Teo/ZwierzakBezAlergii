@@ -19,7 +19,7 @@ const queryClient = new QueryClient({
 
 /**
  * Główny komponent strony artykułów (content)
- * 
+ *
  * Zarządza stanem wyszukiwania i paginacji.
  * Pobiera dane z API przez useArticles hook.
  * Compose wszystkich subkomponentów.
@@ -50,18 +50,14 @@ function ArticlesPageContent() {
   }, [currentPage]);
 
   // Obliczenie całkowitej liczby stron
-  const totalPages = data?.pagination
-    ? Math.ceil(data.pagination.total / limit)
-    : 1;
+  const totalPages = data?.pagination ? Math.ceil(data.pagination.total / limit) : 1;
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="bg-card shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">
-            Artykuły o alergiach pokarmowych
-          </h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Artykuły o alergiach pokarmowych</h1>
           <p className="text-muted-foreground">
             Dowiedz się więcej o alergiach pokarmowych u psów. Praktyczne porady i wiedza merytoryczna.
           </p>
@@ -79,11 +75,11 @@ function ArticlesPageContent() {
               placeholder="Szukaj artykułów po tytule lub treści..."
             />
           </div>
-          
+
           {/* Przyciski nawigacyjne */}
           <div className="flex gap-2">
             {/* Przycisk: Strona główna */}
-            <a 
+            <a
               href="/"
               className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               aria-label="Powrót do strony głównej"
@@ -107,7 +103,7 @@ function ArticlesPageContent() {
             </a>
 
             {/* Przycisk: Karmy */}
-            <a 
+            <a
               href="/foods"
               className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               aria-label="Przejdź do listy karm"
@@ -131,7 +127,7 @@ function ArticlesPageContent() {
             </a>
 
             {/* Asystent AI - Wyróżniony button */}
-            <a 
+            <a
               href="/asystent"
               className="flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 shadow-lg bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700"
               aria-label="Porozmawiaj z asystentem AI"
@@ -160,11 +156,7 @@ function ArticlesPageContent() {
         {isError && (
           <ErrorMessage
             title="Błąd ładowania artykułów"
-            message={
-              error instanceof Error
-                ? error.message
-                : "Nie udało się pobrać listy artykułów"
-            }
+            message={error instanceof Error ? error.message : "Nie udało się pobrać listy artykułów"}
             onRetry={() => refetch()}
           />
         )}
@@ -180,17 +172,12 @@ function ArticlesPageContent() {
               {searchTerm ? (
                 <span>
                   Znaleziono <strong className="text-foreground">{data.count}</strong>{" "}
-                  {data.count === 1
-                    ? "artykuł"
-                    : data.count < 5
-                    ? "artykuły"
-                    : "artykułów"}{" "}
-                  dla frazy "<strong className="text-foreground">{searchTerm}</strong>"
+                  {data.count === 1 ? "artykuł" : data.count < 5 ? "artykuły" : "artykułów"} dla frazy "
+                  <strong className="text-foreground">{searchTerm}</strong>"
                 </span>
               ) : (
                 <span>
-                  Wszystkie artykuły ({" "}
-                  <strong className="text-foreground">{data.count}</strong> )
+                  Wszystkie artykuły ( <strong className="text-foreground">{data.count}</strong> )
                 </span>
               )}
             </div>
@@ -216,7 +203,7 @@ function ArticlesPageContent() {
 
 /**
  * Komponent wrapper z QueryClientProvider
- * 
+ *
  * Eksportowany jako główny komponent do użycia w Astro page.
  */
 export function ArticlesPage() {
@@ -226,4 +213,3 @@ export function ArticlesPage() {
     </QueryClientProvider>
   );
 }
-

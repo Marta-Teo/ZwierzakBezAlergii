@@ -33,25 +33,18 @@ const contentHtml = marked(article.content || "");
 const formattedDate = format(new Date(article.created_at), "dd MMMM yyyy", { locale: pl });
 ---
 
-<Layout 
-  title={`${article.title} | ZwierzakBezAlergii`}
-  description={article.excerpt || article.title}
->
+<Layout title={`${article.title} | ZwierzakBezAlergii`} description={article.excerpt || article.title}>
   <main class="min-h-screen bg-background py-8">
     <article class="container mx-auto max-w-4xl px-4">
       {/* Breadcrumbs / Nawigacja */}
       <nav class="mb-8" aria-label="Nawigacja breadcrumb">
         <ol class="flex items-center gap-2 text-sm text-muted-foreground">
           <li>
-            <a href="/" class="hover:text-foreground transition-colors">
-              Strona główna
-            </a>
+            <a href="/" class="hover:text-foreground transition-colors"> Strona główna </a>
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <a href="/articles" class="hover:text-foreground transition-colors">
-              Artykuły
-            </a>
+            <a href="/articles" class="hover:text-foreground transition-colors"> Artykuły </a>
           </li>
           <li aria-hidden="true">/</li>
           <li class="text-foreground" aria-current="page">
@@ -71,12 +64,7 @@ const formattedDate = format(new Date(article.created_at), "dd MMMM yyyy", { loc
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 19l-7-7 7-7"
-              />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
             Powrót do listy artykułów
           </Button>
@@ -104,8 +92,7 @@ const formattedDate = format(new Date(article.created_at), "dd MMMM yyyy", { loc
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
             {formattedDate}
           </time>
@@ -114,37 +101,35 @@ const formattedDate = format(new Date(article.created_at), "dd MMMM yyyy", { loc
           {article.authorName && <span aria-hidden="true">•</span>}
 
           {/* Autor (jeśli jest) */}
-          {article.authorName && (
-            <span class="flex items-center gap-1">
-              <svg
-                class="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
-              </svg>
-              {article.authorName}
-            </span>
-          )}
+          {
+            article.authorName && (
+              <span class="flex items-center gap-1">
+                <svg
+                  class="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+                {article.authorName}
+              </span>
+            )
+          }
         </div>
 
         {/* Excerpt (jeśli jest) */}
-        {article.excerpt && (
-          <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
-            {article.excerpt}
-          </p>
-        )}
+        {article.excerpt && <p class="mt-4 text-lg text-muted-foreground leading-relaxed">{article.excerpt}</p>}
       </header>
 
       {/* Treść artykułu (Markdown wyrenderowany do HTML) */}
-      <div 
+      <div
         class="prose prose-slate dark:prose-invert max-w-none
                prose-headings:text-foreground
                prose-p:text-foreground
@@ -163,25 +148,16 @@ const formattedDate = format(new Date(article.created_at), "dd MMMM yyyy", { loc
       {/* Footer artykułu - CTA */}
       <footer class="mt-12 border-t border-border pt-8">
         <div class="bg-muted rounded-lg p-6 text-center">
-          <h2 class="text-xl font-semibold text-foreground mb-2">
-            Szukasz karmy dla psa z alergiami?
-          </h2>
-          <p class="text-muted-foreground mb-4">
-            Przeglądaj naszą bazę karm i filtruj po alergenach
-          </p>
+          <h2 class="text-xl font-semibold text-foreground mb-2">Szukasz karmy dla psa z alergiami?</h2>
+          <p class="text-muted-foreground mb-4">Przeglądaj naszą bazę karm i filtruj po alergenach</p>
           <a href="/foods">
-            <Button variant="default" size="lg">
-              Przeglądaj karmy
-            </Button>
+            <Button variant="default" size="lg"> Przeglądaj karmy </Button>
           </a>
         </div>
 
         {/* Powrót do listy artykułów */}
         <div class="mt-6 text-center">
-          <a 
-            href="/articles" 
-            class="text-primary hover:text-primary/80 transition-colors text-sm"
-          >
+          <a href="/articles" class="text-primary hover:text-primary/80 transition-colors text-sm">
             ← Zobacz więcej artykułów o alergiach
           </a>
         </div>
@@ -324,4 +300,3 @@ const formattedDate = format(new Date(article.created_at), "dd MMMM yyyy", { loc
     border-color: hsl(var(--border));
   }
 </style>
-

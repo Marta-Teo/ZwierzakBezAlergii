@@ -9,37 +9,33 @@ const hasBackground = background.image !== null;
 ---
 
 <Layout title="ZwierzakBezAlergii - Karmy dla psów z alergiami">
-  <main 
+  <main
     class="hero-section min-h-screen flex items-center justify-center px-4"
     class:list={[!hasBackground && "bg-background"]}
   >
     {/* Warstwa tła - tylko gdy jest ustawiony obraz */}
-    {hasBackground && (
-      <>
-        {/* Obraz tła */}
-        <div 
-          class="hero-background"
-          style={`background-image: url('${background.image}');`}
-        />
-        
-        {/* Gradient overlay */}
-        {background.overlay !== "none" && (
-          <div 
-            class="hero-overlay"
-            data-overlay={background.overlay}
-            style={`opacity: ${background.overlayOpacity};`}
-          />
-        )}
-      </>
-    )}
+    {
+      hasBackground && (
+        <>
+          {/* Obraz tła */}
+          <div class="hero-background" style={`background-image: url('${background.image}');`} />
+
+          {/* Gradient overlay */}
+          {background.overlay !== "none" && (
+            <div
+              class="hero-overlay"
+              data-overlay={background.overlay}
+              style={`opacity: ${background.overlayOpacity};`}
+            />
+          )}
+        </>
+      )
+    }
 
     {/* Treść hero (zawsze na wierzchu) */}
-    <section 
-      class="hero-content container max-w-2xl text-center relative z-10"
-      aria-labelledby="hero-heading"
-    >
+    <section class="hero-content container max-w-2xl text-center relative z-10" aria-labelledby="hero-heading">
       {/* Nagłówek główny */}
-      <h1 
+      <h1
         id="hero-heading"
         class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
         class:list={[hasBackground ? "text-white drop-shadow-lg" : "text-foreground"]}
@@ -48,7 +44,7 @@ const hasBackground = background.image !== null;
       </h1>
 
       {/* Opis misji */}
-      <p 
+      <p
         class="text-lg sm:text-xl mb-10 max-w-xl mx-auto leading-relaxed"
         class:list={[hasBackground ? "text-white/90 drop-shadow-md" : "text-muted-foreground"]}
       >
@@ -58,28 +54,24 @@ const hasBackground = background.image !== null;
       {/* Przyciski CTA */}
       <div class="flex flex-col gap-4 items-center">
         {/* Primary CTA - Karmy */}
-        <a 
+        <a
           href={HERO_CONTENT.buttons.primary.href}
           class="w-full max-w-md transition-transform hover:-translate-y-1 active:translate-y-0"
           aria-label={HERO_CONTENT.buttons.primary.ariaLabel}
         >
-          <Button 
-            variant="default" 
-            size="lg"
-            className="w-full text-lg py-6 shadow-lg"
-          >
+          <Button variant="default" size="lg" className="w-full text-lg py-6 shadow-lg">
             {HERO_CONTENT.buttons.primary.label}
           </Button>
         </a>
 
         {/* Secondary CTA - Artykuły */}
-        <a 
+        <a
           href={HERO_CONTENT.buttons.secondary.href}
           class="w-full max-w-md transition-transform hover:-translate-y-1 active:translate-y-0"
           aria-label={HERO_CONTENT.buttons.secondary.ariaLabel}
         >
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="lg"
             className="w-full text-lg py-6 backdrop-blur-sm"
             class:list={[hasBackground && "bg-white/10 hover:bg-white/20 border-white/30"]}
@@ -89,13 +81,13 @@ const hasBackground = background.image !== null;
         </a>
 
         {/* AI Assistant CTA */}
-        <a 
+        <a
           href="/asystent"
           class="w-full max-w-md transition-transform hover:-translate-y-1 active:translate-y-0"
           aria-label="Porozmawiaj z asystentem AI o karmach dla psów"
         >
-          <Button 
-            variant="default" 
+          <Button
+            variant="default"
             size="lg"
             className="w-full text-lg py-6 shadow-xl bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 border-0"
           >
@@ -133,12 +125,7 @@ const hasBackground = background.image !== null;
 
   /* Gradient ciemny (dla jasnych zdjęć) */
   .hero-overlay[data-overlay="dark"] {
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.6) 50%,
-      rgba(0, 0, 0, 0.8) 100%
-    );
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.8) 100%);
   }
 
   /* Gradient jasny (dla ciemnych zdjęć) */

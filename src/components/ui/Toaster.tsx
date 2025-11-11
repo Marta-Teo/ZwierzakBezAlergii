@@ -1,4 +1,4 @@
-import { Toaster as SonnerToaster } from 'sonner';
+import { Toaster as SonnerToaster } from "sonner";
 
 /**
  * Komponent Toaster dla toast notifications
@@ -13,12 +13,11 @@ export function Toaster() {
       closeButton
       toastOptions={{
         style: {
-          background: 'hsl(var(--background))',
-          border: '1px solid hsl(var(--border))',
-          color: 'hsl(var(--foreground))',
+          background: "hsl(var(--background))",
+          border: "1px solid hsl(var(--border))",
+          color: "hsl(var(--foreground))",
         },
       }}
     />
   );
 }
-

@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { sortAllergensByPriority } from "../../lib/utils/allergenSorting";
 
 /**
  * GET /api/allergens
@@ -10,6 +11,13 @@ import type { APIRoute } from "astro";
  * - Główne kategorie (parent_id = null): mięso, drób, ryby, zboża, strączkowe, nabiał, jaja, czosnek
  * - Podkategorie (parent_id != null): np. kurczak (parent: drób), pszenica (parent: zboża)
  *
+ * Sortowanie według priorytetów:
+ * - Kategorie główne: drób → mięso → ryby → zboża → reszta alfabetycznie
+ * - Podkategorie drobiu: kurczak → indyk → kaczka → reszta alfabetycznie
+ * - Podkategorie mięsa: wołowina → reszta alfabetycznie
+ * - Podkategorie zbóż: pszenica → kukurydza → jęczmień → reszta alfabetycznie
+ * - Pozostałe podkategorie: alfabetycznie
+ *
  * @returns 200 - Lista alergenów z informacją o hierarchii
  * @returns 500 - Błąd serwera
  */
@@ -17,11 +25,7 @@ export const prerender = false;
 
 export const GET: APIRoute = async ({ locals }) => {
   try {
-    const { data: allergens, error } = await locals.supabase
-      .from("allergens")
-      .select("*")
-      .order("parent_id", { ascending: true, nullsFirst: true })
-      .order("name", { ascending: true });
+    const { data: allergens, error } = await locals.supabase.from("allergens").select("*");
 
     if (error) {
       console.error("[API /allergens] Błąd Supabase:", JSON.stringify(error, null, 2));
@@ -39,18 +43,21 @@ export const GET: APIRoute = async ({ locals }) => {
       );
     }
 
+    // Sortuj alergeny według priorytetów
+    const sortedAllergens = sortAllergensByPriority(allergens || []);
+
     // Opcjonalnie: grupowanie w strukturę drzewa
     // Główne kategorie (parent_id = null)
-    const mainCategories = allergens?.filter((a) => a.parent_id === null) || [];
+    const mainCategories = sortedAllergens.filter((a) => a.parent_id === null);
 
     // Podkategorie
-    const subCategories = allergens?.filter((a) => a.parent_id !== null) || [];
+    const subCategories = sortedAllergens.filter((a) => a.parent_id !== null);
 
     return new Response(
       JSON.stringify({
         success: true,
-        data: allergens,
-        count: allergens?.length || 0,
+        data: sortedAllergens,
+        count: sortedAllergens.length,
         hierarchy: {
           mainCategories,
           subCategories,

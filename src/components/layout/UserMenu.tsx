@@ -38,11 +38,7 @@ export function UserMenu({ user, userRole = "user" }: UserMenuProps) {
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          className="relative h-10 w-10 rounded-full"
-          aria-label="Menu użytkownika"
-        >
+        <Button variant="ghost" className="relative h-10 w-10 rounded-full" aria-label="Menu użytkownika">
           <Avatar>
             <AvatarFallback>{getInitials(user.email)}</AvatarFallback>
           </Avatar>
@@ -54,9 +50,7 @@ export function UserMenu({ user, userRole = "user" }: UserMenuProps) {
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium">Moje konto</p>
             <p className="text-xs text-muted-foreground">{user.email}</p>
-            {userRole === "admin" && (
-              <span className="text-xs font-medium text-primary">Admin</span>
-            )}
+            {userRole === "admin" && <span className="text-xs font-medium text-primary">Admin</span>}
           </div>
         </DropdownMenuLabel>
 
@@ -78,11 +72,7 @@ export function UserMenu({ user, userRole = "user" }: UserMenuProps) {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem
-          onClick={handleLogout}
-          disabled={isLoggingOut}
-          className="cursor-pointer"
-        >
+        <DropdownMenuItem onClick={handleLogout} disabled={isLoggingOut} className="cursor-pointer">
           {isLoggingOut ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -99,4 +89,3 @@ export function UserMenu({ user, userRole = "user" }: UserMenuProps) {
     </DropdownMenu>
   );
 }
-

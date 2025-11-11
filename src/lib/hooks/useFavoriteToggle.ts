@@ -9,7 +9,7 @@ interface ToggleFavoriteParams {
 /**
  * Hook do dodawania/usuwania karm z ulubionych
  * Implementuje optimistic updates dla lepszego UX
- * 
+ *
  * @returns Mutation do toggle ulubionych
  */
 export function useFavoriteToggle() {
@@ -22,12 +22,12 @@ export function useFavoriteToggle() {
         const res = await fetch(`/api/favorites/${foodId}`, {
           method: "DELETE",
         });
-        
+
         if (!res.ok) {
           const errorData = await res.json();
           throw new Error(errorData.error || "Failed to remove from favorites");
         }
-        
+
         return res.json();
       } else {
         // Dodaj do ulubionych
@@ -36,16 +36,16 @@ export function useFavoriteToggle() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ foodId }),
         });
-        
+
         if (!res.ok) {
           const errorData = await res.json();
           throw new Error(errorData.error || "Failed to add to favorites");
         }
-        
+
         return res.json();
       }
     },
-    
+
     onMutate: async ({ foodId, isFavorite }) => {
       // Optimistic update dla favorite-ids
       await queryClient.cancelQueries({ queryKey: ["favorite-ids"] });
@@ -63,24 +63,22 @@ export function useFavoriteToggle() {
 
       return { previousIds };
     },
-    
+
     onError: (err: Error, variables, context) => {
       // Rollback przy błędzie
       if (context?.previousIds) {
         queryClient.setQueryData(["favorite-ids"], context.previousIds);
       }
-      
+
       // Toast z błędem
       toast.error(err.message || "Nie udało się zaktualizować ulubionych");
     },
-    
+
     onSuccess: (data, { isFavorite }) => {
       // Toast z sukcesem
-      toast.success(
-        isFavorite ? "Usunięto z ulubionych" : "Dodano do ulubionych"
-      );
+      toast.success(isFavorite ? "Usunięto z ulubionych" : "Dodano do ulubionych");
     },
-    
+
     onSettled: () => {
       // Invalidate obu queries aby odświeżyć dane
       queryClient.invalidateQueries({ queryKey: ["favorites"] });
@@ -88,4 +86,3 @@ export function useFavoriteToggle() {
     },
   });
 }
-

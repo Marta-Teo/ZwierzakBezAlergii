@@ -15,15 +15,11 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   // 3. Ochrona chronionych stron
   const protectedRoutes = ["/dogs", "/favorites"];
-  const isProtectedRoute = protectedRoutes.some((route) =>
-    context.url.pathname.startsWith(route)
-  );
+  const isProtectedRoute = protectedRoutes.some((route) => context.url.pathname.startsWith(route));
 
   if (isProtectedRoute && !session) {
     // Redirect do login z return URL
-    const returnUrl = encodeURIComponent(
-      context.url.pathname + context.url.search
-    );
+    const returnUrl = encodeURIComponent(context.url.pathname + context.url.search);
     return context.redirect(`/login?redirect=${returnUrl}`);
   }
 

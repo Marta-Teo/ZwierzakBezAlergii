@@ -14,17 +14,12 @@ export function Header({ user, userRole = "user" }: HeaderProps) {
         {/* Logo */}
         <a href="/" className="flex items-center space-x-2 hover:opacity-80">
           <span className="text-2xl">🐕</span>
-          <span className="font-bold text-xl hidden sm:inline-block">
-            ZwierzakBezAlergii
-          </span>
+          <span className="font-bold text-xl hidden sm:inline-block">ZwierzakBezAlergii</span>
         </a>
 
         {/* Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
-          <a
-            href="/foods"
-            className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
-          >
+          <a href="/foods" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
             Karmy
           </a>
           <a
@@ -44,10 +39,7 @@ export function Header({ user, userRole = "user" }: HeaderProps) {
         {/* Auth Buttons / User Menu */}
         <div className="flex items-center gap-3">
           {user ? (
-            <UserMenu
-              user={{ email: user.email || "" }}
-              userRole={userRole}
-            />
+            <UserMenu user={{ email: user.email || "" }} userRole={userRole} />
           ) : (
             <>
               <a href="/login">
@@ -65,4 +57,3 @@ export function Header({ user, userRole = "user" }: HeaderProps) {
     </header>
   );
 }
-

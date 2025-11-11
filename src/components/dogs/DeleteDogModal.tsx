@@ -1,14 +1,7 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "../ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Alert, AlertDescription } from "../ui/alert";
 import { supabase } from "@/lib/supabase/client";
 
@@ -24,13 +17,7 @@ interface DeleteDogModalProps {
  * DeleteDogModal Component
  * Confirmation dialog for deleting a dog profile
  */
-export function DeleteDogModal({
-  dogId,
-  dogName,
-  isOpen,
-  onClose,
-  onSuccess,
-}: DeleteDogModalProps) {
+export function DeleteDogModal({ dogId, dogName, isOpen, onClose, onSuccess }: DeleteDogModalProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,10 +27,7 @@ export function DeleteDogModal({
 
     try {
       // Delete dog profile (allergens will be deleted automatically via CASCADE)
-      const { error: deleteError } = await supabase
-        .from("dog_profiles")
-        .delete()
-        .eq("id", dogId);
+      const { error: deleteError } = await supabase.from("dog_profiles").delete().eq("id", dogId);
 
       if (deleteError) throw deleteError;
 
@@ -61,9 +45,7 @@ export function DeleteDogModal({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Usuń profil {dogName}?</DialogTitle>
-          <DialogDescription>
-            Ta akcja jest nieodwracalna. Wszystkie dane psa zostaną usunięte.
-          </DialogDescription>
+          <DialogDescription>Ta akcja jest nieodwracalna. Wszystkie dane psa zostaną usunięte.</DialogDescription>
         </DialogHeader>
 
         {error && (
@@ -76,11 +58,7 @@ export function DeleteDogModal({
           <Button variant="outline" onClick={onClose} disabled={isDeleting}>
             Anuluj
           </Button>
-          <Button
-            variant="destructive"
-            onClick={handleDelete}
-            disabled={isDeleting}
-          >
+          <Button variant="destructive" onClick={handleDelete} disabled={isDeleting}>
             {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Usuń
           </Button>

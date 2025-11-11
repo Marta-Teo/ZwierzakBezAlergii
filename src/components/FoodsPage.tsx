@@ -1,23 +1,23 @@
-import React, { useState, useMemo } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { toast } from 'sonner';
-import { SearchBar } from './SearchBar';
-import { FilterSidebar } from './FilterSidebar';
-import { FoodCardGrid } from './FoodCardGrid';
-import { LoadingState } from './LoadingState';
-import { ErrorMessage } from './ErrorMessage';
-import { PaginationButton } from './PaginationButton';
-import { FoodDetailModal } from './FoodDetailModal';
-import { Alert, AlertDescription, AlertTitle } from './ui/alert';
-import { Button } from './ui/button';
-import { useFoods } from '../lib/hooks/useFoods';
-import { useBrands } from '../lib/hooks/useBrands';
-import { useSizeTypes } from '../lib/hooks/useSizeTypes';
-import { useAgeCategories } from '../lib/hooks/useAgeCategories';
-import { useAllergens } from '../lib/hooks/useAllergens';
-import { useFavoriteIds } from '../lib/hooks/useFavoriteIds';
-import { useFavoriteToggle } from '../lib/hooks/useFavoriteToggle';
-import type { FiltersModel, FoodListItem } from '../types';
+import React, { useState, useMemo } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { SearchBar } from "./SearchBar";
+import { FilterSidebar } from "./FilterSidebar";
+import { FoodCardGrid } from "./FoodCardGrid";
+import { LoadingState } from "./LoadingState";
+import { ErrorMessage } from "./ErrorMessage";
+import { PaginationButton } from "./PaginationButton";
+import { FoodDetailModal } from "./FoodDetailModal";
+import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { Button } from "./ui/button";
+import { useFoods } from "../lib/hooks/useFoods";
+import { useBrands } from "../lib/hooks/useBrands";
+import { useSizeTypes } from "../lib/hooks/useSizeTypes";
+import { useAgeCategories } from "../lib/hooks/useAgeCategories";
+import { useAllergens } from "../lib/hooks/useAllergens";
+import { useFavoriteIds } from "../lib/hooks/useFavoriteIds";
+import { useFavoriteToggle } from "../lib/hooks/useFavoriteToggle";
+import type { FiltersModel, FoodListItem } from "../types";
 
 // Tworzenie QueryClient dla React Query
 const queryClient = new QueryClient({
@@ -43,20 +43,20 @@ interface FoodsPageContentProps {
 
 /**
  * Główny komponent widoku listy karm
- * 
+ *
  * Zawiera:
  * - SearchBar (wyszukiwanie z debounce)
  * - FilterSidebar (filtry po marce, rozmiarze, wieku, alergenach)
  * - FoodCardGrid (responsive grid 1-5 kolumn)
  * - PaginationButton ("Załaduj więcej")
  * - FoodDetailModal (szczegóły karmy)
- * 
+ *
  * Stan:
  * - searchTerm (fraza wyszukiwania)
  * - filters (aktywne filtry)
  * - offset (paginacja)
  * - selectedFoodId (ID karmy dla modalu)
- * 
+ *
  * @example
  * ```tsx
  * <FoodsPage />
@@ -64,10 +64,10 @@ interface FoodsPageContentProps {
  */
 function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentProps) {
   // Stan lokalny
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [offset, setOffset] = useState(0);
   const [selectedFoodId, setSelectedFoodId] = useState<number | null>(null);
-  
+
   // Inicjalizacja filtrów z preselectedFilters jeśli dostępne
   const [filters, setFilters] = useState<FiltersModel>({
     excludeAllergens: preselectedFilters?.excludeAllergens || [],
@@ -75,7 +75,7 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
     sizeTypeId: preselectedFilters?.sizeTypeId || undefined,
     ageCategoryId: preselectedFilters?.ageCategoryId || undefined,
   });
-  
+
   // Flaga czy filtry pochodzą z profilu psa
   const [isDogProfile, setIsDogProfile] = useState(!!preselectedFilters);
 
@@ -115,7 +115,7 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
   const foodsWithBrands: FoodListItem[] = useMemo(() => {
     return foods.map((food) => ({
       ...food,
-      brandName: brands.find((b) => b.id === food.brand_id)?.name || 'Nieznana marka',
+      brandName: brands.find((b) => b.id === food.brand_id)?.name || "Nieznana marka",
     }));
   }, [foods, brands]);
 
@@ -139,8 +139,8 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
     setIsDogProfile(false);
     // Remove dogId from URL
     const url = new URL(window.location.href);
-    url.searchParams.delete('dogId');
-    window.history.replaceState({}, '', url);
+    url.searchParams.delete("dogId");
+    window.history.replaceState({}, "", url);
   };
 
   // Obsługa resetowania filtrów
@@ -167,10 +167,10 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
   // Obsługa dodawania/usuwania z ulubionych
   const handleFavoriteToggle = (foodId: number, isFavorite: boolean) => {
     if (!isLoggedIn) {
-      toast.info('Zaloguj się, aby dodać karmy do ulubionych', {
+      toast.info("Zaloguj się, aby dodać karmy do ulubionych", {
         action: {
-          label: 'Zaloguj się',
-          onClick: () => (window.location.href = '/login?redirect=/foods'),
+          label: "Zaloguj się",
+          onClick: () => (window.location.href = "/login?redirect=/foods"),
         },
       });
       return;
@@ -180,8 +180,7 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
   };
 
   // Loading state dla opcji filtrów
-  const areOptionsLoading =
-    isBrandsLoading || isSizeTypesLoading || isAgeCategoriesLoading || isAllergensLoading;
+  const areOptionsLoading = isBrandsLoading || isSizeTypesLoading || isAgeCategoriesLoading || isAllergensLoading;
 
   return (
     <div className="min-h-screen bg-background">
@@ -202,10 +201,10 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
           <div className="flex-1">
             <SearchBar value={searchTerm} onSearchChange={handleSearchChange} />
           </div>
-          
+
           {/* Przyciski nawigacyjne */}
           <div className="flex gap-2">
-            <a 
+            <a
               href="/"
               className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               aria-label="Powrót do strony głównej"
@@ -229,7 +228,7 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
             </a>
 
             {/* Asystent AI - Wyróżniony button */}
-            <a 
+            <a
               href="/asystent"
               className="flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 shadow-lg bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700"
               aria-label="Porozmawiaj z asystentem AI"
@@ -263,15 +262,9 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
                   <span>🐕</span>
                   Wyniki dla: {preselectedFilters.dogName}
                 </AlertTitle>
-                <AlertDescription>
-                  Filtry automatycznie ustawione na podstawie profilu psa.
-                </AlertDescription>
+                <AlertDescription>Filtry automatycznie ustawione na podstawie profilu psa.</AlertDescription>
               </div>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={clearDogFilters}
-              >
+              <Button variant="ghost" size="sm" onClick={clearDogFilters}>
                 Wyczyść filtry
               </Button>
             </div>
@@ -307,11 +300,7 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
             {isFoodsError && (
               <ErrorMessage
                 title="Błąd ładowania karm"
-                message={
-                  foodsError instanceof Error
-                    ? foodsError.message
-                    : 'Nie udało się pobrać listy karm'
-                }
+                message={foodsError instanceof Error ? foodsError.message : "Nie udało się pobrać listy karm"}
                 onRetry={() => refetchFoods()}
               />
             )}
@@ -341,11 +330,7 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
 
                 {/* Pagination */}
                 {pagination && (
-                  <PaginationButton
-                    hasMore={pagination.hasMore}
-                    isLoading={false}
-                    onLoadMore={handleLoadMore}
-                  />
+                  <PaginationButton hasMore={pagination.hasMore} isLoading={false} onLoadMore={handleLoadMore} />
                 )}
               </>
             )}
@@ -354,11 +339,7 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
       </main>
 
       {/* Modal szczegółów karmy */}
-      <FoodDetailModal
-        isOpen={!!selectedFoodId}
-        foodId={selectedFoodId}
-        onClose={handleModalClose}
-      />
+      <FoodDetailModal isOpen={!!selectedFoodId} foodId={selectedFoodId} onClose={handleModalClose} />
     </div>
   );
 }
@@ -373,4 +354,3 @@ export function FoodsPage({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
     </QueryClientProvider>
   );
 }
-

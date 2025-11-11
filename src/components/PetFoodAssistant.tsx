@@ -1,17 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useChat } from '@/lib/hooks/useChat';
-import { Button } from './ui/button';
+import React, { useState, useRef, useEffect } from "react";
+import { useChat } from "@/lib/hooks/useChat";
+import { Button } from "./ui/button";
 
 /**
  * PetFoodAssistant - Inteligentny asystent do doboru karm dla psów
- * 
+ *
  * Komponent czatu który pomaga użytkownikom w:
  * - Doborze karmy dla psa z alergią
  * - Analizie składu karm
  * - Odpowiadaniu na pytania o alergeny
  */
 export function PetFoodAssistant() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { messages, isLoading, error, sendMessage, clearMessages } = useChat({
@@ -19,14 +19,14 @@ export function PetFoodAssistant() {
 Pomagasz właścicielom psów dobierać odpowiednie karmy, szczególnie dla psów z alergiami.
 Odpowiadaj zwięźle, konkretnie i pomocnie. Jeśli pytają o konkretną karmę, zachęć do sprawdzenia bazy danych na stronie.
 Bądź ciepły i przyjazny w komunikacji.`,
-    model: 'openai/gpt-3.5-turbo',
+    model: "openai/gpt-3.5-turbo",
     temperature: 0.7,
-    maxTokens: 500
+    maxTokens: 500,
   });
 
   // Auto-scroll do najnowszej wiadomości
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,14 +34,14 @@ Bądź ciepły i przyjazny w komunikacji.`,
     if (!input.trim() || isLoading) return;
 
     await sendMessage(input);
-    setInput('');
+    setInput("");
   };
 
   // Przykładowe pytania do szybkiego startu
   const quickQuestions = [
-    'Jakie są najczęstsze alergeny u psów?',
-    'Mój pies ma alergię na kurczaka, co polecasz?',
-    'Jak rozpoznać alergię pokarmową u psa?',
+    "Jakie są najczęstsze alergeny u psów?",
+    "Mój pies ma alergię na kurczaka, co polecasz?",
+    "Jak rozpoznać alergię pokarmową u psa?",
   ];
 
   const handleQuickQuestion = (question: string) => {
@@ -53,16 +53,10 @@ Bądź ciepły i przyjazny w komunikacji.`,
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-border bg-gradient-to-r from-purple-500 to-indigo-600">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-2xl">
-            🐕
-          </div>
+          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-2xl">🐕</div>
           <div>
-            <h2 className="text-xl font-bold text-white">
-              Asystent Żywieniowy
-            </h2>
-            <p className="text-sm text-blue-100">
-              Pytaj o karmy i alergeny
-            </p>
+            <h2 className="text-xl font-bold text-white">Asystent Żywieniowy</h2>
+            <p className="text-sm text-blue-100">Pytaj o karmy i alergeny</p>
           </div>
         </div>
         <Button
@@ -80,13 +74,9 @@ Bądź ciepły i przyjazny w komunikacji.`,
         {messages.length === 0 && (
           <div className="text-center py-8">
             <div className="text-6xl mb-4">🐾</div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">
-              Witaj w Asystencie Żywieniowym!
-            </h3>
-            <p className="text-muted-foreground mb-6">
-              Zapytaj mnie o karmy, alergeny lub dietę dla Twojego psa
-            </p>
-            
+            <h3 className="text-xl font-semibold text-foreground mb-2">Witaj w Asystencie Żywieniowym!</h3>
+            <p className="text-muted-foreground mb-6">Zapytaj mnie o karmy, alergeny lub dietę dla Twojego psa</p>
+
             {/* Quick Questions */}
             <div className="space-y-2">
               <p className="text-sm text-muted-foreground mb-3">Przykładowe pytania:</p>
@@ -104,32 +94,24 @@ Bądź ciepły i przyjazny w komunikacji.`,
         )}
 
         {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`flex ${
-              message.role === 'user' ? 'justify-end' : 'justify-start'
-            }`}
-          >
+          <div key={index} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
             <div
               className={`max-w-[80%] rounded-lg px-4 py-3 ${
-                message.role === 'user'
-                  ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white'
-                  : 'bg-card border border-border text-foreground'
+                message.role === "user"
+                  ? "bg-gradient-to-r from-purple-500 to-indigo-600 text-white"
+                  : "bg-card border border-border text-foreground"
               }`}
             >
               <div className="flex items-start gap-2">
-                {message.role === 'assistant' && (
-                  <span className="text-lg">🤖</span>
-                )}
+                {message.role === "assistant" && <span className="text-lg">🤖</span>}
                 <div className="flex-1">
                   <div className="text-xs font-semibold mb-1 opacity-70">
-                    {message.role === 'user' ? 'Ty' : 'Asystent'}
+                    {message.role === "user" ? "Ty" : "Asystent"}
                   </div>
                   <div className="whitespace-pre-wrap leading-relaxed">
-                    {typeof message.content === 'string' 
-                      ? message.content 
-                      : message.content.map((c, i) => c.type === 'text' ? c.text : '').join('')
-                    }
+                    {typeof message.content === "string"
+                      ? message.content
+                      : message.content.map((c, i) => (c.type === "text" ? c.text : "")).join("")}
                   </div>
                 </div>
               </div>
@@ -143,9 +125,18 @@ Bądź ciepły i przyjazny w komunikacji.`,
               <div className="flex items-center gap-2">
                 <span className="text-lg">🤖</span>
                 <div className="flex gap-1">
-                  <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                  <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                  <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                  <div
+                    className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                    style={{ animationDelay: "0ms" }}
+                  ></div>
+                  <div
+                    className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                    style={{ animationDelay: "150ms" }}
+                  ></div>
+                  <div
+                    className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                    style={{ animationDelay: "300ms" }}
+                  ></div>
                 </div>
                 <span className="text-sm text-muted-foreground">Myślę...</span>
               </div>
@@ -190,7 +181,7 @@ Bądź ciepły i przyjazny w komunikacji.`,
                 Wysyłam...
               </span>
             ) : (
-              '📤 Wyślij'
+              "📤 Wyślij"
             )}
           </Button>
         </form>
@@ -201,4 +192,3 @@ Bądź ciepły i przyjazny w komunikacji.`,
     </div>
   );
 }
-

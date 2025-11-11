@@ -39,7 +39,8 @@ export function AuthPromptBanner() {
         <Lightbulb className="h-6 w-6 text-primary flex-shrink-0" />
         <div className="flex-1">
           <p className="text-sm font-medium text-foreground">
-            Masz psa z alergiami? Zaloguj się i stwórz jego profil, aby automatycznie ukryć karmy z niebezpiecznymi składnikami!
+            Masz psa z alergiami? Zaloguj się i stwórz jego profil, aby automatycznie ukryć karmy z niebezpiecznymi
+            składnikami!
           </p>
         </div>
         <a href="/register" className="hidden sm:block">
@@ -58,4 +59,3 @@ export function AuthPromptBanner() {
     </div>
   );
 }
-

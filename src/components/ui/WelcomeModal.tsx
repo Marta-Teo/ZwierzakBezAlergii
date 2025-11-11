@@ -31,9 +31,7 @@ export function WelcomeModal() {
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <Dog className="h-8 w-8 text-primary" />
           </div>
-          <DialogTitle className="text-center text-2xl">
-            Witaj w ZwierzakBezAlergii! 🐕
-          </DialogTitle>
+          <DialogTitle className="text-center text-2xl">Witaj w ZwierzakBezAlergii! 🐕</DialogTitle>
           <DialogDescription className="text-center text-base">
             Stwórz profil swojego psa i automatycznie filtruj karmy bezpieczne dla niego!
           </DialogDescription>
@@ -62,4 +60,3 @@ export function WelcomeModal() {
     </Dialog>
   );
 }
-

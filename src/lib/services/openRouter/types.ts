@@ -1,4 +1,4 @@
-import type { z } from 'zod';
+import type { z } from "zod";
 
 // ===== Konfiguracja =====
 export interface OpenRouterConfig {
@@ -16,22 +16,22 @@ export interface OpenRouterConfig {
 
 // ===== Wiadomości =====
 export interface MessageContent {
-  type: 'text' | 'image_url';
+  type: "text" | "image_url";
   text?: string;
   image_url?: {
     url: string;
-    detail?: 'low' | 'high' | 'auto';
+    detail?: "low" | "high" | "auto";
   };
 }
 
 export interface Message {
-  role: 'system' | 'user' | 'assistant';
+  role: "system" | "user" | "assistant";
   content: string | MessageContent[];
 }
 
 // ===== Response Format =====
 export interface ResponseFormat {
-  type: 'json_schema';
+  type: "json_schema";
   json_schema: {
     name: string;
     strict: boolean;
@@ -65,7 +65,7 @@ export interface ChatResponse {
     completionTokens: number;
     totalTokens: number;
   };
-  finishReason: 'stop' | 'length' | 'content_filter' | 'tool_calls';
+  finishReason: "stop" | "length" | "content_filter" | "tool_calls";
   metadata: {
     created: number;
     latency: number;
@@ -104,14 +104,14 @@ export interface OpenRouterResponse {
   id: string;
   model: string;
   created: number;
-  choices: Array<{
+  choices: {
     index: number;
     message: {
       role: string;
       content: string;
     };
     finish_reason: string;
-  }>;
+  }[];
   usage: {
     prompt_tokens: number;
     completion_tokens: number;
@@ -120,8 +120,7 @@ export interface OpenRouterResponse {
 }
 
 // ===== Schema Types =====
-export interface ChatWithSchemaOptions<T> extends Omit<ChatOptions, 'responseFormat'> {
+export interface ChatWithSchemaOptions<T> extends Omit<ChatOptions, "responseFormat"> {
   schema: z.ZodSchema<T>;
   schemaName: string;
 }
-

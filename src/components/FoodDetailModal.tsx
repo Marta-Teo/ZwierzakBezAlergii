@@ -1,19 +1,9 @@
-import React from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from './ui/dialog';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from './ui/accordion';
-import { Badge } from './ui/badge';
-import { Loader2, AlertCircle } from 'lucide-react';
-import { useFoodDetail } from '../lib/hooks/useFoodDetail';
+import React from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
+import { Badge } from "./ui/badge";
+import { Loader2, AlertCircle } from "lucide-react";
+import { useFoodDetail } from "../lib/hooks/useFoodDetail";
 
 /**
  * Props dla komponentu FoodDetailModal
@@ -29,19 +19,19 @@ interface FoodDetailModalProps {
 
 /**
  * Modal z pełnymi szczegółami karmy
- * 
+ *
  * Wyświetla:
  * - Duże zdjęcie opakowania (16:9)
  * - Nazwę, markę, kategorię wieku, rozmiar granulatu
  * - Accordion z listą składników
  * - Accordion z listą alergenów (Badge)
- * 
+ *
  * Obsługuje:
  * - Zamknięcie przez X, ESC, kliknięcie w overlay
  * - Focus trap (Shadcn Dialog)
  * - Loading state
  * - Error state (404, błąd sieci)
- * 
+ *
  * @example
  * ```tsx
  * <FoodDetailModal
@@ -76,7 +66,7 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
               <AlertCircle className="mx-auto h-12 w-12 text-red-500" />
               <h3 className="mt-4 text-lg font-semibold text-red-900">Błąd ładowania</h3>
               <p className="mt-2 text-sm text-red-700">
-                {error instanceof Error ? error.message : 'Nie udało się pobrać szczegółów karmy'}
+                {error instanceof Error ? error.message : "Nie udało się pobrać szczegółów karmy"}
               </p>
               <button
                 type="button"
@@ -98,7 +88,7 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
 
             <div className="space-y-6">
               {/* Duże zdjęcie - dopasowane do proporcji obrazka */}
-              <div className="relative w-full overflow-hidden rounded-lg bg-white" style={{ paddingBottom: '75%' }}>
+              <div className="relative w-full overflow-hidden rounded-lg bg-white" style={{ paddingBottom: "75%" }}>
                 {food.image_url ? (
                   <img
                     src={food.image_url}
@@ -107,12 +97,7 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <svg
-                      className="h-24 w-24 text-gray-300"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+                    <svg className="h-24 w-24 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -132,14 +117,14 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
                     <p className="mt-1 text-sm font-semibold text-gray-900">{food.brand.name}</p>
                   </div>
                 )}
-                
+
                 {food.sizeType && (
                   <div>
                     <p className="text-xs font-medium text-gray-500">Rozmiar granulatu</p>
                     <p className="mt-1 text-sm font-semibold text-gray-900">{food.sizeType.name}</p>
                   </div>
                 )}
-                
+
                 {food.ageCategory && (
                   <div>
                     <p className="text-xs font-medium text-gray-500">Wiek psa</p>
@@ -180,11 +165,7 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
                     <AccordionContent>
                       <div className="flex flex-wrap gap-2">
                         {food.allergens.map((allergen) => (
-                          <Badge
-                            key={allergen.id}
-                            variant="destructive"
-                            className="text-sm"
-                          >
+                          <Badge key={allergen.id} variant="destructive" className="text-sm">
                             {allergen.name}
                           </Badge>
                         ))}
@@ -199,13 +180,9 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
                 {/* Skład surowy (jeśli dostępny) */}
                 {food.ingredients_raw && (
                   <AccordionItem value="raw-composition">
-                    <AccordionTrigger className="text-lg font-semibold">
-                      Pełny skład (z opakowania)
-                    </AccordionTrigger>
+                    <AccordionTrigger className="text-lg font-semibold">Pełny skład (z opakowania)</AccordionTrigger>
                     <AccordionContent>
-                      <p className="whitespace-pre-wrap text-sm text-gray-700">
-                        {food.ingredients_raw}
-                      </p>
+                      <p className="whitespace-pre-wrap text-sm text-gray-700">{food.ingredients_raw}</p>
                     </AccordionContent>
                   </AccordionItem>
                 )}
@@ -214,9 +191,7 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
               {/* Brak składników/alergenów */}
               {(!food.ingredients || food.ingredients.length === 0) && (
                 <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
-                  <p className="text-sm text-yellow-800">
-                    Brak szczegółowych informacji o składnikach dla tej karmy.
-                  </p>
+                  <p className="text-sm text-yellow-800">Brak szczegółowych informacji o składnikach dla tej karmy.</p>
                 </div>
               )}
             </div>
@@ -226,4 +201,3 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
     </Dialog>
   );
 }
-

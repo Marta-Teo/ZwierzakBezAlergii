@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import type { Message, ChatResponse } from '@/lib/services/openRouter';
+import { useState, useCallback } from "react";
+import type { Message, ChatResponse } from "@/lib/services/openRouter";
 
 /**
  * Opcje konfiguracji dla hooka useChat
@@ -35,13 +35,13 @@ interface UseChatReturn {
 
 /**
  * React hook do zarządzania konwersacją z LLM
- * 
+ *
  * Automatycznie zarządza stanem konwersacji, obsługuje błędy i loading state.
  * Wysyła requesty do /api/chat endpoint.
- * 
+ *
  * @param options - Opcje konfiguracji chatu
  * @returns Obiekt z metodami i stanem konwersacji
- * 
+ *
  * @example
  * ```tsx
  * const { messages, isLoading, error, sendMessage, clearMessages } = useChat({
@@ -49,10 +49,10 @@ interface UseChatReturn {
  *   model: 'openai/gpt-4',
  *   temperature: 0.7
  * });
- * 
+ *
  * // Wyślij wiadomość
  * await sendMessage('Jakie są najczęstsze alergeny u psów?');
- * 
+ *
  * // Wyczyść historię
  * clearMessages();
  * ```
@@ -65,68 +65,68 @@ export function useChat(options: UseChatOptions = {}): UseChatReturn {
   /**
    * Wysyła nową wiadomość użytkownika i otrzymuje odpowiedź asystenta
    */
-  const sendMessage = useCallback(async (content: string) => {
-    // Guard clause - ignoruj puste wiadomości
-    if (!content.trim()) return;
+  const sendMessage = useCallback(
+    async (content: string) => {
+      // Guard clause - ignoruj puste wiadomości
+      if (!content.trim()) return;
 
-    // Utwórz wiadomość użytkownika
-    const userMessage: Message = {
-      role: 'user',
-      content: content.trim()
-    };
-
-    // Dodaj wiadomość użytkownika do historii
-    setMessages(prev => [...prev, userMessage]);
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      // Wyślij request do API
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: [...messages, userMessage],
-          systemMessage: options.systemMessage,
-          model: options.model,
-          temperature: options.temperature,
-          maxTokens: options.maxTokens
-        })
-      });
-
-      // Obsługa błędów HTTP
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Błąd serwera');
-      }
-
-      // Parsuj odpowiedź
-      const data: ChatResponse = await response.json();
-
-      // Dodaj odpowiedź asystenta do historii
-      const assistantMessage: Message = {
-        role: 'assistant',
-        content: data.content
+      // Utwórz wiadomość użytkownika
+      const userMessage: Message = {
+        role: "user",
+        content: content.trim(),
       };
 
-      setMessages(prev => [...prev, assistantMessage]);
+      // Dodaj wiadomość użytkownika do historii
+      setMessages((prev) => [...prev, userMessage]);
+      setIsLoading(true);
+      setError(null);
 
-    } catch (err) {
-      // Obsługa błędów
-      const errorMessage = err instanceof Error 
-        ? err.message 
-        : 'Wystąpił nieoczekiwany błąd';
-      
-      setError(errorMessage);
-      
-      // Wywołaj callback onError jeśli został podany
-      if (options.onError) {
-        options.onError(err instanceof Error ? err : new Error(errorMessage));
+      try {
+        // Wyślij request do API
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            messages: [...messages, userMessage],
+            systemMessage: options.systemMessage,
+            model: options.model,
+            temperature: options.temperature,
+            maxTokens: options.maxTokens,
+          }),
+        });
+
+        // Obsługa błędów HTTP
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Błąd serwera");
+        }
+
+        // Parsuj odpowiedź
+        const data: ChatResponse = await response.json();
+
+        // Dodaj odpowiedź asystenta do historii
+        const assistantMessage: Message = {
+          role: "assistant",
+          content: data.content,
+        };
+
+        setMessages((prev) => [...prev, assistantMessage]);
+      } catch (err) {
+        // Obsługa błędów
+        const errorMessage = err instanceof Error ? err.message : "Wystąpił nieoczekiwany błąd";
+
+        setError(errorMessage);
+
+        // Wywołaj callback onError jeśli został podany
+        if (options.onError) {
+          options.onError(err instanceof Error ? err : new Error(errorMessage));
+        }
+      } finally {
+        setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
-    }
-  }, [messages, options]);
+    },
+    [messages, options]
+  );
 
   /**
    * Czyści całą historię konwersacji i resetuje błędy
@@ -141,7 +141,6 @@ export function useChat(options: UseChatOptions = {}): UseChatReturn {
     isLoading,
     error,
     sendMessage,
-    clearMessages
+    clearMessages,
   };
 }
-
