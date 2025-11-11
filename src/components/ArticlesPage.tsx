@@ -53,9 +53,9 @@ function ArticlesPageContent() {
   const totalPages = data?.pagination ? Math.ceil(data.pagination.total / limit) : 1;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-card shadow-sm border-b border-border">
+      <header className="bg-card/90 backdrop-blur-sm shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-foreground mb-2">Artykuły o alergiach pokarmowych</h1>
           <p className="text-muted-foreground">

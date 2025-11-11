@@ -47,7 +47,7 @@ function FavoritesPageContent() {
   // Error state
   if (isError) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen">
         <div className="container mx-auto px-4 py-8">
           <div className="flex min-h-[400px] items-center justify-center rounded-lg border border-destructive/50 bg-destructive/10">
             <div className="text-center">
@@ -68,7 +68,7 @@ function FavoritesPageContent() {
   // Loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen">
         <div className="container mx-auto px-4 py-8">
           <div className="mb-8 flex animate-pulse items-center gap-3">
             <div className="h-8 w-8 rounded-full bg-muted" />
@@ -81,9 +81,9 @@ function FavoritesPageContent() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="border-b border-border bg-card shadow-sm">
+      <header className="border-b border-border bg-card/90 backdrop-blur-sm shadow-sm">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center gap-3">
             <Heart className="h-8 w-8 fill-destructive text-destructive" />

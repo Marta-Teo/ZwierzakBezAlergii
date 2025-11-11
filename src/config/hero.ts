@@ -6,9 +6,9 @@
  */
 
 export const HERO_CONTENT = {
-  title: "Jeśli szukasz dopasowanej karmy dla Twojego psa alergika, to jesteś w dobrym miejscu!",
+  title: "Twój pies ma alergię pokarmową? Jesteś w dobrym miejscu! :)",
   description:
-    "Strona ta została stworzona z miłości do psów i z doświadczenia związanego z posiadaniem psów z alergami. Być może Twój pies boryka się z różnymi przypadłościami, których nie umiesz zdiagnozować bądź alergia już jest znana i chcesz się dowiedzieć jaki wybór karm masz. Posiadamy tu bazę karm suchych dostępnych w Polsce z możliwością filtrowania po składnikach i alergenach oraz artykuły, które odpowiedzą na nurtujące Cię pytania.",
+    "Strona ta została stworzona z miłości do psów i z doświadczenia z psami alergikami.\n\nNie wiesz, czym karmić psa z alergią? Pomożemy!\n\nNasza baza karm pozwala szybko znaleźć bezpieczne dla Twojego pupila karmy dostępne w Polsce.\n\n Filtruj po składnikach, czytaj porady oraz artykuły i wybieraj świadomie.",
   buttons: {
     primary: {
       label: "Przeglądaj karmy",
@@ -55,6 +55,6 @@ export const HERO_CONTENT = {
      * Opacity gradientu (0-1)
      * Wyższa wartość = silniejszy gradient
      */
-    overlayOpacity: 0.7,
+    overlayOpacity: 0.1,
   },
 } as const;

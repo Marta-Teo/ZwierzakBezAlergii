@@ -183,13 +183,13 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
   const areOptionsLoading = isBrandsLoading || isSizeTypesLoading || isAgeCategoriesLoading || isAllergensLoading;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-card shadow-sm border-b border-border">
+      <header className="bg-card/90 backdrop-blur-sm shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-6">
           <h1 className="text-3xl font-bold text-foreground">Karmy dla psów</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Znajdź odpowiednią karmę dla Twojego pupila, wolną od wybranych alergenów
+            Pełne składy wraz z prawidłową kolejnością składników, w zależności od proporcji w składzie, znajdują się w zakładce "Pełny skład (z opakowania)". Pole "Składniki" zawiera listę składników karmy ale w losowej kolejności.
           </p>
         </div>
       </header>

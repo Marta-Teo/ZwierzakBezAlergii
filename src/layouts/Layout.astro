@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { Header } from "../components/layout/Header";
 import { Toaster } from "../components/ui/Toaster";
+import { HERO_CONTENT } from "../config/hero";
 
 interface Props {
   title?: string;
@@ -22,6 +23,10 @@ if (user) {
   const { data: userData } = await Astro.locals.supabase.from("users").select("role").eq("id", user.id).single();
   userRole = (userData?.role as "user" | "admin") || "user";
 }
+
+// Konfiguracja tła
+const { background } = HERO_CONTENT;
+const hasBackground = background.image !== null;
 ---
 
 <!doctype html>
@@ -60,8 +65,80 @@ if (user) {
     <link rel="canonical" href={Astro.url} />
   </head>
   <body>
-    <Header client:load user={user} userRole={userRole} />
-    <slot />
-    <Toaster client:load />
+    <div class="app-wrapper">
+      {/* Warstwa tła - tylko gdy jest ustawiony obraz */}
+      {
+        hasBackground && (
+          <>
+            {/* Obraz tła */}
+            <div class="global-background" style={`background-image: url('${background.image}');`} />
+
+            {/* Gradient overlay */}
+            {background.overlay !== "none" && (
+              <div
+                class="global-overlay"
+                data-overlay={background.overlay}
+                style={`opacity: ${background.overlayOpacity};`}
+              />
+            )}
+          </>
+        )
+      }
+
+      {/* Zawartość strony */}
+      <div class="app-content">
+        <Header client:load user={user} userRole={userRole} />
+        <slot />
+        <Toaster client:load />
+      </div>
+    </div>
   </body>
 </html>
+
+<style>
+  /* Kontener aplikacji z pozycjonowaniem relative dla warstw */
+  .app-wrapper {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Warstwa tła - obraz */
+  .global-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Warstwa overlay - gradient dla lepszej czytelności */
+  .global-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+  }
+
+  /* Gradient ciemny (dla jasnych zdjęć) */
+  .global-overlay[data-overlay="dark"] {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.8) 100%);
+  }
+
+  /* Gradient jasny (dla ciemnych zdjęć) */
+  .global-overlay[data-overlay="light"] {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.8) 100%
+    );
+  }
+
+  /* Zawartość aplikacji - zawsze na wierzchu */
+  .app-content {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+  }
+</style>

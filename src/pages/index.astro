@@ -9,44 +9,22 @@ const hasBackground = background.image !== null;
 ---
 
 <Layout title="ZwierzakBezAlergii - Karmy dla psów z alergiami">
-  <main
-    class="hero-section min-h-screen flex items-center justify-center px-4"
-    class:list={[!hasBackground && "bg-background"]}
-  >
-    {/* Warstwa tła - tylko gdy jest ustawiony obraz */}
-    {
-      hasBackground && (
-        <>
-          {/* Obraz tła */}
-          <div class="hero-background" style={`background-image: url('${background.image}');`} />
-
-          {/* Gradient overlay */}
-          {background.overlay !== "none" && (
-            <div
-              class="hero-overlay"
-              data-overlay={background.overlay}
-              style={`opacity: ${background.overlayOpacity};`}
-            />
-          )}
-        </>
-      )
-    }
-
+  <main class="hero-section min-h-screen flex items-center justify-center px-4">
     {/* Treść hero (zawsze na wierzchu) */}
-    <section class="hero-content container max-w-2xl text-center relative z-10" aria-labelledby="hero-heading">
+    <section class="hero-content container max-w-8xl text-center relative z-10" aria-labelledby="hero-heading">
       {/* Nagłówek główny */}
       <h1
         id="hero-heading"
-        class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
-        class:list={[hasBackground ? "text-white drop-shadow-lg" : "text-foreground"]}
+        class="text-3xl sm:text-5xl lg:text-5xl font-bold mb-16 leading-tight"
+        class:list={[hasBackground ? "text-purple drop-shadow-lg" : "text-foreground"]}
       >
         {HERO_CONTENT.title}
       </h1>
 
       {/* Opis misji */}
       <p
-        class="text-lg sm:text-xl mb-10 max-w-xl mx-auto leading-relaxed"
-        class:list={[hasBackground ? "text-white/90 drop-shadow-md" : "text-muted-foreground"]}
+        class="text-base sm:text-2xl mb-4 max-w-6xl mx-auto leading-relaxed whitespace-pre-line"
+        class:list={[hasBackground ? "text-black/90 drop-shadow-md" : "text-muted-foreground"]}
       >
         {HERO_CONTENT.description}
       </p>
@@ -100,44 +78,6 @@ const hasBackground = background.image !== null;
 </Layout>
 
 <style>
-  /* Kontener hero z pozycjonowaniem relative dla warstw */
-  .hero-section {
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Warstwa tła - obraz */
-  .hero-background {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  /* Warstwa overlay - gradient dla lepszej czytelności */
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-  }
-
-  /* Gradient ciemny (dla jasnych zdjęć) */
-  .hero-overlay[data-overlay="dark"] {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.8) 100%);
-  }
-
-  /* Gradient jasny (dla ciemnych zdjęć) */
-  .hero-overlay[data-overlay="light"] {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.8) 0%,
-      rgba(255, 255, 255, 0.6) 50%,
-      rgba(255, 255, 255, 0.8) 100%
-    );
-  }
-
   /* Animacja fade-in przy załadowaniu */
   .hero-content {
     animation: fadeInUp 0.8s ease-out;
@@ -151,13 +91,6 @@ const hasBackground = background.image !== null;
     to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-
-  /* Responsywne dostosowanie tła */
-  @media (max-width: 640px) {
-    .hero-background {
-      background-position: center center;
     }
   }
 </style>
