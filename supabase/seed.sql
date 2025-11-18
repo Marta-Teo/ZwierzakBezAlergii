@@ -1,5 +1,5 @@
 -- Seed data for ZwierzakBezAlergii
--- Auto-generated on 2025-11-10T19:56:24.009Z
+-- Auto-generated on 2025-11-18T19:01:46.509Z
 -- This file contains all data exported from Supabase database
 
 -- ============================================================================
@@ -12,7 +12,9 @@ INSERT INTO public.brands (id, name) VALUES
   (3, 'Acana'),
   (4, 'Taste of the Wild'),
   (5, 'Carnilove'),
-  (6, 'Josera');
+  (6, 'Josera'),
+  (7, 'Wolf of Wilderness'),
+  (8, 'Purizon');
 
 -- ============================================================================
 -- SIZE_TYPES
@@ -314,7 +316,10 @@ INSERT INTO public.ingredients (id, name) VALUES
   (280, 'suszone algi'),
   (281, 'mąka grochowa'),
   (282, 'ekstrakt drożdżowy'),
-  (283, 'suszony rokitnik zwyczajny');
+  (283, 'suszony rokitnik zwyczajny'),
+  (285, 'białko jagnięce'),
+  (286, 'płatki ziemniaczane'),
+  (287, 'tłuszcz jagnięcy');
 
 -- ============================================================================
 -- ALLERGENS (Main categories)
@@ -667,7 +672,11 @@ INSERT INTO public.ingredient_allergens (ingredient_id, allergen_id) VALUES
   (272, 6),
   (272, 51),
   (281, 6),
-  (281, 49);
+  (281, 49),
+  (285, 1),
+  (285, 15),
+  (287, 1),
+  (287, 15);
 
 -- ============================================================================
 -- FOODS
@@ -687,7 +696,8 @@ INSERT INTO public.foods (id, name, brand_id, size_type_id, age_category_id, ing
   (12, 'Josera Optiness', 6, 3, 3, 'Suszone białko drobiowe, ryż, jęczmień, suszony ziemniak, włókno buraczane, tłuszcz drobiowy, suszone białko jagnięce (4,5%), hydrolizowane białko drobiowe, minerały, mielony korzeń cykorii (naturalne źródło inuliny), suszone białko z nowozelandzkiej małży zielonowargowej (perna canaliculus).', '/images/foods/josera-optiness-adult.jpg'),
   (13, 'Brit Veterinary Diet Hypoallergenic', 1, 2, 3, 'dehydratyzowany łosoś (30%), żółty groszek (25%), hydrolizowane białko łososia (18%), gryka, olej kokosowy, pulpa jabłkowa, olej z łososia (3%), hydrolizowany sos z łososia (2%), minerały, suszone algi (0,5%, Ascophyllum nodosum), suszone algi (0,4%, Schizochytrium limacinum), wyciąg z drożdży (źródło mannooligosacharydów, 0,02%), beta-glukany (0,02%), rokitnik zwyczajny (0,015%), fruktooligosacharydy (0,013%), jukka Mojave (0,013%).', '/images/foods/Brit-veterinary-hypoallergenic.jpg'),
   (14, 'ACANA DOG Puppy Small Breed', 3, 1, 1, 'świeży kurczak (18%), dehydratyzowany kurczak (18%), cała czerwona soczewica, cały groch zielony, świeże organy kurczaka (wątroba, serce) (7%), tłuszcz z kurczaka (7%), dehydratyzowany indyk (4%), świeże jaja (4%), surowy morszczuk (4%), dehydratyzowany śledź (4%), olej rybny (3%), cała zielona soczewica, cała ciecierzyca, cały groch żółty, włókno z ciecierzycy, skrobia grochowa, surowa wątroba indyka (1%), sól, suszony kelp, świeża cała dynia, świeża cała dynia piżmowa, świeża cała marchew, świeże całe jabłka, świeże całe gruszki, świeża cała cukinia, suszony korzeń cykorii, świeży jarmuż, świeży szpinak, świeże liście rzepy, świeże liście buraków, cała żurawina, całe borówki, całe jagody saskatoon, kurkuma, ostropest plamisty, korzeń łopianu, lawenda, korzeń prawoślazu lekarskiego, owoce dzikiej róży.', '/images/foods/Acana-puppy-small-breed.jpg'),
-  (15, 'Brit Grain Free Veterinary Diets Dog Ultra-Hypoallergenic', 1, 2, 3, 'owady dehydratyzowane (30%), groch żółty, suszona pulpa jabłkowa, olej kokosowy, białko grochu, siemię lniane (4%), węglan wapnia, suszone algi (2,5%, Schizochytrium limacinum), mąka grochowa, hydrolizowane drożdże (0,5% – źródło inozytolu i aminokwasów), ekstrakt drożdżowy (źródło mannanooligosacharydów, 0,02%), β-glukany (0,02%), suszony rokitnik zwyczajny (0,015%), fruktooligosacharydy (0,013%), Jukka Mojave (0,013%), Lactobacillus helveticus HA – 122 inaktywowane (15x109 komórek/kg).', '/images/foods/brit-vet-ultrahypoallergenic.jpg');
+  (15, 'Brit Grain Free Veterinary Diets Dog Ultra-Hypoallergenic', 1, 2, 3, 'owady dehydratyzowane (30%), groch żółty, suszona pulpa jabłkowa, olej kokosowy, białko grochu, siemię lniane (4%), węglan wapnia, suszone algi (2,5%, Schizochytrium limacinum), mąka grochowa, hydrolizowane drożdże (0,5% – źródło inozytolu i aminokwasów), ekstrakt drożdżowy (źródło mannanooligosacharydów, 0,02%), β-glukany (0,02%), suszony rokitnik zwyczajny (0,015%), fruktooligosacharydy (0,013%), Jukka Mojave (0,013%), Lactobacillus helveticus HA – 122 inaktywowane (15x109 komórek/kg).', '/images/foods/brit-vet-ultrahypoallergenic.jpg'),
+  (16, 'Wolf of Wilderness Sensitive Fiery Volcanoes- jagnięcina', 7, 2, 3, 'Świeża jagnięcina (40%), białko jagnięce (suszone, 14,8%), płatki ziemniaczane, groszek (suszony), tłuszcz jagnięcy (4,5%), skrobia ziemniaczana, suszona pulpa buraczana, hydrolizat białka (z drożdży), białko ziemniaczane, siemię lniane, olej słonecznikowy, drożdże piwne (suszone), lignoceluloza, olej z łososia (0,7%), ściany komórkowe drożdży (suszone, 0,2%: Beta-glukany i mannan-oligosacharydy), dzikie jagody (suszone, 0,2%: porzeczki, jagody aronii), zioła (suszone, 0,2%: krwawnik pospolity, korzeń mniszka lekarskiego, rumianek pospolity, liść pokrzywy, żebrzyca, dziurawiec zwyczajny), inulina z cykorii (0,1%).', '/images/foods/Wolf-of-Wilderness-Fiery-Volcanoes.jpg');
 
 -- ============================================================================
 -- FOOD_INGREDIENTS
@@ -950,7 +960,12 @@ INSERT INTO public.food_ingredients (food_id, ingredient_id) VALUES
   (15, 280),
   (15, 281),
   (15, 282),
-  (15, 283);
+  (15, 283),
+  (16, 19),
+  (16, 71),
+  (16, 285),
+  (16, 286),
+  (16, 287);
 
 -- ============================================================================
 -- ARTICLES
@@ -1129,7 +1144,7 @@ W składach karm kurczak może kryć się pod różnymi nazwami:
 ```markdown
 
 ```
-▪ **Mączka z kurczaka ** – to samo, ale bezpośrednio z kurczaka. 
+▪ **Mączka z kurczaka** – to samo, ale bezpośrednio z kurczaka. 
 ```markdown
 
 ```
@@ -2052,15 +2067,15 @@ Jeśli chcesz pomóc swojemu pupilowi czuć się lepiej, wprowadzenie kwasów om
 -- SUMMARY
 -- ============================================================================
 
--- Export completed on 10.11.2025, 20:56:24
--- Brands: 6
+-- Export completed on 18.11.2025, 20:01:46
+-- Brands: 8
 -- Size types: 3
 -- Age categories: 4
--- Ingredients: 277
+-- Ingredients: 280
 -- Allergens: 59
--- Ingredient-Allergen mappings: 265
--- Foods: 14
--- Food-Ingredient mappings: 257
+-- Ingredient-Allergen mappings: 269
+-- Foods: 15
+-- Food-Ingredient mappings: 262
 -- Articles: 5
 -- Dog profiles: 0
 -- Dog-Allergen mappings: 0

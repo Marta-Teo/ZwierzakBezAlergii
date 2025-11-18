@@ -76,11 +76,75 @@ npm run food:update "Nazwa karmy" "Pełny skład"
 - [README-food-update.md](./README-food-update.md) - szczegółowa instrukcja
 - [docs/aktualizacja-skladow-karm.md](../docs/aktualizacja-skladow-karm.md) - przewodnik
 
+---
+
+## 💾 backup-database.ps1 🆕
+
+**Automatyczny backup bazy danych Supabase**
+
+### Użycie:
+
+```powershell
+.\scripts\backup-database.ps1
+```
+
+### Co robi?
+
+- ✅ Tworzy pełny backup bazy danych (struktura + dane)
+- ✅ Zapisuje backup w katalogu `backups/` z datą i czasem
+- ✅ Automatycznie usuwa backupy starsze niż 30 dni
+- ✅ Pokazuje rozmiar utworzonego backupu
+- ✅ **Zawiera dane użytkowników, profile psów, ulubione karmy**
+
+### Wymagania:
+
+- Supabase musi być uruchomiony (`supabase start`)
+- Supabase CLI
+
+### Więcej informacji:
+
+Zobacz [docs/backup-restore-guide.md](../docs/backup-restore-guide.md) dla szczegółowej dokumentacji.
+
+---
+
+## 🔄 restore-database.ps1 🆕
+
+**Przywracanie backupu bazy danych**
+
+### Użycie:
+
+```powershell
+# Zobacz listę dostępnych backupów
+.\scripts\restore-database.ps1
+
+# Przywróć konkretny backup
+.\scripts\restore-database.ps1 backups\backup-20251118-143022.sql
+```
+
+### Co robi?
+
+- ✅ Pokazuje listę dostępnych backupów z datami i rozmiarami
+- ✅ Przywraca backup do lokalnej bazy Supabase
+- ✅ Wymaga potwierdzenia przed nadpisaniem danych
+- ✅ Waliduje czy plik backupu istnieje
+
+### Wymagania:
+
+- Supabase musi być uruchomiony (`supabase start`)
+- psql (dostępny z Supabase CLI)
+- Plik backupu w katalogu `backups/`
+
+### Więcej informacji:
+
+Zobacz [docs/backup-restore-guide.md](../docs/backup-restore-guide.md) dla szczegółowej dokumentacji.
+
+---
+
 ## 🔧 Dodawanie nowych skryptów
 
 Wszystkie skrypty w tym folderze powinny:
-1. Być napisane w TypeScript
+1. Być napisane w TypeScript (dla Node.js) lub PowerShell (dla Windows)
 2. Zawierać komentarz na początku wyjaśniający ich cel
-3. Mieć odpowiedni wpis w `package.json` scripts
+3. Mieć odpowiedni wpis w `package.json` scripts (jeśli TypeScript)
 4. Używać zmiennych środowiskowych z `.env` jeśli potrzebują konfiguracji
 

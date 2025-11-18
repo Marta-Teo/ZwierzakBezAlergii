@@ -71,7 +71,14 @@ npm run test:e2e:ui  # Open Playwright UI (interactive mode)
 npm run test:e2e:debug # Debug E2E tests step-by-step
 
 # Database
-npm run db:export    # Export database to supabase/seed.sql (backup)
+npm run db:export    # Export database to supabase/seed.sql (seed data)
+
+# Backup & Restore (nowe!)
+.\scripts\backup-database.ps1                      # Backup bazy (z użytkownikami)
+.\scripts\restore-database.ps1                     # Przywróć backup
+# Dostęp do bazy: http://localhost:54323 (Supabase Studio)
+
+# Food updates
 npm run food:update  # Update food composition with detailed ingredients
 ```
 
@@ -93,6 +100,9 @@ npx playwright test user-journey.e2e.ts  # User journey tests
 ```
 
 ### Database Management
+- **🆕 Lokalna vs Produkcyjna baza**: [docs/local-vs-production.md](docs/local-vs-production.md) - **Zacznij tutaj!**
+- **Backup i przywracanie bazy**: [docs/backup-restore-guide.md](docs/backup-restore-guide.md)
+- **Checklist wdrożenia**: [docs/deployment-checklist.md](docs/deployment-checklist.md)
 - **Export database**: [docs/database-export.md](docs/database-export.md)
 - **Update food compositions**: [docs/aktualizacja-skladow-karm.md](docs/aktualizacja-skladow-karm.md)
 
