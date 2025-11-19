@@ -1,5 +1,5 @@
 -- Seed data for ZwierzakBezAlergii
--- Auto-generated on 2025-11-18T19:01:46.509Z
+-- Auto-generated on 2025-11-19T17:21:55.930Z
 -- This file contains all data exported from Supabase database
 
 -- ============================================================================
@@ -2067,7 +2067,7 @@ Jeśli chcesz pomóc swojemu pupilowi czuć się lepiej, wprowadzenie kwasów om
 -- SUMMARY
 -- ============================================================================
 
--- Export completed on 18.11.2025, 20:01:46
+-- Export completed on 19.11.2025, 18:21:56
 -- Brands: 8
 -- Size types: 3
 -- Age categories: 4

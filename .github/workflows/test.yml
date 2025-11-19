@@ -69,8 +69,9 @@ jobs:
       - name: Uruchom testy E2E
         run: npm run test:e2e
         env:
-          # Dodaj zmienne środowiskowe jeśli potrzebne
-          # PLAYWRIGHT_TEST_BASE_URL: http://localhost:4321
+            PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+            PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+            NODE_ENV: test
           CI: true
 
       - name: Upload raportu Playwright
