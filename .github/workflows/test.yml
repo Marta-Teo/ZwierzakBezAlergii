@@ -15,12 +15,12 @@ jobs:
     
     steps:
       - name: Checkout kodu
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Instalacja zależności
@@ -34,7 +34,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload coverage do Codecov (opcjonalnie)
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         if: always()
         with:
           files: ./coverage/coverage-final.json
@@ -46,18 +46,19 @@ jobs:
   test-e2e:
     name: Testy E2E (Playwright)
     runs-on: ubuntu-latest
+    environment: integration
     
     # Opcjonalnie: uruchom E2E tylko jeśli testy jednostkowe przeszły
     # needs: test-unit
     
     steps:
       - name: Checkout kodu
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Instalacja zależności
@@ -69,13 +70,19 @@ jobs:
       - name: Uruchom testy E2E
         run: npm run test:e2e
         env:
-            PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-            PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-            NODE_ENV: test
+          PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
+          PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          PUBLIC_APP_NAME: ${{ secrets.PUBLIC_APP_NAME }}
+          PUBLIC_SITE_URL: ${{ secrets.PUBLIC_SITE_URL }}
+          PLAYWRIGHT_TEST_BASE_URL: ${{ secrets.PLAYWRIGHT_TEST_BASE_URL }}
           CI: true
 
       - name: Upload raportu Playwright
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: playwright-report
@@ -83,7 +90,7 @@ jobs:
           retention-days: 30
 
       - name: Upload traces w przypadku błędu
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: failure()
         with:
           name: playwright-traces
@@ -97,12 +104,12 @@ jobs:
     
     steps:
       - name: Checkout kodu
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Instalacja zależności
@@ -115,15 +122,16 @@ jobs:
   build:
     name: Build projektu
     runs-on: ubuntu-latest
+    environment: integration
     
     steps:
       - name: Checkout kodu
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Instalacja zależności
@@ -132,9 +140,14 @@ jobs:
       - name: Build projektu
         run: npm run build
         env:
-          # Dodaj zmienne środowiskowe potrzebne do build
-          # PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          # PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
+          PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          PUBLIC_APP_NAME: ${{ secrets.PUBLIC_APP_NAME }}
+          PUBLIC_SITE_URL: ${{ secrets.PUBLIC_SITE_URL }}
           NODE_ENV: production
 
 # Opcjonalnie: Status check
