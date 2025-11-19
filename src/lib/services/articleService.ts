@@ -1,4 +1,4 @@
-import type { SupabaseClient } from "@supabase/supabase-js";
+import type { PostgrestError, SupabaseClient } from "@supabase/supabase-js";
 import type { ArticleListItem } from "../../types";
 import type { ArticleFilters } from "../schemas/articleQuerySchema";
 
@@ -19,7 +19,10 @@ export const articleService = {
    * const { data, error } = await articleService.getBySlug(supabase, 'alergie-pokarmowe');
    * ```
    */
-  async getBySlug(supabase: SupabaseClient, slug: string): Promise<{ data: ArticleListItem | null; error: any }> {
+  async getBySlug(
+    supabase: SupabaseClient,
+    slug: string
+  ): Promise<{ data: ArticleListItem | null; error: PostgrestError | null }> {
     // Walidacja slug (prosta - tylko sprawdzamy czy nie jest pusty)
     if (!slug || slug.trim() === "") {
       return {
@@ -78,7 +81,7 @@ export const articleService = {
   async list(
     supabase: SupabaseClient,
     filters: ArticleFilters
-  ): Promise<{ data: ArticleListItem[] | null; count: number; error: any }> {
+  ): Promise<{ data: ArticleListItem[] | null; count: number; error: PostgrestError | null }> {
     // Destructure z wartościami domyślnymi
     const { authorId, search, limit = 10, offset = 0, orderBy = "created_at", orderDirection = "desc" } = filters;
 
@@ -113,7 +116,7 @@ export const articleService = {
 
     // Mapowanie do ArticleListItem (dodanie authorName)
     // TODO: W przyszłości dodać join z users gdy będzie kolumna display_name/full_name
-    const articles: ArticleListItem[] = (data || []).map((article: any) => ({
+    const articles: ArticleListItem[] = (data || []).map((article) => ({
       ...article,
       authorName: null, // Brak danych o autorze w MVP
     }));

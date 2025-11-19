@@ -188,7 +188,7 @@ async function updateFoodComposition(foodName: string, ingredientsRaw: string) {
     console.log("🔍 Szukam karmy w bazie...");
 
     // Najpierw próbuj dokładnego dopasowania
-    let { data: food, error: foodError } = await supabase
+    const { data: food, error: foodError } = await supabase
       .from("foods")
       .select("id, name")
       .eq("name", foodName)

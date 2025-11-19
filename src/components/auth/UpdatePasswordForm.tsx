@@ -52,7 +52,7 @@ export function UpdatePasswordForm() {
       setTimeout(() => {
         window.location.href = "/login";
       }, 2000);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(getAuthErrorMessage(err));
     } finally {
       setIsLoading(false);

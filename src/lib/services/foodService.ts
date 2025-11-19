@@ -1,3 +1,4 @@
+import type { PostgrestError } from "@supabase/supabase-js";
 import type { SupabaseClient } from "../../db/supabase.client";
 import type { CreateFoodCommand, FoodDTO, FoodDetailDTO, UpdateFoodCommand } from "../../types";
 import type { FoodFilters } from "../schemas/foodQuerySchema";
@@ -36,7 +37,7 @@ import type { FoodFilters } from "../schemas/foodQuerySchema";
 export async function create(
   supabase: SupabaseClient,
   command: CreateFoodCommand
-): Promise<{ data: FoodDTO | null; error: any }> {
+): Promise<{ data: FoodDTO | null; error: PostgrestError | null }> {
   try {
     // Wykonujemy INSERT do tabeli foods
     // .select() zwraca utworzony rekord
@@ -132,7 +133,7 @@ async function getAllergenIdsWithChildren(supabase: SupabaseClient, allergenName
 export async function list(
   supabase: SupabaseClient,
   filters: FoodFilters
-): Promise<{ data: FoodDTO[] | null; count: number; error: any }> {
+): Promise<{ data: FoodDTO[] | null; count: number; error: PostgrestError | null }> {
   try {
     // Budujemy zapytanie bazowe
     let query = supabase.from("foods").select("*", { count: "exact" });
@@ -234,7 +235,7 @@ export async function list(
 export async function getById(
   supabase: SupabaseClient,
   id: number
-): Promise<{ data: FoodDetailDTO | null; error: any }> {
+): Promise<{ data: FoodDetailDTO | null; error: PostgrestError | null }> {
   try {
     // Krok 1: Pobierz podstawowe dane karmy
     const { data: food, error: foodError } = await supabase.from("foods").select("*").eq("id", id).single();
@@ -275,8 +276,8 @@ export async function getById(
     }
 
     // Krok 4: Pobierz alergeny dla każdego składnika
-    const ingredientIds = foodIngredients?.map((fi: any) => fi.ingredient_id) || [];
-    let allergens: any[] = [];
+    const ingredientIds = foodIngredients?.map((fi: { ingredient_id: number }) => fi.ingredient_id) || [];
+    let allergens: { id: number; name: string; parent_id: number | null }[] = [];
 
     if (ingredientIds.length > 0) {
       const { data: ingredientAllergens, error: allergensError } = await supabase
@@ -297,8 +298,8 @@ export async function getById(
         console.error("[foodService] Błąd pobierania alergenów:", allergensError);
       } else {
         // Deduplikacja alergenów (ten sam alergen może występować w wielu składnikach)
-        const uniqueAllergens = new Map();
-        ingredientAllergens?.forEach((ia: any) => {
+        const uniqueAllergens = new Map<number, { id: number; name: string; parent_id: number | null }>();
+        ingredientAllergens?.forEach((ia: { allergens: { id: number; name: string; parent_id: number | null } }) => {
           if (ia.allergens && !uniqueAllergens.has(ia.allergens.id)) {
             uniqueAllergens.set(ia.allergens.id, ia.allergens);
           }
@@ -313,7 +314,7 @@ export async function getById(
       brand: brandResult.data || null,
       sizeType: sizeTypeResult.data || null,
       ageCategory: ageCategoryResult.data || null,
-      ingredients: foodIngredients?.map((fi: any) => fi.ingredients).filter(Boolean) || [],
+      ingredients: foodIngredients?.map((fi: { ingredients: unknown }) => fi.ingredients).filter(Boolean) || [],
       allergens,
     };
 
@@ -344,7 +345,7 @@ export async function update(
   supabase: SupabaseClient,
   id: number,
   data: UpdateFoodCommand
-): Promise<{ data: FoodDTO | null; error: any }> {
+): Promise<{ data: FoodDTO | null; error: PostgrestError | null }> {
   try {
     // Sprawdź czy są jakieś dane do aktualizacji
     if (Object.keys(data).length === 0) {
@@ -391,7 +392,7 @@ export async function update(
  * }
  * ```
  */
-export async function remove(supabase: SupabaseClient, id: number): Promise<{ error: any }> {
+export async function remove(supabase: SupabaseClient, id: number): Promise<{ error: PostgrestError | null }> {
   try {
     const { error } = await supabase.from("foods").delete().eq("id", id);
 

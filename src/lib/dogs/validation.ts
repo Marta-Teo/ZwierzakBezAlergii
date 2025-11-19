@@ -27,7 +27,7 @@ export function validateDogForm(data: DogFormData): string | null {
   }
 
   // Only letters, spaces, hyphens allowed (including Polish characters)
-  const nameRegex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s\-]+$/;
+  const nameRegex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s-]+$/;
   if (!nameRegex.test(data.name)) {
     return "Imię psa może zawierać tylko litery, spacje i myślniki";
   }

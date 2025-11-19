@@ -40,7 +40,7 @@ export function LoginForm({ redirectTo = "/foods" }: LoginFormProps) {
 
       // Success - full page reload to refresh SSR context
       window.location.href = redirectTo;
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(getAuthErrorMessage(err));
     } finally {
       setIsLoading(false);

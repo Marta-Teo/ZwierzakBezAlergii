@@ -73,8 +73,9 @@ export const GET: APIRoute = async ({ locals, url }) => {
       }
 
       // Pobierz nazwy marek dla wszystkich karm
-      const foodIds = data.map((f: any) => f.foods.id);
-      const brandIds = data.map((f: any) => f.foods.brand_id).filter(Boolean);
+      const brandIds = data
+        .map((f: { foods: { brand_id: number | null } }) => f.foods.brand_id)
+        .filter((id): id is number => id !== null);
 
       let brandsMap: Record<number, string> = {};
       if (brandIds.length > 0) {
@@ -92,7 +93,7 @@ export const GET: APIRoute = async ({ locals, url }) => {
       }
 
       // Mapowanie do FoodListItem
-      const foods = data.map((f: any) => ({
+      const foods = data.map((f: { foods: { id: number; brand_id: number; [key: string]: unknown } }) => ({
         ...f.foods,
         brandName: brandsMap[f.foods.brand_id] || "Nieznana marka",
         isFavorite: true,

@@ -125,12 +125,15 @@ export function sortAllergensByPriority(allergens: AllergenDTO[]): AllergenDTO[]
       if (!subCategoriesByParent.has(allergen.parent_id)) {
         subCategoriesByParent.set(allergen.parent_id, []);
       }
-      subCategoriesByParent.get(allergen.parent_id)!.push(allergen);
+      const parentSubs = subCategoriesByParent.get(allergen.parent_id);
+      if (parentSubs) {
+        parentSubs.push(allergen);
+      }
     }
   });
 
   // Posortuj podkategorie w każdej grupie
-  subCategoriesByParent.forEach((subs, parentId) => {
+  subCategoriesByParent.forEach((subs) => {
     subs.sort((a, b) => {
       const aPriority = getAllergenPriority(a, mainCategoriesMap);
       const bPriority = getAllergenPriority(b, mainCategoriesMap);

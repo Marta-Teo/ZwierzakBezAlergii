@@ -176,7 +176,7 @@ export class OpenRouterService {
                 done: false,
                 usage: parsed.usage,
               };
-            } catch (e) {
+            } catch {
               // Ignoruj błędy parsowania pojedynczych chunków
               continue;
             }
@@ -346,7 +346,7 @@ export class OpenRouterService {
     const status = response.status;
 
     // Spróbuj odczytać error details
-    let errorData: any;
+    let errorData: { error?: { message?: string }; message?: string };
     try {
       errorData = await response.json();
     } catch {
@@ -412,7 +412,7 @@ export class OpenRouterService {
         completionTokens: raw.usage.completion_tokens,
         totalTokens: raw.usage.total_tokens,
       },
-      finishReason: choice.finish_reason as any,
+      finishReason: choice.finish_reason as "stop" | "length" | "content_filter" | "tool_calls",
       metadata: {
         created: raw.created,
         latency: Date.now() - startTime,
@@ -427,7 +427,8 @@ export class OpenRouterService {
     });
 
     // Usuń metadane dodane przez zod-to-json-schema
-    const { $schema, ...cleanSchema } = jsonSchema as any;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { $schema, ...cleanSchema } = jsonSchema as { $schema?: string; [key: string]: unknown };
 
     return cleanSchema;
   }

@@ -34,14 +34,15 @@ export const AUTH_ERROR_MESSAGES: Record<string, string> = {
  * @param error - Error object from Supabase Auth
  * @returns User-friendly error message in Polish
  */
-export const getAuthErrorMessage = (error: any): string => {
+export const getAuthErrorMessage = (error: unknown): string => {
   // Handle network errors
-  if (error?.message?.includes("network") || !navigator.onLine) {
+  const errorObj = error as { message?: string; code?: string };
+  if (errorObj?.message?.includes("network") || !navigator.onLine) {
     return AUTH_ERROR_MESSAGES.network_error;
   }
 
   // Get error code
-  const code = error?.code || error?.message || "unknown";
+  const code = errorObj?.code || errorObj?.message || "unknown";
 
   // Return mapped message or generic error
   return AUTH_ERROR_MESSAGES[code] || "Wystąpił nieoczekiwany błąd. Spróbuj ponownie.";

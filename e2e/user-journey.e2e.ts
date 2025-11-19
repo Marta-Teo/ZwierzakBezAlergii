@@ -131,7 +131,7 @@ test.describe("Kompleksowy User Journey", () => {
         await foodsPage.addToFavorites();
         await page.waitForTimeout(1000);
         console.log("✅ Karma dodana do ulubionych");
-      } catch (error) {
+      } catch {
         console.log("⚠️ Przycisk ulubionych niedostępny lub już w ulubionych");
       }
     }

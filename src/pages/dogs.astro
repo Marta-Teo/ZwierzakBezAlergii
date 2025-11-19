@@ -34,7 +34,7 @@ const dogs =
     size_type_label: dog.size_type?.name || null,
     age_category_label: dog.age_category?.name || null,
     allergen_count: dog.dog_allergens?.length || 0,
-    allergen_names: dog.dog_allergens?.slice(0, 3).map((da: any) => da.allergen.name) || [],
+    allergen_names: dog.dog_allergens?.slice(0, 3).map((da: { allergen: { name: string } }) => da.allergen.name) || [],
     created_at: dog.created_at,
   })) || [];
 ---

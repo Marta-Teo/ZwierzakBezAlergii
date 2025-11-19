@@ -56,11 +56,34 @@ const reactConfig = tseslint.config({
   },
 });
 
+// Allow console in scripts, tests, and API endpoints
+const consoleOverrides = tseslint.config({
+  files: ["scripts/**/*.ts", "e2e/**/*.ts", "src/pages/api/**/*.ts", "test/**/*.ts"],
+  rules: {
+    "no-console": "off",
+  },
+});
+
+// Relax some strict rules for specific files
+const relaxedRules = tseslint.config({
+  files: [".astro/**/*.ts", "src/db/database.types.ts"],
+  rules: {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-object-type": "off",
+    "@typescript-eslint/unified-signatures": "off",
+  },
+});
+
 export default tseslint.config(
   includeIgnoreFile(gitignorePath),
+  {
+    ignores: ["src/db/database.types.ts"],
+  },
   baseConfig,
   jsxA11yConfig,
   reactConfig,
+  consoleOverrides,
+  relaxedRules,
   eslintPluginAstro.configs["flat/recommended"],
   eslintPluginPrettier
 );

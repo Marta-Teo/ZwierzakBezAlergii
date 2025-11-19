@@ -35,7 +35,7 @@ if (dogError || !dogProfile) {
 }
 
 // Transform allergens do array of IDs
-const allergenIds = dogProfile.dog_allergens?.map((da: any) => da.allergen_id) || [];
+const allergenIds = dogProfile.dog_allergens?.map((da: { allergen_id: number }) => da.allergen_id) || [];
 
 const initialData = {
   id: dogProfile.id,

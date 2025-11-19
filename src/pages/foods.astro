@@ -30,7 +30,7 @@ if (dogId && isLoggedIn && Astro.locals.user) {
       dogName: dogProfile.name,
       sizeTypeId: dogProfile.size_type_id,
       ageCategoryId: dogProfile.age_category_id,
-      excludeAllergens: dogProfile.dog_allergens?.map((da: any) => da.allergen.name) || [],
+      excludeAllergens: dogProfile.dog_allergens?.map((da: { allergen: { name: string } }) => da.allergen.name) || [],
     };
   }
 }

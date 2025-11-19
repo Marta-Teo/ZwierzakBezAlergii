@@ -34,7 +34,7 @@ const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 /**
  * Escape SQL string values
  */
-function escapeSqlString(value: any): string {
+function escapeSqlString(value: unknown): string {
   if (value === null || value === undefined) {
     return "NULL";
   }
@@ -54,7 +54,7 @@ function escapeSqlString(value: any): string {
  */
 function generateInsertStatement(
   tableName: string,
-  rows: any[],
+  rows: Record<string, unknown>[],
   columns: string[],
   options?: { manualIds?: boolean }
 ): string {

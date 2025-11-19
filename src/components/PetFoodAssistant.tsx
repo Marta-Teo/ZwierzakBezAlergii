@@ -111,7 +111,7 @@ Bądź ciepły i przyjazny w komunikacji.`,
                   <div className="whitespace-pre-wrap leading-relaxed">
                     {typeof message.content === "string"
                       ? message.content
-                      : message.content.map((c, i) => (c.type === "text" ? c.text : "")).join("")}
+                      : message.content.map((c) => (c.type === "text" ? c.text : "")).join("")}
                   </div>
                 </div>
               </div>

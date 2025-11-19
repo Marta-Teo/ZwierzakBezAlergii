@@ -172,8 +172,8 @@ function ArticlesPageContent() {
               {searchTerm ? (
                 <span>
                   Znaleziono <strong className="text-foreground">{data.count}</strong>{" "}
-                  {data.count === 1 ? "artykuł" : data.count < 5 ? "artykuły" : "artykułów"} dla frazy "
-                  <strong className="text-foreground">{searchTerm}</strong>"
+                  {data.count === 1 ? "artykuł" : data.count < 5 ? "artykuły" : "artykułów"} dla frazy &quot;
+                  <strong className="text-foreground">{searchTerm}</strong>&quot;
                 </span>
               ) : (
                 <span>

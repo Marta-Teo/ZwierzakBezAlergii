@@ -97,6 +97,10 @@ export function DogForm({ mode, initialData, sizeTypes, ageCategories, allergens
         }
       } else {
         // Edit mode - update profile
+        if (!initialData?.id) {
+          throw new Error("Brak danych profilu do aktualizacji");
+        }
+
         const { error: updateError } = await supabase
           .from("dog_profiles")
           .update({
@@ -105,16 +109,16 @@ export function DogForm({ mode, initialData, sizeTypes, ageCategories, allergens
             age_category_id: ageCategoryId,
             notes: notes || null,
           })
-          .eq("id", initialData!.id);
+          .eq("id", initialData.id);
 
         if (updateError) throw updateError;
 
         // Update allergens (delete all, then re-insert)
-        await supabase.from("dog_allergens").delete().eq("dog_id", initialData!.id);
+        await supabase.from("dog_allergens").delete().eq("dog_id", initialData.id);
 
         if (allergenIds.length > 0) {
           const allergenInserts = allergenIds.map((allergenId) => ({
-            dog_id: initialData!.id,
+            dog_id: initialData.id,
             allergen_id: allergenId,
           }));
 
@@ -126,9 +130,10 @@ export function DogForm({ mode, initialData, sizeTypes, ageCategories, allergens
 
       // Success - redirect
       window.location.href = "/dogs";
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Dog form error:", err);
-      setError(err.message || "Wystąpił nieoczekiwany błąd");
+      const message = err instanceof Error ? err.message : "Wystąpił nieoczekiwany błąd";
+      setError(message);
     } finally {
       setIsLoading(false);
     }

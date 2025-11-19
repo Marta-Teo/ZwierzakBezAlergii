@@ -34,7 +34,7 @@ export function ResetPasswordForm() {
       if (resetError) throw resetError;
 
       setSuccess(true);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(getAuthErrorMessage(err));
     } finally {
       setIsLoading(false);

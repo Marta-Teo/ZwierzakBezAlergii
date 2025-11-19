@@ -64,7 +64,7 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
           window.location.href = redirectTo;
         }, 2000);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Registration error:", err);
       setError(getAuthErrorMessage(err));
     } finally {

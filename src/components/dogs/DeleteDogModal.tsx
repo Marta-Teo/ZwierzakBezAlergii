@@ -33,9 +33,10 @@ export function DeleteDogModal({ dogId, dogName, isOpen, onClose, onSuccess }: D
 
       // Success
       onSuccess();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Delete error:", err);
-      setError(err.message || "Wystąpił nieoczekiwany błąd");
+      const message = err instanceof Error ? err.message : "Wystąpił nieoczekiwany błąd";
+      setError(message);
       setIsDeleting(false);
     }
   };
