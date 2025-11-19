@@ -7,10 +7,10 @@ import { FavoritesPage } from "./pages/favorites.page";
 
 /**
  * KOMPLEKSOWY TEST USER JOURNEY
- * 
+ *
  * Ten test weryfikuje działanie aplikacji z perspektywy użytkownika końcowego.
  * Symuluje pełny scenariusz od rejestracji do korzystania z głównych funkcji aplikacji.
- * 
+ *
  * Scenariusz:
  * 1. Nowy użytkownik rejestruje się w aplikacji
  * 2. Loguje się do swojego konta
@@ -18,7 +18,7 @@ import { FavoritesPage } from "./pages/favorites.page";
  * 4. Wyszukuje karmę odpowiednią dla psa
  * 5. Dodaje karmę do ulubionych
  * 6. Sprawdza swoją listę ulubionych karm
- * 
+ *
  * To jest "happy path" - najbardziej typowa ścieżka użytkownika w aplikacji.
  */
 
@@ -53,7 +53,7 @@ test.describe("Kompleksowy User Journey", () => {
 
     // Czekamy na przekierowanie po logowaniu lub pozostanie na stronie login z błędem
     await page.waitForTimeout(3000);
-    
+
     const currentUrl = page.url();
     if (currentUrl.includes("/login")) {
       console.log("⚠️ Użytkownik pozostał na stronie logowania - możliwe że wymaga potwierdzenia email");
@@ -61,7 +61,7 @@ test.describe("Kompleksowy User Journey", () => {
       // Kończymy test tutaj - to normalne dla Supabase z włączoną weryfikacją email
       return;
     }
-    
+
     console.log("✅ Użytkownik zalogowany pomyślnie");
 
     // ===== KROK 3: DODANIE PROFILU PSA =====
@@ -121,9 +121,7 @@ test.describe("Kompleksowy User Journey", () => {
       await page.waitForTimeout(1000);
 
       // Sprawdzamy czy modal się otworzył (może być dialog lub nowa strona)
-      const modalVisible =
-        (await page.locator('[role="dialog"]').isVisible()) ||
-        page.url().includes("/foods/");
+      const modalVisible = (await page.locator('[role="dialog"]').isVisible()) || page.url().includes("/foods/");
 
       expect(modalVisible).toBeTruthy();
       console.log("✅ Szczegóły karmy wyświetlone");
@@ -192,9 +190,7 @@ test.describe("Kompleksowy User Journey", () => {
     console.log("✅ Wyszukiwanie działa dla anonimowych użytkowników");
   });
 
-  test("Typowy scenariusz użytkownika: przeglądanie → wyszukiwanie → szczegóły", async ({
-    page,
-  }) => {
+  test("Typowy scenariusz użytkownika: przeglądanie → wyszukiwanie → szczegóły", async ({ page }) => {
     /**
      * Ten test weryfikuje najbardziej typową ścieżkę użytkownika w aplikacji.
      * Nie wymaga rejestracji - testuje funkcjonalności dostępne dla wszystkich.
@@ -226,9 +222,7 @@ test.describe("Kompleksowy User Journey", () => {
       await page.waitForTimeout(1000);
 
       // Sprawdzamy czy szczegóły się wyświetliły (modal lub nowa strona)
-      const hasDetails =
-        (await page.locator('[role="dialog"]').isVisible()) ||
-        page.url().includes("/foods/");
+      const hasDetails = (await page.locator('[role="dialog"]').isVisible()) || page.url().includes("/foods/");
 
       expect(hasDetails).toBeTruthy();
       console.log("   ✓ Szczegóły karmy wyświetlone (skład, alergeny, cena)");
@@ -255,14 +249,13 @@ test.describe("Kompleksowy User Journey", () => {
 
 /**
  * DLACZEGO TEN TEST JEST WAŻNY?
- * 
+ *
  * 1. Weryfikuje działanie aplikacji z perspektywy użytkownika końcowego
  * 2. Testuje integrację wszystkich głównych funkcjonalności
  * 3. Sprawdza "happy path" - najbardziej typowy scenariusz użycia
  * 4. Wykrywa problemy w przepływie użytkownika (user flow)
  * 5. Potwierdza że kluczowe funkcje działają razem, nie tylko osobno
- * 
+ *
  * To jest dokładnie to czego potrzebuje wymaganie:
  * "Test weryfikujący działanie z perspektywy użytkownika"
  */
-

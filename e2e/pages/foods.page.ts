@@ -40,4 +40,3 @@ export class FoodsPage {
     return await this.foodCards.count();
   }
 }
-

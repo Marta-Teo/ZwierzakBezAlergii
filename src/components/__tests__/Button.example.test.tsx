@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 /**
  * Przykładowy test komponentu Button z shadcn/ui
- * 
+ *
  * Ten plik pokazuje jak testować komponenty React:
  * - Renderowanie
  * - Interakcje użytkownika
@@ -34,7 +34,7 @@ describe("Button (przykładowy test komponentu)", () => {
     const { getByRole } = renderWithProviders(
       <Button disabled onClick={handleClick}>
         Kliknij
-      </Button>,
+      </Button>
     );
 
     const button = getByRole("button");
@@ -67,7 +67,7 @@ describe("Button (przykładowy test komponentu)", () => {
     const { container } = renderWithProviders(
       <Button asChild>
         <a href="/test">Link</a>
-      </Button>,
+      </Button>
     );
 
     const link = container.querySelector("a");
@@ -78,26 +78,25 @@ describe("Button (przykładowy test komponentu)", () => {
 
 /**
  * WSKAZÓWKI:
- * 
+ *
  * 1. Używaj renderWithProviders zamiast render:
  *    - Automatycznie dodaje React Query Provider
  *    - Unika duplikacji kodu
- * 
+ *
  * 2. Używaj userEvent zamiast fireEvent:
  *    - Bardziej realistyczne symulacje interakcji
  *    - Lepiej odwzorowuje rzeczywiste zachowanie użytkownika
- * 
+ *
  * 3. Testuj zachowania, nie implementację:
  *    - ✅ "powinien wywołać onClick"
  *    - ❌ "powinien zmienić state.clicked na true"
- * 
+ *
  * 4. Używaj getByRole gdy to możliwe:
  *    - Lepsze dla accessibility
  *    - Bardziej odporne na zmiany
- * 
+ *
  * 5. Mockuj zewnętrzne zależności:
  *    - API calls
  *    - Timery
  *    - Browser APIs
  */
-

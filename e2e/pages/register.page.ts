@@ -17,7 +17,7 @@ export class RegisterPage {
     this.emailInput = page.getByLabel(/email/i);
     this.passwordInput = page.getByLabel(/^hasło|^password/i).first();
     this.confirmPasswordInput = page.getByLabel(/potwierdź|confirm/i);
-    this.submitButton = page.locator('form').getByRole("button", { name: /zarejestruj|register/i });
+    this.submitButton = page.locator("form").getByRole("button", { name: /zarejestruj|register/i });
     this.errorMessage = page.getByRole("alert");
   }
 
@@ -39,4 +39,3 @@ export class RegisterPage {
     return null;
   }
 }
-

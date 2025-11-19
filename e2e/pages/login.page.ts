@@ -20,7 +20,7 @@ export class LoginPage {
     this.emailInput = page.getByLabel(/email/i);
     this.passwordInput = page.getByLabel(/hasło|password/i);
     // Bardziej precyzyjny selektor - przycisk submit wewnątrz formularza
-    this.submitButton = page.locator('form').getByRole("button", { name: /zaloguj|login/i });
+    this.submitButton = page.locator("form").getByRole("button", { name: /zaloguj|login/i });
     this.errorMessage = page.getByRole("alert");
   }
 

@@ -18,7 +18,7 @@ export class DogsPage {
     this.dogNameInput = page.getByLabel(/imię|name/i);
     this.dogWeightInput = page.getByLabel(/waga|weight/i);
     this.dogBirthDateInput = page.getByLabel(/data urodzenia|birth.*date/i);
-    this.submitButton = page.locator('form').getByRole("button", { name: /zapisz|save|dodaj/i });
+    this.submitButton = page.locator("form").getByRole("button", { name: /zapisz|save|dodaj/i });
   }
 
   async goto() {
@@ -40,4 +40,3 @@ export class DogsPage {
     return await this.page.getByText(name).isVisible();
   }
 }
-

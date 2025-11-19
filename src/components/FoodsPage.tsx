@@ -189,7 +189,9 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
         <div className="container mx-auto px-4 py-6">
           <h1 className="text-3xl font-bold text-foreground">Karmy dla psów</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Pełne składy wraz z prawidłową kolejnością składników, w zależności od proporcji w składzie, znajdują się w zakładce "Pełny skład (z opakowania)". Pole "Składniki" zawiera listę składników karmy ale w losowej kolejności.
+            Pełne składy wraz z prawidłową kolejnością składników, w zależności od proporcji w składzie, znajdują się w
+            zakładce "Pełny skład (z opakowania)". Pole "Składniki" zawiera listę składników karmy ale w losowej
+            kolejności.
           </p>
         </div>
       </header>

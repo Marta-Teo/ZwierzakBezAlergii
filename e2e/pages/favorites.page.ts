@@ -11,9 +11,7 @@ export class FavoritesPage {
   constructor(page: Page) {
     this.page = page;
 
-    this.favoriteFoods = page.locator('[data-testid="favorite-food"]').or(
-      page.locator(".favorite-food")
-    );
+    this.favoriteFoods = page.locator('[data-testid="favorite-food"]').or(page.locator(".favorite-food"));
     this.emptyMessage = page.getByText(/nie masz.*ulubionych|no favorites/i);
   }
 
@@ -34,4 +32,3 @@ export class FavoritesPage {
     return await this.emptyMessage.isVisible();
   }
 }
-
