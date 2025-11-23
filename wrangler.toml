@@ -3,8 +3,6 @@ main = "dist/_worker.js"
 compatibility_date = "2025-11-23"
 compatibility_flags = ["nodejs_compat"]
 
-# Static assets configuration for new Workers
-[assets]
-directory = "dist"
-binding = "ASSETS"
+# For Astro SSR mode, we don't use [assets] section
+# The _worker.js handles both server code and serving static assets
 

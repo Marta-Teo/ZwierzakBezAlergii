@@ -1,0 +1,4 @@
+# Exclude worker script from static assets
+_worker.js
+_worker.js/**
+
