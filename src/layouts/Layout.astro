@@ -63,6 +63,10 @@ const hasBackground = background.image !== null;
     {/* Additional SEO */}
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={Astro.url} />
+
+    {/* Supabase config for client-side */}
+    <meta name="supabase-url" content={import.meta.env.PUBLIC_SUPABASE_URL || import.meta.env.SUPABASE_URL} />
+    <meta name="supabase-anon-key" content={import.meta.env.PUBLIC_SUPABASE_ANON_KEY || import.meta.env.SUPABASE_ANON_KEY} />
   </head>
   <body>
     <div class="app-wrapper">
