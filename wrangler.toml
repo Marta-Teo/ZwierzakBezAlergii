@@ -6,3 +6,17 @@ compatibility_flags = ["nodejs_compat"]
 # For Astro SSR mode, we don't use [assets] section
 # The _worker.js handles both server code and serving static assets
 
+# Environment variables for production
+# NOTE: Add actual values in Cloudflare Dashboard -> Settings -> Environment variables
+# These are just placeholders to document what variables are needed
+[vars]
+PUBLIC_APP_NAME = "ZwierzakBezAlergii"
+PUBLIC_SITE_URL = "https://www.zwierzakbezalergii.pl"
+
+# IMPORTANT: NEVER commit secrets to git!
+# Add these in Cloudflare Dashboard only:
+# - PUBLIC_SUPABASE_URL
+# - PUBLIC_SUPABASE_ANON_KEY  
+# - SUPABASE_URL
+# - SUPABASE_ANON_KEY
+
