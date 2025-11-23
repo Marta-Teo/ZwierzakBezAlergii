@@ -1,8 +1,10 @@
 name = "zwierzakbezalergii"
 main = "dist/_worker.js"
 compatibility_date = "2025-11-23"
-pages_build_output_dir = "dist"
+compatibility_flags = ["nodejs_compat"]
 
-[site]
-bucket = "dist"
+# Static assets configuration for new Workers
+[assets]
+directory = "dist"
+binding = "ASSETS"
 
