@@ -17,7 +17,7 @@ ZwierzakBezAlergii (MVP) is a central database of dry dog foods available in Pol
 - **Backend**: Supabase (PostgreSQL, Authentication, SDK)
 - **AI Integration**: Openrouter.ai
 - **CI/CD**: GitHub Actions
-- **Hosting**: DigitalOcean (Docker)
+- **Hosting**: Cloudflare Pages
 
 ## Getting Started
 ### Prerequisites
@@ -106,6 +106,10 @@ npx playwright test user-journey.e2e.ts  # User journey tests
 - **Export database**: [docs/database-export.md](docs/database-export.md)
 - **Update food compositions**: [docs/aktualizacja-skladow-karm.md](docs/aktualizacja-skladow-karm.md)
 
+### Deployment
+- **🚀 Cloudflare Pages - Pełny przewodnik**: [docs/cloudflare-deployment.md](docs/cloudflare-deployment.md)
+- **⚡ Cloudflare Pages - Szybki checklist**: [docs/cloudflare-quick-checklist.md](docs/cloudflare-quick-checklist.md)
+
 ## API Endpoints
 
 ### Foods (Karmy) - CRUD
@@ -170,3 +174,5 @@ This project is currently in active development as an MVP.
 
 ## License
 This project is currently unlicensed. Please add a `LICENSE` file to specify the license of your choice.
+
+##Final URL under which project will be visible and usable for users- www.zwierzakbezalergii.pl
