@@ -5,26 +5,28 @@ import { ValidationError, APIError, ConfigurationError } from "@/lib/services/op
 // Wyłączamy prerendering dla tego endpointu zgodnie z zasadami Astro
 export const prerender = false;
 
-// Lazy initialization - tworzymy serwis dopiero przy pierwszym requeście
-let openRouter: OpenRouterService | null = null;
-
-function getOpenRouterService(): OpenRouterService {
-  if (!openRouter) {
-    const apiKey = import.meta.env.OPENROUTER_API_KEY;
-    
-    if (!apiKey) {
-      throw new ConfigurationError(
-        "Brak klucza OPENROUTER_API_KEY. Dodaj go w Cloudflare Dashboard -> Settings -> Variables and Secrets."
-      );
-    }
-    
-    openRouter = new OpenRouterService({
-      apiKey,
-      appName: import.meta.env.PUBLIC_APP_NAME || "ZwierzakBezAlergii",
-      siteUrl: import.meta.env.PUBLIC_SITE_URL || "https://www.zwierzakbezalergii.pl",
-    });
+/**
+ * Tworzy instancję OpenRouterService z kluczem API z runtime env
+ * W Cloudflare Workers, zmienne z Dashboard są dostępne przez runtime.env
+ */
+function createOpenRouterService(runtimeEnv: Record<string, unknown> | undefined): OpenRouterService {
+  // Próbuj pobrać klucz z runtime env (Cloudflare Dashboard) lub import.meta.env (wrangler.toml)
+  const apiKey = (runtimeEnv?.OPENROUTER_API_KEY as string) || import.meta.env.OPENROUTER_API_KEY;
+  
+  if (!apiKey) {
+    throw new ConfigurationError(
+      "Brak klucza OPENROUTER_API_KEY. Dodaj go w Cloudflare Dashboard -> Settings -> Variables and Secrets."
+    );
   }
-  return openRouter;
+  
+  const appName = (runtimeEnv?.PUBLIC_APP_NAME as string) || import.meta.env.PUBLIC_APP_NAME || "ZwierzakBezAlergii";
+  const siteUrl = (runtimeEnv?.PUBLIC_SITE_URL as string) || import.meta.env.PUBLIC_SITE_URL || "https://www.zwierzakbezalergii.pl";
+  
+  return new OpenRouterService({
+    apiKey,
+    appName,
+    siteUrl,
+  });
 }
 
 /**
@@ -42,10 +44,13 @@ function getOpenRouterService(): OpenRouterService {
  *
  * @returns ChatResponse z treścią odpowiedzi i metadanymi
  */
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
-    // Lazy init serwisu - jeśli brak klucza API, zwrócimy czytelny błąd
-    const service = getOpenRouterService();
+    // Pobierz runtime env z Cloudflare (zmienne z Dashboard)
+    const runtimeEnv = locals.runtime?.env as Record<string, unknown> | undefined;
+    
+    // Utwórz serwis z kluczem API
+    const service = createOpenRouterService(runtimeEnv);
     // Parsuj body requesta
     const body = await request.json();
     const { messages, systemMessage, model, temperature, maxTokens } = body;
