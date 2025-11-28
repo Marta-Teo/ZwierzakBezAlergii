@@ -1,19 +1,10 @@
 name = "zwierzakbezalergii"
 main = "dist/_worker.js/index.js"
-<<<<<<< HEAD
 compatibility_date = "2025-11-23"
 compatibility_flags = ["nodejs_compat"]
 
 # For Astro in "directory" mode, assets are handled via _routes.json
 # ASSETS binding must be configured in Cloudflare Pages Dashboard!
-=======
-compatibility_date = "2025-04-01"
-compatibility_flags = ["nodejs_compat"]
-
-# Static assets configuration (new in April 2025)
-# Workers now natively support serving static assets
-# See: https://blog.cloudflare.com/full-stack-development-on-cloudflare-workers/
->>>>>>> parent of e26c50d (fix: dodanie MessageChannel polyfill dla React 19 na Cloudflare Workers)
 
 # Non-secret environment variables
 [vars]
