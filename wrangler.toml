@@ -1,11 +1,10 @@
 name = "zwierzakbezalergii"
 main = "dist/_worker.js/index.js"
-compatibility_date = "2025-04-01"
+compatibility_date = "2025-11-23"
 compatibility_flags = ["nodejs_compat"]
 
-# Static assets configuration (new in April 2025)
-# Workers now natively support serving static assets
-# See: https://blog.cloudflare.com/full-stack-development-on-cloudflare-workers/
+# For Astro in "directory" mode, assets are handled via _routes.json
+# ASSETS binding must be configured in Cloudflare Pages Dashboard!
 
 # Non-secret environment variables
 [vars]
