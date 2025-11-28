@@ -17,8 +17,8 @@ export default defineConfig({
   },
   adapter: cloudflare({
     imageService: "compile",
-    routes: {
-      strategy: "auto",
+    platformProxy: {
+      enabled: true,
     },
   }),
 });
