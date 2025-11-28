@@ -4,27 +4,25 @@ import { Button } from "../../components/ui/button";
 import { marked } from "marked";
 import { format } from "date-fns";
 import { pl } from "date-fns/locale";
+import { articleService } from "../../lib/services/articleService";
 
 // Pobierz slug z parametrów URL
 const { slug } = Astro.params;
 
-// Pobierz artykuł z API
-const apiUrl = new URL(`/api/articles/${slug}`, Astro.url);
-const response = await fetch(apiUrl);
-
-// Obsługa błędów
-if (!response.ok) {
+// Walidacja slug
+if (!slug) {
   return Astro.redirect("/articles");
 }
 
-const json = await response.json();
+// Pobierz artykuł bezpośrednio z serwisu (nie przez HTTP fetch)
+// W Cloudflare Workers, Worker nie może wywołać sam siebie przez HTTP
+const { data: article, error } = await articleService.getBySlug(Astro.locals.supabase, slug);
 
-// Jeśli nie znaleziono artykułu - redirect do listy
-if (!json.success || !json.data) {
+// Jeśli błąd lub nie znaleziono artykułu - redirect do listy
+if (error || !article) {
+  console.error(`[articles/${slug}] Błąd pobierania artykułu:`, error);
   return Astro.redirect("/articles");
 }
-
-const article = json.data;
 
 // Renderuj Markdown do HTML
 const contentHtml = marked(article.content || "");
