@@ -5,6 +5,7 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import cloudflare from "@astrojs/cloudflare";
+import { injectPolyfills } from "./vite-plugins/inject-polyfills.js";
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,7 +14,7 @@ export default defineConfig({
   integrations: [react(), sitemap()],
   server: { port: 4321 },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [injectPolyfills(), tailwindcss()],
   },
   adapter: cloudflare({
     imageService: "compile",

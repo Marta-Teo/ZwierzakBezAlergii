@@ -1,3 +1,6 @@
+// Polyfill for MessageChannel (required for React 19 on Cloudflare Workers)
+import "../polyfills/message-channel";
+
 import { defineMiddleware } from "astro:middleware";
 import { createSupabaseServerClient } from "../lib/supabase/server";
 
