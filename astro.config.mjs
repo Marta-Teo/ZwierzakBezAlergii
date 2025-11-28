@@ -17,6 +17,5 @@ export default defineConfig({
   },
   adapter: cloudflare({
     mode: "directory",
-    imageService: "compile",
   }),
 });
