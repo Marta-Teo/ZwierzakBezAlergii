@@ -1,13 +1,11 @@
 name = "zwierzakbezalergii"
 main = "dist/_worker.js/index.js"
 compatibility_date = "2025-04-01"
-compatibility_flags = ["nodejs_compat", "web_socket_compression"]
+compatibility_flags = ["nodejs_compat"]
 
 # Static assets configuration (new in April 2025)
 # Workers now natively support serving static assets
 # See: https://blog.cloudflare.com/full-stack-development-on-cloudflare-workers/
-
-# Note: MessageChannel polyfill is loaded via middleware for React 19 compatibility
 
 # Non-secret environment variables
 [vars]
