@@ -1,16 +1,31 @@
 import type { APIRoute } from "astro";
 import { OpenRouterService } from "@/lib/services/openRouter";
-import { ValidationError, APIError } from "@/lib/services/openRouter/errors";
+import { ValidationError, APIError, ConfigurationError } from "@/lib/services/openRouter/errors";
 
 // Wyłączamy prerendering dla tego endpointu zgodnie z zasadami Astro
 export const prerender = false;
 
-// Tworzymy singleton instancję OpenRouterService
-const openRouter = new OpenRouterService({
-  apiKey: import.meta.env.OPENROUTER_API_KEY,
-  appName: import.meta.env.PUBLIC_APP_NAME,
-  siteUrl: import.meta.env.PUBLIC_SITE_URL,
-});
+// Lazy initialization - tworzymy serwis dopiero przy pierwszym requeście
+let openRouter: OpenRouterService | null = null;
+
+function getOpenRouterService(): OpenRouterService {
+  if (!openRouter) {
+    const apiKey = import.meta.env.OPENROUTER_API_KEY;
+    
+    if (!apiKey) {
+      throw new ConfigurationError(
+        "Brak klucza OPENROUTER_API_KEY. Dodaj go w Cloudflare Dashboard -> Settings -> Variables and Secrets."
+      );
+    }
+    
+    openRouter = new OpenRouterService({
+      apiKey,
+      appName: import.meta.env.PUBLIC_APP_NAME || "ZwierzakBezAlergii",
+      siteUrl: import.meta.env.PUBLIC_SITE_URL || "https://www.zwierzakbezalergii.pl",
+    });
+  }
+  return openRouter;
+}
 
 /**
  * POST /api/chat
@@ -29,6 +44,8 @@ const openRouter = new OpenRouterService({
  */
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Lazy init serwisu - jeśli brak klucza API, zwrócimy czytelny błąd
+    const service = getOpenRouterService();
     // Parsuj body requesta
     const body = await request.json();
     const { messages, systemMessage, model, temperature, maxTokens } = body;
@@ -47,7 +64,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Wywołanie OpenRouter Service
-    const response = await openRouter.chat({
+    const response = await service.chat({
       messages,
       systemMessage,
       model,
@@ -63,6 +80,20 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (error) {
     // Loguj błąd po stronie serwera
     console.error("[API /chat] Błąd:", error);
+
+    // Obsługa ConfigurationError (brak klucza API)
+    if (error instanceof ConfigurationError) {
+      return new Response(
+        JSON.stringify({
+          error: error.message,
+          code: "CONFIGURATION_ERROR",
+        }),
+        {
+          status: 503,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
 
     // Obsługa ValidationError (400)
     if (error instanceof ValidationError) {
