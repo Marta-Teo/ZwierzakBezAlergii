@@ -4,7 +4,7 @@ compatibility_date = "2025-11-23"
 compatibility_flags = ["nodejs_compat"]
 
 # For Astro in "directory" mode, assets are handled via _routes.json
-# Do not use [assets] section - it will try to upload _worker.js as an asset!
+# ASSETS binding must be configured in Cloudflare Pages Dashboard!
 
 # Non-secret environment variables
 [vars]

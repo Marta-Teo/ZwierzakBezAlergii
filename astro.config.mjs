@@ -16,7 +16,9 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   adapter: cloudflare({
-    mode: "directory",
     imageService: "compile",
+    routes: {
+      strategy: "auto",
+    },
   }),
 });
