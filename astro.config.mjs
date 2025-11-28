@@ -15,7 +15,13 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  // Wyłączamy automatyczne sesje Astro przez ustawienie custom drivera (noop)
+  session: {
+    driver: "memory",
+  },
   adapter: cloudflare({
-    mode: "directory",
+    platformProxy: {
+      enabled: true,
+    },
   }),
 });

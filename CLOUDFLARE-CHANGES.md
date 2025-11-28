@@ -1,6 +1,6 @@
 # 🔄 Zmiany wprowadzone dla Cloudflare Pages Deployment
 
-## 📅 Data: 23 listopada 2025
+## 📅 Data: 28 listopada 2025 (aktualizacja)
 
 ### ✅ Co zostało zmienione w projekcie:
 
@@ -18,8 +18,25 @@ adapter: node({ mode: "standalone" })
 
 // Po:
 import cloudflare from "@astrojs/cloudflare";
-adapter: cloudflare({ platformProxy: { enabled: true } })
+adapter: cloudflare({
+  platformProxy: {
+    enabled: true,
+  },
+})
 ```
+
+#### 2. **Wyłączenie automatycznych sesji Cloudflare KV**
+
+Adapter @astrojs/cloudflare v12+ domyślnie włącza sesje z Cloudflare KV, co wymaga dodatkowej konfiguracji. Żeby uniknąć błędów, wyłączamy je poprzez ustawienie custom drivera w konfiguracji Astro:
+
+```javascript
+// W astro.config.mjs
+session: {
+  driver: "memory",
+},
+```
+
+**Dlaczego?** Bez tej konfiguracji adapter próbuje używać Cloudflare KV do sesji, co powoduje błąd "Cannot read properties of undefined (reading 'fetch')" jeśli binding KV nie jest skonfigurowany.
 
 **Dlaczego?** Cloudflare Pages wymaga specjalnego adaptera, który kompiluje aplikację do formatu kompatybilnego z ich infrastrukturą (Cloudflare Workers).
 
