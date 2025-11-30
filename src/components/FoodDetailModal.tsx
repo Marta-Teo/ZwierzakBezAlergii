@@ -48,7 +48,7 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto">
+      <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto p-4 sm:p-6">
         {/* Loading state */}
         {isLoading && (
           <div className="flex min-h-[400px] items-center justify-center">
@@ -83,10 +83,10 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
         {food && !isLoading && !isError && (
           <>
             <DialogHeader>
-              <DialogTitle className="text-2xl font-bold">{food.name}</DialogTitle>
+              <DialogTitle className="text-xl sm:text-2xl font-bold pr-8">{food.name}</DialogTitle>
             </DialogHeader>
 
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {/* Duże zdjęcie - dopasowane do proporcji obrazka */}
               <div className="relative w-full overflow-hidden rounded-lg bg-white" style={{ paddingBottom: "75%" }}>
                 {food.image_url ? (
@@ -97,7 +97,12 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <svg className="h-24 w-24 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg
+                      className="h-16 w-16 sm:h-24 sm:w-24 text-gray-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -110,25 +115,29 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
               </div>
 
               {/* Informacje podstawowe */}
-              <div className="grid grid-cols-2 gap-4 rounded-lg border border-gray-200 bg-gray-50 p-4 sm:grid-cols-4">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 rounded-lg border border-gray-200 bg-gray-50 p-3 sm:p-4 sm:grid-cols-4">
                 {food.brand && (
                   <div>
-                    <p className="text-xs font-medium text-gray-500">Marka</p>
-                    <p className="mt-1 text-sm font-semibold text-gray-900">{food.brand.name}</p>
+                    <p className="text-[10px] sm:text-xs font-medium text-gray-500">Marka</p>
+                    <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm font-semibold text-gray-900">{food.brand.name}</p>
                   </div>
                 )}
 
                 {food.sizeType && (
                   <div>
-                    <p className="text-xs font-medium text-gray-500">Rozmiar granulatu</p>
-                    <p className="mt-1 text-sm font-semibold text-gray-900">{food.sizeType.name}</p>
+                    <p className="text-[10px] sm:text-xs font-medium text-gray-500">Rozmiar granulatu</p>
+                    <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm font-semibold text-gray-900">
+                      {food.sizeType.name}
+                    </p>
                   </div>
                 )}
 
                 {food.ageCategory && (
                   <div>
-                    <p className="text-xs font-medium text-gray-500">Wiek psa</p>
-                    <p className="mt-1 text-sm font-semibold text-gray-900">{food.ageCategory.name}</p>
+                    <p className="text-[10px] sm:text-xs font-medium text-gray-500">Wiek psa</p>
+                    <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm font-semibold text-gray-900">
+                      {food.ageCategory.name}
+                    </p>
                   </div>
                 )}
               </div>
@@ -138,15 +147,15 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
                 {/* Składniki */}
                 {food.ingredients && food.ingredients.length > 0 && (
                   <AccordionItem value="ingredients">
-                    <AccordionTrigger className="text-lg font-semibold">
+                    <AccordionTrigger className="text-base sm:text-lg font-semibold">
                       Składniki ({food.ingredients.length})
                     </AccordionTrigger>
                     <AccordionContent>
-                      <ul className="space-y-2">
+                      <ul className="space-y-1.5 sm:space-y-2">
                         {food.ingredients.map((ingredient) => (
                           <li
                             key={ingredient.id}
-                            className="rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700"
+                            className="rounded-md border border-gray-200 bg-white px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-700"
                           >
                             {ingredient.name}
                           </li>
@@ -159,18 +168,18 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
                 {/* Alergeny */}
                 {food.allergens && food.allergens.length > 0 && (
                   <AccordionItem value="allergens">
-                    <AccordionTrigger className="text-lg font-semibold text-red-600">
+                    <AccordionTrigger className="text-base sm:text-lg font-semibold text-red-600">
                       Potencjalne alergeny ({food.allergens.length})
                     </AccordionTrigger>
                     <AccordionContent>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {food.allergens.map((allergen) => (
-                          <Badge key={allergen.id} variant="destructive" className="text-sm">
+                          <Badge key={allergen.id} variant="destructive" className="text-xs sm:text-sm">
                             {allergen.name}
                           </Badge>
                         ))}
                       </div>
-                      <p className="mt-4 text-xs text-gray-600">
+                      <p className="mt-3 sm:mt-4 text-[10px] sm:text-xs text-gray-600">
                         Lista alergenów zawiera wszystkie potencjalne alergeny wykryte w składnikach tej karmy.
                       </p>
                     </AccordionContent>
@@ -180,9 +189,11 @@ export function FoodDetailModal({ isOpen, foodId, onClose }: FoodDetailModalProp
                 {/* Skład surowy (jeśli dostępny) */}
                 {food.ingredients_raw && (
                   <AccordionItem value="raw-composition">
-                    <AccordionTrigger className="text-lg font-semibold">Pełny skład (z opakowania)</AccordionTrigger>
+                    <AccordionTrigger className="text-base sm:text-lg font-semibold">
+                      Pełny skład (z opakowania)
+                    </AccordionTrigger>
                     <AccordionContent>
-                      <p className="whitespace-pre-wrap text-sm text-gray-700">{food.ingredients_raw}</p>
+                      <p className="whitespace-pre-wrap text-xs sm:text-sm text-gray-700">{food.ingredients_raw}</p>
                     </AccordionContent>
                   </AccordionItem>
                 )}

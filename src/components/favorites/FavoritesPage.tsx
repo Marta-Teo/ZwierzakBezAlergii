@@ -84,13 +84,13 @@ function FavoritesPageContent() {
     <div className="min-h-screen">
       {/* Header */}
       <header className="border-b border-border bg-card/90 backdrop-blur-sm shadow-sm">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center gap-3">
-            <Heart className="h-8 w-8 fill-destructive text-destructive" />
+        <div className="container mx-auto px-4 py-4 sm:py-6">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Heart className="h-6 w-6 sm:h-8 sm:w-8 fill-destructive text-destructive shrink-0" />
             <div>
-              <h1 className="text-3xl font-bold text-foreground">Moje ulubione karmy</h1>
+              <h1 className="text-xl sm:text-3xl font-bold text-foreground">Moje ulubione karmy</h1>
               {count > 0 && (
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
                   {count} {count === 1 ? "karma" : count < 5 ? "karmy" : "karm"} w ulubionych
                 </p>
               )}
@@ -100,21 +100,21 @@ function FavoritesPageContent() {
       </header>
 
       {/* Main content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-4 sm:py-8">
         {/* Empty State */}
         {count === 0 ? (
-          <div className="flex min-h-[500px] flex-col items-center justify-center rounded-lg border border-border bg-muted/30 px-4 py-16 text-center">
-            <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-muted">
-              <Heart className="h-10 w-10 text-muted-foreground" />
+          <div className="flex min-h-[400px] sm:min-h-[500px] flex-col items-center justify-center rounded-lg border border-border bg-muted/30 px-4 py-8 sm:py-16 text-center">
+            <div className="mb-4 sm:mb-6 flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-muted">
+              <Heart className="h-8 w-8 sm:h-10 sm:w-10 text-muted-foreground" />
             </div>
-            <h2 className="mb-2 text-2xl font-bold text-foreground">Brak ulubionych karm</h2>
-            <p className="mb-8 max-w-md text-muted-foreground">
+            <h2 className="mb-2 text-xl sm:text-2xl font-bold text-foreground">Brak ulubionych karm</h2>
+            <p className="mb-6 sm:mb-8 max-w-md text-sm sm:text-base text-muted-foreground">
               Przeglądaj karmy i dodawaj je do ulubionych klikając ikonkę serduszka. Wszystkie ulubione karmy znajdziesz
               tutaj!
             </p>
             <a href="/foods">
-              <Button size="lg" className="gap-2">
-                <Search className="h-5 w-5" />
+              <Button size="default" className="gap-2 sm:text-base">
+                <Search className="h-4 w-4 sm:h-5 sm:w-5" />
                 Przeglądaj karmy
               </Button>
             </a>

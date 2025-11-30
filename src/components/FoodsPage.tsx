@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { SearchBar } from "./SearchBar";
 import { FilterSidebar } from "./FilterSidebar";
+import { MobileFilters } from "./MobileFilters";
 import { FoodCardGrid } from "./FoodCardGrid";
 import { LoadingState } from "./LoadingState";
 import { ErrorMessage } from "./ErrorMessage";
@@ -182,13 +183,23 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
   // Loading state dla opcji filtrów
   const areOptionsLoading = isBrandsLoading || isSizeTypesLoading || isAgeCategoriesLoading || isAllergensLoading;
 
+  // Licznik aktywnych filtrów dla MobileFilters
+  const activeFiltersCount = useMemo(() => {
+    let count = 0;
+    if (filters.excludeAllergens.length > 0) count += filters.excludeAllergens.length;
+    if (filters.brandId) count++;
+    if (filters.sizeTypeId) count++;
+    if (filters.ageCategoryId) count++;
+    return count;
+  }, [filters]);
+
   return (
     <div className="min-h-screen">
       {/* Header */}
       <header className="bg-card/90 backdrop-blur-sm shadow-sm border-b border-border">
-        <div className="container mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-foreground">Karmy dla psów</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
+        <div className="container mx-auto px-4 py-4 sm:py-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Karmy dla psów</h1>
+          <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
             Pełne składy wraz z prawidłową kolejnością składników, w zależności od proporcji w składzie, znajdują się w
             zakładce &quot;Pełny skład (z opakowania)&quot;. Pole &quot;Składniki&quot; zawiera listę składników karmy
             ale w losowej kolejności.
@@ -197,22 +208,36 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
       </header>
 
       {/* Main content */}
-      <main className="container mx-auto px-4 py-8">
-        {/* SearchBar + Przyciski nawigacyjne */}
-        <div className="mb-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-          <div className="flex-1">
-            <SearchBar value={searchTerm} onSearchChange={handleSearchChange} />
+      <main className="container mx-auto px-4 py-4 sm:py-8">
+        {/* SearchBar + Filtry mobilne + Przyciski nawigacyjne */}
+        <div className="mb-4 sm:mb-6 flex flex-col gap-3 sm:gap-4">
+          {/* Rząd 1: SearchBar */}
+          <div className="flex gap-2 sm:gap-4">
+            <div className="flex-1">
+              <SearchBar value={searchTerm} onSearchChange={handleSearchChange} />
+            </div>
+
+            {/* Mobilny przycisk filtrów */}
+            {!areOptionsLoading && (
+              <MobileFilters
+                filters={filters}
+                onChange={handleFiltersChange}
+                onReset={handleFiltersReset}
+                options={{ brands, sizeTypes, ageCategories, allergens }}
+                activeFiltersCount={activeFiltersCount}
+              />
+            )}
           </div>
 
-          {/* Przyciski nawigacyjne */}
-          <div className="flex gap-2">
+          {/* Rząd 2: Przyciski nawigacyjne - ukryte na bardzo małych ekranach */}
+          <div className="flex gap-2 justify-end">
             <a
               href="/"
-              className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 sm:px-4 py-2 sm:py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               aria-label="Powrót do strony głównej"
             >
               <svg
-                className="h-5 w-5"
+                className="h-4 w-4 sm:h-5 sm:w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -232,11 +257,11 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
             {/* Asystent AI - Wyróżniony button */}
             <a
               href="/asystent"
-              className="flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 shadow-lg bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700"
+              className="flex items-center gap-2 rounded-lg px-3 sm:px-5 py-2 sm:py-3 text-sm font-semibold text-white transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 shadow-lg bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700"
               aria-label="Porozmawiaj z asystentem AI"
             >
               <svg
-                className="h-5 w-5"
+                className="h-4 w-4 sm:h-5 sm:w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -250,7 +275,8 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
                   d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                 />
               </svg>
-              <span>Asystent AI</span>
+              <span className="hidden xs:inline">Asystent AI</span>
+              <span className="xs:hidden">AI</span>
             </a>
           </div>
         </div>
@@ -275,29 +301,31 @@ function FoodsPageContent({ isLoggedIn, preselectedFilters }: FoodsPageContentPr
 
         {/* Layout: Sidebar + Content */}
         <div className="flex gap-6">
-          {/* Sidebar z filtrami */}
-          {areOptionsLoading ? (
-            <div className="w-64 flex-shrink-0 rounded-lg border border-border bg-card p-6">
-              <div className="animate-pulse space-y-4">
-                <div className="h-4 w-24 rounded bg-muted" />
-                <div className="space-y-2">
-                  <div className="h-3 w-full rounded bg-muted" />
-                  <div className="h-3 w-full rounded bg-muted" />
-                  <div className="h-3 w-full rounded bg-muted" />
+          {/* Sidebar z filtrami - ukryty na mobile */}
+          <div className="hidden md:block">
+            {areOptionsLoading ? (
+              <div className="w-64 flex-shrink-0 rounded-lg border border-border bg-card p-6">
+                <div className="animate-pulse space-y-4">
+                  <div className="h-4 w-24 rounded bg-muted" />
+                  <div className="space-y-2">
+                    <div className="h-3 w-full rounded bg-muted" />
+                    <div className="h-3 w-full rounded bg-muted" />
+                    <div className="h-3 w-full rounded bg-muted" />
+                  </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <FilterSidebar
-              filters={filters}
-              onChange={handleFiltersChange}
-              onReset={handleFiltersReset}
-              options={{ brands, sizeTypes, ageCategories, allergens }}
-            />
-          )}
+            ) : (
+              <FilterSidebar
+                filters={filters}
+                onChange={handleFiltersChange}
+                onReset={handleFiltersReset}
+                options={{ brands, sizeTypes, ageCategories, allergens }}
+              />
+            )}
+          </div>
 
           {/* Content area */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             {/* Error state */}
             {isFoodsError && (
               <ErrorMessage

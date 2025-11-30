@@ -51,42 +51,47 @@ Bądź ciepły i przyjazny w komunikacji.`,
   };
 
   return (
-    <div className="flex flex-col h-[600px] max-w-4xl mx-auto border border-border rounded-lg shadow-lg bg-card">
+    <div className="flex flex-col h-[calc(100vh-8rem)] sm:h-[600px] max-w-4xl mx-auto border border-border rounded-lg shadow-lg bg-card">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-border bg-gradient-to-r from-purple-500 to-indigo-600">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-2xl">🐕</div>
+      <div className="flex items-center justify-between p-3 sm:p-4 border-b border-border bg-gradient-to-r from-purple-500 to-indigo-600">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white flex items-center justify-center text-xl sm:text-2xl">
+            🐕
+          </div>
           <div>
-            <h2 className="text-xl font-bold text-white">Asystent Żywieniowy</h2>
-            <p className="text-sm text-blue-100">Pytaj o karmy i alergeny</p>
+            <h2 className="text-base sm:text-xl font-bold text-white">Asystent Żywieniowy</h2>
+            <p className="text-xs sm:text-sm text-blue-100 hidden sm:block">Pytaj o karmy i alergeny</p>
           </div>
         </div>
         <Button
           onClick={clearMessages}
           variant="outline"
           size="sm"
-          className="bg-white/20 text-white border-white/30 hover:bg-white/30"
+          className="bg-white/20 text-white border-white/30 hover:bg-white/30 text-xs sm:text-sm px-2 sm:px-3"
         >
-          Nowa rozmowa
+          <span className="hidden sm:inline">Nowa rozmowa</span>
+          <span className="sm:hidden">Nowa</span>
         </Button>
       </div>
 
       {/* Messages Area */}
-      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/30">
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-muted/30">
         {messages.length === 0 && (
-          <div className="text-center py-8">
-            <div className="text-6xl mb-4">🐾</div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Witaj w Asystencie Żywieniowym!</h3>
-            <p className="text-muted-foreground mb-6">Zapytaj mnie o karmy, alergeny lub dietę dla Twojego psa</p>
+          <div className="text-center py-4 sm:py-8">
+            <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">🐾</div>
+            <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">Witaj w Asystencie Żywieniowym!</h3>
+            <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 px-2">
+              Zapytaj mnie o karmy, alergeny lub dietę dla Twojego psa
+            </p>
 
             {/* Quick Questions */}
             <div className="space-y-2">
-              <p className="text-sm text-muted-foreground mb-3">Przykładowe pytania:</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">Przykładowe pytania:</p>
               {quickQuestions.map((question, i) => (
                 <button
                   key={i}
                   onClick={() => handleQuickQuestion(question)}
-                  className="block w-full max-w-md mx-auto px-4 py-2 text-left text-sm bg-card border border-border rounded-lg hover:bg-muted/50 hover:border-purple-300 transition-colors"
+                  className="block w-full max-w-md mx-auto px-3 sm:px-4 py-2 text-left text-xs sm:text-sm bg-card border border-border rounded-lg hover:bg-muted/50 hover:border-purple-300 transition-colors"
                 >
                   💡 {question}
                 </button>
@@ -98,19 +103,19 @@ Bądź ciepły i przyjazny w komunikacji.`,
         {messages.map((message, index) => (
           <div key={index} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
             <div
-              className={`max-w-[80%] rounded-lg px-4 py-3 ${
+              className={`max-w-[90%] sm:max-w-[80%] rounded-lg px-3 sm:px-4 py-2 sm:py-3 ${
                 message.role === "user"
                   ? "bg-gradient-to-r from-purple-500 to-indigo-600 text-white"
                   : "bg-card border border-border text-foreground"
               }`}
             >
               <div className="flex items-start gap-2">
-                {message.role === "assistant" && <span className="text-lg">🤖</span>}
-                <div className="flex-1">
+                {message.role === "assistant" && <span className="text-base sm:text-lg">🤖</span>}
+                <div className="flex-1 min-w-0">
                   <div className="text-xs font-semibold mb-1 opacity-70">
                     {message.role === "user" ? "Ty" : "Asystent"}
                   </div>
-                  <div className="whitespace-pre-wrap leading-relaxed">
+                  <div className="whitespace-pre-wrap leading-relaxed text-sm sm:text-base break-words">
                     {typeof message.content === "string"
                       ? message.content
                       : message.content.map((c) => (c.type === "text" ? c.text : "")).join("")}
@@ -160,32 +165,35 @@ Bądź ciepły i przyjazny w komunikacji.`,
       </div>
 
       {/* Input Area */}
-      <div className="border-t border-border bg-card p-4">
+      <div className="border-t border-border bg-card p-3 sm:p-4">
         <form onSubmit={handleSubmit} className="flex gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Napisz pytanie o karmy lub alergeny..."
-            className="flex-1 px-4 py-3 border border-border bg-background rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-foreground placeholder:text-muted-foreground"
+            placeholder="Napisz pytanie..."
+            className="flex-1 min-w-0 px-3 sm:px-4 py-2 sm:py-3 border border-border bg-background rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base text-foreground placeholder:text-muted-foreground"
             disabled={isLoading}
           />
           <Button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="px-3 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all shrink-0"
           >
             {isLoading ? (
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-1 sm:gap-2">
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                Wysyłam...
+                <span className="hidden sm:inline">Wysyłam...</span>
               </span>
             ) : (
-              "📤 Wyślij"
+              <>
+                <span className="sm:hidden">📤</span>
+                <span className="hidden sm:inline">📤 Wyślij</span>
+              </>
             )}
           </Button>
         </form>
-        <p className="text-xs text-muted-foreground mt-2 text-center">
+        <p className="text-xs text-muted-foreground mt-2 text-center hidden sm:block">
           💡 Wskazówka: Możesz zapytać o konkretne składniki, alergeny lub porównać karmy
         </p>
       </div>
