@@ -34,15 +34,15 @@ function getSupabaseAnonKey(): string {
 export function createSupabaseBrowserClient() {
   const url = getSupabaseUrl();
   const key = getSupabaseAnonKey();
-  
+
   if (!url || !key) {
     throw new Error(
       "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\n" +
-      "Check your Supabase project's API settings to find these values\n\n" +
-      "https://supabase.com/dashboard/project/_/settings/api"
+        "Check your Supabase project's API settings to find these values\n\n" +
+        "https://supabase.com/dashboard/project/_/settings/api"
     );
   }
-  
+
   return createBrowserClient<Database>(url, key);
 }
 

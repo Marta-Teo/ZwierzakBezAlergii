@@ -12,16 +12,17 @@ export const prerender = false;
 function createOpenRouterService(runtimeEnv: Record<string, unknown> | undefined): OpenRouterService {
   // Próbuj pobrać klucz z runtime env (Cloudflare Dashboard) lub import.meta.env (wrangler.toml)
   const apiKey = (runtimeEnv?.OPENROUTER_API_KEY as string) || import.meta.env.OPENROUTER_API_KEY;
-  
+
   if (!apiKey) {
     throw new ConfigurationError(
       "Brak klucza OPENROUTER_API_KEY. Dodaj go w Cloudflare Dashboard -> Settings -> Variables and Secrets."
     );
   }
-  
+
   const appName = (runtimeEnv?.PUBLIC_APP_NAME as string) || import.meta.env.PUBLIC_APP_NAME || "ZwierzakBezAlergii";
-  const siteUrl = (runtimeEnv?.PUBLIC_SITE_URL as string) || import.meta.env.PUBLIC_SITE_URL || "https://www.zwierzakbezalergii.pl";
-  
+  const siteUrl =
+    (runtimeEnv?.PUBLIC_SITE_URL as string) || import.meta.env.PUBLIC_SITE_URL || "https://www.zwierzakbezalergii.pl";
+
   return new OpenRouterService({
     apiKey,
     appName,
@@ -48,7 +49,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   try {
     // Pobierz runtime env z Cloudflare (zmienne z Dashboard)
     const runtimeEnv = locals.runtime?.env as Record<string, unknown> | undefined;
-    
+
     // Utwórz serwis z kluczem API
     const service = createOpenRouterService(runtimeEnv);
     // Parsuj body requesta

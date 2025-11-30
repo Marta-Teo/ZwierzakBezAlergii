@@ -1,17 +1,18 @@
-name: Tests
+name: CI/CD Pipeline with Cloudflare Deploy
 
-# Uruchamiaj testy tylko na pull request
-# (push do main/master obsługuje deploy.yml z pełnym CI/CD)
+# Uruchamiaj na push do głównych branchy
 on:
-  pull_request:
-    branches: [main, master, develop]
+  push:
+    branches: [main, master]
 
 jobs:
-  # Testy jednostkowe
-  test-unit:
-    name: Testy jednostkowe (Vitest)
+  # =====================================================
+  # ETAP 1: Linting
+  # =====================================================
+  lint:
+    name: 🔍 Linting
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout kodu
         uses: actions/checkout@v5
@@ -19,8 +20,32 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - name: Instalacja zależności
+        run: npm ci
+
+      - name: Uruchom ESLint
+        run: npm run lint
+
+  # =====================================================
+  # ETAP 2: Testy jednostkowe (po lintingu)
+  # =====================================================
+  test-unit:
+    name: 🧪 Testy jednostkowe (Vitest)
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - name: Checkout kodu
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
 
       - name: Instalacja zależności
         run: npm ci
@@ -32,24 +57,23 @@ jobs:
         run: npm run test:coverage
         continue-on-error: true
 
-      - name: Upload coverage do Codecov (opcjonalnie)
-        uses: codecov/codecov-action@v5
+      - name: Upload coverage
+        uses: actions/upload-artifact@v5
         if: always()
         with:
-          files: ./coverage/coverage-final.json
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: false
+          name: unit-coverage
+          path: coverage/
+          retention-days: 7
 
-  # Testy E2E
+  # =====================================================
+  # ETAP 3: Testy E2E (po lintingu, równolegle z unit)
+  # =====================================================
   test-e2e:
-    name: Testy E2E (Playwright)
+    name: 🎭 Testy E2E (Playwright)
     runs-on: ubuntu-latest
+    needs: lint
     environment: integration
-    
-    # Opcjonalnie: uruchom E2E tylko jeśli testy jednostkowe przeszły
-    # needs: test-unit
-    
+
     steps:
       - name: Checkout kodu
         uses: actions/checkout@v5
@@ -57,8 +81,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
+          node-version-file: ".nvmrc"
+          cache: "npm"
 
       - name: Instalacja zależności
         run: npm ci
@@ -85,7 +109,7 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30
+          retention-days: 7
 
       - name: Upload traces w przypadku błędu
         uses: actions/upload-artifact@v5
@@ -93,13 +117,17 @@ jobs:
         with:
           name: playwright-traces
           path: test-results/
-          retention-days: 30
+          retention-days: 7
 
-  # Lint i formatowanie (opcjonalnie)
-  lint:
-    name: Linting i formatowanie
+  # =====================================================
+  # ETAP 4: Build i Deploy do Cloudflare Workers (po wszystkich testach)
+  # =====================================================
+  deploy:
+    name: 🚀 Deploy do Cloudflare Workers
     runs-on: ubuntu-latest
-    
+    needs: [lint, test-unit, test-e2e]
+    environment: production
+
     steps:
       - name: Checkout kodu
         uses: actions/checkout@v5
@@ -107,30 +135,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
-
-      - name: Instalacja zależności
-        run: npm ci
-
-      - name: Uruchom ESLint
-        run: npm run lint
-
-  # Build (sprawdź czy projekt się buduje)
-  build:
-    name: Build projektu
-    runs-on: ubuntu-latest
-    environment: integration
-    
-    steps:
-      - name: Checkout kodu
-        uses: actions/checkout@v5
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
+          node-version-file: ".nvmrc"
+          cache: "npm"
 
       - name: Instalacja zależności
         run: npm ci
@@ -147,7 +153,10 @@ jobs:
           PUBLIC_SITE_URL: ${{ secrets.PUBLIC_SITE_URL }}
           NODE_ENV: production
 
-# Opcjonalnie: Status check
-# To zapewni, że wszystkie testy muszą przejść przed merge
-# (konfigurowane w ustawieniach repozytorium GitHub)
-
+      - name: Deploy do Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Używamy wrangler deploy (Workers), nie pages deploy
+          command: deploy

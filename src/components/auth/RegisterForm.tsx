@@ -88,7 +88,7 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
   if (success) {
     // Sprawdź czy mamy sesję (auto-login) czy trzeba potwierdzić email
     const needsEmailConfirmation = !error && typeof window !== "undefined" && !document.cookie.includes("sb-");
-    
+
     return (
       <div className="w-full max-w-md mx-auto bg-card rounded-lg shadow-lg p-8 text-center">
         <CheckCircle className="mx-auto h-12 w-12 text-green-500 mb-4" />
@@ -98,18 +98,14 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
             <p className="text-muted-foreground mb-4">
               Sprawdź swoją skrzynkę email i kliknij link aktywacyjny, aby dokończyć rejestrację.
             </p>
-            <p className="text-sm text-muted-foreground">
-              Nie widzisz emaila? Sprawdź folder spam.
-            </p>
+            <p className="text-sm text-muted-foreground">Nie widzisz emaila? Sprawdź folder spam.</p>
             <a href="/login" className="mt-4 inline-block text-primary hover:underline">
               Przejdź do logowania →
             </a>
           </>
         ) : (
           <>
-            <p className="text-muted-foreground mb-4">
-              Za chwilę zostaniesz przekierowany...
-            </p>
+            <p className="text-muted-foreground mb-4">Za chwilę zostaniesz przekierowany...</p>
             <p className="text-sm text-muted-foreground">Przekierowanie nastąpi za chwilę...</p>
           </>
         )}
