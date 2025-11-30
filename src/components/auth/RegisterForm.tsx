@@ -86,29 +86,36 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
   };
 
   if (success) {
-    // Sprawdź czy mamy sesję (auto-login) czy trzeba potwierdzić email
-    const needsEmailConfirmation = !error && typeof window !== "undefined" && !document.cookie.includes("sb-");
-
     return (
       <div className="w-full max-w-md mx-auto bg-card rounded-lg shadow-lg p-8 text-center">
         <CheckCircle className="mx-auto h-12 w-12 text-green-500 mb-4" />
         <h2 className="text-2xl font-bold mb-2">Rejestracja udana!</h2>
-        {needsEmailConfirmation ? (
-          <>
-            <p className="text-muted-foreground mb-4">
-              Sprawdź swoją skrzynkę email i kliknij link aktywacyjny, aby dokończyć rejestrację.
-            </p>
-            <p className="text-sm text-muted-foreground">Nie widzisz emaila? Sprawdź folder spam.</p>
-            <a href="/login" className="mt-4 inline-block text-primary hover:underline">
-              Przejdź do logowania →
-            </a>
-          </>
-        ) : (
-          <>
-            <p className="text-muted-foreground mb-4">Za chwilę zostaniesz przekierowany...</p>
-            <p className="text-sm text-muted-foreground">Przekierowanie nastąpi za chwilę...</p>
-          </>
-        )}
+        
+        <div className="text-left bg-muted/50 rounded-lg p-4 mb-4">
+          <p className="font-medium mb-2">📧 Link aktywacyjny został wysłany na adres:</p>
+          <p className="text-primary font-semibold mb-3">{email}</p>
+          
+          <p className="font-medium mb-2">Co teraz?</p>
+          <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground">
+            <li>Otwórz swoją skrzynkę email</li>
+            <li>Znajdź wiadomość od ZwierzakBezAlergii</li>
+            <li>Kliknij link aktywacyjny w wiadomości</li>
+            <li>Po aktywacji możesz się zalogować</li>
+          </ol>
+        </div>
+
+        <div className="text-sm text-muted-foreground bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-3 mb-4">
+          <p className="font-medium text-amber-700 dark:text-amber-400 mb-1">⚠️ Nie widzisz emaila?</p>
+          <ul className="text-amber-600 dark:text-amber-500 space-y-1">
+            <li>• Sprawdź folder <strong>Spam</strong> lub <strong>Oferty</strong></li>
+            <li>• Email może dotrzeć w ciągu kilku minut</li>
+            <li>• Upewnij się, że adres email jest poprawny</li>
+          </ul>
+        </div>
+
+        <a href="/login" className="inline-block text-primary hover:underline font-medium">
+          Przejdź do logowania →
+        </a>
       </div>
     );
   }
