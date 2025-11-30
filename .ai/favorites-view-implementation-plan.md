@@ -20,7 +20,7 @@ FavoritesPage
 └─ ErrorBoundary + ToastContainer
 ```
 
-## 4. Szczegóły komponentów
+## 4. Szczegóły komponentów.
 
 ### PageHeader
 - Opis: Nagłówek strony z tytułem i opcjonalnym licznikiem ulubionych.

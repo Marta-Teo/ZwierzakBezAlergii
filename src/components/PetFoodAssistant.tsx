@@ -12,7 +12,7 @@ import { Button } from "./ui/button";
  */
 export function PetFoodAssistant() {
   const [input, setInput] = useState("");
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const { messages, isLoading, error, sendMessage, clearMessages } = useChat({
     systemMessage: `Jesteś ekspertem od żywienia psów i alergii pokarmowych. 
@@ -24,9 +24,11 @@ Bądź ciepły i przyjazny w komunikacji.`,
     maxTokens: 500,
   });
 
-  // Auto-scroll do najnowszej wiadomości
+  // Auto-scroll do najnowszej wiadomości - tylko wewnątrz kontenera, nie całej strony
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messages.length > 0 && messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -70,7 +72,7 @@ Bądź ciepły i przyjazny w komunikacji.`,
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/30">
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/30">
         {messages.length === 0 && (
           <div className="text-center py-8">
             <div className="text-6xl mb-4">🐾</div>
@@ -155,8 +157,6 @@ Bądź ciepły i przyjazny w komunikacji.`,
             </div>
           </div>
         )}
-
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Input Area */}

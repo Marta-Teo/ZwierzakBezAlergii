@@ -30,7 +30,7 @@ adapter: cloudflare({
 Adapter @astrojs/cloudflare v12+ domyślnie włącza sesje z Cloudflare KV, co wymaga dodatkowej konfiguracji. Żeby uniknąć błędów, wyłączamy je poprzez ustawienie custom drivera w konfiguracji Astro:
 
 ```javascript
-// W astro.config.mjs
+// W astro.config.mjs.
 session: {
   driver: "memory",
 },
