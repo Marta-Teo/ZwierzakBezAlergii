@@ -74,7 +74,7 @@ export function MobileFilters({ filters, onChange, onReset, options, activeFilte
       </SheetTrigger>
 
       <SheetContent side="right" className="w-full sm:w-[350px] p-0 flex flex-col">
-        <SheetHeader className="px-4 py-4 border-b">
+        <SheetHeader className="px-4 py-4 pr-12 border-b">
           <div className="flex items-center justify-between">
             <SheetTitle className="flex items-center gap-2">
               <SlidersHorizontal className="h-5 w-5" />
