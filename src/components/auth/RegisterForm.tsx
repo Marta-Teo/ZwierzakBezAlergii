@@ -90,11 +90,11 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
       <div className="w-full max-w-md mx-auto bg-card rounded-lg shadow-lg p-8 text-center">
         <CheckCircle className="mx-auto h-12 w-12 text-green-500 mb-4" />
         <h2 className="text-2xl font-bold mb-2">Rejestracja udana!</h2>
-        
+
         <div className="text-left bg-muted/50 rounded-lg p-4 mb-4">
           <p className="font-medium mb-2">📧 Link aktywacyjny został wysłany na adres:</p>
           <p className="text-primary font-semibold mb-3">{email}</p>
-          
+
           <p className="font-medium mb-2">Co teraz?</p>
           <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground">
             <li>Otwórz swoją skrzynkę email</li>
@@ -107,7 +107,9 @@ export function RegisterForm({ redirectTo = "/foods" }: RegisterFormProps) {
         <div className="text-sm text-muted-foreground bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-3 mb-4">
           <p className="font-medium text-amber-700 dark:text-amber-400 mb-1">⚠️ Nie widzisz emaila?</p>
           <ul className="text-amber-600 dark:text-amber-500 space-y-1">
-            <li>• Sprawdź folder <strong>Spam</strong> lub <strong>Oferty</strong></li>
+            <li>
+              • Sprawdź folder <strong>Spam</strong> lub <strong>Oferty</strong>
+            </li>
             <li>• Email może dotrzeć w ciągu kilku minut</li>
             <li>• Upewnij się, że adres email jest poprawny</li>
           </ul>
