@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { Header } from "../components/layout/Header";
 import { Toaster } from "../components/ui/Toaster";
+import { CookieBanner } from "../components/CookieBanner";
 import { HERO_CONTENT } from "../config/hero";
 
 interface Props {
@@ -97,6 +98,7 @@ const hasBackground = background.image !== null;
         <Header client:load user={user} userRole={userRole} />
         <slot />
         <Toaster client:load />
+        <CookieBanner client:load />
       </div>
     </div>
   </body>

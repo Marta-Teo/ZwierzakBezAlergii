@@ -8,7 +8,7 @@
 export const HERO_CONTENT = {
   title: "Twój pies ma alergię pokarmową? Jesteś w dobrym miejscu! :)",
   description:
-    "Strona ta została stworzona z miłości do psów i z doświadczenia z psami alergikami.\n\nNie wiesz, czym karmić psa z alergią? Pomożemy!\n\nNasza baza karm pozwala szybko znaleźć bezpieczne dla Twojego pupila karmy dostępne w Polsce.\n\n Filtruj po składnikach, czytaj porady oraz artykuły i wybieraj świadomie.",
+    "Strona ta została stworzona z miłości do psów i z doświadczenia z psami alergikami.\n\nNasza baza karm pozwala szybko znaleźć bezpieczne dla Twojego pupila karmy dostępne w Polsce.\n\n Filtruj po składnikach, czytaj porady oraz artykuły i wybieraj świadomie. \n\n Zarejestruj się, aby stworzyć profil swojego psa, filtruj karmy pod względem jego alergii oraz dodawaj do ulubionych",
   buttons: {
     primary: {
       label: "Przeglądaj karmy",

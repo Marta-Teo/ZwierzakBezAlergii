@@ -144,13 +144,23 @@ function FoodCard({ food, onSelect, isFavorite = false, onFavoriteToggle, isAuth
       aria-label={`Zobacz szczegóły karmy ${food.name}`}
       data-testid="food-card"
     >
-      {/* Favorite Heart Button - tylko dla zalogowanych */}
-      {isAuthenticated && onFavoriteToggle && (
+      {/* Favorite Heart Button - widoczny dla wszystkich, z tooltipem dla niezalogowanych */}
+      {onFavoriteToggle && (
         <button
           onClick={handleFavoriteClick}
           onKeyDown={handleFavoriteKeyDown}
-          className="absolute right-2 top-2 z-10 rounded-full bg-background/80 p-2 backdrop-blur-sm transition-colors hover:bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-          aria-label={isFavorite ? "Usuń z ulubionych" : "Dodaj do ulubionych"}
+          className={cn(
+            "absolute right-2 top-2 z-10 rounded-full bg-background/80 p-2 backdrop-blur-sm transition-colors hover:bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+            !isAuthenticated && "cursor-default"
+          )}
+          aria-label={
+            isAuthenticated
+              ? isFavorite
+                ? "Usuń z ulubionych"
+                : "Dodaj do ulubionych"
+              : "Zaloguj się, aby dodawać karmy do ulubionych"
+          }
+          title={!isAuthenticated ? "Zaloguj się, aby dodawać karmy do ulubionych" : undefined}
           tabIndex={0}
         >
           <Heart
@@ -158,7 +168,9 @@ function FoodCard({ food, onSelect, isFavorite = false, onFavoriteToggle, isAuth
               "h-5 w-5 transition-all",
               isFavorite
                 ? "fill-destructive text-destructive" // Czerwone wypełnione
-                : "text-muted-foreground hover:text-destructive" // Szare puste
+                : isAuthenticated
+                  ? "text-muted-foreground hover:text-destructive" // Szare puste - zalogowany
+                  : "text-muted-foreground/50 hover:text-muted-foreground" // Jeszcze bledsze - niezalogowany
             )}
           />
         </button>
