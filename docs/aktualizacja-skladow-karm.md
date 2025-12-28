@@ -93,16 +93,43 @@ Skrypt pokaże:
 ✅ Aktualizacja zakończona pomyślnie!
 ```
 
-### 5. Wyeksportuj do seed.sql
+### 5. Wygeneruj przyrostowy plik SQL dla produkcji
+
+**Dla bazy produkcyjnej** (zalecane):
+
+```bash
+npm run db:incremental
+```
+
+To wygeneruje plik w `supabase/incremental-updates/YYYY-MM-DD_HH-mm-ss.sql` zawierający tylko nowe/zmienione dane.
+
+**Dla lokalnej bazy** (backup):
 
 ```bash
 npm run db:export
 ```
 
-### 6. Commituj zmiany
+To wygeneruje pełny plik `seed.sql` z całą bazą (używany do resetowania lokalnej bazy).
+
+### 6. Wklej zmiany do bazy produkcyjnej
+
+1. Otwórz wygenerowany plik z `supabase/incremental-updates/`
+2. Skopiuj całą zawartość
+3. Otwórz [Supabase Dashboard](https://app.supabase.com/) → Twój projekt → **SQL Editor**
+4. Wklej zawartość i kliknij **"Run"**
+5. ✅ Gotowe! Zmiany są teraz w bazie produkcyjnej
+
+**Dlaczego przyrostowy plik?**
+- ✅ Używa `UPSERT` (INSERT ... ON CONFLICT DO UPDATE) - bezpiecznie aktualizuje istniejące dane
+- ✅ Nie nadpisuje danych użytkowników (np. profile psów)
+- ✅ Można go wkleić wielokrotnie bez problemów
+- ✅ Zawiera tylko zmiany, nie całą bazę
+
+### 7. Commituj zmiany
 
 ```bash
-git add supabase/seed.sql
+git add supabase/incremental-updates/*.sql
+git add supabase/seed.sql  # jeśli aktualizowałeś lokalną bazę
 git commit -m "feat: zaktualizowano skład karmy Brit Care"
 git push
 ```
@@ -195,10 +222,16 @@ npm run food:update "Nazwa karmy 2" "Skład 2"
 # 3. Aktualizuj trzecią karmę
 npm run food:update "Nazwa karmy 3" "Skład 3"
 
-# 4. Wyeksportuj wszystkie zmiany do seed.sql
+# 4. Wygeneruj przyrostowy plik SQL dla produkcji
+npm run db:incremental
+
+# 5. (Opcjonalnie) Wyeksportuj pełną bazę do seed.sql (dla lokalnego backupu)
 npm run db:export
 
-# 5. Commituj
+# 6. Wklej plik z incremental-updates/ do Supabase Dashboard → SQL Editor
+
+# 7. Commituj
+git add supabase/incremental-updates/*.sql
 git add supabase/seed.sql
 git commit -m "feat: zaktualizowano składy 3 karm"
 ```
@@ -250,11 +283,47 @@ npm run food:update "Taste of the Wild High Prairie" "Bizon, wołowina, jagnięc
 npm run food:update "Royal Canin Hypoallergenic" "ryż (46%), hydrolizowane białka drobiowe, olejek kokosowy, olej sojowy, minerały, pulpa buraczana"
 ```
 
+## 📤 Przenoszenie zmian na produkcję
+
+### Opcja 1: Przyrostowy plik SQL (ZALECANE) ⭐
+
+Najprostsze i najbezpieczniejsze rozwiązanie:
+
+```bash
+# 1. Po aktualizacji karm lokalnie
+npm run food:update "Nazwa karmy" "Skład"
+
+# 2. Wygeneruj przyrostowy plik
+npm run db:incremental
+
+# 3. Otwórz plik z supabase/incremental-updates/
+# 4. Skopiuj zawartość
+# 5. Wklej do Supabase Dashboard → SQL Editor → Run
+```
+
+**Zalety:**
+- ✅ Bezpieczne - używa UPSERT, nie nadpisuje danych
+- ✅ Można wkleić wielokrotnie
+- ✅ Zawiera tylko zmiany
+- ✅ Nie wymaga specjalnych uprawnień
+
+### Opcja 2: Pełny seed.sql (tylko dla lokalnej bazy)
+
+Używaj tylko do resetowania lokalnej bazy:
+
+```bash
+npm run db:export  # generuje seed.sql
+supabase db reset  # resetuje lokalną bazę i ładuje seed.sql
+```
+
+**UWAGA:** NIE wklejaj całego `seed.sql` do produkcji! To nadpisze wszystkie dane.
+
 ## 🔗 Zobacz też
 
 - [database-export.md](database-export.md) - Export bazy danych
 - [quick-start-export-bazy.md](quick-start-export-bazy.md) - Szybki start
 - [SUPABASE_GUIDE.md](../SUPABASE_GUIDE.md) - Ogólny przewodnik Supabase
+- [local-vs-production.md](local-vs-production.md) - Różnice między lokalną a produkcyjną bazą
 
 ---
 

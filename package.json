@@ -11,6 +11,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "db:export": "tsx --env-file=.env scripts/export-to-seed.ts",
+    "db:incremental": "tsx --env-file=.env scripts/generate-incremental-sql.ts",
     "food:update": "tsx --env-file=.env scripts/update-food-composition.ts",
     "test": "vitest",
     "test:ui": "vitest --ui",
